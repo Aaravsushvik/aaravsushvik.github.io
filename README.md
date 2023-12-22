@@ -13,4 +13,4 @@ Sushvik dreams of contributing to the field of robotics one day. He envisions a 
 ```
 ```
  Meet Sai Sushvik, a resilient individual who faces life with determination despite grappling with a locomotive disability. Sushvik, with an indomitable spirit, navigates the challenges posed by his condition with grace and courage. His daily life is a testament to his unwavering perseverance, as he tackles mobility obstacles with an inspiring resilience. Sushvik refuses to let his physical limitations define him, instead focusing on his abilities and passions. Whether engaging with technology, pursuing academic interests, or participating in social activities, Sai Sushvik stands as a beacon of strength and a reminder that one's spirit can triumph over any physical constraint. His journey serves as an inspiration to those around him, demonstrating that the human spirit can soar beyond the boundaries of disability, embracing life with a tenacious and positive outlook.
-        ```
+```
