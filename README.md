@@ -3,15 +3,11 @@
 Hello
 ```
 ```
-Meet G Sai Sushvik, an enthusiastic and bright 8th-grade student with a deep passion for technology and robots. Born with an innate curiosity, Sushvik has always been drawn to the world of gadgets and automation. His eyes light up at the mention of the latest technological advancements, and he eagerly explores the realms of artificial intelligence and robotics.
+Meet G Sai Sushvik, a vibrant and inquisitive 8th-grade student with an insatiable passion for technology and robots. Born on July 12, 2009, Sushvik has always been fascinated by the rapidly evolving world of science and innovation. From a young age, he displayed a natural curiosity, often disassembling gadgets just to understand how they worked.
 
-Sushvik's love for technology started at a young age when he dismantled his first toy to understand how it worked. Since then, he has been on a relentless quest for knowledge, constantly tinkering with gadgets and devices to unravel their mysteries. His room is a makeshift laboratory filled with wires, circuits, and a variety of gadgets that he has either built or disassembled in his quest for understanding.
+Sushvik's eyes light up with excitement whenever he talks about the latest advancements in technology. Whether it's the intricacies of artificial intelligence or the mechanics of cutting-edge robots, he eagerly absorbs every piece of information that comes his way. His room is a testament to his love for technology, adorned with posters of iconic robots and a collection of gadgets that he has tinkered with over the years.
 
-In school, Sushvik is known for his keen interest in science and mathematics, excelling in subjects that allow him to explore the logical and technical aspects of the world. His teachers often find themselves amazed by his insightful questions and the depth of his understanding of complex technological concepts.
+Despite being in 8th grade, Sushvik's knowledge of technology surpasses his age, and he often engages in discussions with older enthusiasts. His classmates and teachers admire his enthusiasm and are often amazed at his ability to explain complex technological concepts in simple terms.
 
-Outside the classroom, Sushvik can be found participating in robotics clubs and tech competitions. He thrives in the collaborative environment of these activities, where he can share ideas and learn from other tech enthusiasts. His dream is to contribute to the field of robotics and artificial intelligence, envisioning a future where technology improves the lives of people around the world.
-
-Despite his advanced understanding of technology, Sushvik remains a typical 8th-grader at heart. He enjoys playing video games, watching science fiction movies, and reading books on futuristic technologies. His room is adorned with posters of his favorite robots and tech icons, serving as daily inspiration for his ambitious goals.
-
-G Sai Sushvik is a young technophile on a journey to unravel the secrets of the digital age, and his passion for technology is bound to propel him toward a future filled with innovation and discovery.
+Sushvik dreams of contributing to the field of robotics one day. He envisions a future where robots play a crucial role in making the world a better place. His dedication to learning and his passion for technology set him apart, and it's clear that he is destined for great things in the world of science and innovation. As he continues his journey through school, one can only imagine the incredible technological feats that G Sai Sushvik will accomplish in the years to come.
 ```
