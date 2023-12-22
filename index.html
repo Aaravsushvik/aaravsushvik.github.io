@@ -1,0 +1,446 @@
+<!-- I want my page to include these major sections
+
+1. Home
+2. Tweets
+3. Projects
+4. Inspiration
+5. Drop a Message
+
+# Home Section
+
+A. This should contain (at the beginning)
+1. One idea I like
+2. Picture of me
+
+B. Contains a list of interactive icon links to my socail media platforms
+1. Twitter
+2. Github
+3. LinkedIn
+4. Instagram
+5. Spotify
+
+C. A minimal timeline of my life following these rules
+1. Latest events at the top
+2. Each event in a row has a date, and an interactive title
+
+D. My Conference Papers
+1. Each paper has a photo/gif, title, authors and a description
+2. Photo is on the left
+3. Title, authors and description are on the right
+4. Title is a link to the paper
+5. Title is above the authors and authors are above the description
+6. Description is a paragraph of text
+
+# Tweets Section
+1. This should contain a scrollable list of my tweets
+2. Each tweet is an embedded tweet
+
+# Projects Section
+1. This should contain a list of my projects
+2. Each project has a photo, title, and a description to the project
+3. Photo is on the left
+4. Title and description are on the right
+5. Title is a link to the project
+6. Title is above the description
+7. Description is a paragraph of text
+
+# Inspiration Section
+1. This should contain a list of my inspirations
+Example of an inspiration
+1. Iridov collision problems: Unique way of solving collision problems
+2. Mario Reinforcement Learning: Youtube Video
+3. Ludwig Wittgenstein: About Language
+4. ChatGPT
+5. Comma.ai George Hotz
+6. Elon Musk: And all his Projects
+7. Lex Fridman: Podcasts
+8. Puri Jagannadh: Musings
+9. Ramuism Series
+10. Cyrill Stachniss and SLAM
+11. My Math Tuition Teacher, Prof SK Saha, Prof Madhava Krishna
+
+# Drop a Message Section
+Maybe this can be done later, leave this for now
+ -->
+
+<!-- MINIMAL DESIGN -->
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <title>Shashank Dammalapati</title>
+        <!-- ADD IMAGE -->
+        <link rel="shortcut icon" href="images/shashank_red.png" type="image/png">
+        <link rel="stylesheet" href="style.css">
+        <style>
+            body {
+                font-family: 'Monaco', monospace;
+            }
+        </style>
+        
+    </head>
+
+    <body>
+    
+
+
+
+    <!-- ADD SECTIONS AS DESCRIBED ABOVE -->
+    <header>
+    <nav>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#tweets">Tweets</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#inspiration">Inspiration</a></li>
+        <li><a href="#message">Drop a Message</a></li>
+      </ul>
+    </nav>
+    </header>
+   
+    
+    <!-- HOME SECTION -->
+    <section id="home">
+        <!-- <h2>Home</h2> -->
+      
+        <div class="intro">
+          <img src="Images/shashank_red.png" alt="Picture of me" style="border-radius: 50%;">
+          
+          <!-- <h3>Introduction</h3> -->
+          <p>
+            I like to be free, I wish to live forever with 100 health 
+          </p>
+        </div>
+      
+        <div class="social-media">
+          <!-- <h3>Social Media</h3> -->
+          <ul class="social-media">
+            <li><a href="https://twitter.com/sha0nk" style="background-image: url('Images/twitter.png')"><span class="sr-only">Twitter</span></a></li>
+            <li><a href="https://github.com/shashankyld" style="background-image: url('Images/github.png')"><span class="sr-only">GitHub</span></a></li>
+            <li><a href="https://www.linkedin.com/in/shashank-dammalapati-03169b145/" style="background-image: url('Images/linkedin.png')"><span class="sr-only">LinkedIn</span></a></li>
+            <li><a href="https://www.instagram.com/shashank4pi/" style="background-image: url('Images/instagram.png')"><span class="sr-only">Instagram</span></a></li>
+            <li><a href="https://open.spotify.com/show/6cfYcoQQenVXiGFyxjWpWr" style="background-image: url('Images/spotify.png')"><span class="sr-only">Spotify</span></a></li>
+          </ul>
+          
+        </div>
+      
+        <div class="timeline">
+          <h3>Recent Updates</h3>
+          <ul>
+            <li>
+              <span class="date">Jan '23</span>
+              <p>(present) Started working at the Stachniss Lab as a Research Assistant</p>
+            </li>
+            <li>
+              <span class="date">Oct '22</span>
+              <p>(present) Joined Masters in Mobile Sensing & Robotics at Univeristy of Bonn</p>
+            </li>
+            <li>
+              <span class="date">May '22</span>
+              <p>Started working at the RRC in IIIT-Hyderabad as a Project Assistant </p>
+            </li>
+            <li>
+              <span class="date">Sept '22</span>
+              <p>Joined IHFC as a Research & Entrepreneurship Development Intern (1st co-hort)</p>
+            </li>
+            <li>
+              <span class="date">Sept '22</span>
+              <p>Joined Indo-Korea Joint Network on Robotics as a Project Assistant (IIT-Delhi) </p>
+            </li>
+            <li>
+              <span class="date">Sept '22</span>
+              <p>Joined Vecros (startup) as a Hardware Design Engineer </p>
+            </li>
+            <li>
+              <span class="date">May '18</span>
+              <p>Assumed multiple leadership roles at Aeromodelling Club - IIT Delhi </p>
+            </li>
+            <li>
+              <span class="date">June '17</span>
+              <p>Joined IIT Delhi for my Bachelors degree in Mechanical Engineering </p>
+            </li>
+          </ul>
+        </div>
+      
+        <div class="conference-papers">
+          <h3>Conference Papers and Awards</h3>
+          <ul>
+            <li>
+              
+              <div class="paper-details">
+                
+                <h4><a href="#">Development of an Autonomous UAV Integrated with a Manipulator and a Soft Gripper | IEEE - ASCC '22</a></h4>
+                <div class="paper-image">
+                  <img src="Images/soft_gripper.png" alt="Paper Image">
+                </div>
+                <p class="authors">Debadrata Sarkar, Aman Arora, Soumen Sen, Sree SS Katta, *D Shashank, M Rohan, SK Saha</p>
+                <p class="description">We present a quad-rotor drone system that includes a manipulator and a soft gripper, designed for delivering small packages of up to 500 grams with care. The paper details the design and development of the system, which integrates the drone, manipulator, and gripper, and discusses potential applications in fields like industry automation, defense, agriculture, and more.</p>
+              </div>
+            </li>
+            <li>
+              
+              <div class="paper-details">
+                <h4><a href="#">Aeromechanical Design and Analysis of H-Drone Configuration | IEEE - ASCC '22</a></h4>
+                <div class="paper-image">
+                  <img src="Images/hdrone_aeromodel.png" alt="Paper Image">
+                </div>
+                
+                <p class="authors">D Dwarakanathan, S Raja, P Shanmugam, *D Shashank, M Rohan, C Selvam, R Sanjeeth Kevin, Sree SS Katta, SK Saha</p>
+                <p class="description">We conducted collaborative research between the Indian Institute of Technology, Delhi (IITD) and CSIRNAL to design and analyze the aeromechanics of H-Drone. Our numerical simulations evaluated the aerodynamic and propulsion characteristics, as well as the structural design of the H-Drone. The H-Drone's arms were analyzed for their ability to withstand loads from aerodynamics and rotating propulsive systems. We developed a finite element model and evaluated the structural margin of safety through stress analysis. Additionally, we performed free vibration analysis to establish the structural dynamics of the H-Drone airframe.</p>
+                <div class="paper-image">
+                  <img src="Images/hdrone_stress_analysis.png" alt="Paper Image">
+                </div>
+              </div>
+            </li>
+            <li>
+              
+              <div class="paper-details">
+                <h4><a href="#">3D Pure Pursuit Guidance of Drones for Autonomous Precision Landing | IEEE - ASCC '22</a></h4>
+                <div class="paper-image">
+                  <img src="Images/gazebo_aruco.png" alt="Paper Image">
+                </div>
+                <p class="authors">Kaushal Kishore, Sagar Dalai, Yash Jangir, Samarth Singh, M Rohan, *D Shashank, Sree SS Katta, SK Saha</p>
+                <p class="description">We propose a simplified pure pursuit-based method for landing a UAV precisely to its target location in the presence of external disturbance and inaccurate GPS localization. The proposed method utilizes virtual targets to generate drone way-points, which are then followed by the UAV using classical pure-pursuit. The method generates a smooth arc for the Drone to follow and avoid crashing while landing. We identify the Aruco marker placed on the landing pad using an OpenCV framework for self-localization of the drone. Additionally, a PID controller is used to ensure that the Drone follows the generated trajectory within a reliable margin of error. Our method delivers an efficient and computationally less expensive landing approach for autonomous drones.</p>
+              </div>
+            </li>
+            <li>
+              
+              <div class="paper-details">
+                <h4><a href="#">Design Innovation Summer Award</a></h4>
+                <div class="paper-image">
+                  <img src="Images/disa.gif" width="512" height="360" alt="GIF Image">
+                </div>
+                <p class="authors">*Shashank Dammalapati, Nagendra Chinmai, Vamsi Krishna</p>
+                <p class="description">We created a motor failsafe mode for Ardupilot (opensource flight controller). I personally consider the project a failure. </p>
+              </div>
+            </li>
+          </ul>
+        </div>
+        </section>
+
+        <!-- TWEETS SECTION  -->
+
+<!--         <section id="tweets">
+            <h2>Tweets</h2>
+            <div class="tweet">
+              <img src="https://placehold.it/50x50" alt="Twitter profile picture">
+              <div class="tweet-content">
+                <p class="tweet-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac velit enim. Morbi ac lorem sapien.</p>
+                <p class="tweet-date">April 5, 2023</p>
+              </div>
+            </div>
+            <div class="tweet">
+              <img src="https://placehold.it/50x50" alt="Twitter profile picture">
+              <div class="tweet-content">
+                <p class="tweet-text">Pellentesque mollis lobortis augue, nec eleifend augue iaculis in. Praesent tincidunt enim elit, a tincidunt ex mollis vel.</p>
+                <p class="tweet-date">April 3, 2023</p>
+              </div>
+            </div>
+          </section>
+ -->
+<section id="About Me">
+    <h2>About Me</h2>
+    <div class="About Me">
+        <h3>Language (About its nature and application)</h3>
+        <p class="text">
+            I consider every word I utter and every sentence I write equivalent to any other action I perform. Like walking
+            and kicking a bag. I do not care how people understand my thoughts, I only deeply care about how accurately
+            language can represent my thoughts. It, which I care about, is a problem of my own. A Probabilistic trust model is
+            peaceful for the mind. Every visual imagination is preceded by a sentence/word formation. Imagine a laughing
+            carrot. Language is just complicated action. Language, like light, is a physical stimulus. What we make out of it
+            are abstractions. I have an unbearable love for language and meaning. I feel it now as I form sentences. I deeply
+            desire to engage in conversations. Conversations that never happened. Philosophy exists in language space and hence
+            a philosopher should first understand language. Language is applied. Language is probabilistic. One needs more
+            phrases to narrow down to a meaning/object that the set of phrases (or what the thinker) identifies. We see a color!
+            No! We just experience a color! A color is just an EM wave, a precursor, a cause of the experience which we call
+            color. Good and Evil are just categories and they don't have meaning at all. The totality of facts. I think we
+            rely a lot on language to propagate and represent knowledge. The reality "continues" to exist. I think solutions
+            to problems of love, philosophy, and truth can be found by understanding language! All meaning comes with language
+            and signs! There are no facts only interpretations! A fact is a language sentence and hence only a representation.
+            Fact Vs Reality. Learn your language game's rules! Language is the most important part of my life. Language is the
+            world. Choice of words merely endorses thoughts. But they dictate the direction of the message. Paradoxes are
+            problems of the language, not reality. Language is not blind. The last thing is clarity. This world is just
+            language and logic. Minds are private, not their expressions to the world. People project their meaning into
+            texts.
+        </p>
+        <h3>Logic</h3>
+        <p class="text">
+            Bachelors are unmarried. Macro is a thinking style. Nothing is original except the whole! Is reasoning necessary
+            if there is only a single being? Is logic the same in all simulations? The idea is to out-philosophize others.
+        </p>
+        <h3>Metaphysics (About Reality)</h3>
+        <p class="text">
+            Metaphysics is the presumption from which you derive all other studies! Maybe I am just mechanical. God is a waste
+            of time. Philosophy is mental work. Thinking is Hallucinating. and Hallucinating is Thinking. In retrospect,
+            everything was a metaphor. Who picks the random? Resistance is your true self. Ideas infect! Some phenomena are
+            explained by cause, and some by purpose! All prophets fail. Unlike geographies, thoughts aren't tactile and aren't
+            limited. So publicness is not a responsibility in virtual groups. I can decide what to write so I have free will.
+            Can I be wrong here? Manipulating knowledge (let's say thinking) is indirectly manipulating some physical system.
+            Traveling through space, time, and memories. Imagine food with morally bad taste. Particles are the Objects,
+            Forces are the Plugins, and World as a Simulation. Properties of "I" are too local and temporal for it to be
+            eternal and independent of physical nature. Thinking is Simulating. Experiencing is Living. There is no "I", There
+            is no "You", We are just hosts of information, ideas, and genes. We live in a story that our brain tells itself.
+            Basically, a dream. A mirror is a sensor. Metaphysical Hypothesis: You are a computer. I am a bunch of ideas. I
+            don't have ideas, ideas have me. Some ideas are more viral than others. Ideas influence ideas. Brains and humans
+            are just containers. Nature, we are. I am this world. Consciousness transcends time. Little closer to nothingness.
+            Illusions aren't necessarily bad. In a simulation, we try to minimize the possibilities so that our computational
+            power will not go short. I believe our whole God's systems are simulating entities in clusters, looping individual
+            items' instantiations relatively at times and places closer to their cluster-mates. Not who I was, not who I will
+            be. I am is. Space has no grid.
+        </p>
+        <h3>Value, Ethics, and Aesthetics</h3>
+        <p class="text">
+            Sometimes some ideas are so beautiful that you will momentarily accept and revere them before analyzing them. My
+            ethics will only ever be direct deductions from my metaphysics. All other accepted ethics will be rejected. Like
+            that of Schopenhauer! You are a plague. Love. I want to understand how we assume value in things. Bias is different
+            but love is same. There is no meaning in this world. There are 2 cars and 5 pens in this world. Love is every experience you call love. 
+            Likewise, other emotions. I think it is only in the mind that one can love. I need a computer that can render love for me. 
+            Love is a man's truest and most creative expression. Access to storage is empowerment! Inspiration is more real than love! 
+            Confidence and Exploration depend on the type of sense of ownership! Government cannot control morals. Value arises from the contract. 
+            No value ever is not from some contract. To love someone is an amazing painkiller, and a good night's sleep! 
+            Unlike geographies, thoughts aren't tactile and aren't limited, so publicness is not a responsibility in virtual groups. 
+            Respect is a protocol? or a feeling? I consider a drone as an organism. The alien within. It might be the case that God created us, but I don't think he cares about our morality. 
+            Value requires a valuer. It's morally wrong if you hurt any sentient being, and also it is morally wrong if you disrespectfully damage any nonliving tool you have. 
+            What is not boring? Is art boring? Not just humanity. Consciousness first. Bored while pooping. Practice more of what is important, what you love. 
+            It is very hard to focus without a purpose. You are my stakeholder. Creativity is not about control, it is about letting go. 
+            What makes beauty appealing is that it is useful.
+        </p>
+        <h3>Epistemology (About Knowledge)</h3>
+        <p class="text">
+            I don't know if any of the things I say are correct at all! I'm afraid, I don't even seem to understand the nature
+            of correctness at all. Did I ever prove anything in my life? I don’t know anything for certain; this feeling is
+            heavy, yet I will act. A Probabilistic trust model is peaceful for the mind. Is truth always inspiring? Truth is
+            important. Nonsense is everywhere. Learning and Knowledge are personal! It is our duty (and is an advantage) to
+            support the truth. Some truths are more important than food and money. Part of the truth is disliking, liking,
+            action, and inaction. My belief is my knowledge. Education is all about equipping with tools.
+        </p>
+        <h3>Critical and Social</h3>
+        <p class="text">
+            A nation may brand itself as a unifying agent, but all nations, like all classes/categories, are divided by
+            definition. My eyes look like that of a dead man. They are dull. But I like them. They show me this world and art.
+            Metaphysics is the presumption from which you derive all other studies! I want to have good conversations, I want to
+            be fearless. I am a free man. Commands are programs written by someone else. In company, you kill yourself. I don't
+            live in the real world. So, I can't thrive by usual standards. Freedom from god, freedom from bonds, and freedom
+            from the state are liberation from the external. Standing for oneself is the sexiest quality. Only compute-intensive
+            philosophies should try to reach more people for their brains. What is the difference between a nation and a social
+            group? I want to have good conversations, I want to be fearless. I think honesty helps you appreciate other honest
+            people. I deeply desire to engage in conversations. Conversations that never happened. I still stand on the fact
+            that doing philosophy is a luxury. Why nihilists won't suicide? In fact, everything is just a category/class. They
+            don't have meaning at all. LED, Bus, Man, Taste,... I think we rely a lot on language to propagate and represent
+            knowledge. The reality "continues" to exist. I think I should fix the language. There is no freedom in the true
+            sense. I think it is important to listen to everyone's voice. One cannot understand what is wrong. Some people can
+            believe the wrong and also expect you to believe it. This isn't impossible. When you have infinite love, try loving
+            animals. Obviously, output depends on the tools used. Breaking laws makes bad laws clear. Plan in language space and
+            execute in action space. Philosophy is not a belief system nor is it a knowledge system. Present your self-fatal
+            questions! There's nothing unique about being the world's tallest building. Some things are to be given to the most
+            dedicated, not necessarily to the best! It is empowerment to be able to do shit on the web! Statistically, it is
+            actually good for individuals to take the responsibility of learning certain knowledge whether or not it is useful
+            for them personally. I love how world states and problems can be mathematically put. How important is it to
+            understand the rules of society? How to frame society as a robotic system? Missed duties are more daunting than
+            missed opportunities. As long as I can afford quality food, health, shelter, internet, and time for friends I am
+            cool. I can just imagine other expensive shit! Society: Multiple intelligent swarms with plenty of independent
+            self-centric agents in them. With every word I type/say, I am feeling conscious that I'm using language. I don't
+            want to pay for any education! The foundation of any system = exploitation. Bring meme culture to political
+            relevance. Need for Alien Policy. When you learn a language, you change. All that is needed to do great work is to
+            do what you love. For me, India is a territory, not a specific people. The healthiest are the smartest. I have
+            nothing to do with any religion. To accelerate human evolution. One should be conscious enough to figure out if
+            they are in a dilemma. I go through multiple of them each day. Some noticed, some not. Altruists have no empathy
+            for themselves. Dextrousity gave us cognition. Common sense is social sense. Alienation is a real problem. Try not
+            to alienate others and try to familiarize yourself with alien situations. Sociological Imagination can help you
+            appreciate that you are a part of society. Give people wonderful tools, and they will do wonderful things. I have a
+            dream to map the entire world in 3D and 4Pi. Religion is an imagination. Any intelligent trade is a win-win. Self-
+            interest prevails. There is no such thing as a free lunch. Technological borders Nation-state borders. Overhauling
+            the status quo/society completely is not as hard as it immediately strikes. We are just changing the present, not
+            the whole history behind it. Ex: Question of God. It's not about learning the popular tools, it is about finding
+            the right tools for your use case. Everyone should become an entrepreneur. Without regular affirmation, you will
+            lose your patriotism. Curb hatred, and that's all. People can be freer without guns in their hands. Games create
+            strong social bonds. You are simply your society/nation. Can unaddressed memories in a computer give it
+            consciousness? Each moment/iteration asks itself, what it should, where it should get its arguments from?... Is our brain discretely
+            functioning with time? We shouldn't be dismissive of bad ideas. Inference to the best explanation. Humans are not
+            the center. You don't need to abuse the law as long as you understand the risk of not respecting it. One day I want
+            to be able to buy time. Apples, peaches, pears, and plums are all from the Rose family. IIT made me feel national;
+            Hyderabad made me feel national; Telugu made me feel national; Even Technology made me feel national. But,
+            Hinduism couldn't. Because it never really mattered to me as an INDIVIDUAL. Houses protect humans from other
+            animals. Society protects one human from the other humans. Treaties protect one society from the other. Only Culture
+            can protect society from itself and its wrongdoings. Democratizing every industry. No one's classical unless they
+            are taught to be. Social will is created. Not yielded by the weight of society, I am a little strange. Labs are
+            prisons⛓. I can neither promise rights nor force duties in and on any society. I am just a developing animal. Love
+            the people of your nation. If you are classical, you are not understanding yourself. I am not just me but my
+            society, and I am selfish. Education is a tool, but every time you use it, it doesn't wear but grows. Consciousness,
+            I wish. A good teacher protects his students from his own influence. Once you start, you start enjoying. I plan only
+            to understand what's important to me. I think people need better feedback. Selfish gene. My child will be a cyborg.
+        </p>
+    </div>
+</section>
+
+
+
+          
+        <!-- PROJECTS SECTION -->
+        
+        <section id="projects">
+            <h2>Projects</h2>
+            
+            <div class="project">
+              <img src="Images/shashank_red.jpg" alt="Project 1">
+              <div class="project-details">
+                <h3><a href="#">Development of an AGV: Robomuse (Bachelor Thesis)</a></h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget mauris vitae tellus vestibulum sollicitudin ac ac arcu.</p>
+              </div>
+            </div>
+          
+            <div class="project">
+              <img src="images/project2.jpg" alt="Project 2">
+              <div class="project-details">
+                <h3><a href="#">Project 2 Title</a></h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget mauris vitae tellus vestibulum sollicitudin ac ac arcu.</p>
+              </div>
+            </div>
+          
+            <div class="project">
+              <img src="images/project3.jpg" alt="Project 3">
+              <div class="project-details">
+                <h3><a href="#">Project 3 Title</a></h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget mauris vitae tellus vestibulum sollicitudin ac ac arcu.</p>
+              </div>
+            </div>
+            
+          </section>  -->
+        
+    <!-- INSPIRATION SECTION  -->
+    <section id="inspiration">
+        <h2>Inspiration Section</h2>
+        <ol>
+          <li>Iridov collision problems: Unique way of solving collision problems</li>
+          <li>Mario Reinforcement Learning: Youtube Video</li>
+          <li>Ludwig Wittgenstein: About Language</li>
+          <li>ChatGPT</li>
+          <li>Comma.ai George Hotz</li>
+          <li>Elon Musk: And all his Projects</li>
+          <li>Lex Fridman: Podcasts</li>
+          <li>Puri Jagannadh: Musings</li>
+          <li>Ramuism Series</li>
+          <li>Cyrill Stachniss and SLAM</li>
+          <li>My Math Tuition Teacher, Prof SK Saha, Prof Madhava Krishna</li>
+        </ol>
+      </section>
+      
+    <!-- DROP A MESSAGE SECTION  -->
+    <!-- <section id="message">
+        <h2>Drop a Message</h2>
+        <form>
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name"><br><br>
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email"><br><br>
+          <label for="message">Message:</label><br>
+          <textarea id="message" name="message" rows="5" cols="30"></textarea><br><br>
+          <input type="submit" value="Send">
+        </form>
+      </section> -->
+      
+
+    </body>
+
+</html>
