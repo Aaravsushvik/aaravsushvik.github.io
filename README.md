@@ -1,4 +1,4 @@
-# aaravsushvik.github.io
+# SUSHVIK GADIPARTHI.github.io
 ```
 Hello
 ```
