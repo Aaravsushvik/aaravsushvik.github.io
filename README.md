@@ -3,7 +3,7 @@
 Hello who is born 12 july 2009
 ```
 ```
-Meet G Sai Sushvik, a vibrant and inquisitive 8th-grade student\ with an insatiable passion for technology and robots. Born on July 12, 2009, Sushvik has always been fascinated by the rapidly evolving world of science and innovation. From a young age, he displayed a natural curiosity, often disassembling gadgets just to understand how they worked.
+Meet G Sai Sushvik, a vibrant and inquisitive 8th-grade student<br> with an insatiable passion for technology and robots. Born on July 12, 2009, Sushvik has always been fascinated by the rapidly evolving world of science and innovation. From a young age, he displayed a natural curiosity, often disassembling gadgets just to understand how they worked.
 
 Sushvik's eyes light up with excitement whenever he talks about the latest advancements in technology. Whether it's the intricacies of artificial intelligence or the mechanics of cutting-edge robots, he eagerly absorbs every piece of information that comes his way. His room is a testament to his love for technology, adorned with posters of iconic robots and a collection of gadgets that he has tinkered with over the years.
 
