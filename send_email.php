@@ -36,4 +36,4 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     echo "405 Method Not Allowed";
     exit(); // Stop further execution
 }
-?>    
+?>
