@@ -1,54 +1,71 @@
 <?php
-// Enable error reporting for debugging (remove in production)
-error_reporting(E_ALL);
+// Configuration constants
+define("ADMIN_EMAIL", "saisushvik.pnt@gmail.com");
+define("REDIRECT_URL", "index.html");
+
+// Enable error reporting for development (comment out in production)
 ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-// Ensure the script is accessed via a web server with a valid request method
-if (isset($_SERVER["REQUEST_METHOD"])) {
-    if ($_SERVER["REQUEST_METHOD"] === "POST") {
-        
-        // Validate and sanitize form data
-        $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-        $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
-        $message = filter_input(INPUT_POST, 'message', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+// Ensure the script is accessed via a valid request method
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    session_start();
 
-        // Check for required fields
-        if (!$name || !$email || !$message) {
-            header("Location: index.html?status=validation_error");
-            exit();
-        }
+    // CSRF token validation
+    if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+        http_response_code(403); // Forbidden
+        echo "Invalid CSRF token.";
+        exit();
+    }
 
-        // Email configuration
-        $to = "saisushvik.pnt@gmail.com";
-        $subject = "New Message from Website";
+    // Validate and sanitize form data
+    $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
+    $message = filter_input(INPUT_POST, 'message', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-        // Construct headers
-        $headers = "From: " . htmlspecialchars($email) . "\r\n";
-        $headers .= "Reply-To: " . htmlspecialchars($email) . "\r\n";
-        $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
+    // Check for required fields
+    if (!$name || !$email || !$message) {
+        header("Location: " . REDIRECT_URL . "?status=validation_error");
+        exit();
+    }
 
-        // Construct email message
-        $fullMessage = "Name: " . htmlspecialchars($name) . "\n";
-        $fullMessage .= "Email: " . htmlspecialchars($email) . "\n\n";
-        $fullMessage .= "Message:\n" . htmlspecialchars($message) . "\n";
+    // Email configuration
+    $subject = "New Message from Website";
 
-        // Attempt to send email
-        if (mail($to, $subject, $fullMessage, $headers)) {
-            header("Location: index.html?status=success");
-            exit();
-        } else {
-            header("Location: index.html?status=error");
-            exit();
-        }
+    // Construct headers securely
+    $headers = [
+        "From: " . htmlspecialchars($email),
+        "Reply-To: " . htmlspecialchars($email),
+        "Content-Type: text/plain; charset=UTF-8"
+    ];
+
+    // Construct email message securely
+    $fullMessage = "Name: " . htmlspecialchars($name) . "\n";
+    $fullMessage .= "Email: " . htmlspecialchars($email) . "\n\n";
+    $fullMessage .= "Message:\n" . htmlspecialchars($message) . "\n";
+
+    // Attempt to send email
+    if (mail(ADMIN_EMAIL, $subject, $fullMessage, implode("\r\n", $headers))) {
+        header("Location: " . REDIRECT_URL . "?status=success");
+        exit();
     } else {
-        // Respond with a 405 Method Not Allowed status code
-        http_response_code(405);
-        echo "405 Method Not Allowed";
+        header("Location: " . REDIRECT_URL . "?status=error");
         exit();
     }
 } else {
-    // Respond with a 500 Internal Server Error status code
-    http_response_code(500);
-    echo "500 Internal Server Error";
+    // Respond with a 405 Method Not Allowed status code
+    http_response_code(405);
+    echo "405 Method Not Allowed";
     exit();
 }
+
+// CSRF token generation (call this in your form)
+function generateCsrfToken()
+{
+    if (empty($_SESSION['csrf_token'])) {
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+    }
+    return $_SESSION['csrf_token'];
+}
+?>
