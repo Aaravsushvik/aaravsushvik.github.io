@@ -1,139 +1,96 @@
+<?php
+session_start();
+
+function generateCsrfToken()
+{
+    if (empty($_SESSION['csrf_token'])) {
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+    }
+    return $_SESSION['csrf_token'];
+}
+
+$csrf_token = generateCsrfToken();
+?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Personal website of G Sai Sushvik – passionate about technology, robotics, and programming.">
-    <title>Sushvik Gadiparthi - Born on 12 July 2009</title>
-    <link rel="shortcut icon" href="images/family.png" type="image/png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Contact Me</title>
     <link rel="stylesheet" href="style.css" />
-    <style>
-        body {
-            font-family: 'Monaco', monospace;
-        }
-    </style>
 </head>
-
 <body>
-
     <header>
         <nav>
-            <ul>
+            <div class="logo">My Website</div>
+            <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about-me">About Me</a></li>
                 <li><a href="#favorites">Favorites</a></li>
                 <li><a href="#inspiration">Inspiration</a></li>
-                <li><a href="#message">Drop a Message</a></li>
+                <li><a href="#message">Message</a></li>
             </ul>
         </nav>
     </header>
 
-    <main>
+    <section id="home" class="section">
+        <h1>Welcome to My Site</h1>
+        <p>This is a simple contact form website using PHP, HTML, and CSS.</p>
+    </section>
 
-        <!-- HOME SECTION -->
-        <section id="home">
-            <p>
-                GADIPARTHI SAI SUSHVIK <br />
-                <em>I LIKE TECHNOLOGY THAT CAN MAKE HUMANS SUPERHUMANS!</em>
-            </p>
-            <div class="social-media">
-                <ul>
-                    <li><a href="https://twitter.com/sha0nk"><img src="images/twitter.png" alt="Twitter"></a></li>
-                    <li><a href="https://github.com/shashankyld"><img src="images/github.png" alt="GitHub"></a></li>
-                    <li><a href="https://www.linkedin.com/in/shashank-dammalapati-03169b145/"><img src="images/linkedin.png" alt="LinkedIn"></a></li>
-                    <li><a href="https://www.instagram.com/shashank4pi/"><img src="images/instagram.png" alt="Instagram"></a></li>
-                    <li><a href="https://open.spotify.com/show/6cfYcoQQenVXiGFyxjWpWr"><img src="images/spotify.png" alt="Spotify"></a></li>
-                </ul>
-            </div>
-            <img src="images/family.jpg" alt="Family Photo" class="profile-image" width="240" height="160" />
+    <section id="about-me" class="section">
+        <h2>About Me</h2>
+        <p>I am a passionate web developer learning PHP and secure coding practices.</p>
+    </section>
 
-            <div class="timeline">
-                <h3>Recent Updates</h3>
-                <ul>
-                    <li>
-                        <span class="date">14/11/2024</span><br />
-                        Started this website on 23-12-23
-                    </li>
-                </ul>
-            </div>
+    <section id="favorites" class="section">
+        <h2>Favorites</h2>
+        <ul>
+            <li>Coding</li>
+            <li>Music</li>
+            <li>Travel</li>
+        </ul>
+    </section>
 
-            <p class="authors">Sushvik, Aarav, Shashank & Pavan</p>
-            <p class="description">All about the newest tech</p>
-        </section>
+    <section id="inspiration" class="section">
+        <h2>Inspiration</h2>
+        <ol>
+            <li>Creativity</li>
+            <li>Innovation</li>
+            <li>Collaboration</li>
+        </ol>
+    </section>
 
-        <!-- ABOUT ME SECTION -->
-        <section id="about-me">
-            <h2>About Me</h2>
-            <div>
-                <h3>Language</h3>
-                <p>
-                    Meet G Sai Sushvik, an enthusiastic and bright 8th-grade student with a deep passion for technology and robots. He loves exploring the latest trends in artificial intelligence, robotics, and programming languages. With curiosity and creativity, he’s constantly learning new skills and experimenting with technology to better understand the world around him.
-                </p>
+    <section id="message" class="section">
+        <h2>Send Me a Message</h2>
+        <?php
+        if (isset($_GET['status'])) {
+            if ($_GET['status'] == 'success') {
+                echo "<p style='color: green;'>Message sent successfully!</p>";
+            } elseif ($_GET['status'] == 'error') {
+                echo "<p style='color: red;'>Failed to send message. Try again.</p>";
+            } elseif ($_GET['status'] == 'validation_error') {
+                echo "<p style='color: red;'>Please fill in all fields correctly.</p>";
+            }
+        }
+        ?>
+        <form action="send_email.php" method="post">
+            <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>" />
+            <label for="name">Name:</label><br />
+            <input type="text" id="name" name="name" required /><br /><br />
 
-                <h3>Technology</h3>
-                <p>
-                    The latest technology continues to push boundaries, shaping the way we live, work, and connect. From robotics to AI, G Sai Sushvik is fascinated by the endless possibilities that innovation brings. His love for gadgets, coding, and space exploration drives him to keep exploring and expanding his knowledge.
-                </p>
+            <label for="email">Email:</label><br />
+            <input type="email" id="email" name="email" required /><br /><br />
 
-                <h3>My Drawbacks (G Sai Sushvik)</h3>
-                <p>
-                    Meet Sai Sushvik, a resilient individual who faces life with determination despite grappling with a locomotive disability. His journey is marked by perseverance and a passion for technology, which serves as his greatest strength in overcoming challenges.
-                </p>
+            <label for="message">Message:</label><br />
+            <textarea id="message" name="message" rows="5" required></textarea><br /><br />
 
-                <h3>My Gmail</h3>
-                <p>saisushvik.pnt@gmail.com</p>
-            </div>
-        </section>
+            <input type="submit" value="Send" />
+        </form>
+    </section>
 
-        <!-- FAVORITES SECTION -->
-        <section id="favorites">
-            <h2>My Favorites</h2>
-            <ul>
-                <li>Robotics: Exploring the fascinating world of robots and automation.</li>
-                <li>Artificial Intelligence: Delving into the complexities of AI and its applications.</li>
-                <li>Programming Languages: Learning and experimenting with coding languages like Python and JavaScript.</li>
-                <li>Gadgets: Tinkering with the latest gadgets and devices to understand their functionality.</li>
-                <li>Virtual Reality: Exploring immersive experiences through VR technology.</li>
-                <li>Open Source Projects: Contributing to and collaborating on open-source initiatives.</li>
-                <li>Space Exploration: Following advancements in space technology and exploration.</li>
-                <li>Innovative Tech Startups: Keeping an eye on groundbreaking startups pushing technological boundaries.</li>
-                <li>DIY Electronics: Engaging in do-it-yourself electronics projects and experiments.</li>
-                <li>Tech Conferences: Attending conferences to stay updated on the latest industry trends and innovations.</li>
-            </ul>
-        </section>
-
-        <!-- INSPIRATION SECTION -->
-        <section id="inspiration">
-            <h2>Inspiration</h2>
-            <ol>
-                <li>DAMMALAPATI Venkateswar Rao</li>
-                <li>ChatGPT</li>
-                <li>Marques Brownlee</li>
-                <li>Elon Musk: And all his Projects</li>
-                <li>Biryani</li>
-            </ol>
-        </section>
-
-        <!-- DROP A MESSAGE SECTION -->
-        <section id="message">
-            <h2>Drop a Message (<em>Feature in development</em>)</h2>
-            <form action="send_email.php" method="post">
-                <label for="name">Name:</label><br />
-                <input type="text" id="name" name="name" required /><br /><br />
-
-                <label for="email">Email:</label><br />
-                <input type="email" id="email" name="email" required /><br /><br />
-
-                <label for="message">Message:</label><br />
-                <textarea id="message" name="message" rows="5" cols="30" required></textarea><br /><br />
-
-                <input type="submit" value="Send" />
-            </form>
-        </section>
-
-    </main>
-
+    <footer>
+        <p>&copy; 2025 My Website. All rights reserved.</p>
+    </footer>
 </body>
-
 </html>
