@@ -33,47 +33,98 @@ header {
 }
 nav {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 2rem;
   align-items: center;
 }
-.logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-.nav-links {
+nav ul {
   display: flex;
-  gap: 1rem;
-  align-items: center;
+  gap: 1.5rem;
 }
-.nav-links li {
+nav ul li {
   list-style: none;
 }
+nav ul li a {
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+}
+nav ul li a:hover {
+  background-color: #112240;
+}
 
-/* Hero section */
-.hero {
-  padding: 3rem 1rem;
+/* Home Section */
+#home {
+  padding: 2rem 1rem;
   text-align: center;
-  background: linear-gradient(135deg, #00bcd4, #009688);
-  color: white;
 }
-.hero .highlight {
-  color: #ffeb3b;
+#home .social-media ul {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+#home .social-media img {
+  width: 40px;
+  height: 40px;
+}
+#home .profile-image {
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+#home .timeline {
+  margin-top: 1.5rem;
+}
+#home .timeline .date {
+  font-weight: bold;
+}
+#home .authors,
+#home .description {
+  margin-top: 1rem;
 }
 
-/* Sections */
-.section {
+/* About Me Section */
+#about-me {
   padding: 2rem 1rem;
   max-width: 800px;
   margin: auto;
 }
-.card {
-  background: #e0f7fa;
-  padding: 1rem;
-  border-radius: 8px;
+#about-me h3 {
   margin-top: 1rem;
+  color: #00796b;
 }
 
-/* Form */
+/* Favorites Section */
+#favorites {
+  padding: 2rem 1rem;
+  max-width: 800px;
+  margin: auto;
+}
+#favorites ul {
+  margin-top: 1rem;
+}
+#favorites ul li {
+  margin-bottom: 0.75rem;
+}
+
+/* Inspiration Section */
+#inspiration {
+  padding: 2rem 1rem;
+  max-width: 800px;
+  margin: auto;
+}
+#inspiration ol {
+  margin-top: 1rem;
+}
+#inspiration ol li {
+  margin-bottom: 0.5rem;
+}
+
+/* Message Form Section */
+#message {
+  padding: 2rem 1rem;
+  max-width: 600px;
+  margin: auto;
+}
 form {
   display: flex;
   flex-direction: column;
@@ -86,7 +137,12 @@ form textarea {
   border-radius: 5px;
   font-size: 1rem;
 }
-form button {
+form input:focus,
+form textarea:focus {
+  border-color: #009688;
+  outline: none;
+}
+form input[type="submit"] {
   background-color: #009688;
   color: white;
   padding: 0.75rem;
@@ -94,7 +150,7 @@ form button {
   border-radius: 5px;
   cursor: pointer;
 }
-form button:hover {
+form input[type="submit"]:hover {
   background-color: #00796b;
 }
 
