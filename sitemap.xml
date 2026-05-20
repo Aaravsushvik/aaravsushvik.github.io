@@ -1,1 +1,4 @@
-hqha
+User-agent: *
+Allow: /
+
+Sitemap: https://aaravsushvik.github.io/sitemap.xml
