@@ -1,0 +1,18 @@
+# Jekyll configuration for GitHub Pages
+# This ensures sitemap.xml and other XML files are properly served
+
+include:
+  - sitemap.xml
+  - robots.txt
+
+keep_files:
+  - sitemap.xml
+  - robots.txt
+  - .nojekyll
+
+markdown: kramdown
+lsi: false
+safe: true
+incremental: false
+highlighter: rouge
+theme: null
