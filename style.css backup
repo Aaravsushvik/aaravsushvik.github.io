@@ -265,3 +265,231 @@ flex-direction:column;
 }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+New 
+/* =========================
+   BASE RESET
+   ========================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', Arial, sans-serif;
+  background: #0f172a;
+  color: white;
+  line-height: 1.6;
+}
+
+/* =========================
+   HEADER
+   ========================= */
+header {
+  text-align: center;
+  padding: 20px;
+}
+
+header h1 {
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+}
+
+header p {
+  opacity: 0.9;
+  margin-bottom: 15px;
+}
+
+/* =========================
+   BUTTONS
+   ========================= */
+button {
+  padding: 10px 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #1e293b;
+  color: white;
+  margin: 5px;
+}
+
+/* Top button */
+#topBtn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 12px;
+  border-radius: 50%;
+}
+
+/* =========================
+   NAVIGATION
+   ========================= */
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 15px;
+  padding: 0;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: white;
+  background: #1e293b;
+  padding: 10px 14px;
+  border-radius: 10px;
+  display: block;
+  transition: 0.2s ease;
+}
+
+nav ul li a:hover {
+  background: #334155;
+}
+
+/* =========================
+   MAIN LAYOUT
+   ========================= */
+main {
+  max-width: 1100px;
+  margin: auto;
+  padding: 20px;
+}
+
+section {
+  margin-bottom: 50px;
+}
+
+h2 {
+  margin-bottom: 10px;
+}
+
+h3 {
+  margin-top: 15px;
+  margin-bottom: 8px;
+}
+
+/* =========================
+   PROFILE IMAGE
+   ========================= */
+.profile {
+  width: 250px;
+  max-width: 90%;
+  border-radius: 12px;
+  margin: 15px auto;
+  display: block;
+}
+
+/* =========================
+   SOCIAL LINKS
+   ========================= */
+.social {
+  margin-top: 15px;
+}
+
+.social a {
+  display: inline-block;
+  margin: 5px;
+  padding: 10px 14px;
+  background: #1e293b;
+  border-radius: 10px;
+  color: white;
+  text-decoration: none;
+}
+
+/* =========================
+   FORM
+   ========================= */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 400px;
+  margin: auto;
+}
+
+input, textarea {
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+}
+
+textarea {
+  resize: none;
+}
+
+form button {
+  background: #22c55e;
+}
+
+/* =========================
+   FOOTER
+   ========================= */
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #0b1220;
+  margin-top: 40px;
+}
+
+/* =========================
+   RESPONSIVE DESIGN
+   ========================= */
+
+/* PHONE */
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 1.6rem;
+  }
+
+  nav ul {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  nav ul li a {
+    width: 100%;
+    text-align: center;
+  }
+
+  .profile {
+    width: 80%;
+  }
+}
+
+/* IPAD */
+@media (min-width: 601px) and (max-width: 1024px) {
+  header h1 {
+    font-size: 2rem;
+  }
+
+  main {
+    padding: 15px;
+  }
+
+  .profile {
+    width: 200px;
+  }
+}
+
+/* LAPTOP */
+@media (min-width: 1025px) {
+  main {
+    max-width: 900px;
+  }
+}
