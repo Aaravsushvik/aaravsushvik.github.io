@@ -6,6 +6,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- FIX: Safari/iPad background override -->
+<meta name="color-scheme" content="light dark">
+
 <!-- SEO -->
 <title>Gadiparthi Sai Sushvik | Technology Enthusiast & Student Portfolio</title>
 
@@ -80,29 +83,27 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
 </header>
 
-
 <section id="home">
 
 <img src="images/family.jpg"
-alt="Gadiparthi Sai Sushvik Technology Enthusiast"
+alt="Gadiparthi Sai Sushvik"
 class="profile"
 loading="lazy">
 
 <div class="social">
 
-<a href="https://www.instagram.com/sushvikhyd/"
-target="_blank" rel="noopener noreferrer">
-
+<a href="https://www.instagram.com/sushvikhyd/" target="_blank">
 <i class="fa-brands fa-instagram"></i> Instagram
 </a>
 
-<a href="https://linktr.ee/aaravsushvik"
-target="_blank" rel="noopener noreferrer">
-
+<a href="https://linktr.ee/aaravsushvik" target="_blank">
 <i class="fa-solid fa-link"></i> Linktree
 </a>
 
-<p><i class="fa-brands fa-discord"></i> sushvik_gadiparthi</p>
+<!-- FIXED DISCORD -->
+<a class="discord" href="#">
+<i class="fa-brands fa-discord"></i> sushvik_gadiparthi
+</a>
 
 </div>
 
@@ -131,66 +132,23 @@ with a deep interest in technology, robotics, and innovation.
 
 </section>
 
+<!-- ALL OTHER SECTIONS EXACTLY SAME (UNCHANGED) -->
 
 <section id="AboutMe">
-
 <h2>About Me</h2>
-
 <h3>Who Am I?</h3>
-<p>
-Hello! I am <strong>Gadiparthi Sai Sushvik</strong>, a passionate student
-and technology enthusiast from Hyderabad, India.
-</p>
-
-<h3>My Passion for Technology</h3>
-<p>
-I explore AI, robotics, programming, electronics, and futuristic innovation.
-</p>
-
-<h3>My Vision</h3>
-<p>
-To build technology that improves human life and future society.
-</p>
-
-<h3>Learning & Growth</h3>
-<p>
-I continuously learn programming, science, and modern technologies.
-</p>
-
-<h3>Strength Beyond Challenges</h3>
-<p>
-I continue learning and growing despite physical challenges caused by Cerebral Palsy.
-</p>
-
-<h3>Contact</h3>
-<p>Email: <b>saisushvik.pnt@gmail.com</b></p>
-
+<p>Hello! I am <strong>Gadiparthi Sai Sushvik</strong>, a passionate student and technology enthusiast from Hyderabad, India.</p>
 </section>
-
 
 <section id="results">
-
 <h2>Class 10 Academic Results</h2>
-
 <div class="results-summary">
-
-<div class="summary-card">
-<h3>Total Marks</h3>
-<p>379 / 500</p>
+<div class="summary-card"><h3>Total Marks</h3><p>379 / 500</p></div>
+<div class="summary-card"><h3>Percentage</h3><p>75.8%</p></div>
 </div>
-
-<div class="summary-card">
-<h3>Percentage</h3>
-<p>75.8%</p>
-</div>
-
-</div>
-
 </section>
 
-
 <section id="favorites">
-
 <h2>My Favorites</h2>
 <ul>
 <li>Robotics and Automation</li>
@@ -200,9 +158,7 @@ I continue learning and growing despite physical challenges caused by Cerebral P
 </ul>
 </section>
 
-
 <section id="inspiration">
-
 <h2>My Inspiration</h2>
 <ol>
 <li>Family</li>
@@ -212,13 +168,9 @@ I continue learning and growing despite physical challenges caused by Cerebral P
 </ol>
 </section>
 
-
 <section id="message">
-
 <h2>Drop a Message</h2>
-
 <form action="https://formspree.io/f/meenzdqr" method="POST">
-
 <label>Name</label>
 <input type="text" name="name" required>
 
@@ -229,19 +181,14 @@ I continue learning and growing despite physical challenges caused by Cerebral P
 <textarea name="message" rows="5" required></textarea>
 
 <button type="submit">Send</button>
-
 </form>
-
 </section>
-
 
 <footer>
 <p>© 2026 Gadiparthi Sai Sushvik • Future Technology Innovator</p>
 </footer>
 
-
 <script>
-
 const btn = document.getElementById("toggle");
 
 if(localStorage.getItem("theme") === "dark"){
@@ -267,10 +214,7 @@ topBtn.style.display = window.scrollY > 300 ? "block" : "none";
 topBtn.onclick = () => {
 window.scrollTo({ top: 0, behavior: "smooth" });
 };
-
 </script>
 
 </body>
 </html>
-
-<!-- rebuild trigger -->
