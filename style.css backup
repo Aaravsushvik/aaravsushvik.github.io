@@ -9,7 +9,7 @@ html, body {
 }
 
 :root {
-  color-scheme: light;
+  color-scheme: light dark;
 }
 
 /* =========================
@@ -29,7 +29,6 @@ html, body {
 
 body {
   font-family: Arial, sans-serif;
-  background: #ffffff;
   color: #111111;
   line-height: 1.6;
   transition: 0.4s ease;
@@ -40,8 +39,8 @@ body {
    ========================= */
 
 body.dark {
-  background: #111111;
-  color: #ffffff;
+  background: #111111 !important;
+  color: #ffffff !important;
 }
 
 /* =========================
@@ -120,12 +119,13 @@ h3 {
 .profile {
   display: block;
   margin: 20px auto;
-  width: 220px;
-  height: 220px;
+  width: min(90vw, 420px);
+  height: auto;
+  aspect-ratio: 4 / 3;
   object-fit: cover;
-  border-radius: 50%;
+  border-radius: 20px;
   border: 5px solid #333;
-  max-width: 90%;
+  max-width: 100%;
 }
 
 /* =========================
@@ -140,13 +140,14 @@ h3 {
   margin: 25px 0;
 }
 
-.social a {
+.social a,
+.social a.discord {
   text-decoration: none;
   background: #f2f2f2;
   padding: 12px 18px;
   border-radius: 10px;
   font-weight: bold;
-  color: #111;
+  color: #111111;
   transition: 0.3s;
   display: flex;
   align-items: center;
@@ -155,23 +156,6 @@ h3 {
 
 .social a:hover {
   transform: translateY(-3px);
-}
-
-/* =========================
-   DISCORD FIX (same style box)
-   ========================= */
-
-.social a.discord {
-  text-decoration: none;
-  background: #f2f2f2;
-  padding: 12px 18px;
-  border-radius: 10px;
-  font-weight: bold;
-  color: #111;
-  transition: 0.3s;
-  display: flex;
-  align-items: center;
-  gap: 10px;
 }
 
 /* DARK MODE SOCIAL */
@@ -222,6 +206,8 @@ textarea {
   border-radius: 8px;
   font-size: 16px;
   width: 100%;
+  background: transparent;
+  color: inherit;
 }
 
 textarea {
@@ -264,7 +250,6 @@ footer {
 
 /* MOBILE */
 @media (max-width: 768px) {
-
   header h1 {
     font-size: 26px;
   }
@@ -275,8 +260,8 @@ footer {
   }
 
   .profile {
-    width: 170px;
-    height: 170px;
+    width: 95%;
+    border-radius: 16px;
   }
 
   .social {
@@ -291,7 +276,6 @@ footer {
 
 /* SMALL MOBILE */
 @media (max-width: 480px) {
-
   section {
     padding: 30px 12px;
   }
