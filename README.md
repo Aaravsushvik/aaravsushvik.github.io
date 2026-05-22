@@ -58,7 +58,7 @@ https://aaravsushvik.github.io/
 
 - 📧 Email: saisushvik.pnt@gmail.com  
 - 📸 Instagram: https://instagram.com/sushvikhyd  
-- 🔗 Linktree: https://linktr.ee/aaravsushvik  
+- 🔗 Linktree: https://linktr.ee/gadiparthisaisushvik  
 
 ---
 
@@ -68,4 +68,4 @@ https://aaravsushvik.github.io/
 
 ---
 
-⭐ Thank you for visiting my profile!
+⭐ Thank you for visiting my profile!  
