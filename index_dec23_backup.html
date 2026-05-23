@@ -24,14 +24,9 @@
     <meta name="twitter:description" content="Technology Enthusiast • Aspiring Civil Servant • Future Innovator">
     <meta name="twitter:image" content="https://aaravsushvik.github.io/images/IMG_2358_Original.jpeg">
 
-    <!-- FIX 1: Corrected theme-color from blue #0f172a to black #111111 -->
     <meta name="theme-color" content="#111111">
-
-    <!-- FIX 3: Removed deprecated 'shortcut' from rel -->
     <link rel="icon" href="images/IMG_2358_Original.jpeg" type="image/jpeg">
-
-    <!-- FIX 8: Preload profile image for faster LCP -->
-    <link rel="preload" as="image" href="images/IMG_2358_Original.jpeg">
+    <link rel="preload" as="image" href="images/IMG_2358_Original.jpeg" fetchpriority="high">
 
     <link rel="stylesheet" href="style.css">
 
@@ -40,7 +35,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <!-- Schema.org Person Markup -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org/",
@@ -56,7 +50,7 @@
         "name": "Hyderabad, India"
       },
       "jobTitle": "Student",
-      "email": "mailto:saisushvik.pnt@gmail.com",
+      "email": "saisushvik.pnt@gmail.com",
       "sameAs": [
         "https://www.instagram.com/sushvikhyd/",
         "https://linktr.ee/gadiparthisaisushvik",
@@ -79,7 +73,6 @@
 
 <body>
 
-    <!-- FIX 6: Added aria-label for screen readers -->
     <button id="topBtn" title="Go to top" aria-label="Go to top">
         <i class="fa-solid fa-arrow-up"></i>
     </button>
@@ -87,10 +80,7 @@
     <header>
         <h1>Gadiparthi Sai Sushvik</h1>
         <p><em>TECHNOLOGY THAT EMPOWERS HUMANS IS THE TECHNOLOGY WORTH BUILDING!</em></p>
-
-        <!-- FIX 6: Added aria-label to toggle button -->
         <button id="toggle" aria-label="Toggle theme">Black / White</button>
-
         <nav>
             <ul>
                 <li><a href="#home">Home</a></li>
@@ -105,8 +95,6 @@
 
     <main>
         <section id="home">
-
-            <!-- FIX 2: Removed loading="lazy" — image is above the fold, lazy delays LCP -->
             <img src="images/IMG_2358_Original.jpeg" alt="Gadiparthi Sai Sushvik with Family" class="profile">
 
             <div class="social">
@@ -234,7 +222,6 @@
             <h2>Drop a Message</h2>
             <form action="https://formspree.io/f/meenzdqr" method="POST">
                 <label for="form-name">Name</label>
-                <!-- FIX 7: Added autocomplete attributes -->
                 <input id="form-name" type="text" name="name" autocomplete="name" placeholder="Your full name" required>
 
                 <label for="form-email">Email</label>
