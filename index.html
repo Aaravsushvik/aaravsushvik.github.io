@@ -24,8 +24,14 @@
     <meta name="twitter:description" content="Technology Enthusiast • Aspiring Civil Servant • Future Innovator">
     <meta name="twitter:image" content="https://aaravsushvik.github.io/images/IMG_2358_Original.jpeg">
 
-    <meta name="theme-color" content="#0f172a">
-    <link rel="shortcut icon" href="images/IMG_2358_Original.jpeg" type="image/png">
+    <!-- FIX 1: Corrected theme-color from blue #0f172a to black #111111 -->
+    <meta name="theme-color" content="#111111">
+
+    <!-- FIX 3: Removed deprecated 'shortcut' from rel -->
+    <link rel="icon" href="images/IMG_2358_Original.jpeg" type="image/jpeg">
+
+    <!-- FIX 8: Preload profile image for faster LCP -->
+    <link rel="preload" as="image" href="images/IMG_2358_Original.jpeg">
 
     <link rel="stylesheet" href="style.css">
 
@@ -53,7 +59,7 @@
       "email": "mailto:saisushvik.pnt@gmail.com",
       "sameAs": [
         "https://www.instagram.com/sushvikhyd/",
-        "https://linktr.ee/gadiparthisaisushvik",
+        "https://linktr.ee/aaravsushvik",
         "https://discord.com/users/gadiparthisaisushvik"
       ],
       "nationality": {
@@ -73,14 +79,18 @@
 
 <body>
 
-    <button id="topBtn" title="Go to top">
+    <!-- FIX 6: Added aria-label for screen readers -->
+    <button id="topBtn" title="Go to top" aria-label="Go to top">
         <i class="fa-solid fa-arrow-up"></i>
     </button>
 
     <header>
         <h1>Gadiparthi Sai Sushvik</h1>
         <p><em>TECHNOLOGY THAT EMPOWERS HUMANS IS THE TECHNOLOGY WORTH BUILDING!</em></p>
-        <button id="toggle">Black / White</button>
+
+        <!-- FIX 6: Added aria-label to toggle button -->
+        <button id="toggle" aria-label="Toggle theme">Black / White</button>
+
         <nav>
             <ul>
                 <li><a href="#home">Home</a></li>
@@ -95,13 +105,15 @@
 
     <main>
         <section id="home">
-            <img src="images/IMG_2358_Original.jpeg" alt="Gadiparthi Sai Sushvik with Family" class="profile" loading="lazy">
+
+            <!-- FIX 2: Removed loading="lazy" — image is above the fold, lazy delays LCP -->
+            <img src="images/IMG_2358_Original.jpeg" alt="Gadiparthi Sai Sushvik with Family" class="profile">
 
             <div class="social">
                 <a href="https://www.instagram.com/sushvikhyd/" target="_blank" rel="noopener noreferrer">
                     <i class="fa-brands fa-instagram"></i> Instagram
                 </a>
-                <a href="https://linktr.ee/gadiparthisaisushvik" target="_blank" rel="noopener noreferrer">
+                <a href="https://linktr.ee/aaravsushvik" target="_blank" rel="noopener noreferrer">
                     <i class="fa-solid fa-link"></i> Linktree
                 </a>
                 <a class="discord" href="https://discord.com/users/gadiparthisaisushvik" target="_blank" rel="noopener noreferrer">
@@ -222,10 +234,11 @@
             <h2>Drop a Message</h2>
             <form action="https://formspree.io/f/meenzdqr" method="POST">
                 <label for="form-name">Name</label>
-                <input id="form-name" type="text" name="name" placeholder="Your full name" required>
+                <!-- FIX 7: Added autocomplete attributes -->
+                <input id="form-name" type="text" name="name" autocomplete="name" placeholder="Your full name" required>
 
                 <label for="form-email">Email</label>
-                <input id="form-email" type="email" name="email" placeholder="your@email.com" required>
+                <input id="form-email" type="email" name="email" autocomplete="email" placeholder="your@email.com" required>
 
                 <label for="form-msg">Message</label>
                 <textarea id="form-msg" name="message" rows="5" placeholder="Write your message here..." required></textarea>
