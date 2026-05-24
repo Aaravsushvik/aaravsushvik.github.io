@@ -1,3 +1,4 @@
+/* ./assets/css/styles.css */
 :root {
     --bg: #ffffff;
     --text: #111111;
@@ -195,10 +196,18 @@ li {
     flex-wrap: wrap;
 }
 
+/* Added Flexbox to format the SVG icons alongside text */
 .social a {
     color: var(--accent);
     text-decoration: none;
     font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.social a:hover {
+    text-decoration: underline;
 }
 
 /* Cards & Grids */
@@ -367,7 +376,7 @@ footer {
     #main-nav ul {
         flex-direction: column;
         align-items: center;
-        gap: 2rem;
+        gap: 1.5rem;
     }
     
     #main-nav a {
