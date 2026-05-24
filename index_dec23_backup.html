@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="color-scheme" content="light dark">
     <meta name="referrer" content="strict-origin-when-cross-origin">
-    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), browsing-topics=()">
 
     <title>Gadiparthi Sai Sushvik | Student & Aspiring Civil Servant</title>
+
     <meta name="description" content="Official portfolio of Gadiparthi Sai Sushvik — technology enthusiast, aspiring IAS officer, and future innovator from Hyderabad, India.">
     <meta name="keywords" content="Gadiparthi Sai Sushvik, Sai Sushvik, Hyderabad student, technology enthusiast, AI, robotics, innovation, UPSC, civil services, IAS, IPS, portfolio, CEC Intermediate, Telangana SSC">
     <meta name="author" content="Gadiparthi Sai Sushvik">
@@ -18,177 +18,37 @@
     <meta property="og:title" content="Gadiparthi Sai Sushvik | Student & Aspiring Civil Servant">
     <meta property="og:description" content="Technology • AI • Robotics • Innovation • Governance • Future Vision">
     <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Gadiparthi Sai Sushvik">
     <meta property="og:url" content="https://aaravsushvik.github.io/">
     <meta property="og:image" content="https://aaravsushvik.github.io/images/IMG_2358_Original.jpeg">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Gadiparthi Sai Sushvik">
-    <meta property="og:locale" content="en_IN">
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Gadiparthi Sai Sushvik">
     <meta name="twitter:description" content="Technology Enthusiast • Aspiring Civil Servant • Future Innovator">
     <meta name="twitter:image" content="https://aaravsushvik.github.io/images/IMG_2358_Original.jpeg">
-    <meta name="twitter:image:alt" content="Gadiparthi Sai Sushvik">
 
-    <meta name="theme-color" content="#ffffff">
-    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Content-Security-Policy"
+          content="default-src 'self';
+                   script-src 'self';
+                   style-src 'self' https://fonts.googleapis.com;
+                   font-src https://fonts.gstatic.com;
+                   img-src 'self' https: data:;
+                   form-action https://formspree.io;
+                   connect-src 'self' https://formspree.io;
+                   base-uri 'self';
+                   object-src 'none';
+                   frame-ancestors 'none';">
 
-    <!-- ============================================================
-         STRICT PRODUCTION CSP – hash‑based, no 'unsafe‑inline'
-         ============================================================
-         The hashes below match the exact inline <style> and two <script>
-         blocks in this file. If you modify those blocks, you must
-         regenerate the hashes.
-    -->
-    <meta http-equiv="Content-Security-Policy" content="
-        default-src 'self';
-        script-src
-            'sha256-af67sR5QGO8+GagVSmbX3PhLz9CqY4AOhXp2ul6AxOU='
-            'sha256-oQm9OVqIgRrRsd9p3lgXHjCl8QsEDbAXc/5m7P7kyxI=';
-        script-src-attr 'none';
-        style-src
-            'self'
-            'sha256-ZzJvhBFBtSgHnxo5T7/e8FbQ2uYgxkv3pjsFkfCUvqU='
-            https://fonts.googleapis.com
-            https://cdnjs.cloudflare.com;
-        style-src-attr 'none';
-        font-src https://fonts.gstatic.com https://cdnjs.cloudflare.com;
-        img-src 'self' https://aaravsushvik.github.io;
-        form-action https://formspree.io;
-        connect-src 'self' https://formspree.io;
-        base-uri 'self';
-        object-src 'none';
-        frame-ancestors 'none';
-    ">
+    <link rel="icon" href="images/IMG_2358_Original.jpeg">
+    <link rel="apple-touch-icon" href="images/IMG_2358_Original.jpeg">
+    <link rel="manifest" href="manifest.json">
 
-    <!-- Performance Preloads -->
-    <link rel="preload" href="style.css" as="style">
-    <link rel="preload" as="image" href="images/IMG_2358_Original.webp" type="image/webp">
+    <link rel="preload" href="/assets/css/styles.css" as="style">
+    <link rel="stylesheet" href="/assets/css/styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link rel="stylesheet" href="style.css">
-
-    <!-- Google Fonts – consider self‑hosting for full privacy and control -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Font Awesome with SRI integrity for v6.5.1 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-          integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-          crossorigin="anonymous" referrerpolicy="no-referrer">
-
-    <!-- Critical CSS (inline, allowed by hash) -->
-    <style>
-        :root {
-            --header-height: 80px;
-        }
-        
-        .hamburger {
-            display: none;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 12px;
-            width: 48px;
-            height: 48px;
-            flex-direction: column;
-            justify-content: center;
-            gap: 5px;
-        }
-        
-        .hamburger-line {
-            width: 24px;
-            height: 3px;
-            background: currentColor;
-            transition: all 0.3s ease;
-            border-radius: 3px;
-        }
-        
-        #main-nav {
-            transition: transform 0.3s ease;
-        }
-        
-        @media (max-width: 768px) {
-            .hamburger { display: flex; }
-            
-            #main-nav {
-                position: fixed;
-                top: var(--header-height);
-                left: 0;
-                right: 0;
-                background: var(--bg-color, #ffffff);
-                transform: translateY(-100%);
-                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-                z-index: 1000;
-                max-height: calc(100vh - var(--header-height));
-                overflow-y: auto;
-            }
-            
-            html.dark #main-nav {
-                background: #0f0f0f;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            }
-            
-            #main-nav.open {
-                transform: translateY(0);
-            }
-            
-            nav ul {
-                flex-direction: column;
-                padding: 1rem 0;
-            }
-        }
-        
-        @media (prefers-reduced-motion: reduce) {
-            * {
-                transition-duration: 0.01ms !important;
-                animation-duration: 0.01ms !important;
-                scroll-behavior: auto !important;
-            }
-        }
-        
-        a:focus, button:focus, input:focus, textarea:focus {
-            outline: 3px solid #0066cc;
-            outline-offset: 4px;
-            border-radius: 4px;
-        }
-        
-        .skip-link {
-            position: absolute;
-            top: -40px;
-            left: 10px;
-            background: #0066cc;
-            color: white;
-            padding: 8px 12px;
-            z-index: 10000;
-        }
-        
-        .skip-link:focus {
-            top: 10px;
-        }
-
-        #topBtn {
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-        }
-        
-        #topBtn.visible {
-            opacity: 1;
-            visibility: visible;
-        }
-    </style>
-
-    <!-- Theme flash prevention (inline, allowed by hash) -->
-    <script>
-        (function() {
-            if (localStorage.getItem("theme") === "dark") {
-                document.documentElement.classList.add("dark");
-            }
-        })();
-    </script>
+    <script src="/assets/js/main.js" defer></script>
 
     <script type="application/ld+json">
     {
@@ -208,281 +68,237 @@
         "@type": "Place",
         "name": "Hyderabad, India"
       },
-      "jobTitle": "Student",
-      "sameAs": [
-        "https://www.instagram.com/sushvikhyd/",
-        "https://github.com/aaravsushvik",
-        "https://linktr.ee/gadiparthisaisushvik"
-      ],
-      "nationality": {
-        "@type": "Country",
-        "name": "India"
-      },
-      "knowsAbout": [
-        "Artificial Intelligence",
-        "Robotics",
-        "Public Administration",
-        "Political Science",
-        "Web Development",
-        "Accessibility"
-      ]
+      "jobTitle": "Student"
     }
     </script>
 </head>
 
 <body>
 
-    <a href="#main-content" class="skip-link">Skip to main content</a>
+<a href="#main-content" class="skip-link">Skip to main content</a>
 
-    <button type="button" id="topBtn" title="Go to top" aria-label="Go to top">
-        <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
-    </button>
+<button id="topBtn" aria-label="Go to top" class="hidden">↑</button>
 
-    <header>
+<header id="main-header">
+    <div class="header-titles">
         <h1>Gadiparthi Sai Sushvik</h1>
         <p><em>Exploring technology, governance, and systems that improve everyday life.</em></p>
-        
-        <button type="button" id="toggle" aria-label="Toggle dark mode">🌙</button>
-        
-        <button type="button" id="menu-toggle" class="hamburger" aria-label="Toggle navigation" aria-expanded="false" aria-controls="main-nav">
-            <span class="hamburger-line" aria-hidden="true"></span>
-            <span class="hamburger-line" aria-hidden="true"></span>
-            <span class="hamburger-line" aria-hidden="true"></span>
+    </div>
+
+    <div class="header-controls">
+        <button id="toggle" aria-label="Toggle theme">🌙</button>
+
+        <button id="menu-toggle"
+                class="hamburger"
+                aria-label="Open navigation"
+                aria-expanded="false"
+                aria-controls="main-nav">
+            <span></span><span></span><span></span>
         </button>
+    </div>
 
-        <nav id="main-nav" role="navigation" aria-label="Main navigation">
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#AboutMe">About Me</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#learning">Currently Learning</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#results">Results</a></li>
-                <li><a href="#favorites">Favorites</a></li>
-                <li><a href="#inspiration">Inspiration</a></li>
-                <li><a href="#message">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+    <nav id="main-nav" aria-label="Main navigation">
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#AboutMe">About Me</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#learning">Learning</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#results">Results</a></li>
+            <li><a href="#favorites">Favorites</a></li>
+            <li><a href="#inspiration">Inspiration</a></li>
+            <li><a href="#message">Contact</a></li>
+        </ul>
+    </nav>
+</header>
 
-    <main id="main-content">
-        <!-- All original content preserved exactly as per instructions -->
-        <section id="home">
-            <picture>
-                <source srcset="images/IMG_2358_Original.webp" type="image/webp">
-                <img src="images/IMG_2358_Original.jpeg"
-                     alt="Gadiparthi Sai Sushvik with Family"
-                     class="profile"
-                     width="420"
-                     height="315"
-                     loading="eager"
-                     decoding="async"
-                     fetchpriority="high">
-            </picture>
+<main id="main-content">
 
-            <div class="social">
-                <a href="https://www.instagram.com/sushvikhyd/" target="_blank" rel="me noopener noreferrer" aria-label="Instagram Profile">
-                    <i class="fa-brands fa-instagram" aria-hidden="true"></i> Instagram
-                </a>
-                <a href="https://github.com/aaravsushvik" target="_blank" rel="me noopener noreferrer" aria-label="GitHub Profile">
-                    <i class="fa-brands fa-github" aria-hidden="true"></i> GitHub
-                </a>
-                <a href="https://linktr.ee/gadiparthisaisushvik" target="_blank" rel="me noopener noreferrer" aria-label="Linktree Profile">
-                    <i class="fa-solid fa-link" aria-hidden="true"></i> Linktree
-                </a>
-            </div>
+<section id="home">
+    <picture>
+        <source srcset="images/IMG_2358_Original.webp" type="image/webp">
+        <img src="images/IMG_2358_Original.jpeg"
+             alt="Gadiparthi Sai Sushvik with Family"
+             class="profile"
+             width="420"
+             height="315"
+             loading="eager"
+             decoding="async">
+    </picture>
 
-            <h2>Recent Updates</h2>
-            <ul>
-                <li>
-                    <span class="date">2026</span><br>
-                    Successfully cleared the Telangana SSC Board Examinations with 379/500 (75.8%) — a proud milestone marking the end of my foundational schooling journey.
-                </li>
-                <li>
-                    <span class="date">2026</span><br>
-                    Enrolled in CEC Intermediate (2026–2028) — beginning the academic path that leads toward my goal of cracking the UPSC Civil Services Examination.
-                </li>
-                <li>
-                    <span class="date">2026</span><br>
-                    Relaunched my official portfolio with new sections, projects documentation, and a live contact system.
-                </li>
-            </ul>
+    <div class="social">
+        <a href="https://www.instagram.com/sushvikhyd/" target="_blank" rel="me noopener noreferrer" aria-label="Instagram Profile">Instagram</a>
+        <a href="https://github.com/aaravsushvik" target="_blank" rel="me noopener noreferrer" aria-label="GitHub Profile">GitHub</a>
+        <a href="https://linktr.ee/gadiparthisaisushvik" target="_blank" rel="me noopener noreferrer" aria-label="Linktree Profile">Linktree</a>
+    </div>
 
-            <p class="authors">
-                Technology • Web Development • AI • Governance • Public Policy
-            </p>
-            <p class="description">
-                Interested in how technology, governance, and public systems connect — learning through web development, AI research, and exploring the intersection of innovation and policy.
-            </p>
-            <p>
-                Gadiparthi Sai Sushvik — born July 12, 2009, in Hyderabad, India. Curious about technology, governance, and building things that matter.
-            </p>
-        </section>
+    <h2>Recent Updates</h2>
+    <ul>
+        <li><strong>2026:</strong> Successfully cleared the Telangana SSC Board Examinations with 379/500 (75.8%) — a proud milestone marking the end of my foundational schooling journey.</li>
+        <li><strong>2026:</strong> Enrolled in CEC Intermediate (2026–2028) — beginning the academic path that leads toward my goal of cracking the UPSC Civil Services Examination.</li>
+        <li><strong>2026:</strong> Relaunched my official portfolio with new sections, projects documentation, and a live contact system.</li>
+    </ul>
 
-        <!-- All other sections (AboutMe through message) are identical to previous stable versions and fully preserved -->
+    <p class="authors">Technology • Web Development • AI • Governance • Public Policy</p>
+    <p class="description">Interested in how technology, governance, and public systems connect — learning through web development, AI research, and exploring the intersection of innovation and policy.</p>
+    <p>Gadiparthi Sai Sushvik — born July 12, 2009, in Hyderabad, India. Curious about technology, governance, and building things that matter.</p>
+</section>
 
-        <section id="AboutMe">
-            <h2>About Me</h2>
-            <h3>Who Am I?</h3>
-            <p>
-                Hello! I am <strong>Gadiparthi Sai Sushvik</strong> — a student, technology enthusiast, and aspiring civil servant from Hyderabad, India, committed to a path that connects innovation with public service.
-            </p>
-            <!-- Remaining AboutMe content unchanged -->
-        </section>
+<section id="AboutMe">
+    <h2>About Me</h2>
+    <h3>Who Am I?</h3>
+    <p>Hello! I am <strong>Gadiparthi Sai Sushvik</strong> — a student, technology enthusiast, and aspiring civil servant from Hyderabad, India, committed to a path that connects innovation with public service.</p>
+    <p>My world exists at the intersection of two forces: <em>technology</em> and <em>governance</em>. I am equally fascinated by artificial intelligence and the architecture of policies that shape millions of lives. To me, these are closely connected — and I want to understand both deeply.</p>
+    <p>I am currently enrolled in CEC Intermediate (2026–2028). Following that, I plan to pursue a Bachelor's degree in Political Science, Economics, or History (2028–2031), and then appear for the UPSC Civil Services Examination in 2031, with the ambition of serving as an IAS or IPS officer.</p>
 
-        <!-- Projects, learning, skills, results, favorites, inspiration, writing, message sections unchanged -->
+    <h3>My Passion for Technology</h3>
+    <p>From artificial intelligence and robotics to programming, electronics, and web development — technology is a lens through which I explore the world. I believe every great innovation needs strong governance behind it, and every effective governance system can be improved through thoughtful use of technology.</p>
 
-    </main>
+    <h3>My Vision</h3>
+    <p>I want to serve as a civil servant who understands both technology and governance. I am especially interested in digital governance, accessibility, education systems, and how technology can improve public service delivery at scale.</p>
 
-    <footer>
-        <p>Built with HTML, CSS, and a focus on learning by building. &nbsp;•&nbsp; © 2026 Gadiparthi Sai Sushvik</p>
-    </footer>
+    <h3>Learning & Growth</h3>
+    <p>I actively study programming, science, history, political theory, and emerging technologies. I approach learning as an ongoing process — each subject shapes how I understand both technology and the world around me.</p>
 
-    <!-- Main application logic (inline, allowed by hash) -->
-    <script>
-        (function() {
-            const btn = document.getElementById("toggle");
-            const metaTheme = document.querySelector('meta[name="theme-color"]');
-            const menuToggle = document.getElementById('menu-toggle');
-            const mainNav = document.getElementById('main-nav');
-            const topBtn = document.getElementById("topBtn");
+    <h3>Strength Beyond Challenges</h3>
+    <p>Living with Cerebral Palsy has taught me patience, adaptability, and persistence. It continues to shape how I approach learning and problem-solving. I move forward steadily — learning, building, and growing one step at a time.</p>
+</section>
 
-            if (!btn || !menuToggle || !mainNav || !topBtn) return;
+<section id="projects">
+    <h2>Projects & Experiments</h2>
 
-            let isMenuOpen = false;
-            let trapHandler = null;
+    <article class="project-card">
+        <div class="project-header">
+            <h3>Personal Portfolio Website</h3>
+            <span class="project-status">2026 · Ongoing</span>
+        </div>
+        <ul>
+            <li>Responsive design across desktop, tablet, and mobile</li>
+            <li>Semantic HTML5 structure</li>
+            <li>Dark mode system using CSS variables</li>
+            <li>Accessibility improvements — aria-labels, skip navigation, keyboard accessibility</li>
+            <li>SEO optimization — Schema.org, Open Graph, strict CSP</li>
+        </ul>
+    </article>
 
-            function updateThemeColor() {
-                if (!metaTheme) return;
-                metaTheme.setAttribute(
-                    "content",
-                    document.documentElement.classList.contains("dark") ? "#0f0f0f" : "#ffffff"
-                );
-            }
+    <article class="project-card">
+        <div class="project-header">
+            <h3>Responsive UI Experiments</h3>
+            <span class="project-status">2026 · Experimental</span>
+        </div>
+        <ul>
+            <li>Mobile-first layout design</li>
+            <li>CSS architecture using custom properties</li>
+            <li>Navigation systems and scroll behavior</li>
+        </ul>
+    </article>
 
-            function updateToggleIcon() {
-                btn.textContent = document.documentElement.classList.contains("dark") ? "☀️" : "🌙";
-            }
+    <article class="project-card">
+        <div class="project-header">
+            <h3>Civic-Tech & Governance — Reading Notes</h3>
+            <span class="project-status">2026 · Notes</span>
+        </div>
+        <ul>
+            <li>Reading and noting how digital tools can improve public service accessibility</li>
+            <li>Following GovTech developments and Digital India initiatives</li>
+            <li>Studying the relationship between AI policy and public administration</li>
+        </ul>
+    </article>
+</section>
 
-            updateThemeColor();
-            updateToggleIcon();
+<section id="learning">
+    <h2>Currently Learning</h2>
+    <div class="tag-grid">
+        <span class="tag-item">Responsive Web Design</span>
+        <span class="tag-item">Accessibility (WCAG)</span>
+        <span class="tag-item">Semantic HTML</span>
+        <span class="tag-item">CSS Architecture</span>
+        <span class="tag-item">JavaScript Fundamentals</span>
+        <span class="tag-item">AI Tools & Prompting</span>
+        <span class="tag-item">Governance & Public Policy</span>
+        <span class="tag-item">Political Science</span>
+    </div>
+</section>
 
-            btn.addEventListener("click", function() {
-                document.documentElement.classList.toggle("dark");
-                const isDark = document.documentElement.classList.contains("dark");
-                localStorage.setItem("theme", isDark ? "dark" : "light");
-                updateThemeColor();
-                updateToggleIcon();
-            });
+<section id="skills">
+    <h2>Skills</h2>
+    <div class="tag-grid">
+        <span class="tag-item">HTML5</span>
+        <span class="tag-item">CSS3</span>
+        <span class="tag-item">Responsive Design</span>
+        <span class="tag-item">Accessibility</span>
+        <span class="tag-item">Dark Mode Systems</span>
+        <span class="tag-item">Frontend Optimization</span>
+        <span class="tag-item">SEO Fundamentals</span>
+        <span class="tag-item">AI Research & Tools</span>
+    </div>
+</section>
 
-            function toggleMenu() {
-                isMenuOpen = !isMenuOpen;
-                mainNav.classList.toggle('open', isMenuOpen);
-                menuToggle.setAttribute('aria-expanded', String(isMenuOpen));
-                mainNav.setAttribute('aria-hidden', String(!isMenuOpen));
-                document.body.style.overflow = isMenuOpen ? "hidden" : "";
+<section id="results">
+    <h2>Telangana SSC Board Examinations 2026</h2>
+    <div class="results-summary">
+        <div class="summary-card">
+            <h3>Total Marks</h3>
+            <p>379 / 500</p>
+        </div>
+        <div class="summary-card">
+            <h3>Percentage</h3>
+            <p>75.8%</p>
+        </div>
+    </div>
+</section>
 
-                if (isMenuOpen) {
-                    const firstLink = mainNav.querySelector('a');
-                    if (firstLink) setTimeout(function() { firstLink.focus(); }, 50);
-                    setupFocusTrap();
-                } else {
-                    removeFocusTrap();
-                    menuToggle.focus();
-                }
-            }
+<section id="favorites">
+    <h2>My Favorites</h2>
+    <ul>
+        <li>Artificial Intelligence & Machine Learning</li>
+        <li>Robotics & Embedded Systems</li>
+        <li>Web Development & Open Source</li>
+        <li>Political Science, History & Constitutional Governance</li>
+        <li>Smart Governance, GovTech & Digital Accessibility</li>
+        <li>Space Exploration & Aerospace Innovation</li>
+        <li>Creative Problem Solving & Systems Thinking</li>
+    </ul>
+</section>
 
-            function setupFocusTrap() {
-                const focusable = mainNav.querySelectorAll('a[href], button');
-                if (focusable.length === 0) return;
+<section id="inspiration">
+    <h2>My Inspiration</h2>
+    <ol>
+        <li>My Family — my foundation, my strength, and my first teachers</li>
+        <li>Dr. APJ Abdul Kalam — Missile Man, Visionary, and the President who dared to dream for a billion people</li>
+        <li>Artificial Intelligence & Emerging Technologies — the frontier that never stops moving</li>
+        <li>Researchers advancing accessible and inclusive technology</li>
+        <li>Marques Brownlee (MKBHD) — making technology honest, accessible, and exciting for everyone</li>
+        <li>Public servants and technologists improving digital governance</li>
+        <li>IAS & IPS Officers Who Drive Change — the unsung architects of India's transformation</li>
+        <li>Scientists, Engineers & Inventors — the quiet builders of the world we live in</li>
+        <li>The Future of Humanity & Space — the ultimate horizon, reminding us how much further we can go</li>
+    </ol>
+</section>
 
-                const first = focusable[0];
-                const last = focusable[focusable.length - 1];
+<section id="message">
+    <h2>Drop a Message</h2>
+    <form action="https://formspree.io/f/meenzdqr" method="POST">
+        <label for="name">Name</label>
+        <input id="name" name="name" type="text" placeholder="Your full name" required>
 
-                trapHandler = function(e) {
-                    if (e.key !== 'Tab') return;
-                    if (e.shiftKey && document.activeElement === first) {
-                        e.preventDefault();
-                        last.focus();
-                    } else if (!e.shiftKey && document.activeElement === last) {
-                        e.preventDefault();
-                        first.focus();
-                    }
-                };
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" placeholder="your@email.com" required>
 
-                mainNav.addEventListener('keydown', trapHandler);
-            }
+        <label for="form-message">Message</label>
+        <textarea id="form-message" name="message" rows="5" placeholder="Write your message here..." required></textarea>
 
-            function removeFocusTrap() {
-                if (trapHandler) {
-                    mainNav.removeEventListener('keydown', trapHandler);
-                    trapHandler = null;
-                }
-            }
+        <input type="text" name="_gotcha" class="gotcha" tabindex="-1" autocomplete="off">
 
-            menuToggle.addEventListener('click', toggleMenu);
+        <button type="submit">Send Message</button>
+    </form>
+</section>
 
-            const navLinks = mainNav.querySelectorAll('a');
-            navLinks.forEach(function(link) {
-                link.addEventListener('click', function() {
-                    if (window.innerWidth <= 768 && isMenuOpen) {
-                        toggleMenu();
-                    }
-                });
-            });
+</main>
 
-            window.addEventListener('resize', function() {
-                if (window.innerWidth > 768 && isMenuOpen) {
-                    isMenuOpen = false;
-                    mainNav.classList.remove('open');
-                    menuToggle.setAttribute('aria-expanded', 'false');
-                    mainNav.setAttribute('aria-hidden', 'true');
-                    document.body.style.overflow = "";
-                    removeFocusTrap();
-                }
-            });
+<footer>
+    <p>Built with HTML, CSS, and a focus on learning by building. &nbsp;•&nbsp; © 2026 Gadiparthi Sai Sushvik</p>
+</footer>
 
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && isMenuOpen) {
-                    toggleMenu();
-                }
-            });
-
-            var scrollTimeout;
-            window.addEventListener('scroll', function() {
-                if (scrollTimeout) clearTimeout(scrollTimeout);
-                scrollTimeout = setTimeout(function() {
-                    if (window.scrollY > 300) {
-                        topBtn.classList.add('visible');
-                    } else {
-                        topBtn.classList.remove('visible');
-                    }
-                }, 16);
-            }, { passive: true });
-
-            topBtn.addEventListener('click', function() {
-                var behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
-                window.scrollTo({ top: 0, behavior: behavior });
-            });
-
-            document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
-                anchor.addEventListener('click', function(e) {
-                    var targetId = this.getAttribute('href').substring(1);
-                    var targetElement = document.getElementById(targetId);
-                    if (targetElement) {
-                        e.preventDefault();
-                        var behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
-                        var headerOffset = 80;
-                        var elementPosition = targetElement.getBoundingClientRect().top;
-                        var offsetPosition = elementPosition + window.scrollY - headerOffset;
-                        window.scrollTo({
-                            top: offsetPosition,
-                            behavior: behavior
-                        });
-                    }
-                });
-            });
-        })();
-    </script>
 </body>
 </html>
