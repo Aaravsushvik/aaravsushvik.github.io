@@ -1,4 +1,4 @@
-// Theme Initialization (Executes immediately)
+// ./assets/js/main.js
 if (localStorage.getItem("theme") === "dark") {
     document.documentElement.classList.add("dark");
 }
@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const menuBtn = document.getElementById("menu-toggle");
     const topBtn = document.getElementById("topBtn");
 
-    // Theme toggle logic
+    // Theme toggle
     if (toggle) {
         toggle.addEventListener("click", () => {
             document.documentElement.classList.toggle("dark");
@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Mobile menu logic
+    // Mobile menu
     const closeMenu = () => {
         if (nav) {
             nav.classList.remove("open");
@@ -34,7 +34,6 @@ document.addEventListener("DOMContentLoaded", () => {
             menuBtn.setAttribute("aria-expanded", isOpen);
             document.body.style.overflow = isOpen ? "hidden" : "";
             
-            // Focus trap: send focus to first link when opened
             if (isOpen) {
                 const firstLink = nav.querySelector("a");
                 if (firstLink) setTimeout(() => firstLink.focus(), 100);
@@ -48,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Escape Key logic & Tab Focus Trap for Accessibility
+    // Escape Key logic & Focus Trap
     document.addEventListener("keydown", (e) => {
         if (e.key === "Escape" && nav && nav.classList.contains("open")) {
             closeMenu();
@@ -78,7 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Scroll to top button visibility
+    // Scroll to top button logic
     if (topBtn) {
         let isScrolling = false;
         window.addEventListener("scroll", () => {
@@ -100,7 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Smooth scroll offset for sticky header
+    // Smooth scroll for anchor links offset by header height
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener("click", function(e) {
             const targetId = this.getAttribute("href").slice(1);
@@ -109,7 +108,6 @@ document.addEventListener("DOMContentLoaded", () => {
             const targetEl = document.getElementById(targetId);
             if (targetEl) {
                 e.preventDefault();
-                // 80px offset matches header height
                 const offset = targetEl.getBoundingClientRect().top + window.scrollY - 80;
                 window.scrollTo({ top: offset, behavior: "smooth" });
             }
