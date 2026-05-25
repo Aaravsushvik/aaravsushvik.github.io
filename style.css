@@ -69,6 +69,8 @@ header {
     z-index: 1000;
     min-height: var(--header-height);
     transition: background 0.3s;
+    flex-wrap: wrap; 
+    gap: 1rem;       
 }
 
 .header-titles h1 {
