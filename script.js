@@ -1,45 +1,59 @@
-// ./assets/js/main.js
+// Theme initialisation — runs immediately on defer parse
+// Prevents flash of wrong theme before DOMContentLoaded
 if (localStorage.getItem("theme") === "dark") {
     document.documentElement.classList.add("dark");
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    const toggle = document.getElementById("toggle");
-    const nav = document.getElementById("main-nav");
+    const toggle  = document.getElementById("toggle");
+    const nav     = document.getElementById("main-nav");
     const menuBtn = document.getElementById("menu-toggle");
-    const topBtn = document.getElementById("topBtn");
+    const topBtn  = document.getElementById("topBtn");
 
-    // Theme toggle
+    // ── Theme ────────────────────────────────────────────────────
+    function updateToggleIcon() {
+        if (!toggle) return;
+        const dark = document.documentElement.classList.contains("dark");
+        toggle.textContent = dark ? "☀️" : "🌙";
+        toggle.setAttribute("aria-label", dark ? "Switch to light mode" : "Switch to dark mode");
+    }
+
+    // Set correct icon immediately on load
+    updateToggleIcon();
+
     if (toggle) {
         toggle.addEventListener("click", () => {
             document.documentElement.classList.toggle("dark");
             localStorage.setItem("theme",
                 document.documentElement.classList.contains("dark") ? "dark" : "light"
             );
+            updateToggleIcon();
         });
     }
 
-    // Mobile menu
+    // ── Mobile menu ───────────────────────────────────────────────
     const closeMenu = () => {
-        if (nav) {
-            nav.classList.remove("open");
-            if (menuBtn) menuBtn.setAttribute("aria-expanded", "false");
-            document.body.style.overflow = "";
-        }
+        if (!nav || !menuBtn) return;
+        nav.classList.remove("open");
+        menuBtn.setAttribute("aria-expanded", "false");
+        menuBtn.setAttribute("aria-label", "Open navigation");
+        document.body.style.overflow = "";
     };
 
     if (menuBtn && nav) {
         menuBtn.addEventListener("click", () => {
             const isOpen = nav.classList.toggle("open");
             menuBtn.setAttribute("aria-expanded", isOpen);
+            menuBtn.setAttribute("aria-label", isOpen ? "Close navigation" : "Open navigation");
             document.body.style.overflow = isOpen ? "hidden" : "";
-            
+
             if (isOpen) {
                 const firstLink = nav.querySelector("a");
-                if (firstLink) setTimeout(() => firstLink.focus(), 100);
+                if (firstLink) setTimeout(() => firstLink.focus(), 50);
             }
         });
 
+        // Close when a nav link is tapped on mobile
         nav.addEventListener("click", (e) => {
             if (e.target.tagName === "A" && window.innerWidth <= 768) {
                 closeMenu();
@@ -47,51 +61,36 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Escape Key logic & Focus Trap
+    // Escape key closes menu and returns focus
     document.addEventListener("keydown", (e) => {
         if (e.key === "Escape" && nav && nav.classList.contains("open")) {
             closeMenu();
             if (menuBtn) menuBtn.focus();
         }
-        
+
+        // Focus trap inside open menu
         if (e.key === "Tab" && nav && nav.classList.contains("open") && window.innerWidth <= 768) {
             const focusable = nav.querySelectorAll("a[href], button");
-            if (focusable.length === 0) return;
-            
+            if (!focusable.length) return;
             const first = focusable[0];
-            const last = focusable[focusable.length - 1];
-
+            const last  = focusable[focusable.length - 1];
             if (e.shiftKey && document.activeElement === first) {
-                e.preventDefault();
-                last.focus();
+                e.preventDefault(); last.focus();
             } else if (!e.shiftKey && document.activeElement === last) {
-                e.preventDefault();
-                first.focus();
+                e.preventDefault(); first.focus();
             }
         }
     });
 
+    // Close menu on resize to desktop
     window.addEventListener("resize", () => {
-        if (window.innerWidth > 768 && nav && nav.classList.contains("open")) {
-            closeMenu();
-        }
+        if (window.innerWidth > 768) closeMenu();
     });
 
-    // Scroll to top button logic
+    // ── Scroll-to-top ─────────────────────────────────────────────
     if (topBtn) {
-        let isScrolling = false;
         window.addEventListener("scroll", () => {
-            if (!isScrolling) {
-                window.requestAnimationFrame(() => {
-                    if (window.scrollY > 300) {
-                        topBtn.classList.remove("hidden");
-                    } else {
-                        topBtn.classList.add("hidden");
-                    }
-                    isScrolling = false;
-                });
-                isScrolling = true;
-            }
+            topBtn.classList.toggle("hidden", window.scrollY <= 300);
         }, { passive: true });
 
         topBtn.addEventListener("click", () => {
@@ -99,18 +98,16 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Smooth scroll for anchor links offset by header height
+    // ── Smooth scroll with header offset ─────────────────────────
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener("click", function(e) {
-            const targetId = this.getAttribute("href").slice(1);
-            if (!targetId || this.classList.contains("skip-link")) return;
-            
-            const targetEl = document.getElementById(targetId);
-            if (targetEl) {
-                e.preventDefault();
-                const offset = targetEl.getBoundingClientRect().top + window.scrollY - 80;
-                window.scrollTo({ top: offset, behavior: "smooth" });
-            }
+        anchor.addEventListener("click", function (e) {
+            const id = this.getAttribute("href").slice(1);
+            if (!id || this.classList.contains("skip-link")) return;
+            const target = document.getElementById(id);
+            if (!target) return;
+            e.preventDefault();
+            const offset = target.getBoundingClientRect().top + window.scrollY - 80;
+            window.scrollTo({ top: offset, behavior: "smooth" });
         });
     });
 });
