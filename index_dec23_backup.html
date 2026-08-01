@@ -12,7 +12,7 @@
     <title>Gadiparthi Sai Sushvik | Student & Aspiring Civil Servant</title>
 
     <meta name="description" content="Personal portfolio of Gadiparthi Sai Sushvik, a student exploring technology, governance, accessibility, and digital innovation from Hyderabad, India.">
-    <meta name="keywords" content="Gadiparthi Sai Sushvik, Sai Sushvik, Hyderabad student, technology enthusiast, AI, robotics, innovation, UPSC, civil services, IAS, IPS, portfolio, CEC Intermediate, Telangana SSC">
+    <meta name="keywords" content="Gadiparthi Sai Sushvik, Sai Sushvik, Hyderabad student, technology enthusiast, AI, innovation, UPSC, civil services, portfolio">
     <meta name="author" content="Gadiparthi Sai Sushvik">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://aaravsushvik.github.io/">
@@ -32,8 +32,8 @@
 
     <meta http-equiv="Content-Security-Policy"
           content="default-src 'self';
-                   script-src 'self' 'sha256-r9b5zG2YyRj7Zk0Z0+7RkKqZ4s1bK8tXhQ0Zg9Q0X8o=';
-                   style-src 'self';
+                   script-src 'self' 'unsafe-inline';
+                   style-src 'self' 'unsafe-inline';
                    img-src 'self' data:;
                    font-src 'self';
                    connect-src 'self' https://formspree.io;
@@ -47,7 +47,14 @@
                    base-uri 'self';
                    upgrade-insecure-requests;">
 
-    <script>(()=>{const e=localStorage.getItem("theme");if(e==="dark"||(!e&&window.matchMedia("(prefers-color-scheme: dark)").matches)){document.documentElement.classList.add("dark");}})();</script>
+    <script>
+        (()=>{
+            const e=localStorage.getItem("theme");
+            if(e==="dark"||(!e&&window.matchMedia("(prefers-color-scheme: dark)").matches)){
+                document.documentElement.classList.add("dark");
+            }
+        })();
+    </script>
 
     <link rel="icon" href="./favicon.ico" sizes="any">
     <link rel="icon" href="./images/favicon.svg" type="image/svg+xml">
@@ -139,6 +146,8 @@
 <main id="main-content">
 
     <section id="home" class="hero">
+        <canvas id="hero-canvas" aria-hidden="true" role="presentation"></canvas>
+        
         <div class="container hero-grid">
             <div class="hero-text reveal">
                 <p class="hero-kicker">Student & Aspiring Civil Servant</p>
@@ -203,11 +212,10 @@
                     <span class="badge">2026 · Ongoing</span>
                 </div>
                 <ul class="feature-list">
-                    <li>Engineered a fully responsive, mobile-first design optimized for all devices.</li>
-                    <li>Implemented semantic HTML5 architecture for superior accessibility and structure.</li>
-                    <li>Developed a native dark mode system utilizing CSS variables and system preferences.</li>
+                    <li>Designed and developed an accessible, responsive portfolio using semantic HTML, modern CSS, and vanilla JavaScript.</li>
+                    <li>Engineered a custom, hardware-accelerated canvas background optimized for battery life and cross-device performance.</li>
                     <li>Integrated comprehensive accessibility enhancements aligned with WCAG 2.2 AA standards.</li>
-                    <li>Executed advanced SEO strategies leveraging Schema.org JSON-LD and strict CSP.</li>
+                    <li>Executed advanced SEO strategies leveraging Schema.org JSON-LD and strict CSP parameters.</li>
                 </ul>
             </article>
 
@@ -217,8 +225,8 @@
                     <span class="badge">2026 · Experimental</span>
                 </div>
                 <ul class="feature-list">
-                    <li>Designed layouts utilizing a mobile-first philosophy.</li>
-                    <li>Constructed scalable CSS architecture relying on modern custom properties.</li>
+                    <li>Designed layouts utilizing a mobile-first philosophy to ensure universal accessibility.</li>
+                    <li>Constructed scalable CSS architecture relying on modern custom properties and fluid typography.</li>
                     <li>Experimented with accessible navigation systems and dynamic scroll behavior tracking.</li>
                 </ul>
             </article>
@@ -229,8 +237,8 @@
                     <span class="badge">2026 · Research</span>
                 </div>
                 <ul class="feature-list">
-                    <li>Documenting literature on how digital tools enhance public service accessibility.</li>
-                    <li>Tracking the evolution of GovTech developments and Digital India initiatives.</li>
+                    <li>Documenting literature on how digital tools and APIs enhance public service accessibility.</li>
+                    <li>Tracking the evolution of GovTech developments and Digital India scale initiatives.</li>
                     <li>Analyzing the critical relationship between artificial intelligence policy and public administration.</li>
                 </ul>
             </article>
@@ -315,7 +323,7 @@
         </div>
     </section>
 
-    <section id="message" class="container reveal">
+    <section id="contact" class="container reveal">
         <h2 class="section-title">Get in Touch</h2>
         <div class="solid-panel contact-layout">
             <div class="contact-info">
