@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Defensive DOM querying
     const html = document.documentElement;
     const header = document.getElementById('main-header');
     const themeToggle = document.getElementById('theme-toggle');
@@ -13,7 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const sections = document.querySelectorAll('section[id]');
     const topBtn = document.getElementById('topBtn');
     const progressBar = document.getElementById('scroll-progress');
-    
     const contactForm = document.getElementById('contact-form');
     const submitBtn = document.getElementById('submit-btn');
     const formStatus = document.getElementById('form-status');
@@ -78,7 +76,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (themeToggle) {
         themeToggle.addEventListener('click', () => {
             const currentlyDark = html.classList.contains('dark') || (!html.classList.contains('light') && systemTheme.matches);
-            
             html.classList.remove(currentlyDark ? 'dark' : 'light');
             html.classList.add(currentlyDark ? 'light' : 'dark');
             localStorage.setItem('theme', currentlyDark ? 'light' : 'dark');
@@ -90,13 +87,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================================================
-    // Canvas Engine (Final Optimized Pipeline)
+    // Canvas Engine 
     // ==========================================================================
     const canvas = document.getElementById('hero-canvas');
     const heroSection = document.getElementById('home');
-    
     const QUALITY = Object.freeze({ LOW: 0, MEDIUM: 1, HIGH: 2 });
-    
     const CONFIG = Object.freeze({
         mouseRadius: 150,
         mouseRadiusSq: 22500,
@@ -117,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const ctx = canvas.getContext('2d', { alpha: false });
         
         let engineRunning = false;
-        let heroVisible = false;
+        let heroVisible = true; 
         let animationFrameId = null;
         let width = 0, height = 0;
         let canvasRect = { left: 0, top: 0 };
@@ -167,16 +162,11 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         const updateRect = () => { canvasRect = canvas.getBoundingClientRect(); };
-        
-        const pointerMoveHandler = (e) => {
-            rawPointer.x = e.clientX;
-            rawPointer.y = e.clientY;
-        };
+        const pointerMoveHandler = (e) => { rawPointer.x = e.clientX; rawPointer.y = e.clientY; };
         const pointerLeaveHandler = () => { rawPointer.x = null; rawPointer.y = null; };
 
         class Particle {
             constructor() { this.reset(); }
-            
             reset() {
                 this.x = Math.random() * width;
                 this.y = Math.random() * height;
@@ -184,7 +174,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 this.vy = (Math.random() - 0.5) * 0.5;
                 this.radius = Math.random() * 1.5 + 0.5;
             }
-            
             update(dt) {
                 const timeScale = dt / CONFIG.physicsStep;
                 this.x += this.vx * timeScale;
@@ -197,7 +186,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     const dx = mouse.x - this.x;
                     const dy = mouse.y - this.y;
                     const distSq = dx * dx + dy * dy;
-                    
                     if (distSq > 0 && distSq < CONFIG.mouseRadiusSq) {
                         const distance = Math.sqrt(distSq);
                         const force = Math.max(0, (CONFIG.mouseRadius - distance) / CONFIG.mouseRadius);
@@ -216,17 +204,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const initCanvas = () => {
             const newWidth = canvas.parentElement.clientWidth;
             const newHeight = canvas.parentElement.clientHeight;
-            
             if (newWidth === 0 || newHeight === 0 || (newWidth === width && newHeight === height)) return;
             
-            width = newWidth;
-            height = newHeight;
+            width = newWidth; height = newHeight;
             const dpr = window.devicePixelRatio || 1;
-            
-            canvas.width = width * dpr;
-            canvas.height = height * dpr;
-            canvas.style.width = `${width}px`;
-            canvas.style.height = `${height}px`;
+            canvas.width = width * dpr; canvas.height = height * dpr;
+            canvas.style.width = `${width}px`; canvas.style.height = `${height}px`;
             ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
             updateRect();
             
@@ -263,8 +246,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 mouse.x = rawPointer.x - canvasRect.left;
                 mouse.y = rawPointer.y - canvasRect.top;
             } else {
-                mouse.x = null;
-                mouse.y = null;
+                mouse.x = null; mouse.y = null;
             }
 
             const currentFps = 1000 / (dt || 1);
@@ -272,21 +254,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (time - lastQualityCheck > 500) {
                 lastQualityCheck = time;
-                
-                if (emaFps < 45) {
-                    lowFrames++;
-                    highFrames = 0;
-                } else if (emaFps > 55) {
-                    highFrames++;
-                    lowFrames = 0;
-                } else {
-                    lowFrames = 0;
-                    highFrames = 0;
-                }
+                if (emaFps < 45) { lowFrames++; highFrames = 0; } 
+                else if (emaFps > 55) { highFrames++; lowFrames = 0; } 
+                else { lowFrames = 0; highFrames = 0; }
 
                 if (lowFrames >= 3 && currentQuality > QUALITY.LOW) {
-                    currentQuality--;
-                    lowFrames = 0; 
+                    currentQuality--; lowFrames = 0; 
                 } else if (highFrames >= 3 && currentQuality < maxHardwareQuality) {
                     const oldTarget = CONFIG.levels[currentQuality].count;
                     currentQuality++;
@@ -309,7 +282,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             ctx.fillStyle = backgroundColor;
             ctx.fillRect(0, 0, width, height);
-
             ctx.fillStyle = particleColor;
             for (let i = 0; i < activeCount; i++) particles[i].draw();
 
@@ -327,10 +299,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         
                         const ptr = bucketCounts[bucketIdx] * 4;
                         const arr = lineBuckets[bucketIdx];
-                        arr[ptr] = particles[i].x;
-                        arr[ptr+1] = particles[i].y;
-                        arr[ptr+2] = particles[j].x;
-                        arr[ptr+3] = particles[j].y;
+                        arr[ptr] = particles[i].x; arr[ptr+1] = particles[i].y;
+                        arr[ptr+2] = particles[j].x; arr[ptr+3] = particles[j].y;
                         bucketCounts[bucketIdx]++;
                     }
                 }
@@ -341,7 +311,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (bucketCounts[b] === 0) continue;
                 ctx.beginPath();
                 ctx.globalAlpha = (b + 1) / CONFIG.alphaBuckets;
-                
                 const count = bucketCounts[b];
                 const arr = lineBuckets[b];
                 for (let i = 0; i < count; i++) {
@@ -359,21 +328,11 @@ document.addEventListener('DOMContentLoaded', () => {
         canvas.addEventListener('pointercancel', pointerLeaveHandler, { passive: true });
         document.addEventListener('themechange', themeHandler);
 
-        const observer = new IntersectionObserver(([entry]) => {
-            heroVisible = entry.isIntersecting;
-            if (heroVisible && !document.hidden) startEngine();
-            else stopEngine();
-        }, { threshold: 0 });
-        observer.observe(heroSection);
-
         let resizePending = false;
         const resizeObserver = new ResizeObserver(() => {
             if (resizePending) return;
             resizePending = true;
-            requestAnimationFrame(() => {
-                initCanvas();
-                resizePending = false;
-            });
+            requestAnimationFrame(() => { initCanvas(); resizePending = false; });
         });
         resizeObserver.observe(canvas.parentElement);
 
@@ -382,10 +341,7 @@ document.addEventListener('DOMContentLoaded', () => {
             else if (heroVisible) startEngine();
         };
         const scrollHandler = () => updateRect();
-        
-        const pageShowHandler = () => { 
-            if (heroVisible && !document.hidden) startEngine(); 
-        };
+        const pageShowHandler = () => { if (heroVisible && !document.hidden) startEngine(); };
 
         document.addEventListener('visibilitychange', visibilityHandler);
         window.addEventListener('pagehide', stopEngine);
@@ -398,10 +354,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         let dprMedia;
-        const dprHandler = () => {
-            initCanvas();
-            watchDPR(); 
-        };
+        const dprHandler = () => { initCanvas(); watchDPR(); };
         const watchDPR = () => {
             if (dprMedia) dprMedia.removeEventListener('change', dprHandler);
             dprMedia = window.matchMedia(`(resolution: ${window.devicePixelRatio}dppx)`);
@@ -445,6 +398,9 @@ document.addEventListener('DOMContentLoaded', () => {
         initTheme();
         assessHardware();
         initCanvas();
+        
+        // Start immediately since hero relies on fast rendering
+        startEngine(); 
     }
 
     // ==========================================================================
@@ -508,77 +464,75 @@ document.addEventListener('DOMContentLoaded', () => {
                 const lastElement = focusableElements[focusableElements.length - 1];
 
                 if (e.shiftKey && document.activeElement === firstElement) {
-                    e.preventDefault();
-                    lastElement.focus();
+                    e.preventDefault(); lastElement.focus();
                 } else if (!e.shiftKey && document.activeElement === lastElement) {
-                    e.preventDefault();
-                    firstElement.focus();
+                    e.preventDefault(); firstElement.focus();
                 }
             }
         });
     }
 
     // ==========================================================================
-    // Intersection Observers (Reveal & Navigation)
+    // Deferred UI Observers (Run in idle time to unblock rendering)
     // ==========================================================================
-    if (navLinks.length > 0 && sections.length > 0) {
-        const navObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const id = entry.target.getAttribute('id');
-                    navLinks.forEach(link => {
-                        link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
-                    });
-                }
-            });
-        }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
-
-        sections.forEach(sec => navObserver.observe(sec));
-    }
-
-    if (!prefersReducedMotion.matches) {
-        const reveals = document.querySelectorAll('.reveal');
-        if (reveals.length > 0) {
-            const revealObserver = new IntersectionObserver((entries, observer) => {
+    const initDeferredObservers = () => {
+        if (navLinks.length > 0 && sections.length > 0) {
+            const navObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                        observer.unobserve(entry.target); 
+                        const id = entry.target.getAttribute('id');
+                        navLinks.forEach(link => {
+                            link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+                        });
                     }
                 });
-            }, { rootMargin: '0px 0px -50px 0px', threshold: 0.1 });
-            reveals.forEach(el => revealObserver.observe(el));
+            }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+            sections.forEach(sec => navObserver.observe(sec));
         }
-    } else {
-        document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
-    }
+
+        if (!prefersReducedMotion.matches) {
+            const reveals = document.querySelectorAll('.reveal');
+            if (reveals.length > 0) {
+                const revealObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                            observer.unobserve(entry.target); 
+                        }
+                    });
+                }, { rootMargin: '0px 0px -50px 0px', threshold: 0.1 });
+                reveals.forEach(el => revealObserver.observe(el));
+            }
+        } else {
+            document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+        }
+    };
+
+    // Safari Fallback for requestIdleCallback
+    const scheduleIdle = window.requestIdleCallback ?? ((cb) => setTimeout(cb, 1));
+    scheduleIdle(initDeferredObservers);
 
     // ==========================================================================
     // Throttled Scroll Events
     // ==========================================================================
     let ticking = false;
-
     window.addEventListener('scroll', () => {
         if (!ticking) {
             window.requestAnimationFrame(() => {
                 const scrollTop = window.scrollY;
-                
                 if (header) {
                     if (scrollTop > 10) header.classList.add('scrolled');
                     else header.classList.remove('scrolled');
                 }
-
                 if (progressBar && !prefersReducedMotion.matches) {
                     const docHeight = document.documentElement.scrollHeight - window.innerHeight;
                     const scrollPercent = docHeight > 0 ? (scrollTop / docHeight) : 0;
                     progressBar.style.transform = `scaleX(${scrollPercent})`;
                 }
-
                 if (topBtn) {
                     if (scrollTop > 400) topBtn.classList.remove('hidden');
                     else topBtn.classList.add('hidden');
                 }
-
                 ticking = false;
             });
             ticking = true;
@@ -596,10 +550,8 @@ document.addEventListener('DOMContentLoaded', () => {
         anchor.addEventListener('click', function(e) {
             const href = this.getAttribute('href');
             if (!href || href === '#' || this.classList.contains('skip-link')) return;
-            
             const id = href.slice(1);
             const target = document.getElementById(id);
-            
             if (target) {
                 e.preventDefault();
                 const offset = target.getBoundingClientRect().top + window.scrollY - 60; 
@@ -614,7 +566,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (contactForm && submitBtn && formStatus) {
         contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            
             submitBtn.disabled = true;
             submitBtn.textContent = 'Sending...';
             formStatus.textContent = 'Sending your message...';
