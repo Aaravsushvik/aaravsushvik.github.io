@@ -63,9 +63,9 @@
     <link rel="sitemap" type="application/xml" href="/sitemap.xml">
 
     <link rel="preload" href="./style.css" as="style">
-    <link rel="preload" href="./images/IMG_2358_Original.jpeg" as="image" type="image/jpeg" imagesizes="(max-width: 768px) 90vw, 420px">
-    <link rel="stylesheet" href="./style.css">
+    <link rel="preload" href="./images/IMG_2358_Original.jpeg" as="image" type="image/jpeg" fetchpriority="high">
     
+    <link rel="stylesheet" href="./style.css">
     <script src="./script.js" defer></script>
 
     <script type="application/ld+json">
@@ -174,19 +174,27 @@
             </div>
             
             <div class="hero-image-wrapper reveal">
-                <img src="./images/IMG_2358_Original.jpeg"
-                     alt="Gadiparthi Sai Sushvik with Family"
-                     class="hero-image"
-                     width="420"
-                     height="315"
-                     sizes="(max-width: 768px) 90vw, 420px"
-                     fetchpriority="high"
-                     decoding="async">
+                <picture>
+                    <source type="image/avif" 
+                            srcset="./images/IMG_2358_Original.avif 420w" 
+                            sizes="(max-width: 768px) 90vw, 420px">
+                    <source type="image/webp" 
+                            srcset="./images/IMG_2358_Original.webp 420w" 
+                            sizes="(max-width: 768px) 90vw, 420px">
+                    <img src="./images/IMG_2358_Original.jpeg"
+                         alt="Gadiparthi Sai Sushvik with Family"
+                         class="hero-image"
+                         width="420"
+                         height="315"
+                         fetchpriority="high"
+                         loading="eager"
+                         decoding="async">
+                </picture>
             </div>
         </div>
     </section>
 
-    <section id="about" class="container reveal">
+    <section id="about" class="container reveal content-section">
         <h2 class="section-title">About Me</h2>
         <div class="content-grid solid-panel">
             <div class="text-block">
@@ -203,7 +211,7 @@
         </div>
     </section>
 
-    <section id="projects" class="container reveal">
+    <section id="projects" class="container reveal content-section">
         <h2 class="section-title">Projects & Experiments</h2>
         <div class="card-grid">
             <article class="solid-card">
@@ -245,7 +253,7 @@
         </div>
     </section>
 
-    <section id="learning" class="container reveal">
+    <section id="learning" class="container reveal content-section">
         <h2 class="section-title">Currently Learning</h2>
         <div class="solid-panel">
             <div class="tag-cloud" aria-label="List of topics currently being studied">
@@ -261,7 +269,7 @@
         </div>
     </section>
 
-    <section id="skills" class="container reveal">
+    <section id="skills" class="container reveal content-section">
         <h2 class="section-title">Technical Skills</h2>
         <div class="solid-panel">
             <div class="tag-cloud" aria-label="List of technical skills">
@@ -277,7 +285,7 @@
         </div>
     </section>
 
-    <section id="results" class="container reveal">
+    <section id="results" class="container reveal content-section">
         <h2 class="section-title">Academic Milestones</h2>
         <div class="solid-panel stats-container">
             <div class="stat-box">
@@ -291,7 +299,7 @@
         </div>
     </section>
 
-    <section id="favorites" class="container reveal">
+    <section id="favorites" class="container reveal content-section">
         <h2 class="section-title">My Favorites</h2>
         <div class="solid-panel">
             <ul class="feature-list">
@@ -306,7 +314,7 @@
         </div>
     </section>
 
-    <section id="inspiration" class="container reveal">
+    <section id="inspiration" class="container reveal content-section">
         <h2 class="section-title">Sources of Inspiration</h2>
         <div class="solid-panel">
             <ol class="feature-list ordered">
@@ -323,7 +331,7 @@
         </div>
     </section>
 
-    <section id="contact" class="container reveal">
+    <section id="contact" class="container reveal content-section">
         <h2 class="section-title">Get in Touch</h2>
         <div class="solid-panel contact-layout">
             <div class="contact-info">
@@ -359,7 +367,7 @@
 
 </main>
 
-<footer class="footer">
+<footer class="footer content-section">
     <div class="container footer-content">
         <p>Built with semantic HTML, modern CSS, and a commitment to accessibility. &nbsp;•&nbsp; © 2026 Gadiparthi Sai Sushvik</p>
     </div>
