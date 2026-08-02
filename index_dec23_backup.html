@@ -21,14 +21,14 @@
     <meta property="og:description" content="Exploring the intersection of technology, governance, accessibility, and digital innovation.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://aaravsushvik.github.io/">
-    <meta property="og:image" content="https://aaravsushvik.github.io/images/hero-840.jpeg">
+    <meta property="og:image" content="https://aaravsushvik.github.io/images/hero-1024.jpeg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Gadiparthi Sai Sushvik">
     <meta name="twitter:description" content="Technology Enthusiast • Aspiring Civil Servant • Future Innovator">
-    <meta name="twitter:image" content="https://aaravsushvik.github.io/images/hero-840.jpeg">
+    <meta name="twitter:image" content="https://aaravsushvik.github.io/images/hero-1024.jpeg">
 
     <meta http-equiv="Content-Security-Policy"
           content="default-src 'self';
@@ -56,16 +56,15 @@
         })();
     </script>
 
-    <link rel="icon" href="./favicon.ico" sizes="any">
-    <link rel="icon" href="./images/favicon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="./images/apple-touch-icon.png">
-    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+    <link rel="manifest" href="/manifest.json">
     <link rel="sitemap" type="application/xml" href="/sitemap.xml">
 
-    <link rel="preload" href="./style.css" as="style">
-    
-    <link rel="stylesheet" href="./style.css">
-    <script src="./script.js" defer></script>
+    <link rel="preload" href="/style.css" as="style">
+    <link rel="stylesheet" href="/style.css">
+    <script src="/script.js" defer></script>
 
     <script type="application/ld+json">
     [
@@ -75,7 +74,7 @@
         "name": "Gadiparthi Sai Sushvik",
         "alternateName": "Sai Sushvik",
         "url": "https://aaravsushvik.github.io/",
-        "image": "https://aaravsushvik.github.io/images/hero-840.jpeg",
+        "image": "https://aaravsushvik.github.io/images/hero-1024.jpeg",
         "description": "Student interested in technology, governance, and digital innovation.",
         "inLanguage": "en-IN",
         "birthPlace": {
@@ -173,21 +172,39 @@
             </div>
             
             <div class="hero-image-wrapper">
-                <picture>
-                    <source type="image/avif" 
-                            srcset="./images/hero-320.avif 320w, ./images/hero-480.avif 480w, ./images/hero-768.avif 768w, ./images/hero-1024.avif 1024w" 
-                            sizes="(max-width: 768px) 90vw, 420px">
-                    <source type="image/webp" 
-                            srcset="./images/hero-320.webp 320w, ./images/hero-480.webp 480w, ./images/hero-768.webp 768w, ./images/hero-1024.webp 1024w" 
-                            sizes="(max-width: 768px) 90vw, 420px">
-                    <img src="./images/hero-840.jpeg"
-                         alt="Gadiparthi Sai Sushvik with Family"
-                         class="hero-image"
-                         width="420"
-                         height="315"
-                         fetchpriority="high"
-                         loading="eager"
-                         decoding="async">
+                <picture class="hero-picture">
+                    <source
+                        type="image/avif"
+                        srcset="
+                            /images/hero-320.avif 320w,
+                            /images/hero-480.avif 480w,
+                            /images/hero-768.avif 768w,
+                            /images/hero-1024.avif 1024w"
+                        sizes="(max-width: 768px) 90vw, 420px">
+                    <source
+                        type="image/webp"
+                        srcset="
+                            /images/hero-320.webp 320w,
+                            /images/hero-480.webp 480w,
+                            /images/hero-768.webp 768w,
+                            /images/hero-1024.webp 1024w"
+                        sizes="(max-width: 768px) 90vw, 420px">
+                    <img
+                        src="/images/hero-1024.jpeg"
+                        srcset="
+                            /images/hero-320.jpeg 320w,
+                            /images/hero-480.jpeg 480w,
+                            /images/hero-768.jpeg 768w,
+                            /images/hero-1024.jpeg 1024w"
+                        sizes="(max-width: 768px) 90vw, 420px"
+                        alt="Portrait of Gadiparthi Sai Sushvik"
+                        class="hero-image"
+                        width="420"
+                        height="315"
+                        loading="eager"
+                        fetchpriority="high"
+                        decoding="async"
+                        draggable="false">
                 </picture>
             </div>
         </div>
