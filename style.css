@@ -190,8 +190,11 @@ section { margin-bottom: var(--space-lg); }
 .hero-title { font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.04em; margin-bottom: var(--space-sm); }
 .hero-subtitle { font-size: clamp(1.1rem, 2vw, 1.5rem); color: var(--color-text-secondary); margin-bottom: var(--space-sm); }
 .hero-description { color: var(--color-text-secondary); margin: 0 auto var(--space-md); max-width: 100%; }
+
+/* Hero Image Specifics */
 .hero-image-wrapper { max-width: 400px; margin: 0 auto; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--color-shadow) 0 20px 40px -10px; }
-.hero-image { width: 100%; height: auto; display: block; object-fit: cover; }
+.hero-picture { display: block; width: 100%; }
+.hero-image { display: block; width: 100%; max-width: 420px; height: auto; object-fit: cover; }
 
 .social-links { display: flex; justify-content: center; gap: var(--space-xs); }
 .social-icon {
