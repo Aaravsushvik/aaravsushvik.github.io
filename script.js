@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Defensive DOM querying
     const html = document.documentElement;
     const header = document.getElementById('main-header');
     const themeToggle = document.getElementById('theme-toggle');
@@ -23,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
 
     // ==========================================================================
-    // Theme Management & Decoupled Dispatcher
+    // Theme Management
     // ==========================================================================
     const updateMetaColor = (isDark) => {
         if (metaThemeColor) {
@@ -32,6 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const updateThemeIcon = () => {
+        if (!moonIcon || !sunIcon || !themeToggle) return;
         const isDark = html.classList.contains('dark') || (!html.classList.contains('light') && systemTheme.matches);
         if (isDark) {
             moonIcon.classList.add('hidden');
@@ -53,7 +55,6 @@ document.addEventListener('DOMContentLoaded', () => {
     updateThemeIcon();
 
     const dispatchThemeUpdate = () => {
-        // Force layout read to ensure CSS variables reflect the new DOM class
         const styles = getComputedStyle(document.body);
         document.dispatchEvent(new CustomEvent('themechange', {
             detail: {
@@ -89,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================================================
-    // Final Production Canvas Engine (Batched, Adaptive, Bounded Complexity)
+    // Canvas Engine (Final Optimized Pipeline)
     // ==========================================================================
     const canvas = document.getElementById('hero-canvas');
     const heroSection = document.getElementById('home');
@@ -136,7 +137,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const lineBuckets = Array.from({ length: CONFIG.alphaBuckets }, () => new Float32Array(maxLines * 4));
         const bucketCounts = new Int32Array(CONFIG.alphaBuckets);
 
-        // --- Hardware & Theme ---
         const assessHardware = () => {
             const cores = navigator.hardwareConcurrency || 4;
             const networkType = connection ? connection.effectiveType : '4g';
@@ -166,7 +166,6 @@ document.addEventListener('DOMContentLoaded', () => {
             lineColor = styles.getPropertyValue('--canvas-line').trim();
         };
 
-        // --- Input & Layout ---
         const updateRect = () => { canvasRect = canvas.getBoundingClientRect(); };
         
         const pointerMoveHandler = (e) => {
@@ -175,7 +174,6 @@ document.addEventListener('DOMContentLoaded', () => {
         };
         const pointerLeaveHandler = () => { rawPointer.x = null; rawPointer.y = null; };
 
-        // --- Physics Objects ---
         class Particle {
             constructor() { this.reset(); }
             
@@ -237,7 +235,6 @@ document.addEventListener('DOMContentLoaded', () => {
             for (let i = 0; i < maxNeeded; i++) particles[i].reset();
         };
 
-        // --- Scheduler & Rendering ---
         const startEngine = () => {
             if (engineRunning) return;
             engineRunning = true;
@@ -357,7 +354,6 @@ document.addEventListener('DOMContentLoaded', () => {
             ctx.globalAlpha = 1.0;
         };
 
-        // --- Events & Observers ---
         canvas.addEventListener('pointermove', pointerMoveHandler, { passive: true });
         canvas.addEventListener('pointerleave', pointerLeaveHandler, { passive: true });
         canvas.addEventListener('pointercancel', pointerLeaveHandler, { passive: true });
@@ -419,7 +415,6 @@ document.addEventListener('DOMContentLoaded', () => {
         };
         prefersReducedMotion.addEventListener('change', motionHandler);
 
-        // --- Complete Cleanup Routine ---
         window.destroyCanvasEngine = () => {
             stopEngine();
             
@@ -453,10 +448,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================================================
-    // Mobile Navigation & Focus Trap
+    // Mobile Navigation & Focus Trap 
     // ==========================================================================
     const closeMenu = () => {
-        if (!nav.classList.contains('open')) return;
+        if (!nav || !menuToggle || !nav.classList.contains('open')) return;
         nav.classList.remove('open');
         menuToggle.setAttribute('aria-expanded', 'false');
         
@@ -526,29 +521,34 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================================================
     // Intersection Observers (Reveal & Navigation)
     // ==========================================================================
-    const navObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const id = entry.target.getAttribute('id');
-                navLinks.forEach(link => {
-                    link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
-                });
-            }
-        });
-    }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
-
-    sections.forEach(sec => navObserver.observe(sec));
-
-    if (!prefersReducedMotion.matches) {
-        const revealObserver = new IntersectionObserver((entries, observer) => {
+    if (navLinks.length > 0 && sections.length > 0) {
+        const navObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target); 
+                    const id = entry.target.getAttribute('id');
+                    navLinks.forEach(link => {
+                        link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+                    });
                 }
             });
-        }, { rootMargin: '0px 0px -50px 0px', threshold: 0.1 });
-        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+        }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+
+        sections.forEach(sec => navObserver.observe(sec));
+    }
+
+    if (!prefersReducedMotion.matches) {
+        const reveals = document.querySelectorAll('.reveal');
+        if (reveals.length > 0) {
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target); 
+                    }
+                });
+            }, { rootMargin: '0px 0px -50px 0px', threshold: 0.1 });
+            reveals.forEach(el => revealObserver.observe(el));
+        }
     } else {
         document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
     }
@@ -563,8 +563,10 @@ document.addEventListener('DOMContentLoaded', () => {
             window.requestAnimationFrame(() => {
                 const scrollTop = window.scrollY;
                 
-                if (scrollTop > 10) header.classList.add('scrolled');
-                else header.classList.remove('scrolled');
+                if (header) {
+                    if (scrollTop > 10) header.classList.add('scrolled');
+                    else header.classList.remove('scrolled');
+                }
 
                 if (progressBar && !prefersReducedMotion.matches) {
                     const docHeight = document.documentElement.scrollHeight - window.innerHeight;
@@ -592,8 +594,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================================================
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
-            const id = this.getAttribute('href').slice(1);
-            if (!id || this.classList.contains('skip-link')) return;
+            const href = this.getAttribute('href');
+            if (!href || href === '#' || this.classList.contains('skip-link')) return;
+            
+            const id = href.slice(1);
             const target = document.getElementById(id);
             
             if (target) {
@@ -607,7 +611,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================================================
     // Form Submission (Formspree)
     // ==========================================================================
-    if (contactForm && submitBtn) {
+    if (contactForm && submitBtn && formStatus) {
         contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             
