@@ -8,7 +8,6 @@
     --color-border: rgba(0, 0, 0, 0.08);
     --color-border-hover: rgba(0, 0, 0, 0.15);
     
-    /* WCAG AA (4.5:1+) Compliant Text Colors */
     --color-text-primary: #1d1d1f;
     --color-text-secondary: #59595e; 
     
@@ -127,7 +126,6 @@ body { font-family: var(--font-sans); background-color: var(--color-bg); color: 
 .container { width: 100%; margin: 0 auto; padding: 0 var(--space-md); }
 @media (min-width: 1200px) { .container { max-width: 1200px; } }
 
-/* Below-The-Fold Performance Constraints */
 .content-section { content-visibility: auto; contain-intrinsic-size: 500px; }
 
 .glass-header { background: var(--color-surface); border-bottom: 1px solid transparent; transition: border-bottom-color var(--transition-fast); }
@@ -136,10 +134,10 @@ body { font-family: var(--font-sans); background-color: var(--color-bg); color: 
 }
 .glass-header.scrolled { border-bottom-color: var(--color-border); }
 
-/* Non-composited animation fix: will-change only on transform */
+/* Non-composited animation penalty fixed: only animating transform */
 .solid-panel, .solid-card {
     background: var(--color-surface); border: 1px solid var(--color-border); box-shadow: var(--color-shadow) 0 4px 15px;
-    transition: transform var(--transition-bounce), box-shadow var(--transition-bounce), border-color var(--transition-fast);
+    transition: transform var(--transition-bounce);
     will-change: transform;
 }
 .solid-panel { padding: var(--space-md); border-radius: var(--radius-lg); }
@@ -192,7 +190,6 @@ section { margin-bottom: var(--space-lg); }
 .hero-subtitle { font-size: clamp(1.1rem, 2vw, 1.5rem); color: var(--color-text-secondary); margin-bottom: var(--space-sm); }
 .hero-description { color: var(--color-text-secondary); margin: 0 auto var(--space-md); max-width: 100%; }
 
-/* Hero Image Specifics */
 .hero-image-wrapper { max-width: 400px; margin: 0 auto; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--color-shadow) 0 20px 40px -10px; }
 .hero-picture { display: block; width: 100%; }
 .hero-image { display: block; width: 100%; max-width: 420px; height: auto; object-fit: cover; }
@@ -265,9 +262,8 @@ input:focus, textarea:focus { border-color: var(--color-accent); outline: none; 
 .top-btn.hidden { transform: translateY(20px); opacity: 0; pointer-events: none; }
 .footer { padding: var(--space-md) 0; text-align: center; border-top: 1px solid var(--color-border); color: var(--color-text-secondary); font-size: 0.9rem; }
 
-/* Constrain hover effects to pointer devices */
 @media (hover: hover) {
-    .solid-card:hover { transform: translateY(-4px); box-shadow: var(--color-shadow-hover) 0 12px 24px; border-color: var(--color-border-hover); }
+    .solid-card:hover { transform: translateY(-4px); border-color: var(--color-border-hover); box-shadow: var(--color-shadow-hover) 0 12px 24px; }
     .icon-button:hover { background-color: var(--color-border); }
     .nav-link:hover { color: var(--color-text-primary); }
     .social-icon:hover { background-color: var(--color-text-primary); color: var(--color-bg); transform: translateY(-3px); }
