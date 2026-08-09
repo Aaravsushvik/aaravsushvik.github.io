@@ -53,10 +53,12 @@
     <!-- Render-Blocking Theme Loader (Prevents FOUC) -->
     <script>
         (()=>{
-            const e=localStorage.getItem("theme");
-            if(e==="dark"||(!e&&window.matchMedia("(prefers-color-scheme: dark)").matches)){
-                document.documentElement.classList.add("dark");
-            }
+            try {
+                const e=localStorage.getItem("theme");
+                if(e==="dark"||(!e&&window.matchMedia("(prefers-color-scheme: dark)").matches)){
+                    document.documentElement.classList.add("dark");
+                }
+            } catch(err) {}
         })();
     </script>
 
@@ -67,7 +69,7 @@
     <link rel="manifest" href="/manifest.json">
     <link rel="sitemap" type="application/xml" href="/sitemap.xml">
 
-    <!-- Styles and Scripts (Minify these before final deployment if desired) -->
+    <!-- Styles and Scripts -->
     <link rel="preload" href="/style.css" as="style">
     <link rel="stylesheet" href="/style.css">
     <script src="/script.js" defer></script>
@@ -154,7 +156,6 @@
         <canvas id="hero-canvas" aria-hidden="true" role="presentation"></canvas>
         
         <div class="container hero-grid">
-            <!-- Render immediately for LCP optimization -->
             <div class="hero-text">
                 <p class="hero-kicker">Student & Aspiring Civil Servant</p>
                 <h1 class="hero-title">Gadiparthi Sai Sushvik</h1>
