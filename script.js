@@ -544,23 +544,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================================================
-    // Smooth Anchor Scrolling
-    // ==========================================================================
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            const href = this.getAttribute('href');
-            if (!href || href === '#' || this.classList.contains('skip-link')) return;
-            const id = href.slice(1);
-            const target = document.getElementById(id);
-            if (target) {
-                e.preventDefault();
-                const offset = target.getBoundingClientRect().top + window.scrollY - 60; 
-                window.scrollTo({ top: offset, behavior: prefersReducedMotion.matches ? 'auto' : 'smooth' });
-            }
-        });
-    });
-
-    // ==========================================================================
     // Form Submission (Formspree)
     // ==========================================================================
     if (contactForm && submitBtn && formStatus) {
