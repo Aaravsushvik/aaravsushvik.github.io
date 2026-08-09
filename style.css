@@ -136,10 +136,11 @@ body { font-family: var(--font-sans); background-color: var(--color-bg); color: 
 }
 .glass-header.scrolled { border-bottom-color: var(--color-border); }
 
+/* Non-composited animation fix: will-change only on transform */
 .solid-panel, .solid-card {
     background: var(--color-surface); border: 1px solid var(--color-border); box-shadow: var(--color-shadow) 0 4px 15px;
     transition: transform var(--transition-bounce), box-shadow var(--transition-bounce), border-color var(--transition-fast);
-    will-change: transform, box-shadow;
+    will-change: transform;
 }
 .solid-panel { padding: var(--space-md); border-radius: var(--radius-lg); }
 .solid-card { padding: var(--space-md); border-radius: var(--radius-md); display: flex; flex-direction: column; }
