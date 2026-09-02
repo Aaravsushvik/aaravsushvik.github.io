@@ -1,17 +1,17 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const d=document,w=window,html=d.documentElement;
-    const q=id=>d.getElementById(id);
-    const header=q('main-header'),themeToggle=q('theme-toggle');
-    const sunIcon=q('sun-icon'),moonIcon=q('moon-icon');
-    const menuToggle=q('menu-toggle'),nav=q('main-nav'),mainContent=q('main-content');
-    const footerElement=d.querySelector('footer'),navLinks=d.querySelectorAll('.nav-link'),sections=d.querySelectorAll('section[id]');
-    const topBtn=q('topBtn'),progressBar=q('scroll-progress');
-    const contactForm=q('contact-form'),submitBtn=q('submit-btn'),formStatus=q('form-status');
-    const metaThemeColor=q('meta-theme-color');
+    const d = document, w = window, html = d.documentElement;
+    const q = id => d.getElementById(id);
+    const header = q('main-header'), themeToggle = q('theme-toggle');
+    const sunIcon = q('sun-icon'), moonIcon = q('moon-icon');
+    const menuToggle = q('menu-toggle'), nav = q('main-nav'), mainContent = q('main-content');
+    const footerElement = d.querySelector('footer'), navLinks = d.querySelectorAll('.nav-link'), sections = d.querySelectorAll('section[id]');
+    const topBtn = q('topBtn'), progressBar = q('scroll-progress');
+    const contactForm = q('contact-form'), submitBtn = q('submit-btn'), formStatus = q('form-status');
+    const metaThemeColor = q('meta-theme-color');
 
-    const prefersReducedMotion=w.matchMedia('(prefers-reduced-motion: reduce)');
-    const supportsInert='inert' in HTMLElement.prototype;
-    const systemTheme=w.matchMedia('(prefers-color-scheme: dark)');
+    const prefersReducedMotion = w.matchMedia('(prefers-reduced-motion: reduce)');
+    const supportsInert = 'inert' in HTMLElement.prototype;
+    const systemTheme = w.matchMedia('(prefers-color-scheme: dark)');
 
     let currentLang = 'en';
 
@@ -43,16 +43,31 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    try {
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'light' || savedTheme === 'dark') {
-            html.classList.remove('light', 'dark');
-            html.classList.add(savedTheme);
-        }
-    } catch(e) {}
+    // Theme initialization with URL param support
+    const applyThemeFromState = (darkMode) => {
+        html.classList.remove('light', 'dark');
+        html.classList.add(darkMode ? 'dark' : 'light');
+        try { localStorage.setItem('theme', darkMode ? 'dark' : 'light'); } catch (e) {}
+        updateMetaColor(darkMode);
+        updateThemeIcon();
+        requestAnimationFrame(dispatchThemeUpdate);
+    };
 
-    updateMetaColor(isDark());
-    updateThemeIcon();
+    const getInitialTheme = () => {
+        const urlParams = new URLSearchParams(w.location.search);
+        const themeParam = urlParams.get('theme');
+        if (themeParam === 'dark') return true;
+        if (themeParam === 'light') return false;
+
+        try {
+            const saved = localStorage.getItem('theme');
+            if (saved === 'dark') return true;
+            if (saved === 'light') return false;
+        } catch (e) {}
+        return systemTheme.matches;
+    };
+
+    applyThemeFromState(getInitialTheme());
 
     const dispatchThemeUpdate = () => {
         const styles = w.getComputedStyle(d.body);
@@ -67,92 +82,83 @@ document.addEventListener('DOMContentLoaded', () => {
 
     systemTheme.addEventListener('change', (e) => {
         try {
-            if (!localStorage.getItem('theme')) {
-                html.classList.remove('light', 'dark');
-                html.classList.add(e.matches ? 'dark' : 'light');
-                updateThemeIcon();
-                updateMetaColor(e.matches);
-                requestAnimationFrame(dispatchThemeUpdate);
+            if (!localStorage.getItem('theme') && !new URLSearchParams(w.location.search).has('theme')) {
+                applyThemeFromState(e.matches);
             }
-        } catch(err) {}
+        } catch (err) {}
     });
 
     if (themeToggle) {
         themeToggle.addEventListener('click', () => {
             const currentlyDark = isDark();
-            html.classList.remove(currentlyDark ? 'dark' : 'light');
-            html.classList.add(currentlyDark ? 'light' : 'dark');
-            try {
-                localStorage.setItem('theme', currentlyDark ? 'light' : 'dark');
-            } catch(err) {}
-            updateMetaColor(!currentlyDark);
-            updateThemeIcon();
-            requestAnimationFrame(dispatchThemeUpdate);
+            const newDark = !currentlyDark;
+            const doApply = () => applyThemeFromState(newDark);
+            if (d.startViewTransition) {
+                d.startViewTransition(doApply);
+            } else {
+                doApply();
+            }
         });
     }
 
     // --- Multi-Language System ---
     const applyLanguage = (lang) => {
         if (typeof translations === 'undefined') return;
-        currentLang = translations[lang] ? lang : 'en';
-        const dict = translations[currentLang] || translations.en;
-        
-        html.lang = currentLang === 'en' ? 'en-IN' : currentLang;
-        try {
-            localStorage.setItem('lang', currentLang);
-        } catch(e) {}
+        const targetLang = translations[lang] ? lang : 'en';
+        currentLang = targetLang;
+        const dict = translations[targetLang];
 
-        // Inner HTML text updates
+        html.lang = targetLang === 'en' ? 'en-IN' : targetLang === 'te' ? 'te-IN' : targetLang === 'hi' ? 'hi-IN' : targetLang;
+        try { localStorage.setItem('lang', targetLang); } catch (e) {}
+
         d.querySelectorAll('[data-i18n]').forEach(el => {
             const key = el.getAttribute('data-i18n');
-            if (dict[key] !== undefined) {
-                el.innerHTML = dict[key];
-            }
+            if (dict[key] !== undefined) el.innerHTML = dict[key];
         });
 
-        // Placeholders
         d.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
             const key = el.getAttribute('data-i18n-placeholder');
-            if (dict[key] !== undefined) {
-                el.setAttribute('placeholder', dict[key]);
-            }
+            if (dict[key] !== undefined) el.setAttribute('placeholder', dict[key]);
         });
 
-        // Aria-labels
         d.querySelectorAll('[data-i18n-aria]').forEach(el => {
             const key = el.getAttribute('data-i18n-aria');
-            if (dict[key] !== undefined) {
-                el.setAttribute('aria-label', dict[key]);
-            }
+            if (dict[key] !== undefined) el.setAttribute('aria-label', dict[key]);
         });
 
-        // Image Alts
         d.querySelectorAll('[data-i18n-alt]').forEach(el => {
             const key = el.getAttribute('data-i18n-alt');
-            if (dict[key] !== undefined) {
-                el.setAttribute('alt', dict[key]);
-            }
+            if (dict[key] !== undefined) el.setAttribute('alt', dict[key]);
         });
 
-        // Page title & meta description
         if (dict['page.title']) d.title = dict['page.title'];
         const metaDesc = d.querySelector('meta[name="description"]');
-        if (metaDesc && dict['page.description']) {
-            metaDesc.setAttribute('content', dict['page.description']);
-        }
+        if (metaDesc && dict['page.description']) metaDesc.setAttribute('content', dict['page.description']);
 
         updateThemeIcon();
     };
 
+    const getInitialLanguage = () => {
+        const urlParams = new URLSearchParams(w.location.search);
+        const langParam = urlParams.get('lang');
+        if (langParam && ['en', 'te', 'hi'].includes(langParam)) return langParam;
+        try { return localStorage.getItem('lang') || 'en'; } catch (e) { return 'en'; }
+    };
+
     const langSelect = q('lang-select');
     if (langSelect && typeof translations !== 'undefined') {
-        let savedLang = 'en';
-        try {
-            savedLang = localStorage.getItem('lang') || 'en';
-        } catch(e) {}
-        langSelect.value = savedLang;
-        applyLanguage(savedLang);
-        langSelect.addEventListener('change', (e) => applyLanguage(e.target.value));
+        const initialLang = getInitialLanguage();
+        langSelect.value = initialLang;
+        applyLanguage(initialLang);
+        langSelect.addEventListener('change', (e) => {
+            const newLang = e.target.value;
+            const doApply = () => applyLanguage(newLang);
+            if (d.startViewTransition) {
+                d.startViewTransition(doApply);
+            } else {
+                doApply();
+            }
+        });
     }
 
     // --- Canvas Particle Engine ---
@@ -234,7 +240,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         initCanvas = () => {
             const nw = canvas.parentElement.clientWidth, nh = canvas.parentElement.clientHeight;
-            const dpr = w.devicePixelRatio || 1;
+            const dpr = Math.min(w.devicePixelRatio || 1, 2);
             if (nw === 0 || nh === 0 || (nw === width && nh === height && dpr === lastDpr)) return;
             width = nw; height = nh; lastDpr = dpr;
             canvas.width = width * dpr; canvas.height = height * dpr;
@@ -348,7 +354,9 @@ document.addEventListener('DOMContentLoaded', () => {
         resizeObserver.observe(canvas.parentElement);
 
         const visibilityHandler = () => { if (d.hidden) stopEngine(); else if (heroVisible) startEngine(); };
-        const pageShowHandler = () => { if (heroVisible && !d.hidden) startEngine(); };
+        const pageShowHandler = (event) => {
+            if (heroVisible && !d.hidden && (event.persisted || !event.persisted)) startEngine();
+        };
 
         new IntersectionObserver(([entry]) => {
             heroVisible = entry.isIntersecting;
@@ -371,7 +379,18 @@ document.addEventListener('DOMContentLoaded', () => {
         const motionHandler = (e) => { if (e.matches) stopEngine(); else if (heroVisible && !d.hidden) startEngine(); };
         prefersReducedMotion.addEventListener('change', motionHandler);
 
-        initTheme(); assessHardware(); initCanvas(); startEngine();
+        const initCanvasEngine = () => {
+            initTheme();
+            assessHardware();
+            initCanvas();
+            startEngine();
+        };
+
+        if (w.requestIdleCallback) {
+            w.requestIdleCallback(initCanvasEngine, { timeout: 1000 });
+        } else {
+            setTimeout(initCanvasEngine, 0);
+        }
     }
 
     // --- Navigation & Mobile Drawer ---
@@ -425,6 +444,26 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // --- Smooth Scroll & Section Spy (Event Delegation) ---
+    d.body.addEventListener('click', (e) => {
+        const link = e.target.closest('a[href^="#"]');
+        if (!link || link.classList.contains('skip-link')) return;
+        const href = link.getAttribute('href');
+        if (!href || href === '#') return;
+        const target = d.getElementById(href.slice(1));
+        if (!target) return;
+        e.preventDefault();
+        if (nav && nav.classList.contains('open')) closeMenu();
+        const pad = parseFloat(getComputedStyle(html).scrollPaddingTop) || 60;
+        w.scrollTo({
+            top: target.getBoundingClientRect().top + w.scrollY - pad,
+            behavior: prefersReducedMotion.matches ? 'auto' : 'smooth'
+        });
+        if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1');
+        target.focus({ preventScroll: true });
+        history.pushState(null, '', href);
+    });
+
     const initDeferredObservers = () => {
         if (navLinks.length > 0 && sections.length > 0) {
             const navObserver = new IntersectionObserver((entries) => {
@@ -437,6 +476,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             if (on) link.setAttribute('aria-current', 'true');
                             else link.removeAttribute('aria-current');
                         });
+                        if (history.replaceState) history.replaceState(null, '', `#${id}`);
                     }
                 });
             }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
@@ -472,7 +512,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const scheduleIdle = w.requestIdleCallback ?? ((cb) => setTimeout(cb, 1));
     scheduleIdle(initDeferredObservers);
 
-    // --- Smooth Scroll & Progress ---
+    // --- Scroll Progress & Top Button ---
     let ticking = false;
     w.addEventListener('scroll', () => {
         if (!ticking) {
@@ -499,25 +539,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (topBtn) {
         topBtn.addEventListener('click', () => w.scrollTo({ top: 0, behavior: prefersReducedMotion.matches ? 'auto' : 'smooth' }));
     }
-
-    d.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            const href = this.getAttribute('href');
-            if (!href || href === '#' || this.classList.contains('skip-link')) return;
-            const target = d.getElementById(href.slice(1));
-            if (!target) return;
-            e.preventDefault();
-            if (nav && nav.classList.contains('open')) closeMenu();
-            const pad = parseFloat(getComputedStyle(html).scrollPaddingTop) || 60;
-            w.scrollTo({
-                top: target.getBoundingClientRect().top + w.scrollY - pad,
-                behavior: prefersReducedMotion.matches ? 'auto' : 'smooth'
-            });
-            if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1');
-            target.focus({ preventScroll: true });
-            history.pushState(null, '', href);
-        });
-    });
 
     // --- Contact Form ---
     if (contactForm && submitBtn && formStatus) {
@@ -561,7 +582,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (bad.length) {
                 bad.forEach(f => showError(f, f.validationMessage));
-                setStatus(`${bad.length} field${bad.length > 1 ? 's' : ''} need${bad.length > 1 ? '' : 's'} attention.`, 'error');
+                const msg = getTranslation('form.invalid.generic') || `${bad.length} field(s) need attention.`;
+                setStatus(msg, 'error');
                 bad[0].focus();
                 return;
             }
@@ -584,20 +606,29 @@ document.addEventListener('DOMContentLoaded', () => {
                 setStatus(getTranslation('form.success') || 'Message sent successfully.', 'success');
 
                 setTimeout(() => {
-                    submitBtn.textContent = getTranslation('form.submit') || defaultSubmitText;
+                    submitBtn.textContent = defaultSubmitText;
                     submitBtn.classList.remove('success');
                     submitBtn.disabled = false;
                     formStatus.textContent = '';
                 }, 4000);
-            } catch(error) {
+            } catch (error) {
                 submitBtn.disabled = false;
-                submitBtn.textContent = getTranslation('form.submit') || defaultSubmitText;
+                submitBtn.textContent = defaultSubmitText;
                 setStatus(getTranslation('form.error') || 'Something went wrong. Please try again, or email me directly.', 'error');
             }
         });
     }
 
-    // Email Assembly for Obfuscation
+    // --- Service Worker Registration ---
+    if ('serviceWorker' in navigator) {
+        w.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js').catch(err => {
+                console.warn('Service worker registration failed:', err);
+            });
+        });
+    }
+
+    // --- Email Obfuscation ---
     const emailHost = q('contact-email');
     if (emailHost && emailHost.dataset.u && emailHost.dataset.d) {
         const addr = `${emailHost.dataset.u}@${emailHost.dataset.d}`;
