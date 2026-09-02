@@ -101,6 +101,7 @@ const translations = {
     "form.sent": "Message Sent",
     "form.success": "Message sent successfully.",
     "form.error": "Something went wrong. Please try again, or email me directly.",
+    "form.invalid.generic": "Please check the highlighted fields.",
     "form.note": "Messages are delivered via Formspree, which receives your name, email address, message and technical data such as your IP address. I use this only to reply to you.",
     "footer.text": "Built with semantic HTML, modern CSS, and a commitment to accessibility. &nbsp;•&nbsp; © 2026 Gadiparthi Sai Sushvik &nbsp;•&nbsp; Last updated <time datetime=\"2026-08-29\">29 August 2026</time>",
     "top.button.label": "Scroll to top of page"
@@ -207,6 +208,7 @@ const translations = {
     "form.sent": "సందేశం పంపబడింది",
     "form.success": "సందేశం విజయవంతంగా పంపబడింది.",
     "form.error": "ఏదో తప్పు జరిగింది. దయచేసి మళ్లీ ప్రయత్నించండి లేదా నేరుగా ఈమెయిల్ చేయండి.",
+    "form.invalid.generic": "దయచేసి హైలైట్ చేసిన ఫీల్డ్‌లను సరిచూడండి.",
     "form.note": "సందేశాలు Formspree ద్వారా పంపబడతాయి. మీ సందేశానికి ప్రత్యుత్తరం ఇవ్వడానికి మాత్రమే ఇది ఉపయోగించబడుతుంది.",
     "footer.text": "సెమాంటిక్ హెచ్‌టీఎంఎల్, ఆధునిక సీఎస్ఎస్ మరియు పూర్తి ప్రాప్యతతో నిర్మించబడింది. &nbsp;•&nbsp; © 2026 గాడిపర్తి సాయి సుశ్విక్ &nbsp;•&nbsp; చివరిగా నవీకరించబడింది <time datetime=\"2026-08-29\">29 ఆగస్టు 2026</time>",
     "top.button.label": "పేజీ పైకి వెళ్లండి"
@@ -313,6 +315,7 @@ const translations = {
     "form.sent": "संदेश भेजा गया",
     "form.success": "संदेश सफलतापूर्वक भेजा गया।",
     "form.error": "कुछ गलत हुआ। कृपया पुन: प्रयास करें या सीधे ईमेल करें।",
+    "form.invalid.generic": "कृपया हाइलाइट किए गए फ़ील्ड की जाँच करें।",
     "form.note": "संदेश Formspree के माध्यम से भेजे जाते हैं। इसका उपयोग केवल आपको उत्तर देने के लिए किया जाता है।",
     "footer.text": "सिमेंटिक HTML, आधुनिक CSS और पूर्ण सुगमता के साथ निर्मित। &nbsp;•&nbsp; © 2026 गाडिपर्थी साई सुश्विक &nbsp;•&nbsp; अंतिम अद्यतन <time datetime=\"2026-08-29\">29 अगस्त 2026</time>",
     "top.button.label": "पृष्ठ के शीर्ष पर जाएं"
