@@ -163,7 +163,6 @@ body { font-family: var(--font-sans); background-color: var(--color-bg); color: 
 }
 .glass-header.scrolled { border-bottom-color: var(--color-border); }
 
-/* Non-composited animation penalty fixed: only animating transform */
 .solid-panel, .solid-card {
     background: var(--color-surface); border: 1px solid var(--color-border); box-shadow: var(--color-shadow) 0 4px 15px;
     transition: transform var(--transition-bounce);
@@ -175,6 +174,23 @@ header { position: fixed; top: 0; left: 0; width: 100%; z-index: var(--z-header)
 .header-container { display: flex; justify-content: space-between; align-items: center; height: var(--header-height); margin: 0 auto; padding: 0 var(--space-md); max-width: 1200px; }
 .logo { font-size: 1.2rem; font-weight: 700; color: var(--color-text-primary); text-decoration: none; }
 .header-actions { display: flex; align-items: center; gap: var(--space-xs); }
+
+/* Language Selector */
+.language-selector { display: flex; align-items: center; }
+.lang-dropdown {
+    background: var(--color-surface);
+    color: var(--color-text-primary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: 6px 8px;
+    font-family: inherit;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: border-color var(--transition-fast), background-color var(--transition-fast);
+}
+.lang-dropdown:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+
 .icon-button {
     background: transparent; border: none; color: var(--color-text-primary); cursor: pointer; min-width: 44px; min-height: 44px; border-radius: 50%;
     display: flex; align-items: center; justify-content: center; transition: background-color var(--transition-fast), transform var(--transition-bounce);
@@ -195,7 +211,7 @@ header { position: fixed; top: 0; left: 0; width: 100%; z-index: var(--z-header)
 .nav-list { list-style: none; display: flex; flex-direction: column; align-items: center; gap: var(--space-md); }
 .nav-link { color: var(--color-text-secondary); text-decoration: none; font-weight: 600; font-size: 1.25rem; min-height: 44px; display: flex; align-items: center; transition: color var(--transition-fast); }
 .nav-link.active { color: var(--color-text-primary); box-shadow: inset 0 -2px 0 var(--color-accent); }
-/* .contact-link is a nav item in the mobile drawer too - never display:none it there */
+
 .hamburger { display: flex; flex-direction: column; gap: 4px; padding: 12px 10px; }
 .hamburger span { width: 20px; height: 2px; background-color: var(--color-text-primary); border-radius: 2px; transition: transform var(--transition-bounce), opacity var(--transition-fast); }
 .hamburger[aria-expanded="true"] span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
