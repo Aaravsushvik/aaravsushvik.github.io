@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="color-scheme" content="light dark">
-    <meta id="meta-theme-color" name="theme-color" content="#fbfbfd">
+    <meta id="meta-theme-color-light" name="theme-color" content="#fbfbfd" media="(prefers-color-scheme: light)">
+    <meta id="meta-theme-color-dark" name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
     <meta name="application-name" content="Sai Sushvik Portfolio">
     <meta name="referrer" content="strict-origin-when-cross-origin">
 
@@ -13,7 +14,7 @@
     <meta http-equiv="Cross-Origin-Opener-Policy" content="same-origin">
     <meta http-equiv="Cross-Origin-Embedder-Policy" content="require-corp">
 
-    <title data-i18n="page.title">Gadiparthi Sai Sushvik | Student & Aspiring Civil Servant</title>
+    <title data-i18n="page.title">Gadiparthi Sai Sushvik | Student &amp; Aspiring Civil Servant</title>
 
     <meta name="description" data-i18n-content="page.description" content="Personal portfolio of Gadiparthi Sai Sushvik, a student exploring technology, governance, accessibility, and digital innovation from Hyderabad, India.">
     <meta name="keywords" content="Gadiparthi Sai Sushvik, Sai Sushvik, Hyderabad student, technology enthusiast, AI, robotics, innovation, UPSC, civil services, IAS, IPS, portfolio, CEC Intermediate, Telangana SSC">
@@ -28,7 +29,7 @@
     <link rel="alternate" hreflang="x-default" href="https://aaravsushvik.github.io/" />
 
     <!-- Open Graph -->
-    <meta property="og:title" content="Gadiparthi Sai Sushvik | Student & Aspiring Civil Servant">
+    <meta property="og:title" content="Gadiparthi Sai Sushvik | Student &amp; Aspiring Civil Servant">
     <meta property="og:description" content="Exploring the intersection of technology, governance, accessibility, and digital innovation.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://aaravsushvik.github.io/">
@@ -42,14 +43,17 @@
     <meta name="twitter:description" content="Technology Enthusiast • Aspiring Civil Servant • Future Innovator">
     <meta name="twitter:image" content="https://aaravsushvik.github.io/images/IMG_2358_Original.jpeg">
 
+    <!-- Preconnect to Formspree for faster form submissions -->
+    <link rel="preconnect" href="https://formspree.io">
+
     <!-- Content Security Policy -->
     <meta http-equiv="Content-Security-Policy"
           content="default-src 'self';
-                   script-src 'self';
+                   script-src 'self' https://plausible.io;
                    style-src 'self';
                    img-src 'self' data:;
                    font-src 'self';
-                   connect-src 'self' https://formspree.io;
+                   connect-src 'self' https://formspree.io https://plausible.io;
                    form-action https://formspree.io;
                    frame-src 'none';
                    media-src 'self';
@@ -60,7 +64,7 @@
                    base-uri 'self';
                    upgrade-insecure-requests;">
 
-    <!-- Theme loader (external, adds 'js' class and theme class early) -->
+    <!-- Theme loader (external) -->
     <script src="./theme.js"></script>
 
     <!-- No-JS fallback -->
@@ -97,6 +101,9 @@
     <!-- Translation dictionary must load before main script -->
     <script src="./translations.js"></script>
     <script type="module" src="./script.js"></script>
+
+    <!-- Optional Privacy-friendly Analytics (Plausible) – Replace data-domain with your own -->
+    <script defer data-domain="aaravsushvik.github.io" src="https://plausible.io/js/script.js"></script>
 
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -169,6 +176,10 @@
                 </select>
             </div>
 
+            <button id="share-btn" class="icon-button" aria-label="Share this page" data-i18n-aria="share.button">
+                <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+            </button>
+
             <button id="theme-toggle" class="icon-button" role="switch" aria-checked="false" data-i18n-aria="theme.toDark" aria-label="Switch to dark mode">
                 <svg id="moon-icon" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
                 <svg id="sun-icon" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="hidden" aria-hidden="true"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
@@ -180,6 +191,18 @@
     </div>
 </header>
 
+<!-- Command Palette Modal -->
+<div id="command-palette" class="command-palette" role="dialog" aria-modal="true" aria-label="Command palette" hidden>
+    <div class="command-palette-overlay" data-close-palette></div>
+    <div class="command-palette-content">
+        <input type="text" id="command-input" placeholder="Type a command..." autocomplete="off">
+        <ul id="command-results" class="command-results" role="listbox"></ul>
+    </div>
+</div>
+
+<!-- Hidden live region for language change announcements -->
+<div id="lang-announcer" class="sr-only" aria-live="polite"></div>
+
 <main id="main-content" tabindex="-1">
 
     <section id="home" class="hero">
@@ -187,7 +210,7 @@
         
         <div class="container hero-grid">
             <div class="hero-text reveal">
-                <p class="hero-kicker" data-i18n="hero.kicker">Student & Aspiring Civil Servant</p>
+                <p class="hero-kicker" data-i18n="hero.kicker">Student &amp; Aspiring Civil Servant</p>
                 <h1 class="hero-title" data-i18n="hero.title">Gadiparthi Sai Sushvik</h1>
                 <p class="hero-subtitle" data-i18n="hero.subtitle">Exploring technology, governance, and systems that improve everyday life.</p>
 
@@ -211,15 +234,19 @@
             </div>
 
             <div class="hero-image-wrapper reveal">
-                <img src="./images/IMG_2358_Original.jpeg"
-                     alt="Gadiparthi Sai Sushvik with Family"
-                     data-i18n-alt="hero.img.alt"
-                     class="hero-image"
-                     width="420"
-                     height="315"
-                     sizes="(max-width: 768px) 90vw, 420px"
-                     fetchpriority="high"
-                     decoding="async">
+                <picture>
+                    <source type="image/avif" srcset="./images/IMG_2358_Original.avif 1x">
+                    <source type="image/webp" srcset="./images/IMG_2358_Original.webp 1x">
+                    <img src="./images/IMG_2358_Original.jpeg"
+                         alt="Gadiparthi Sai Sushvik with Family"
+                         data-i18n-alt="hero.img.alt"
+                         class="hero-image"
+                         width="420"
+                         height="315"
+                         sizes="(max-width: 768px) 90vw, 420px"
+                         fetchpriority="high"
+                         decoding="async">
+                </picture>
             </div>
         </div>
     </section>
@@ -234,7 +261,7 @@
                 <p data-i18n="about.who.p3">Living with Cerebral Palsy has instilled in me deep patience, adaptability, and persistence. It continuously shapes my perspective on learning and problem-solving, teaching me to move forward steadily — learning, building, and growing one step at a time.</p>
             </div>
             <div class="text-block">
-                <h3 data-i18n="about.vision.title">My Vision & Academic Path</h3>
+                <h3 data-i18n="about.vision.title">My Vision &amp; Academic Path</h3>
                 <p data-i18n="about.vision.p1">I aim to serve as a civil servant equipped with a profound understanding of both technology and governance. I am particularly focused on digital governance, web accessibility, education systems, and leveraging technology to optimize public service delivery at scale.</p>
                 <p data-i18n="about.vision.p2">Currently enrolled in CEC Intermediate (2026–2028), my future academic plans include pursuing a Bachelor's degree in Political Science, Economics, or History (2028–2031). Ultimately, I intend to appear for the UPSC Civil Services Examination in 2031 with the ambition of serving the nation as an IAS or IPS officer.</p>
             </div>
@@ -242,7 +269,7 @@
     </section>
 
     <section id="projects" class="container reveal content-section">
-        <h2 class="section-title" data-i18n="projects.title">Projects & Experiments</h2>
+        <h2 class="section-title" data-i18n="projects.title">Projects &amp; Experiments</h2>
         <div class="card-grid">
             <article class="solid-card">
                 <div class="card-header">
@@ -272,7 +299,7 @@
 
             <article class="solid-card">
                 <div class="card-header">
-                    <h3 data-i18n="projects.civic.title">Civic-Tech & Governance Notes</h3>
+                    <h3 data-i18n="projects.civic.title">Civic-Tech &amp; Governance Notes</h3>
                     <span class="badge" data-i18n="projects.civic.badge">2026 · Research</span>
                 </div>
                 <ul class="feature-list" role="list">
@@ -293,8 +320,8 @@
                 <span class="tag" data-i18n="learning.tag3">Semantic HTML</span>
                 <span class="tag" data-i18n="learning.tag4">CSS Architecture</span>
                 <span class="tag" data-i18n="learning.tag5">JavaScript Fundamentals</span>
-                <span class="tag" data-i18n="learning.tag6">AI Tools & Prompting</span>
-                <span class="tag" data-i18n="learning.tag7">Governance & Public Policy</span>
+                <span class="tag" data-i18n="learning.tag6">AI Tools &amp; Prompting</span>
+                <span class="tag" data-i18n="learning.tag7">Governance &amp; Public Policy</span>
                 <span class="tag" data-i18n="learning.tag8">Political Science</span>
             </div>
         </div>
@@ -311,7 +338,7 @@
                 <span class="tag" data-i18n="skills.tag5">Dark Mode Systems</span>
                 <span class="tag" data-i18n="skills.tag6">Frontend Optimization</span>
                 <span class="tag" data-i18n="skills.tag7">SEO Fundamentals</span>
-                <span class="tag" data-i18n="skills.tag8">AI Research & Tools</span>
+                <span class="tag" data-i18n="skills.tag8">AI Research &amp; Tools</span>
             </div>
         </div>
     </section>
@@ -334,13 +361,13 @@
         <h2 class="section-title" data-i18n="favorites.title">My Favorites</h2>
         <div class="solid-panel">
             <ul class="feature-list" role="list">
-                <li data-i18n="favorites.li1">Artificial Intelligence & Machine Learning</li>
-                <li data-i18n="favorites.li2">Robotics & Embedded Systems</li>
-                <li data-i18n="favorites.li3">Web Development & Open Source Initiatives</li>
-                <li data-i18n="favorites.li4">Political Science, History, & Constitutional Governance</li>
-                <li data-i18n="favorites.li5">Smart Governance, GovTech, & Digital Accessibility</li>
-                <li data-i18n="favorites.li6">Space Exploration & Aerospace Innovation</li>
-                <li data-i18n="favorites.li7">Creative Problem Solving & Systems Thinking</li>
+                <li data-i18n="favorites.li1">Artificial Intelligence &amp; Machine Learning</li>
+                <li data-i18n="favorites.li2">Robotics &amp; Embedded Systems</li>
+                <li data-i18n="favorites.li3">Web Development &amp; Open Source Initiatives</li>
+                <li data-i18n="favorites.li4">Political Science, History, &amp; Constitutional Governance</li>
+                <li data-i18n="favorites.li5">Smart Governance, GovTech, &amp; Digital Accessibility</li>
+                <li data-i18n="favorites.li6">Space Exploration &amp; Aerospace Innovation</li>
+                <li data-i18n="favorites.li7">Creative Problem Solving &amp; Systems Thinking</li>
             </ul>
         </div>
     </section>
@@ -351,13 +378,13 @@
             <ol class="feature-list ordered" role="list">
                 <li data-i18n="inspiration.li1"><strong>My Family</strong> — My foundation, my strength, and my earliest teachers.</li>
                 <li data-i18n="inspiration.li2"><strong>Dr. APJ Abdul Kalam</strong> — The Missile Man, a visionary President who dared to dream for a billion people.</li>
-                <li data-i18n="inspiration.li3"><strong>Artificial Intelligence & Emerging Technologies</strong> — The technological frontier that continuously evolves.</li>
+                <li data-i18n="inspiration.li3"><strong>Artificial Intelligence &amp; Emerging Technologies</strong> — The technological frontier that continuously evolves.</li>
                 <li data-i18n="inspiration.li4"><strong>Accessibility Researchers</strong> — Professionals actively advancing inclusive and equitable technology.</li>
                 <li data-i18n="inspiration.li5"><strong>Marques Brownlee (MKBHD)</strong> — A creator making technology honest, accessible, and exciting for a global audience.</li>
-                <li data-i18n="inspiration.li6"><strong>Public Servants & Technologists</strong> — The individuals striving to improve digital governance.</li>
-                <li data-i18n="inspiration.li7"><strong>IAS & IPS Officers</strong> — The often unsung architects driving systemic change and transformation in India.</li>
-                <li data-i18n="inspiration.li8"><strong>Scientists, Engineers, & Inventors</strong> — The quiet builders shaping the modern world.</li>
-                <li data-i18n="inspiration.li9"><strong>The Future of Humanity & Space Exploration</strong> — The ultimate horizon, reminding us of our boundless potential.</li>
+                <li data-i18n="inspiration.li6"><strong>Public Servants &amp; Technologists</strong> — The individuals striving to improve digital governance.</li>
+                <li data-i18n="inspiration.li7"><strong>IAS &amp; IPS Officers</strong> — The often unsung architects driving systemic change and transformation in India.</li>
+                <li data-i18n="inspiration.li8"><strong>Scientists, Engineers, &amp; Inventors</strong> — The quiet builders shaping the modern world.</li>
+                <li data-i18n="inspiration.li9"><strong>The Future of Humanity &amp; Space Exploration</strong> — The ultimate horizon, reminding us of our boundless potential.</li>
             </ol>
         </div>
     </section>
@@ -371,6 +398,7 @@
                     <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                     <strong id="contact-email" data-u="saisushvik.pnt" data-d="gmail.com">saisushvik.pnt [at] gmail.com</strong>
                 </div>
+                <button id="listen-btn" class="btn-secondary" data-i18n="listen.button">Listen to this page</button>
             </div>
             <form id="contact-form" action="https://formspree.io/f/meenzdqr" method="POST" class="form-container">
                 <div class="form-group">
