@@ -24,5 +24,22 @@
       "sizes": "any",
       "type": "image/svg+xml"
     }
+  ],
+  "shortcuts": [
+    {
+      "name": "About",
+      "url": "/#about",
+      "description": "Learn about Sai Sushvik"
+    },
+    {
+      "name": "Projects",
+      "url": "/#projects",
+      "description": "View projects"
+    },
+    {
+      "name": "Contact",
+      "url": "/#contact",
+      "description": "Get in touch"
+    }
   ]
 }
