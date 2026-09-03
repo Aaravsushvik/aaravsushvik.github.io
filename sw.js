@@ -1,4 +1,4 @@
-const CACHE_NAME = 'portfolio-v4';
+const CACHE_NAME = 'portfolio-v5';
 const urlsToCache = [
   '/',
   '/index.html',
@@ -12,7 +12,8 @@ const urlsToCache = [
   '/images/apple-touch-icon.png',
   '/images/icon-192.png',
   '/images/icon-512.png',
-  '/images/IMG_2358_Original.jpeg'
+  '/images/IMG_2358_Original.jpeg',
+  '/offline.html'
 ];
 
 self.addEventListener('install', (event) => {
@@ -52,7 +53,7 @@ self.addEventListener('fetch', (event) => {
           return networkResponse;
         }).catch(() => {
           if (event.request.mode === 'navigate') {
-            return caches.match('/index.html');
+            return caches.match('/offline.html');
           }
           return new Response('Offline', { status: 503, statusText: 'Service Unavailable' });
         });
