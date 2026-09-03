@@ -104,7 +104,12 @@ const translations = {
     "form.invalid.generic": "Please check the highlighted fields.",
     "form.note": "Messages are delivered via Formspree, which receives your name, email address, message and technical data such as your IP address. I use this only to reply to you.",
     "footer.text": "Built with semantic HTML, modern CSS, and a commitment to accessibility. &nbsp;•&nbsp; © 2026 Gadiparthi Sai Sushvik",
-    "top.button.label": "Scroll to top of page"
+    "top.button.label": "Scroll to top of page",
+    "share.button": "Share this page",
+    "share.text": "Check out this portfolio!",
+    "listen.button": "Listen to this page",
+    "listen.stop": "Stop listening",
+    "lang.announce": "Language changed to English"
   },
   te: {
     "page.title": "గాడిపర్తి సాయి సుశ్విక్ | విద్యార్థి & కాబోయే సివిల్ సర్వెంట్",
@@ -211,7 +216,12 @@ const translations = {
     "form.invalid.generic": "దయచేసి హైలైట్ చేసిన ఫీల్డ్‌లను సరిచూడండి.",
     "form.note": "సందేశాలు Formspree ద్వారా పంపబడతాయి. మీ సందేశానికి ప్రత్యుత్తరం ఇవ్వడానికి మాత్రమే ఇది ఉపయోగించబడుతుంది.",
     "footer.text": "సెమాంటిక్ హెచ్‌టీఎంఎల్, ఆధునిక సీఎస్ఎస్ మరియు పూర్తి ప్రాప్యతతో నిర్మించబడింది. &nbsp;•&nbsp; © 2026 గాడిపర్తి సాయి సుశ్విక్",
-    "top.button.label": "పేజీ పైకి వెళ్లండి"
+    "top.button.label": "పేజీ పైకి వెళ్లండి",
+    "share.button": "ఈ పేజీని భాగస్వామ్యం చేయండి",
+    "share.text": "ఈ పోర్ట్‌ఫోలియోను చూడండి!",
+    "listen.button": "ఈ పేజీని వినండి",
+    "listen.stop": "వినడం ఆపండి",
+    "lang.announce": "భాష తెలుగులోకి మార్చబడింది"
   },
   hi: {
     "page.title": "गाडिपर्थी साई सुश्विक | छात्र और भावी सिविल सेवक",
@@ -318,6 +328,11 @@ const translations = {
     "form.invalid.generic": "कृपया हाइलाइट किए गए फ़ील्ड की जाँच करें।",
     "form.note": "संदेश Formspree के माध्यम से भेजे जाते हैं। इसका उपयोग केवल आपको उत्तर देने के लिए किया जाता है।",
     "footer.text": "सिमेंटिक HTML, आधुनिक CSS और पूर्ण सुगमता के साथ निर्मित। &nbsp;•&nbsp; © 2026 गाडिपर्थी साई सुश्विक",
-    "top.button.label": "पृष्ठ के शीर्ष पर जाएं"
+    "top.button.label": "पृष्ठ के शीर्ष पर जाएं",
+    "share.button": "इस पेज को साझा करें",
+    "share.text": "इस पोर्टफोलियो को देखें!",
+    "listen.button": "इस पेज को सुनें",
+    "listen.stop": "सुनना बंद करें",
+    "lang.announce": "भाषा हिंदी में बदल गई"
   }
 };
