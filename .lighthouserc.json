@@ -4,7 +4,6 @@
       "url": [
         "http://localhost:8080/"
       ],
-      "startServerCommand": "npx http-server -p 8080",
       "numberOfRuns": 1,
       "settings": {
         "chromeFlags": "--no-sandbox"
