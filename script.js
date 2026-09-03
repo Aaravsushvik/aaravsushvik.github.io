@@ -7,11 +7,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const footerElement = d.querySelector('footer'), navLinks = d.querySelectorAll('.nav-link'), sections = d.querySelectorAll('section[id]');
     const topBtn = q('topBtn'), progressBar = q('scroll-progress');
     const contactForm = q('contact-form'), submitBtn = q('submit-btn'), formStatus = q('form-status');
-    const metaThemeColor = q('meta-theme-color');
+    const metaThemeColorLight = q('meta-theme-color-light'), metaThemeColorDark = q('meta-theme-color-dark');
+    const langAnnouncer = q('lang-announcer');
+    const commandPalette = q('command-palette'), commandInput = q('command-input'), commandResults = q('command-results');
+    const shareBtn = q('share-btn');
+    const listenBtn = q('listen-btn');
 
     const prefersReducedMotion = w.matchMedia('(prefers-reduced-motion: reduce)');
     const supportsInert = 'inert' in HTMLElement.prototype;
     const systemTheme = w.matchMedia('(prefers-color-scheme: dark)');
+    const supportsViewTransitions = 'startViewTransition' in d;
+    const supportsScrollDrivenAnimations = CSS.supports('animation-timeline: view()');
 
     let currentLang = 'en';
 
@@ -23,8 +29,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const isDark = () => html.classList.contains('dark') || (!html.classList.contains('light') && systemTheme.matches);
 
-    const updateMetaColor = (darkMode) => {
-        if (metaThemeColor) metaThemeColor.setAttribute('content', darkMode ? '#1c1c1e' : '#fbfbfd');
+    const updateMetaColors = (darkMode) => {
+        if (metaThemeColorLight) metaThemeColorLight.setAttribute('content', darkMode ? '#1c1c1e' : '#fbfbfd');
+        if (metaThemeColorDark) metaThemeColorDark.setAttribute('content', darkMode ? '#1c1c1e' : '#000000');
     };
 
     const updateThemeIcon = () => {
@@ -43,12 +50,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // Theme initialization with URL param support
     const applyThemeFromState = (darkMode) => {
         html.classList.remove('light', 'dark');
         html.classList.add(darkMode ? 'dark' : 'light');
         try { localStorage.setItem('theme', darkMode ? 'dark' : 'light'); } catch (e) {}
-        updateMetaColor(darkMode);
+        updateMetaColors(darkMode);
         updateThemeIcon();
         requestAnimationFrame(dispatchThemeUpdate);
     };
@@ -93,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const currentlyDark = isDark();
             const newDark = !currentlyDark;
             const doApply = () => applyThemeFromState(newDark);
-            if (d.startViewTransition) {
+            if (supportsViewTransitions) {
                 d.startViewTransition(doApply);
             } else {
                 doApply();
@@ -101,8 +107,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Multi-Language System ---
-    const applyLanguage = (lang) => {
+    // --- Multi-Language System (chunked apply) ---
+    const applyLanguageChunked = (lang) => {
         if (typeof translations === 'undefined') return;
         const targetLang = translations[lang] ? lang : 'en';
         currentLang = targetLang;
@@ -111,31 +117,48 @@ document.addEventListener('DOMContentLoaded', () => {
         html.lang = targetLang === 'en' ? 'en-IN' : targetLang === 'te' ? 'te-IN' : targetLang === 'hi' ? 'hi-IN' : targetLang;
         try { localStorage.setItem('lang', targetLang); } catch (e) {}
 
-        d.querySelectorAll('[data-i18n]').forEach(el => {
-            const key = el.getAttribute('data-i18n');
-            if (dict[key] !== undefined) el.innerHTML = dict[key];
-        });
+        const yieldToMain = w.scheduler && w.scheduler.yield ? () => w.scheduler.yield() : () => new Promise(resolve => setTimeout(resolve, 0));
 
-        d.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
-            const key = el.getAttribute('data-i18n-placeholder');
-            if (dict[key] !== undefined) el.setAttribute('placeholder', dict[key]);
-        });
+        const elements = [...d.querySelectorAll('[data-i18n]')];
+        const placeholders = [...d.querySelectorAll('[data-i18n-placeholder]')];
+        const ariaLabels = [...d.querySelectorAll('[data-i18n-aria]')];
+        const altTexts = [...d.querySelectorAll('[data-i18n-alt]')];
 
-        d.querySelectorAll('[data-i18n-aria]').forEach(el => {
-            const key = el.getAttribute('data-i18n-aria');
-            if (dict[key] !== undefined) el.setAttribute('aria-label', dict[key]);
-        });
+        const processChunk = async (items, callback) => {
+            for (let i = 0; i < items.length; i++) {
+                callback(items[i]);
+                if (i % 10 === 9) await yieldToMain();
+            }
+        };
 
-        d.querySelectorAll('[data-i18n-alt]').forEach(el => {
-            const key = el.getAttribute('data-i18n-alt');
-            if (dict[key] !== undefined) el.setAttribute('alt', dict[key]);
-        });
+        (async () => {
+            await processChunk(elements, el => {
+                const key = el.getAttribute('data-i18n');
+                if (dict[key] !== undefined) el.innerHTML = dict[key];
+            });
+            await processChunk(placeholders, el => {
+                const key = el.getAttribute('data-i18n-placeholder');
+                if (dict[key] !== undefined) el.setAttribute('placeholder', dict[key]);
+            });
+            await processChunk(ariaLabels, el => {
+                const key = el.getAttribute('data-i18n-aria');
+                if (dict[key] !== undefined) el.setAttribute('aria-label', dict[key]);
+            });
+            await processChunk(altTexts, el => {
+                const key = el.getAttribute('data-i18n-alt');
+                if (dict[key] !== undefined) el.setAttribute('alt', dict[key]);
+            });
 
-        if (dict['page.title']) d.title = dict['page.title'];
-        const metaDesc = d.querySelector('meta[name="description"]');
-        if (metaDesc && dict['page.description']) metaDesc.setAttribute('content', dict['page.description']);
+            if (dict['page.title']) d.title = dict['page.title'];
+            const metaDesc = d.querySelector('meta[name="description"]');
+            if (metaDesc && dict['page.description']) metaDesc.setAttribute('content', dict['page.description']);
 
-        updateThemeIcon();
+            updateThemeIcon();
+
+            if (langAnnouncer) {
+                langAnnouncer.textContent = getTranslation('lang.announce') || `Language changed to ${targetLang}`;
+            }
+        })();
     };
 
     const getInitialLanguage = () => {
@@ -149,11 +172,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (langSelect && typeof translations !== 'undefined') {
         const initialLang = getInitialLanguage();
         langSelect.value = initialLang;
-        applyLanguage(initialLang);
+        applyLanguageChunked(initialLang);
         langSelect.addEventListener('change', (e) => {
             const newLang = e.target.value;
-            const doApply = () => applyLanguage(newLang);
-            if (d.startViewTransition) {
+            const doApply = () => applyLanguageChunked(newLang);
+            if (supportsViewTransitions) {
                 d.startViewTransition(doApply);
             } else {
                 doApply();
@@ -376,6 +399,19 @@ document.addEventListener('DOMContentLoaded', () => {
         w.addEventListener('resize', updateHardwareAndCanvas);
         if (connection) connection.addEventListener('change', updateHardwareAndCanvas);
 
+        // DPR change detection
+        let lastDprValue = w.devicePixelRatio || 1;
+        const dprMql = w.matchMedia(`(resolution: ${lastDprValue}dppx)`);
+        const onDprChange = () => {
+            const newDpr = w.devicePixelRatio || 1;
+            if (newDpr !== lastDprValue) {
+                lastDprValue = newDpr;
+                initCanvas();
+            }
+            dprMql.addEventListener('change', onDprChange, { once: true });
+        };
+        dprMql.addEventListener('change', onDprChange, { once: true });
+
         const motionHandler = (e) => { if (e.matches) stopEngine(); else if (heroVisible && !d.hidden) startEngine(); };
         prefersReducedMotion.addEventListener('change', motionHandler);
 
@@ -487,7 +523,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 .forEach(sec => navObserver.observe(sec));
         }
 
-        if (!prefersReducedMotion.matches) {
+        if (!supportsScrollDrivenAnimations && !prefersReducedMotion.matches) {
             const reveals = d.querySelectorAll('.reveal');
             if (reveals.length > 0) {
                 const revealObserver = new IntersectionObserver((entries, observer) => {
@@ -619,12 +655,31 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Service Worker Registration ---
+    // --- Service Worker Registration & Update Flow ---
     if ('serviceWorker' in navigator) {
         w.addEventListener('load', () => {
-            navigator.serviceWorker.register('/sw.js').catch(err => {
+            navigator.serviceWorker.register('/sw.js').then(registration => {
+                registration.addEventListener('updatefound', () => {
+                    const newWorker = registration.installing;
+                    newWorker.addEventListener('statechange', () => {
+                        if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                            if (confirm('A new version of this site is available. Reload now?')) {
+                                w.location.reload();
+                            }
+                        }
+                    });
+                });
+            }).catch(err => {
                 console.warn('Service worker registration failed:', err);
             });
+        });
+
+        let refreshing = false;
+        navigator.serviceWorker.addEventListener('controllerchange', () => {
+            if (!refreshing) {
+                refreshing = true;
+                w.location.reload();
+            }
         });
     }
 
@@ -637,5 +692,205 @@ document.addEventListener('DOMContentLoaded', () => {
         a.textContent = addr;
         a.rel = 'nofollow';
         emailHost.replaceChildren(a);
+    }
+
+    // --- Native Share API ---
+    if (shareBtn && navigator.share) {
+        shareBtn.addEventListener('click', async () => {
+            try {
+                await navigator.share({
+                    title: d.title,
+                    text: getTranslation('share.text') || 'Check out this portfolio!',
+                    url: w.location.href
+                });
+            } catch (err) {
+                console.warn('Share cancelled or failed:', err);
+            }
+        });
+    } else if (shareBtn) {
+        shareBtn.style.display = 'none';
+    }
+
+    // --- Speech Synthesis (Listen button) ---
+    if (listenBtn && 'speechSynthesis' in w) {
+        let speaking = false;
+        const speakPage = () => {
+            if (speaking) {
+                w.speechSynthesis.cancel();
+                speaking = false;
+                listenBtn.textContent = getTranslation('listen.button') || 'Listen to this page';
+                return;
+            }
+            const textToRead = d.body.innerText;
+            const utterance = new SpeechSynthesisUtterance(textToRead);
+            utterance.lang = html.lang;
+            utterance.onend = () => {
+                speaking = false;
+                listenBtn.textContent = getTranslation('listen.button') || 'Listen to this page';
+            };
+            utterance.onerror = () => {
+                speaking = false;
+                listenBtn.textContent = getTranslation('listen.button') || 'Listen to this page';
+            };
+            w.speechSynthesis.speak(utterance);
+            speaking = true;
+            listenBtn.textContent = getTranslation('listen.stop') || 'Stop listening';
+        };
+        listenBtn.addEventListener('click', speakPage);
+    } else if (listenBtn) {
+        listenBtn.style.display = 'none';
+    }
+
+    // --- Command Palette (Ctrl+K / Cmd+K) ---
+    if (commandPalette && commandInput && commandResults) {
+        const commands = [
+            { label: 'Home', action: () => w.location.hash = '#home', keywords: ['home'] },
+            { label: 'About', action: () => w.location.hash = '#about', keywords: ['about'] },
+            { label: 'Projects', action: () => w.location.hash = '#projects', keywords: ['projects'] },
+            { label: 'Learning', action: () => w.location.hash = '#learning', keywords: ['learning'] },
+            { label: 'Contact', action: () => w.location.hash = '#contact', keywords: ['contact'] },
+            { label: 'Toggle dark mode', action: () => themeToggle.click(), keywords: ['dark', 'theme'] },
+            { label: 'Switch to English', action: () => { langSelect.value = 'en'; langSelect.dispatchEvent(new Event('change')); }, keywords: ['english', 'language'] },
+            { label: 'Switch to Telugu', action: () => { langSelect.value = 'te'; langSelect.dispatchEvent(new Event('change')); }, keywords: ['telugu', 'language'] },
+            { label: 'Switch to Hindi', action: () => { langSelect.value = 'hi'; langSelect.dispatchEvent(new Event('change')); }, keywords: ['hindi', 'language'] },
+        ];
+
+        let selectedIndex = -1;
+        let currentFilter = '';
+
+        const openPalette = () => {
+            commandPalette.hidden = false;
+            commandInput.value = '';
+            currentFilter = '';
+            renderResults(commands);
+            commandInput.focus();
+            selectedIndex = -1;
+        };
+
+        const closePalette = () => {
+            commandPalette.hidden = true;
+        };
+
+        const renderResults = (results) => {
+            commandResults.innerHTML = '';
+            results.forEach((cmd, idx) => {
+                const li = d.createElement('li');
+                li.textContent = cmd.label;
+                li.setAttribute('role', 'option');
+                li.dataset.index = idx;
+                li.addEventListener('click', () => {
+                    cmd.action();
+                    closePalette();
+                });
+                commandResults.appendChild(li);
+            });
+            if (results.length > 0) {
+                selectedIndex = 0;
+                highlightSelected();
+            } else {
+                selectedIndex = -1;
+            }
+        };
+
+        const highlightSelected = () => {
+            const items = commandResults.querySelectorAll('li');
+            items.forEach((li, idx) => {
+                li.setAttribute('aria-selected', idx === selectedIndex ? 'true' : 'false');
+                if (idx === selectedIndex) li.scrollIntoView({ block: 'nearest' });
+            });
+        };
+
+        const filterCommands = (query) => {
+            const lower = query.toLowerCase();
+            return commands.filter(cmd => {
+                return cmd.label.toLowerCase().includes(lower) || cmd.keywords.some(k => k.includes(lower));
+            });
+        };
+
+        commandInput.addEventListener('input', () => {
+            currentFilter = commandInput.value;
+            const filtered = filterCommands(currentFilter);
+            renderResults(filtered);
+        });
+
+        commandInput.addEventListener('keydown', (e) => {
+            const items = commandResults.querySelectorAll('li');
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                if (items.length > 0) {
+                    selectedIndex = (selectedIndex + 1) % items.length;
+                    highlightSelected();
+                }
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                if (items.length > 0) {
+                    selectedIndex = (selectedIndex - 1 + items.length) % items.length;
+                    highlightSelected();
+                }
+            } else if (e.key === 'Enter') {
+                e.preventDefault();
+                if (selectedIndex >= 0 && items.length > 0) {
+                    const cmd = commands.find(c => c.label === items[selectedIndex].textContent);
+                    if (cmd) {
+                        cmd.action();
+                        closePalette();
+                    }
+                }
+            } else if (e.key === 'Escape') {
+                closePalette();
+            }
+        });
+
+        d.addEventListener('keydown', (e) => {
+            if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+                e.preventDefault();
+                openPalette();
+            }
+        });
+
+        d.querySelector('[data-close-palette]').addEventListener('click', closePalette);
+    }
+
+    // --- Scroll to hash on load if present ---
+    if (w.location.hash) {
+        const target = d.getElementById(w.location.hash.slice(1));
+        if (target) {
+            setTimeout(() => {
+                const pad = parseFloat(getComputedStyle(html).scrollPaddingTop) || 60;
+                w.scrollTo({
+                    top: target.getBoundingClientRect().top + w.scrollY - pad,
+                    behavior: prefersReducedMotion.matches ? 'auto' : 'smooth'
+                });
+            }, 100);
+        }
+    }
+
+    // --- Web Vitals RUM (Item W) ---
+    if ('PerformanceObserver' in window) {
+        try {
+            new PerformanceObserver((list) => {
+                const entries = list.getEntries();
+                const lastEntry = entries[entries.length - 1];
+                console.log('[Web Vitals] LCP:', lastEntry.startTime);
+            }).observe({ type: 'largest-contentful-paint', buffered: true });
+
+            let clsValue = 0;
+            new PerformanceObserver((list) => {
+                for (const entry of list.getEntries()) {
+                    if (!entry.hadRecentInput) clsValue += entry.value;
+                }
+                console.log('[Web Vitals] CLS:', clsValue);
+            }).observe({ type: 'layout-shift', buffered: true });
+
+            let inpValue = 0;
+            new PerformanceObserver((list) => {
+                for (const entry of list.getEntries()) {
+                    inpValue = entry.duration;
+                }
+                console.log('[Web Vitals] INP:', inpValue);
+            }).observe({ type: 'event', buffered: true, durationThreshold: 16 });
+        } catch (e) {
+            console.warn('Web Vitals RUM not supported:', e);
+        }
     }
 });
