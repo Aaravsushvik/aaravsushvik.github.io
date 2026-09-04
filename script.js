@@ -1,925 +1,1084 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const d = document, w = window, html = d.documentElement;
-    const q = id => d.getElementById(id);
-    const header = q('main-header'), themeToggle = q('theme-toggle');
-    const sunIcon = q('sun-icon'), moonIcon = q('moon-icon');
-    const menuToggle = q('menu-toggle'), nav = q('main-nav'), mainContent = q('main-content');
-    const footerElement = d.querySelector('footer'), navLinks = d.querySelectorAll('.nav-link'), sections = d.querySelectorAll('section[id]');
-    const topBtn = q('topBtn'), progressBar = q('scroll-progress');
-    const contactForm = q('contact-form'), submitBtn = q('submit-btn'), formStatus = q('form-status');
-    const metaThemeColorLight = q('meta-theme-color-light'), metaThemeColorDark = q('meta-theme-color-dark');
-    const langAnnouncer = q('lang-announcer');
-    const commandPalette = q('command-palette'), commandInput = q('command-input'), commandResults = q('command-results');
-    const shareBtn = q('share-btn');
-    const listenBtn = q('listen-btn');
+const $ = (selector, root = document) => root.querySelector(selector);
+const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
 
-    const prefersReducedMotion = w.matchMedia('(prefers-reduced-motion: reduce)');
-    const supportsInert = 'inert' in HTMLElement.prototype;
-    const systemTheme = w.matchMedia('(prefers-color-scheme: dark)');
-    const supportsViewTransitions = 'startViewTransition' in d;
-    const supportsScrollDrivenAnimations = CSS.supports('animation-timeline: view()');
+const state = {
+  lang: "en",
+  paletteOpen: false,
+  palettePreviousFocus: null
+};
 
-    let currentLang = 'en';
+function getPath(object, path) {
+  return path.split(".").reduce(
+    (value, key) => value && value[key],
+    object
+  );
+}
 
-    const getTranslation = (key) => {
-        if (typeof translations === 'undefined') return '';
-        const dict = translations[currentLang] || translations.en;
-        return dict[key] !== undefined ? dict[key] : (translations.en[key] || '');
-    };
+function t(key) {
+  return (
+    getPath(window.TRANSLATIONS?.[state.lang], key) ??
+    getPath(window.TRANSLATIONS?.en, key) ??
+    key
+  );
+}
 
-    const isDark = () => html.classList.contains('dark') || (!html.classList.contains('light') && systemTheme.matches);
+function applyTranslations(lang) {
+  if (!window.TRANSLATIONS?.[lang]) return;
 
-    const updateMetaColors = (darkMode) => {
-        if (metaThemeColorLight) metaThemeColorLight.setAttribute('content', darkMode ? '#000000' : '#f5f5f7');
-        if (metaThemeColorDark) metaThemeColorDark.setAttribute('content', darkMode ? '#000000' : '#f5f5f7');
-    };
+  state.lang = lang;
 
-    const updateThemeIcon = () => {
-        if (!moonIcon || !sunIcon || !themeToggle) return;
-        const darkMode = isDark();
-        themeToggle.setAttribute('aria-checked', String(darkMode));
-        const label = getTranslation(darkMode ? 'theme.toLight' : 'theme.toDark') || (darkMode ? 'Switch to light mode' : 'Switch to dark mode');
-        themeToggle.setAttribute('aria-label', label);
+  const langCode =
+    lang === "te"
+      ? "te-IN"
+      : lang === "hi"
+        ? "hi-IN"
+        : "en-IN";
 
-        if (darkMode) {
-            moonIcon.classList.add('hidden');
-            sunIcon.classList.remove('hidden');
-        } else {
-            moonIcon.classList.remove('hidden');
-            sunIcon.classList.add('hidden');
-        }
-    };
+  document.documentElement.lang = langCode;
 
-    const applyThemeFromState = (darkMode) => {
-        html.classList.remove('light', 'dark');
-        html.classList.add(darkMode ? 'dark' : 'light');
-        try { localStorage.setItem('theme', darkMode ? 'dark' : 'light'); } catch (e) {}
-        updateMetaColors(darkMode);
-        updateThemeIcon();
-        requestAnimationFrame(dispatchThemeUpdate);
-    };
+  try {
+    localStorage.setItem("lang", lang);
+  } catch {}
 
-    const getInitialTheme = () => {
-        const urlParams = new URLSearchParams(w.location.search);
-        const themeParam = urlParams.get('theme');
-        if (themeParam === 'dark') return true;
-        if (themeParam === 'light') return false;
+  $$("[data-i18n]").forEach((el) => {
+    const val = t(el.dataset.i18n);
+    if (val !== undefined) {
+      el.textContent = val;
+    }
+  });
 
-        try {
-            const saved = localStorage.getItem('theme');
-            if (saved === 'dark') return true;
-            if (saved === 'light') return false;
-        } catch (e) {}
-        return systemTheme.matches;
-    };
+  $$("[data-i18n-aria]").forEach((el) => {
+    el.setAttribute(
+      "aria-label",
+      t(el.dataset.i18nAria)
+    );
+  });
 
-    applyThemeFromState(getInitialTheme());
+  $$("[data-i18n-alt]").forEach((el) => {
+    el.setAttribute(
+      "alt",
+      t(el.dataset.i18nAlt)
+    );
+  });
 
-    const dispatchThemeUpdate = () => {
-        const styles = w.getComputedStyle(d.body);
-        d.dispatchEvent(new CustomEvent('themechange', {
-            detail: {
-                background: styles.getPropertyValue('--color-bg').trim(),
-                particle: styles.getPropertyValue('--canvas-particle').trim(),
-                line: styles.getPropertyValue('--canvas-line').trim()
-            }
-        }));
-    };
+  $$("[data-i18n-placeholder]").forEach((el) => {
+    el.setAttribute(
+      "placeholder",
+      t(el.dataset.i18nPlaceholder)
+    );
+  });
 
-    systemTheme.addEventListener('change', (e) => {
-        try {
-            if (!localStorage.getItem('theme') && !new URLSearchParams(w.location.search).has('theme')) {
-                applyThemeFromState(e.matches);
-            }
-        } catch (err) {}
+  document.title = t("page.title");
+
+  $("#lang-announcer").textContent =
+    lang === "te"
+      ? "భాష తెలుగుకు మార్చబడింది"
+      : lang === "hi"
+        ? "भाषा हिंदी में बदल दी गई है"
+        : "Language changed to English";
+
+  updateThemeUI();
+  updateMenuLabel();
+}
+
+function updateThemeUI() {
+  const dark =
+    document.documentElement.classList.contains("dark");
+
+  const btn = $("#theme-toggle");
+
+  if (!btn) return;
+
+  btn.setAttribute(
+    "aria-checked",
+    String(dark)
+  );
+
+  btn.setAttribute(
+    "aria-label",
+    dark
+      ? t("theme.toLight")
+      : t("theme.toDark")
+  );
+
+  const icon = $("#theme-icon");
+
+  if (icon) {
+    icon.textContent = dark ? "☀" : "☾";
+  }
+}
+
+function setTheme(dark, persist = true) {
+  const root = document.documentElement;
+
+  root.classList.toggle("dark", dark);
+  root.classList.toggle("light", !dark);
+
+  if (persist) {
+    try {
+      localStorage.setItem(
+        "theme",
+        dark ? "dark" : "light"
+      );
+    } catch {}
+  }
+
+  const meta = document.querySelector(
+    'meta[name="theme-color"]'
+  );
+
+  if (meta) {
+    meta.setAttribute(
+      "content",
+      dark ? "#000000" : "#f5f5f7"
+    );
+  }
+
+  updateThemeUI();
+}
+
+function initTheme() {
+  updateThemeUI();
+
+  const btn = $("#theme-toggle");
+
+  btn?.addEventListener("click", () => {
+    const dark =
+      document.documentElement.classList.contains("dark");
+
+    setTheme(!dark, true);
+  });
+
+  const media = window.matchMedia(
+    "(prefers-color-scheme: dark)"
+  );
+
+  media.addEventListener?.("change", (e) => {
+    let saved = null;
+
+    try {
+      saved = localStorage.getItem("theme");
+    } catch {}
+
+    if (!saved) {
+      setTheme(e.matches, false);
+    }
+  });
+}
+
+function initLanguage() {
+  let saved = null;
+
+  try {
+    saved = localStorage.getItem("lang");
+  } catch {}
+
+  const params = new URLSearchParams(
+    window.location.search
+  );
+
+  const requested = params.get("lang");
+
+  const lang =
+    window.TRANSLATIONS[requested]
+      ? requested
+      : window.TRANSLATIONS[saved]
+        ? saved
+        : "en";
+
+  const selector = $("#lang-select");
+
+  if (selector) {
+    selector.value = lang;
+
+    selector.addEventListener(
+      "change",
+      (e) => {
+        const selected = e.target.value;
+
+        applyTranslations(selected);
+
+        const url = new URL(
+          window.location.href
+        );
+
+        url.searchParams.set(
+          "lang",
+          selected
+        );
+
+        window.history.replaceState(
+          null,
+          "",
+          url
+        );
+      }
+    );
+  }
+
+  applyTranslations(lang);
+}
+
+function updateMenuLabel() {
+  const btn = $("#menu-toggle");
+
+  if (!btn) return;
+
+  const open =
+    $("#main-nav")?.classList.contains("open");
+
+  btn.setAttribute(
+    "aria-label",
+    open
+      ? t("menu.close")
+      : t("menu.open")
+  );
+}
+
+function closeMenu() {
+  const nav = $("#main-nav");
+  const btn = $("#menu-toggle");
+
+  nav?.classList.remove("open");
+
+  btn?.setAttribute(
+    "aria-expanded",
+    "false"
+  );
+
+  updateMenuLabel();
+}
+
+function initMenu() {
+  const nav = $("#main-nav");
+  const btn = $("#menu-toggle");
+
+  if (!nav || !btn) return;
+
+  btn.addEventListener("click", () => {
+    const open =
+      nav.classList.toggle("open");
+
+    btn.setAttribute(
+      "aria-expanded",
+      String(open)
+    );
+
+    updateMenuLabel();
+  });
+
+  $$(".nav-link").forEach((link) => {
+    link.addEventListener(
+      "click",
+      () => closeMenu()
+    );
+  });
+}
+
+function initScroll() {
+  const progress = $("#scroll-progress");
+  const top = $("#topBtn");
+
+  const sections = $$(".nav-link")
+    .map((link) =>
+      document.getElementById(
+        link.getAttribute("href")?.slice(1)
+      )
+    )
+    .filter(Boolean);
+
+  const update = () => {
+    const max =
+      document.documentElement.scrollHeight -
+      window.innerHeight;
+
+    if (progress) {
+      progress.style.width =
+        `${max > 0
+          ? Math.min(
+              100,
+              (window.scrollY / max) * 100
+            )
+          : 0}%`;
+    }
+
+    if (top) {
+      top.hidden = window.scrollY < 500;
+    }
+
+    let active = null;
+
+    for (const section of sections) {
+      const rect =
+        section.getBoundingClientRect();
+
+      if (
+        rect.top <= 140 &&
+        rect.bottom > 140
+      ) {
+        active = section.id;
+      }
+    }
+
+    $$(".nav-link").forEach((link) => {
+      const id =
+        link.getAttribute("href")?.slice(1);
+
+      link.classList.toggle(
+        "active",
+        id === active
+      );
+    });
+  };
+
+  window.addEventListener(
+    "scroll",
+    update,
+    { passive: true }
+  );
+
+  update();
+
+  top?.addEventListener(
+    "click",
+    () => {
+      window.scrollTo({
+        top: 0,
+        behavior:
+          window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+          ).matches
+            ? "auto"
+            : "smooth"
+      });
+    }
+  );
+}
+
+function initReveal() {
+  const reduced =
+    window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+  if (
+    reduced ||
+    !("IntersectionObserver" in window)
+  ) {
+    $$(".reveal").forEach((el) =>
+      el.classList.add("is-visible")
+    );
+
+    return;
+  }
+
+  const observer =
+    new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add(
+              "is-visible"
+            );
+
+            observer.unobserve(
+              entry.target
+            );
+          }
+        });
+      },
+      {
+        threshold: 0.12
+      }
+    );
+
+  $$(".reveal").forEach((el) =>
+    observer.observe(el)
+  );
+}
+
+function initCanvas() {
+  const canvas = $("#hero-canvas");
+
+  if (!canvas) return;
+
+  if (
+    window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches
+  ) {
+    return;
+  }
+
+  if (navigator.connection?.saveData) {
+    return;
+  }
+
+  const ctx = canvas.getContext("2d");
+
+  if (!ctx) return;
+
+  let raf = 0;
+  let running = true;
+  let points = [];
+
+  function resize() {
+    const rect =
+      canvas.getBoundingClientRect();
+
+    const dpr =
+      Math.min(
+        window.devicePixelRatio || 1,
+        2
+      );
+
+    canvas.width =
+      rect.width * dpr;
+
+    canvas.height =
+      rect.height * dpr;
+
+    ctx.setTransform(
+      dpr,
+      0,
+      0,
+      dpr,
+      0,
+      0
+    );
+
+    const count =
+      Math.min(
+        48,
+        Math.max(
+          18,
+          Math.floor(
+            rect.width / 28
+          )
+        )
+      );
+
+    points =
+      Array.from(
+        { length: count },
+        () => ({
+          x:
+            Math.random() *
+            rect.width,
+
+          y:
+            Math.random() *
+            rect.height,
+
+          vx:
+            (Math.random() - 0.5) *
+            0.18,
+
+          vy:
+            (Math.random() - 0.5) *
+            0.18
+        })
+      );
+  }
+
+  function draw() {
+    if (!running) {
+      raf = 0;
+      return;
+    }
+
+    const rect =
+      canvas.getBoundingClientRect();
+
+    ctx.clearRect(
+      0,
+      0,
+      rect.width,
+      rect.height
+    );
+
+    const dark =
+      document.documentElement.classList.contains(
+        "dark"
+      );
+
+    ctx.fillStyle =
+      dark
+        ? "rgba(41,151,255,.35)"
+        : "rgba(0,113,227,.22)";
+
+    points.forEach((p) => {
+      p.x += p.vx;
+      p.y += p.vy;
+
+      if (
+        p.x < 0 ||
+        p.x > rect.width
+      ) {
+        p.vx *= -1;
+      }
+
+      if (
+        p.y < 0 ||
+        p.y > rect.height
+      ) {
+        p.vy *= -1;
+      }
+
+      ctx.beginPath();
+
+      ctx.arc(
+        p.x,
+        p.y,
+        1.5,
+        0,
+        Math.PI * 2
+      );
+
+      ctx.fill();
     });
 
-    if (themeToggle) {
-        themeToggle.addEventListener('click', () => {
-            const currentlyDark = isDark();
-            const newDark = !currentlyDark;
-            const doApply = () => applyThemeFromState(newDark);
-            if (supportsViewTransitions) {
-                d.startViewTransition(doApply);
-            } else {
-                doApply();
-            }
-        });
-    }
+    raf =
+      window.requestAnimationFrame(
+        draw
+      );
+  }
 
-    // --- Multi-Language System (chunked apply) ---
-    const applyLanguageChunked = (lang) => {
-        if (typeof translations === 'undefined') return;
-        const targetLang = translations[lang] ? lang : 'en';
-        currentLang = targetLang;
-        const dict = translations[targetLang];
+  resize();
+  draw();
 
-        html.lang = targetLang === 'en' ? 'en-IN' : targetLang === 'te' ? 'te-IN' : targetLang === 'hi' ? 'hi-IN' : targetLang;
-        try { localStorage.setItem('lang', targetLang); } catch (e) {}
+  window.addEventListener(
+    "resize",
+    resize,
+    { passive: true }
+  );
 
-        const yieldToMain = w.scheduler && w.scheduler.yield ? () => w.scheduler.yield() : () => new Promise(resolve => setTimeout(resolve, 0));
+  const observer =
+    new IntersectionObserver(
+      ([entry]) => {
+        running =
+          entry.isIntersecting;
 
-        const elements = [...d.querySelectorAll('[data-i18n]')];
-        const placeholders = [...d.querySelectorAll('[data-i18n-placeholder]')];
-        const ariaLabels = [...d.querySelectorAll('[data-i18n-aria]')];
-        const altTexts = [...d.querySelectorAll('[data-i18n-alt]')];
-
-        const processChunk = async (items, callback) => {
-            for (let i = 0; i < items.length; i++) {
-                callback(items[i]);
-                if (i % 10 === 9) await yieldToMain();
-            }
-        };
-
-        (async () => {
-            await processChunk(elements, el => {
-                const key = el.getAttribute('data-i18n');
-                if (dict[key] !== undefined) el.innerHTML = dict[key];
-            });
-            await processChunk(placeholders, el => {
-                const key = el.getAttribute('data-i18n-placeholder');
-                if (dict[key] !== undefined) el.setAttribute('placeholder', dict[key]);
-            });
-            await processChunk(ariaLabels, el => {
-                const key = el.getAttribute('data-i18n-aria');
-                if (dict[key] !== undefined) el.setAttribute('aria-label', dict[key]);
-            });
-            await processChunk(altTexts, el => {
-                const key = el.getAttribute('data-i18n-alt');
-                if (dict[key] !== undefined) el.setAttribute('alt', dict[key]);
-            });
-
-            if (dict['page.title']) d.title = dict['page.title'];
-            const metaDesc = d.querySelector('meta[name="description"]');
-            if (metaDesc && dict['page.description']) metaDesc.setAttribute('content', dict['page.description']);
-
-            updateThemeIcon();
-
-            if (langAnnouncer) {
-                langAnnouncer.textContent = getTranslation('lang.announce') || `Language changed to ${targetLang}`;
-            }
-        })();
-    };
-
-    const getInitialLanguage = () => {
-        const urlParams = new URLSearchParams(w.location.search);
-        const langParam = urlParams.get('lang');
-        if (langParam && ['en', 'te', 'hi'].includes(langParam)) return langParam;
-        try { return localStorage.getItem('lang') || 'en'; } catch (e) { return 'en'; }
-    };
-
-    const langSelect = q('lang-select');
-    if (langSelect && typeof translations !== 'undefined') {
-        const initialLang = getInitialLanguage();
-        langSelect.value = initialLang;
-        applyLanguageChunked(initialLang);
-        langSelect.addEventListener('change', (e) => {
-            const newLang = e.target.value;
-            const doApply = () => applyLanguageChunked(newLang);
-            if (supportsViewTransitions) {
-                d.startViewTransition(doApply);
-            } else {
-                doApply();
-            }
-        });
-    }
-
-    // --- Canvas Particle Engine ---
-    const canvas = q('hero-canvas'), heroSection = q('home');
-    const QUALITY = Object.freeze({ LOW: 0, MEDIUM: 1, HIGH: 2 });
-    const CONFIG = Object.freeze({
-        mouseRadius: 150, mouseRadiusSq: 22500, physicsStep: 1000/60, alphaBuckets: 5,
-        levels: {
-            0: { count: 25, connDistSq: 6400 },
-            1: { count: 50, connDistSq: 10000 },
-            2: { count: 80, connDistSq: 14400 }
-        }
-    });
-    const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-    const saveData = connection && connection.saveData;
-
-    let initCanvas = () => {};
-
-    if (canvas && heroSection && !prefersReducedMotion.matches && !saveData) {
-        canvas.setAttribute('aria-hidden', 'true');
-        const ctx = canvas.getContext('2d', { alpha: false });
-        let engineRunning = false, heroVisible = true, animationFrameId = null, width = 0, height = 0, lastDpr = 0;
-        let lastTime = 0, accumulator = 0, emaFps = 60, lastQualityCheck = 0, lowFrames = 0, highFrames = 0;
-        let maxHardwareQuality = QUALITY.MEDIUM, currentQuality = QUALITY.LOW;
-        const particles = [], mouse = Object.seal({ x: null, y: null });
-        let rawPointer = { x: null, y: null }, backgroundColor, particleColor, lineColor;
-        const maxLines = (CONFIG.levels[2].count * (CONFIG.levels[2].count - 1)) / 2;
-        const lineBuckets = Array.from({ length: 5 }, () => new Float32Array(maxLines * 4)), bucketCounts = new Int32Array(5);
-
-        const assessHardware = () => {
-            const cores = navigator.hardwareConcurrency || 4, networkType = connection ? connection.effectiveType : '4g';
-            const isSlow = networkType === '2g' || networkType === 'slow-2g' || networkType === '3g';
-            if (cores > 4 && !isSlow && w.innerWidth > 768) maxHardwareQuality = QUALITY.HIGH;
-            else if (isSlow) maxHardwareQuality = QUALITY.LOW;
-            else maxHardwareQuality = QUALITY.MEDIUM;
-            currentQuality = maxHardwareQuality;
-        };
-
-        const themeHandler = (e) => {
-            if (!e || !e.detail) return;
-            backgroundColor = e.detail.background || backgroundColor;
-            particleColor = e.detail.particle || particleColor;
-            lineColor = e.detail.line || lineColor;
-        };
-
-        const initTheme = () => {
-            const styles = w.getComputedStyle(d.body);
-            backgroundColor = styles.getPropertyValue('--color-bg').trim();
-            particleColor = styles.getPropertyValue('--canvas-particle').trim();
-            lineColor = styles.getPropertyValue('--canvas-line').trim();
-        };
-
-        const pointerMoveHandler = (e) => { rawPointer.x = e.offsetX; rawPointer.y = e.offsetY; };
-        const pointerLeaveHandler = () => { rawPointer.x = null; rawPointer.y = null; };
-
-        class Particle {
-            constructor() { this.reset(); }
-            reset() {
-                this.x = Math.random() * width; this.y = Math.random() * height;
-                this.vx = (Math.random() - 0.5) * 0.5; this.vy = (Math.random() - 0.5) * 0.5;
-                this.radius = Math.random() * 1.5 + 0.5;
-            }
-            update(dt) {
-                const timeScale = dt / CONFIG.physicsStep;
-                this.x += this.vx * timeScale; this.y += this.vy * timeScale;
-                if (this.x < 0 || this.x > width) { this.vx = -this.vx; this.x = Math.max(0, Math.min(width, this.x)); }
-                if (this.y < 0 || this.y > height) { this.vy = -this.vy; this.y = Math.max(0, Math.min(height, this.y)); }
-                if (mouse.x !== null) {
-                    const dx = mouse.x - this.x, dy = mouse.y - this.y, distSq = dx*dx + dy*dy;
-                    if (distSq > 0 && distSq < CONFIG.mouseRadiusSq) {
-                        const distance = Math.sqrt(distSq), force = Math.max(0, (CONFIG.mouseRadius - distance) / CONFIG.mouseRadius);
-                        this.x -= (dx / distance) * force * 1.5 * timeScale;
-                        this.y -= (dy / distance) * force * 1.5 * timeScale;
-                    }
-                }
-            }
-            draw() { ctx.beginPath(); ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2); ctx.fill(); }
+        if (running && !raf) {
+          draw();
         }
 
-        initCanvas = () => {
-            const nw = canvas.parentElement.clientWidth, nh = canvas.parentElement.clientHeight;
-            const dpr = Math.min(w.devicePixelRatio || 1, 2);
-            if (nw === 0 || nh === 0 || (nw === width && nh === height && dpr === lastDpr)) return;
-            width = nw; height = nh; lastDpr = dpr;
-            canvas.width = width * dpr; canvas.height = height * dpr;
-            canvas.style.width = `${width}px`; canvas.style.height = `${height}px`;
-            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-            const maxNeeded = CONFIG.levels[QUALITY.HIGH].count;
-            while (particles.length < maxNeeded) particles.push(new Particle());
-            for (let i = 0; i < maxNeeded; i++) particles[i].reset();
-        };
+        if (!running) {
+          window.cancelAnimationFrame(
+            raf
+          );
 
-        const startEngine = () => {
-            if (engineRunning) return;
-            engineRunning = true; lastTime = performance.now(); accumulator = 0;
-            animationFrameId = requestAnimationFrame(animateCanvas);
-        };
-
-        const stopEngine = () => {
-            engineRunning = false;
-            if (animationFrameId !== null) {
-                cancelAnimationFrame(animationFrameId);
-                animationFrameId = null;
-            }
-        };
-
-        const animateCanvas = (time) => {
-            if (!engineRunning) return;
-            animationFrameId = requestAnimationFrame(animateCanvas);
-            let dt = time - lastTime;
-            if (dt > 100) dt = 100;
-            lastTime = time;
-
-            if (rawPointer.x !== null) { mouse.x = rawPointer.x; mouse.y = rawPointer.y; }
-            else { mouse.x = null; mouse.y = null; }
-
-            emaFps = emaFps * 0.9 + (1000 / (dt || 1)) * 0.1;
-            if (time - lastQualityCheck > 500) {
-                lastQualityCheck = time;
-                if (emaFps < 45) { lowFrames++; highFrames = 0; }
-                else if (emaFps > 55) { highFrames++; lowFrames = 0; }
-                else { lowFrames = 0; highFrames = 0; }
-
-                if (lowFrames >= 3 && currentQuality > QUALITY.LOW) {
-                    currentQuality--; lowFrames = 0;
-                } else if (highFrames >= 3 && currentQuality < maxHardwareQuality) {
-                    const oldTarget = CONFIG.levels[currentQuality].count;
-                    currentQuality++;
-                    const newTarget = CONFIG.levels[currentQuality].count;
-                    for (let i = oldTarget; i < newTarget; i++) particles[i].reset();
-                    highFrames = 0;
-                }
-            }
-
-            accumulator += dt;
-            const activeCount = CONFIG.levels[currentQuality].count;
-            const currentConnDistSq = CONFIG.levels[currentQuality].connDistSq;
-            let steps = 0;
-            while (accumulator >= CONFIG.physicsStep && steps < 5) {
-                for (let i = 0; i < activeCount; i++) particles[i].update(CONFIG.physicsStep);
-                accumulator -= CONFIG.physicsStep;
-                steps++;
-            }
-
-            ctx.fillStyle = backgroundColor;
-            ctx.fillRect(0, 0, width, height);
-            ctx.fillStyle = particleColor;
-            for (let i = 0; i < activeCount; i++) particles[i].draw();
-
-            bucketCounts.fill(0);
-            for (let i = 0; i < activeCount; i++) {
-                for (let j = i + 1; j < activeCount; j++) {
-                    const dx = particles[i].x - particles[j].x, dy = particles[i].y - particles[j].y, distSq = dx*dx + dy*dy;
-                    if (distSq < currentConnDistSq) {
-                        const alpha = 1 - (distSq / currentConnDistSq);
-                        let bucketIdx = Math.floor(alpha * 5);
-                        if (bucketIdx >= 5) bucketIdx = 4;
-                        const ptr = bucketCounts[bucketIdx] * 4, arr = lineBuckets[bucketIdx];
-                        arr[ptr] = particles[i].x; arr[ptr+1] = particles[i].y;
-                        arr[ptr+2] = particles[j].x; arr[ptr+3] = particles[j].y;
-                        bucketCounts[bucketIdx]++;
-                    }
-                }
-            }
-
-            ctx.strokeStyle = lineColor;
-            for (let b = 0; b < 5; b++) {
-                if (bucketCounts[b] === 0) continue;
-                ctx.beginPath();
-                ctx.globalAlpha = (b + 1) / 5;
-                const count = bucketCounts[b], arr = lineBuckets[b];
-                for (let i = 0; i < count; i++) {
-                    const ptr = i * 4;
-                    ctx.moveTo(arr[ptr], arr[ptr+1]);
-                    ctx.lineTo(arr[ptr+2], arr[ptr+3]);
-                }
-                ctx.stroke();
-            }
-            ctx.globalAlpha = 1.0;
-        };
-
-        canvas.addEventListener('pointermove', pointerMoveHandler, { passive: true });
-        canvas.addEventListener('pointerleave', pointerLeaveHandler, { passive: true });
-        canvas.addEventListener('pointercancel', pointerLeaveHandler, { passive: true });
-        d.addEventListener('themechange', themeHandler);
-
-        let resizePending = false;
-        const resizeObserver = new ResizeObserver(() => {
-            if (resizePending) return;
-            resizePending = true;
-            requestAnimationFrame(() => { initCanvas(); resizePending = false; });
-        });
-        resizeObserver.observe(canvas.parentElement);
-
-        const visibilityHandler = () => { if (d.hidden) stopEngine(); else if (heroVisible) startEngine(); };
-        const pageShowHandler = (event) => {
-            if (heroVisible && !d.hidden && (event.persisted || !event.persisted)) startEngine();
-        };
-
-        new IntersectionObserver(([entry]) => {
-            heroVisible = entry.isIntersecting;
-            if (heroVisible && !d.hidden && !prefersReducedMotion.matches) startEngine();
-            else stopEngine();
-        }, { threshold: 0 }).observe(heroSection);
-
-        d.addEventListener('visibilitychange', visibilityHandler);
-        w.addEventListener('pagehide', stopEngine);
-        w.addEventListener('pageshow', pageShowHandler);
-
-        const updateHardwareAndCanvas = () => {
-            assessHardware();
-            if (currentQuality > maxHardwareQuality) currentQuality = maxHardwareQuality;
-            initCanvas();
-        };
-        w.addEventListener('resize', updateHardwareAndCanvas);
-        if (connection) connection.addEventListener('change', updateHardwareAndCanvas);
-
-        // DPR change detection
-        let lastDprValue = w.devicePixelRatio || 1;
-        const dprMql = w.matchMedia(`(resolution: ${lastDprValue}dppx)`);
-        const onDprChange = () => {
-            const newDpr = w.devicePixelRatio || 1;
-            if (newDpr !== lastDprValue) {
-                lastDprValue = newDpr;
-                initCanvas();
-            }
-            dprMql.addEventListener('change', onDprChange, { once: true });
-        };
-        dprMql.addEventListener('change', onDprChange, { once: true });
-
-        const motionHandler = (e) => { if (e.matches) stopEngine(); else if (heroVisible && !d.hidden) startEngine(); };
-        prefersReducedMotion.addEventListener('change', motionHandler);
-
-        const initCanvasEngine = () => {
-            initTheme();
-            assessHardware();
-            initCanvas();
-            startEngine();
-        };
-
-        if (w.requestIdleCallback) {
-            w.requestIdleCallback(initCanvasEngine, { timeout: 1000 });
-        } else {
-            setTimeout(initCanvasEngine, 0);
+          raf = 0;
         }
-    }
+      }
+    );
 
-    // --- Navigation & Mobile Drawer ---
-    const closeMenu = () => {
-        if (!nav || !menuToggle || !nav.classList.contains('open')) return;
-        nav.classList.remove('open');
-        menuToggle.setAttribute('aria-expanded', 'false');
-        html.style.overflow = '';
-        if (topBtn) topBtn.inert = false;
-        if (supportsInert) {
-            if (mainContent) mainContent.inert = false;
-            if (footerElement) footerElement.inert = false;
-        } else {
-            if (mainContent) mainContent.removeAttribute('aria-hidden');
-            if (footerElement) footerElement.removeAttribute('aria-hidden');
+  observer.observe($("#home"));
+}
+
+function initShare() {
+  const btn = $("#share-btn");
+
+  if (!btn) return;
+
+  btn.addEventListener(
+    "click",
+    async () => {
+      const data = {
+        title: document.title,
+        text:
+          "Gadiparthi Sai Sushvik — Portfolio",
+        url: window.location.href
+      };
+
+      try {
+        if (navigator.share) {
+          await navigator.share(data);
+        } else if (navigator.clipboard) {
+          await navigator.clipboard.writeText(
+            window.location.href
+          );
         }
-    };
-    const desktopMQ = w.matchMedia('(min-width: 768px)');
-
-    if (menuToggle && nav) {
-        menuToggle.addEventListener('click', () => {
-            const isOpen = nav.classList.toggle('open');
-            menuToggle.setAttribute('aria-expanded', String(isOpen));
-            if (isOpen) {
-                html.style.overflow = 'hidden';
-                if (topBtn) topBtn.inert = true;
-                if (supportsInert) {
-                    if (mainContent) mainContent.inert = true;
-                    if (footerElement) footerElement.inert = true;
-                } else {
-                    if (mainContent) mainContent.setAttribute('aria-hidden', 'true');
-                    if (footerElement) footerElement.setAttribute('aria-hidden', 'true');
-                }
-                const firstLink = nav.querySelector('a');
-                if (firstLink) requestAnimationFrame(() => requestAnimationFrame(() => firstLink.focus()));
-            } else {
-                closeMenu();
-            }
-        });
-        desktopMQ.addEventListener('change', (e) => { if (e.matches) closeMenu(); });
-        nav.addEventListener('click', (e) => { if (e.target.closest('a[href]')) closeMenu(); });
-        d.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && nav.classList.contains('open')) { closeMenu(); menuToggle.focus(); }
-            if (!supportsInert && e.key === 'Tab' && nav.classList.contains('open') && w.innerWidth <= 768) {
-                const focusable = nav.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])');
-                if (focusable.length === 0) return;
-                const first = focusable[0], last = focusable[focusable.length - 1];
-                if (e.shiftKey && d.activeElement === first) { e.preventDefault(); last.focus(); }
-                else if (!e.shiftKey && d.activeElement === last) { e.preventDefault(); first.focus(); }
-            }
-        });
+      } catch {}
     }
+  );
+}
 
-    // --- Smooth Scroll & Section Spy (Event Delegation) ---
-    d.body.addEventListener('click', (e) => {
-        const link = e.target.closest('a[href^="#"]');
-        if (!link || link.classList.contains('skip-link')) return;
-        const href = link.getAttribute('href');
-        if (!href || href === '#') return;
-        const target = d.getElementById(href.slice(1));
-        if (!target) return;
+function initSpeech() {
+  const btn = $("#listen-btn");
+
+  if (!btn) return;
+
+  btn.addEventListener(
+    "click",
+    () => {
+      if (
+        !("speechSynthesis" in window)
+      ) {
+        return;
+      }
+
+      window.speechSynthesis.cancel();
+
+      const main = $("#main-content");
+
+      const text =
+        [
+          ...main.querySelectorAll(
+            "h1,h2,h3,p,li"
+          )
+        ]
+          .map((el) =>
+            el.textContent.trim()
+          )
+          .filter(Boolean)
+          .join(". ");
+
+      const utterance =
+        new SpeechSynthesisUtterance(
+          text
+        );
+
+      utterance.lang =
+        document.documentElement.lang;
+
+      utterance.rate = 0.95;
+
+      window.speechSynthesis.speak(
+        utterance
+      );
+    }
+  );
+}
+
+function showError(id, key) {
+  const el = $("#" + id);
+
+  if (!el) return;
+
+  el.textContent = t(key);
+  el.hidden = false;
+}
+
+function clearErrors() {
+  $$(".field-error").forEach((el) => {
+    el.hidden = true;
+    el.textContent = "";
+  });
+}
+
+async function initForm() {
+  const form = $("#contact-form");
+
+  if (!form) return;
+
+  const status = $("#form-status");
+  const submit = $("#submit-btn");
+
+  form.addEventListener(
+    "submit",
+    async (e) => {
+      e.preventDefault();
+
+      clearErrors();
+      status.textContent = "";
+
+      const name = $("#name");
+      const email = $("#email");
+      const message = $("#form-message");
+
+      let valid = true;
+
+      if (!name.value.trim()) {
+        showError(
+          "name-err",
+          "form.name.error"
+        );
+
+        valid = false;
+      }
+
+      if (
+        !email.value.trim() ||
+        !email.validity.valid
+      ) {
+        showError(
+          "email-err",
+          "form.email.error"
+        );
+
+        valid = false;
+      }
+
+      if (!message.value.trim()) {
+        showError(
+          "form-message-err",
+          "form.message.error"
+        );
+
+        valid = false;
+      }
+
+      if (!valid) return;
+
+      const honeypot =
+        form.querySelector(
+          "[name='_gotcha']"
+        );
+
+      if (honeypot?.value) return;
+
+      submit.disabled = true;
+
+      status.textContent =
+        t("form.sending");
+
+      const controller =
+        new AbortController();
+
+      const timeout =
+        setTimeout(
+          () => controller.abort(),
+          15000
+        );
+
+      try {
+        const response =
+          await fetch(
+            form.action,
+            {
+              method: "POST",
+              body: new FormData(form),
+              headers: {
+                Accept:
+                  "application/json"
+              },
+              signal:
+                controller.signal
+            }
+          );
+
+        if (!response.ok) {
+          throw new Error(
+            "Request failed"
+          );
+        }
+
+        form.reset();
+
+        status.textContent =
+          t("form.success");
+      } catch (err) {
+        status.textContent =
+          t("form.failure");
+      } finally {
+        clearTimeout(timeout);
+        submit.disabled = false;
+      }
+    }
+  );
+}
+
+const commands = [
+  ["Home", "#home"],
+  ["About", "#about"],
+  ["Projects", "#projects"],
+  ["Learning", "#learning"],
+  ["Skills", "#skills"],
+  ["Contact", "#contact"]
+];
+
+function initPalette() {
+  const palette =
+    $("#command-palette");
+
+  const input =
+    $("#command-input");
+
+  const list =
+    $("#command-results");
+
+  if (!palette || !input || !list) {
+    return;
+  }
+
+  let activeIndex = -1;
+  let results = [];
+
+  function render() {
+    const query =
+      input.value
+        .toLowerCase()
+        .trim();
+
+    results =
+      commands.filter(
+        ([name]) =>
+          name
+            .toLowerCase()
+            .includes(query)
+      );
+
+    list.textContent = "";
+
+    results.forEach(
+      ([name, id], index) => {
+        const li =
+          document.createElement("li");
+
+        li.setAttribute(
+          "role",
+          "option"
+        );
+
+        li.id =
+          `command-option-${index}`;
+
+        li.tabIndex = -1;
+        li.textContent = name;
+
+        li.addEventListener(
+          "click",
+          () => {
+            closePalette();
+
+            document
+              .querySelector(id)
+              ?.scrollIntoView({
+                behavior:
+                  window.matchMedia(
+                    "(prefers-reduced-motion: reduce)"
+                  ).matches
+                    ? "auto"
+                    : "smooth"
+              });
+          }
+        );
+
+        list.appendChild(li);
+      }
+    );
+
+    activeIndex =
+      results.length > 0
+        ? 0
+        : -1;
+
+    updateActiveDescendant();
+  }
+
+  function updateActiveDescendant() {
+    const items =
+      list.querySelectorAll("li");
+
+    items.forEach(
+      (item, index) => {
+        item.classList.toggle(
+          "is-active",
+          index === activeIndex
+        );
+
+        item.setAttribute(
+          "aria-selected",
+          index === activeIndex
+            ? "true"
+            : "false"
+        );
+      }
+    );
+
+    if (activeIndex >= 0) {
+      input.setAttribute(
+        "aria-activedescendant",
+        items[activeIndex].id
+      );
+    } else {
+      input.setAttribute(
+        "aria-activedescendant",
+        ""
+      );
+    }
+  }
+
+  function openPalette() {
+    state.palettePreviousFocus =
+      document.activeElement;
+
+    palette.hidden = false;
+    state.paletteOpen = true;
+
+    input.value = "";
+
+    render();
+    input.focus();
+  }
+
+  function closePalette() {
+    palette.hidden = true;
+    state.paletteOpen = false;
+
+    input.setAttribute(
+      "aria-activedescendant",
+      ""
+    );
+
+    if (
+      state.palettePreviousFocus &&
+      typeof state.palettePreviousFocus.focus ===
+        "function"
+    ) {
+      state.palettePreviousFocus.focus();
+    }
+  }
+
+  input.addEventListener(
+    "input",
+    render
+  );
+
+  input.addEventListener(
+    "keydown",
+    (e) => {
+      if (e.key === "ArrowDown") {
         e.preventDefault();
-        if (nav && nav.classList.contains('open')) closeMenu();
-        const pad = parseFloat(getComputedStyle(html).scrollPaddingTop) || 60;
-        w.scrollTo({
-            top: target.getBoundingClientRect().top + w.scrollY - pad,
-            behavior: prefersReducedMotion.matches ? 'auto' : 'smooth'
-        });
-        if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1');
-        target.focus({ preventScroll: true });
-        history.pushState(null, '', href);
-    });
 
-    const initDeferredObservers = () => {
-        if (navLinks.length > 0 && sections.length > 0) {
-            const navObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const id = entry.target.getAttribute('id');
-                        navLinks.forEach(link => {
-                            const on = link.getAttribute('href') === `#${id}`;
-                            link.classList.toggle('active', on);
-                            if (on) link.setAttribute('aria-current', 'true');
-                            else link.removeAttribute('aria-current');
-                        });
-                        if (history.replaceState) history.replaceState(null, '', `#${id}`);
-                    }
-                });
-            }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+        if (results.length > 0) {
+          activeIndex =
+            (activeIndex + 1) %
+            results.length;
 
-            [...navLinks]
-                .map(l => d.getElementById(l.getAttribute('href').slice(1)))
-                .filter(Boolean)
-                .forEach(sec => navObserver.observe(sec));
+          updateActiveDescendant();
         }
+      } else if (
+        e.key === "ArrowUp"
+      ) {
+        e.preventDefault();
 
-        if (!supportsScrollDrivenAnimations && !prefersReducedMotion.matches) {
-            const reveals = d.querySelectorAll('.reveal');
-            if (reveals.length > 0) {
-                const revealObserver = new IntersectionObserver((entries, observer) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add('visible');
-                            observer.unobserve(entry.target);
-                        }
-                    });
-                }, { rootMargin: '0px 0px -50px 0px', threshold: 0.1 });
-                reveals.forEach(el => revealObserver.observe(el));
-            }
+        if (results.length > 0) {
+          activeIndex =
+            (activeIndex -
+              1 +
+              results.length) %
+            results.length;
+
+          updateActiveDescendant();
+        }
+      } else if (
+        e.key === "Enter"
+      ) {
+        e.preventDefault();
+
+        if (activeIndex >= 0) {
+          const [, id] =
+            results[activeIndex];
+
+          closePalette();
+
+          document
+            .querySelector(id)
+            ?.scrollIntoView({
+              behavior:
+                window.matchMedia(
+                  "(prefers-reduced-motion: reduce)"
+                ).matches
+                  ? "auto"
+                  : "smooth"
+            });
+        }
+      } else if (
+        e.key === "Escape"
+      ) {
+        e.preventDefault();
+        closePalette();
+      } else if (
+        e.key === "Tab"
+      ) {
+        e.preventDefault();
+        input.focus();
+      }
+    }
+  );
+
+  palette.addEventListener(
+    "click",
+    (e) => {
+      if (
+        e.target.matches(
+          "[data-close-palette]"
+        )
+      ) {
+        closePalette();
+      }
+    }
+  );
+
+  window.addEventListener(
+    "keydown",
+    (e) => {
+      if (
+        (e.metaKey || e.ctrlKey) &&
+        e.key.toLowerCase() === "k"
+      ) {
+        e.preventDefault();
+
+        if (state.paletteOpen) {
+          closePalette();
         } else {
-            d.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+          openPalette();
         }
-    };
 
-    if (canvas && (prefersReducedMotion.matches || saveData)) {
-        prefersReducedMotion.addEventListener('change', () => { if (!prefersReducedMotion.matches) location.reload(); });
+        return;
+      }
+
+      if (
+        e.key === "Escape" &&
+        state.paletteOpen
+      ) {
+        e.preventDefault();
+        closePalette();
+      }
     }
+  );
+}
 
-    const scheduleIdle = w.requestIdleCallback ?? ((cb) => setTimeout(cb, 1));
-    scheduleIdle(initDeferredObservers);
+function registerServiceWorker() {
+  if (
+    !("serviceWorker" in navigator)
+  ) {
+    return;
+  }
 
-    // --- Scroll Progress & Top Button ---
-    let ticking = false;
-    w.addEventListener('scroll', () => {
-        if (!ticking) {
-            w.requestAnimationFrame(() => {
-                const scrollTop = w.scrollY;
-                if (header) {
-                    if (scrollTop > 10) header.classList.add('scrolled');
-                    else header.classList.remove('scrolled');
-                }
-                if (progressBar && !prefersReducedMotion.matches) {
-                    const docHeight = d.documentElement.scrollHeight - w.innerHeight;
-                    progressBar.style.width = `${docHeight > 0 ? (scrollTop / docHeight) * 100 : 0}%`;
-                }
-                if (topBtn) {
-                    if (scrollTop > 400) topBtn.classList.remove('hidden');
-                    else topBtn.classList.add('hidden');
-                }
-                ticking = false;
-            });
-            ticking = true;
-        }
-    }, { passive: true });
-
-    if (topBtn) {
-        topBtn.addEventListener('click', () => w.scrollTo({ top: 0, behavior: prefersReducedMotion.matches ? 'auto' : 'smooth' }));
+  window.addEventListener(
+    "load",
+    () => {
+      navigator.serviceWorker
+        .register("/sw.js")
+        .catch(
+          (err) =>
+            console.warn(
+              "SW registration failed:",
+              err
+            )
+        );
     }
+  );
+}
 
-    // --- Contact Form ---
-    if (contactForm && submitBtn && formStatus) {
-        const setStatus = (msg, state) => {
-            formStatus.textContent = msg;
-            formStatus.className = `form-status is-${state}`;
-        };
-        const errFor = f => q(f.id + '-err');
+function init() {
+  initLanguage();
+  initTheme();
+  initMenu();
+  initScroll();
+  initReveal();
+  initCanvas();
+  initShare();
+  initSpeech();
+  initForm();
+  initPalette();
+  registerServiceWorker();
+}
 
-        const showError = (f, msg) => {
-            const p = errFor(f);
-            f.setAttribute('aria-invalid', 'true');
-            if (p) {
-                p.textContent = msg;
-                p.hidden = false;
-                p.setAttribute('role', 'alert');
-            }
-        };
-
-        const clearError = f => {
-            const p = errFor(f);
-            f.removeAttribute('aria-invalid');
-            if (p) {
-                p.hidden = true;
-                p.textContent = '';
-                p.removeAttribute('role');
-            }
-        };
-
-        contactForm.setAttribute('novalidate', '');
-        ['name', 'email', 'form-message'].forEach(id => {
-            const f = q(id);
-            if (f) f.addEventListener('input', () => { if (f.checkValidity()) clearError(f); });
-        });
-
-        contactForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const fields = [...contactForm.elements].filter(f => f.willValidate && f.id);
-            fields.forEach(clearError);
-            const bad = fields.filter(f => !f.checkValidity());
-
-            if (bad.length) {
-                bad.forEach(f => showError(f, f.validationMessage));
-                const msg = getTranslation('form.invalid.generic') || `${bad.length} field(s) need attention.`;
-                setStatus(msg, 'error');
-                bad[0].focus();
-                return;
-            }
-
-            const defaultSubmitText = getTranslation('form.submit') || 'Send Message';
-            submitBtn.disabled = true;
-            submitBtn.textContent = getTranslation('form.sending') || 'Sending...';
-            setStatus(getTranslation('form.sending') || 'Sending your message...', 'pending');
-
-            try {
-                const response = await fetch(contactForm.action, {
-                    method: 'POST',
-                    body: new FormData(contactForm),
-                    headers: { 'Accept': 'application/json' }
-                });
-                if (!response.ok) throw new Error('Network response was not ok.');
-                contactForm.reset();
-                submitBtn.textContent = getTranslation('form.sent') || 'Message Sent';
-                submitBtn.classList.add('success');
-                setStatus(getTranslation('form.success') || 'Message sent successfully.', 'success');
-
-                setTimeout(() => {
-                    submitBtn.textContent = defaultSubmitText;
-                    submitBtn.classList.remove('success');
-                    submitBtn.disabled = false;
-                    formStatus.textContent = '';
-                }, 4000);
-            } catch (error) {
-                submitBtn.disabled = false;
-                submitBtn.textContent = defaultSubmitText;
-                setStatus(getTranslation('form.error') || 'Something went wrong. Please try again, or email me directly.', 'error');
-            }
-        });
-    }
-
-    // --- Service Worker Registration & Update Flow ---
-    if ('serviceWorker' in navigator) {
-        w.addEventListener('load', () => {
-            navigator.serviceWorker.register('/sw.js').then(registration => {
-                registration.addEventListener('updatefound', () => {
-                    const newWorker = registration.installing;
-                    newWorker.addEventListener('statechange', () => {
-                        if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                            if (confirm('A new version of this site is available. Reload now?')) {
-                                w.location.reload();
-                            }
-                        }
-                    });
-                });
-            }).catch(err => {
-                console.warn('Service worker registration failed:', err);
-            });
-        });
-
-        let refreshing = false;
-        navigator.serviceWorker.addEventListener('controllerchange', () => {
-            if (!refreshing) {
-                refreshing = true;
-                w.location.reload();
-            }
-        });
-    }
-
-    // --- Email Obfuscation ---
-    const emailHost = q('contact-email');
-    if (emailHost && emailHost.dataset.u && emailHost.dataset.d) {
-        const addr = `${emailHost.dataset.u}@${emailHost.dataset.d}`;
-        const a = d.createElement('a');
-        a.href = `mailto:${addr}`;
-        a.textContent = addr;
-        a.rel = 'nofollow';
-        emailHost.replaceChildren(a);
-    }
-
-    // --- Native Share API ---
-    if (shareBtn && navigator.share) {
-        shareBtn.addEventListener('click', async () => {
-            try {
-                await navigator.share({
-                    title: d.title,
-                    text: getTranslation('share.text') || 'Check out this portfolio!',
-                    url: w.location.href
-                });
-            } catch (err) {
-                console.warn('Share cancelled or failed:', err);
-            }
-        });
-    } else if (shareBtn) {
-        shareBtn.style.display = 'none';
-    }
-
-    // --- Speech Synthesis (Listen button) ---
-    if (listenBtn && 'speechSynthesis' in w) {
-        let speaking = false;
-        const speakPage = () => {
-            if (speaking) {
-                w.speechSynthesis.cancel();
-                speaking = false;
-                listenBtn.textContent = getTranslation('listen.button') || 'Listen to this page';
-                return;
-            }
-            const textToRead = d.body.innerText;
-            const utterance = new SpeechSynthesisUtterance(textToRead);
-            utterance.lang = html.lang;
-            utterance.onend = () => {
-                speaking = false;
-                listenBtn.textContent = getTranslation('listen.button') || 'Listen to this page';
-            };
-            utterance.onerror = () => {
-                speaking = false;
-                listenBtn.textContent = getTranslation('listen.button') || 'Listen to this page';
-            };
-            w.speechSynthesis.speak(utterance);
-            speaking = true;
-            listenBtn.textContent = getTranslation('listen.stop') || 'Stop listening';
-        };
-        listenBtn.addEventListener('click', speakPage);
-    } else if (listenBtn) {
-        listenBtn.style.display = 'none';
-    }
-
-    // --- Command Palette (Ctrl+K / Cmd+K) ---
-    if (commandPalette && commandInput && commandResults) {
-        const commands = [
-            { label: 'Home', action: () => w.location.hash = '#home', keywords: ['home'] },
-            { label: 'About', action: () => w.location.hash = '#about', keywords: ['about'] },
-            { label: 'Projects', action: () => w.location.hash = '#projects', keywords: ['projects'] },
-            { label: 'Learning', action: () => w.location.hash = '#learning', keywords: ['learning'] },
-            { label: 'Contact', action: () => w.location.hash = '#contact', keywords: ['contact'] },
-            { label: 'Toggle dark mode', action: () => themeToggle.click(), keywords: ['dark', 'theme'] },
-            { label: 'Switch to English', action: () => { langSelect.value = 'en'; langSelect.dispatchEvent(new Event('change')); }, keywords: ['english', 'language'] },
-            { label: 'Switch to Telugu', action: () => { langSelect.value = 'te'; langSelect.dispatchEvent(new Event('change')); }, keywords: ['telugu', 'language'] },
-            { label: 'Switch to Hindi', action: () => { langSelect.value = 'hi'; langSelect.dispatchEvent(new Event('change')); }, keywords: ['hindi', 'language'] },
-        ];
-
-        let selectedIndex = -1;
-        let currentFilter = '';
-
-        const openPalette = () => {
-            commandPalette.hidden = false;
-            commandInput.value = '';
-            currentFilter = '';
-            commandResults.setAttribute('aria-busy', 'true');
-            renderResults(commands);
-            commandInput.focus();
-            selectedIndex = -1;
-        };
-
-        const closePalette = () => {
-            commandPalette.hidden = true;
-        };
-
-        const renderResults = (results) => {
-            commandResults.innerHTML = '';
-            results.forEach((cmd, idx) => {
-                const li = d.createElement('li');
-                li.textContent = cmd.label;
-                li.setAttribute('role', 'option');
-                li.dataset.index = idx;
-                li.addEventListener('click', () => {
-                    cmd.action();
-                    closePalette();
-                });
-                commandResults.appendChild(li);
-            });
-            commandResults.setAttribute('aria-busy', 'false');
-            if (results.length > 0) {
-                selectedIndex = 0;
-                highlightSelected();
-            } else {
-                selectedIndex = -1;
-            }
-        };
-
-        const highlightSelected = () => {
-            const items = commandResults.querySelectorAll('li');
-            items.forEach((li, idx) => {
-                li.setAttribute('aria-selected', idx === selectedIndex ? 'true' : 'false');
-                if (idx === selectedIndex) li.scrollIntoView({ block: 'nearest' });
-            });
-        };
-
-        const filterCommands = (query) => {
-            const lower = query.toLowerCase();
-            return commands.filter(cmd => {
-                return cmd.label.toLowerCase().includes(lower) || cmd.keywords.some(k => k.includes(lower));
-            });
-        };
-
-        commandInput.addEventListener('input', () => {
-            currentFilter = commandInput.value;
-            const filtered = filterCommands(currentFilter);
-            renderResults(filtered);
-        });
-
-        commandInput.addEventListener('keydown', (e) => {
-            const items = commandResults.querySelectorAll('li');
-            if (e.key === 'ArrowDown') {
-                e.preventDefault();
-                if (items.length > 0) {
-                    selectedIndex = (selectedIndex + 1) % items.length;
-                    highlightSelected();
-                }
-            } else if (e.key === 'ArrowUp') {
-                e.preventDefault();
-                if (items.length > 0) {
-                    selectedIndex = (selectedIndex - 1 + items.length) % items.length;
-                    highlightSelected();
-                }
-            } else if (e.key === 'Enter') {
-                e.preventDefault();
-                if (selectedIndex >= 0 && items.length > 0) {
-                    const cmd = commands.find(c => c.label === items[selectedIndex].textContent);
-                    if (cmd) {
-                        cmd.action();
-                        closePalette();
-                    }
-                }
-            } else if (e.key === 'Escape') {
-                closePalette();
-            }
-        });
-
-        d.addEventListener('keydown', (e) => {
-            if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
-                e.preventDefault();
-                openPalette();
-            }
-        });
-
-        d.querySelector('[data-close-palette]').addEventListener('click', closePalette);
-    }
-
-    // --- Scroll to hash on load if present ---
-    if (w.location.hash) {
-        const target = d.getElementById(w.location.hash.slice(1));
-        if (target) {
-            setTimeout(() => {
-                const pad = parseFloat(getComputedStyle(html).scrollPaddingTop) || 60;
-                w.scrollTo({
-                    top: target.getBoundingClientRect().top + w.scrollY - pad,
-                    behavior: prefersReducedMotion.matches ? 'auto' : 'smooth'
-                });
-            }, 100);
-        }
-    }
-
-    // --- Custom PWA Install Prompt ---
-    let deferredInstallPrompt = null;
-    const installButton = d.getElementById('install-btn');
-
-    w.addEventListener('beforeinstallprompt', (event) => {
-        event.preventDefault();
-        deferredInstallPrompt = event;
-        if (installButton) installButton.classList.remove('hidden');
-    });
-
-    w.addEventListener('appinstalled', () => {
-        deferredInstallPrompt = null;
-        if (installButton) installButton.classList.add('hidden');
-    });
-
-    if (installButton) {
-        installButton.addEventListener('click', async () => {
-            if (!deferredInstallPrompt) return;
-            deferredInstallPrompt.prompt();
-            const { outcome } = await deferredInstallPrompt.userChoice;
-            if (outcome === 'accepted') {
-                deferredInstallPrompt = null;
-                installButton.classList.add('hidden');
-            }
-        });
-    }
-
-    // --- Web Vitals RUM (Item W) ---
-    if ('PerformanceObserver' in window) {
-        try {
-            new PerformanceObserver((list) => {
-                const entries = list.getEntries();
-                const lastEntry = entries[entries.length - 1];
-                console.log('[Web Vitals] LCP:', lastEntry.startTime);
-            }).observe({ type: 'largest-contentful-paint', buffered: true });
-
-            let clsValue = 0;
-            new PerformanceObserver((list) => {
-                for (const entry of list.getEntries()) {
-                    if (!entry.hadRecentInput) clsValue += entry.value;
-                }
-                console.log('[Web Vitals] CLS:', clsValue);
-            }).observe({ type: 'layout-shift', buffered: true });
-
-            let inpValue = 0;
-            new PerformanceObserver((list) => {
-                for (const entry of list.getEntries()) {
-                    inpValue = entry.duration;
-                }
-                console.log('[Web Vitals] INP:', inpValue);
-            }).observe({ type: 'event', buffered: true, durationThreshold: 16 });
-        } catch (e) {
-            console.warn('Web Vitals RUM not supported:', e);
-        }
-    }
-});
+document.addEventListener(
+  "DOMContentLoaded",
+  init
+);
