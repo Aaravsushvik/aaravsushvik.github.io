@@ -1,70 +1,159 @@
-const CACHE_NAME = 'portfolio-v8-liquid-glass';
-const urlsToCache = [
-  '/',
-  '/index.html',
-  '/style.css',
-  '/script.js',
-  '/theme.js',
-  '/translations.js',
-  '/manifest.json',
-  '/favicon.ico',
-  '/images/favicon.svg',
-  '/images/apple-touch-icon.png',
-  '/images/icon-192.png',
-  '/images/icon-512.png',
-  '/images/IMG_2358_Original.jpeg',
-  '/images/IMG_2358_Original.avif',
-  '/images/IMG_2358_Original.webp',
-  '/offline.html'
+const CACHE_NAME = "portfolio-v10-2";
+
+const PRECACHE = [
+  "/",
+  "/index.html",
+  "/style.css",
+  "/script.js",
+  "/theme.js",
+  "/translations.js",
+  "/manifest.json",
+  "/favicon.svg",
+  "/images/apple-touch-icon.png",
+  "/images/icon-192.png",
+  "/images/icon-512.png",
+  "/images/IMG_2358_Original.jpeg",
+  "/offline.html"
 ];
 
-self.addEventListener('install', (event) => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return Promise.allSettled(
-        urlsToCache.map((url) =>
-          cache.add(url).catch((err) => {
-            console.warn(`Failed to cache ${url}:`, err);
-          })
+self.addEventListener(
+  "install",
+  (event) => {
+    event.waitUntil(
+      caches
+        .open(CACHE_NAME)
+        .then((cache) =>
+          Promise.allSettled(
+            PRECACHE.map((url) =>
+              cache
+                .add(url)
+                .catch((err) =>
+                  console.warn(
+                    `Failed to precache ${url}:`,
+                    err
+                  )
+                )
+            )
+          )
         )
-      );
-    }).then(() => self.skipWaiting())
-  );
-});
+        .then(() =>
+          self.skipWaiting()
+        )
+    );
+  }
+);
 
-self.addEventListener('activate', (event) => {
-  event.waitUntil(
-    caches.keys().then((cacheNames) => {
-      return Promise.all(
-        cacheNames.map((cacheName) => {
-          if (cacheName !== CACHE_NAME) {
-            return caches.delete(cacheName);
-          }
+self.addEventListener(
+  "activate",
+  (event) => {
+    event.waitUntil(
+      caches
+        .keys()
+        .then((keys) =>
+          Promise.all(
+            keys
+              .filter(
+                (key) =>
+                  key !== CACHE_NAME
+              )
+              .map((key) =>
+                caches.delete(key)
+              )
+          )
+        )
+        .then(() =>
+          self.clients.claim()
+        )
+    );
+  }
+);
+
+self.addEventListener(
+  "fetch",
+  (event) => {
+    if (
+      event.request.method !== "GET"
+    ) {
+      return;
+    }
+
+    const url =
+      new URL(event.request.url);
+
+    if (
+      url.origin !==
+      self.location.origin
+    ) {
+      return;
+    }
+
+    if (
+      event.request.mode ===
+      "navigate"
+    ) {
+      event.respondWith(
+        fetch(event.request)
+          .then((response) => {
+            const copy =
+              response.clone();
+
+            caches
+              .open(CACHE_NAME)
+              .then((cache) =>
+                cache.put(
+                  "/index.html",
+                  copy
+                )
+              );
+
+            return response;
+          })
+          .catch(() =>
+            caches
+              .match("/index.html")
+              .then(
+                (resp) =>
+                  resp ||
+                  caches.match(
+                    "/offline.html"
+                  )
+              )
+          )
+      );
+
+      return;
+    }
+
+    event.respondWith(
+      caches
+        .match(event.request)
+        .then((cached) => {
+          const networkFetch =
+            fetch(event.request)
+              .then((response) => {
+                if (response.ok) {
+                  const copy =
+                    response.clone();
+
+                  caches
+                    .open(CACHE_NAME)
+                    .then((cache) =>
+                      cache.put(
+                        event.request,
+                        copy
+                      )
+                    );
+                }
+
+                return response;
+              })
+              .catch(() => cached);
+
+          return (
+            cached ||
+            networkFetch
+          );
         })
-      );
-    }).then(() => self.clients.claim())
-  );
-});
-
-self.addEventListener('fetch', (event) => {
-  if (event.request.method !== 'GET') return;
-
-  event.respondWith(
-    caches.match(event.request)
-      .then((cachedResponse) => {
-        if (cachedResponse) return cachedResponse;
-        return fetch(event.request).then((networkResponse) => {
-          if (networkResponse.ok && event.request.url.startsWith(self.location.origin)) {
-            const responseClone = networkResponse.clone();
-            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, responseClone));
-          }
-          return networkResponse;
-        }).catch(() => {
-          if (event.request.mode === 'navigate') {
-            return caches.match('/offline.html');
-          }
-          return new Response('Offline', { status: 503, statusText: 'Service Unavailable' });
-        });
-      })
-  );
-});
+    );
+  }
+);
