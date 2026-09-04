@@ -1,9 +1,7 @@
 {
   "ci": {
     "collect": {
-      "url": [
-        "http://localhost:8080/"
-      ],
+      "staticDistDir": ".",
       "numberOfRuns": 1,
       "settings": {
         "chromeFlags": "--no-sandbox"
