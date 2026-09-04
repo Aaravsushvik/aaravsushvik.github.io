@@ -1,4 +1,4 @@
-const CACHE_NAME = 'portfolio-v7';
+const CACHE_NAME = 'portfolio-v8-liquid-glass';
 const urlsToCache = [
   '/',
   '/index.html',
@@ -20,9 +20,15 @@ const urlsToCache = [
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then((cache) => cache.addAll(urlsToCache))
-      .then(() => self.skipWaiting())
+    caches.open(CACHE_NAME).then((cache) => {
+      return Promise.allSettled(
+        urlsToCache.map((url) =>
+          cache.add(url).catch((err) => {
+            console.warn(`Failed to cache ${url}:`, err);
+          })
+        )
+      );
+    }).then(() => self.skipWaiting())
   );
 });
 
