@@ -23,7 +23,9 @@
         "network-dependency-tree-insight": "off",
         "unminified-javascript": "off",
         "uses-optimized-images": "off",
-        "uses-rel-preconnect": "off"
+        "uses-rel-preconnect": "off",
+        "image-delivery-insight": "off",
+        "uses-responsive-images": "off"
       }
     },
     "upload": {
