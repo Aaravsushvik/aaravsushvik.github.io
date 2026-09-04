@@ -1,1791 +1,304 @@
-<!DOCTYPE html>
-<html lang="en-IN" class="light">
-
+<!doctype html>
+<html lang="en-IN">
 <head>
-    <meta charset="UTF-8">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#f5f5f7">
+  <meta name="description" content="Personal portfolio of Gadiparthi Sai Sushvik, exploring technology, governance, accessibility and digital innovation.">
+  <meta name="author" content="Gadiparthi Sai Sushvik">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://aaravsushvik.github.io/">
+  <link rel="alternate" hreflang="en" href="https://aaravsushvik.github.io/?lang=en">
+  <link rel="alternate" hreflang="te" href="https://aaravsushvik.github.io/?lang=te">
+  <link rel="alternate" hreflang="hi" href="https://aaravsushvik.github.io/?lang=hi">
+  <link rel="alternate" hreflang="x-default" href="https://aaravsushvik.github.io/">
+  <meta property="og:title" content="Gadiparthi Sai Sushvik | Student & Aspiring Civil Servant">
+  <meta property="og:description" content="Exploring technology, governance, accessibility and digital innovation.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://aaravsushvik.github.io/">
+  <meta property="og:image" content="https://aaravsushvik.github.io/images/IMG_2358_Original.jpeg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Gadiparthi Sai Sushvik">
+  <meta name="twitter:description" content="Technology enthusiast • Aspiring civil servant • Future innovator">
+  <meta name="twitter:image" content="https://aaravsushvik.github.io/images/IMG_2358_Original.jpeg">
+  <title data-i18n="page.title">Gadiparthi Sai Sushvik | Student & Aspiring Civil Servant</title>
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://formspree.io; form-action https://formspree.io; frame-src 'none'; object-src 'none'; base-uri 'self'; upgrade-insecure-requests;">
 
-    <meta name="color-scheme"
-          content="light dark">
-
-    <!-- Theme color -->
-    <meta id="meta-theme-color"
-          name="theme-color"
-          content="#f5f5f7">
-
-    <!-- Application -->
-    <meta name="application-name"
-          content="Sai Sushvik Portfolio">
-
-    <meta name="apple-mobile-web-app-title"
-          content="Sai Sushvik">
-
-    <meta name="apple-mobile-web-app-capable"
-          content="yes">
-
-    <meta name="mobile-web-app-capable"
-          content="yes">
-
-    <meta name="referrer"
-          content="strict-origin-when-cross-origin">
-
-    <!-- SEO -->
-    <title>
-        Gadiparthi Sai Sushvik | Student &amp; Aspiring Civil Servant
-    </title>
-
-    <meta name="description"
-          content="Personal portfolio of Gadiparthi Sai Sushvik, a student exploring technology, governance, accessibility, artificial intelligence, and digital innovation from Hyderabad, India.">
-
-    <meta name="author"
-          content="Gadiparthi Sai Sushvik">
-
-    <meta name="robots"
-          content="index, follow, max-image-preview:large">
-
-    <link rel="canonical"
-          href="https://aaravsushvik.github.io/">
-
-    <!-- Language discovery -->
-    <link rel="alternate"
-          hreflang="en"
-          href="https://aaravsushvik.github.io/">
-
-    <link rel="alternate"
-          hreflang="x-default"
-          href="https://aaravsushvik.github.io/">
-
-    <!-- Open Graph -->
-    <meta property="og:site_name"
-          content="Gadiparthi Sai Sushvik">
-
-    <meta property="og:locale"
-          content="en_IN">
-
-    <meta property="og:type"
-          content="profile">
-
-    <meta property="profile:first_name"
-          content="Sai Sushvik">
-
-    <meta property="profile:last_name"
-          content="Gadiparthi">
-
-    <meta property="profile:username"
-          content="aaravsushvik">
-
-    <meta property="og:title"
-          content="Gadiparthi Sai Sushvik | Student &amp; Aspiring Civil Servant">
-
-    <meta property="og:description"
-          content="Exploring the intersection of technology, governance, accessibility, and digital innovation.">
-
-    <meta property="og:url"
-          content="https://aaravsushvik.github.io/">
-
-    <meta property="og:image"
-          content="https://aaravsushvik.github.io/images/og-card.jpg">
-
-    <meta property="og:image:width"
-          content="1200">
-
-    <meta property="og:image:height"
-          content="630">
-
-    <meta property="og:image:type"
-          content="image/jpeg">
-
-    <meta property="og:image:alt"
-          content="Gadiparthi Sai Sushvik">
-
-    <!-- Twitter / X -->
-    <meta name="twitter:card"
-          content="summary_large_image">
-
-    <meta name="twitter:title"
-          content="Gadiparthi Sai Sushvik">
-
-    <meta name="twitter:description"
-          content="Student exploring technology, governance, accessibility, artificial intelligence, and digital innovation.">
-
-    <meta name="twitter:image"
-          content="https://aaravsushvik.github.io/images/og-card.jpg">
-
-    <meta name="twitter:image:alt"
-          content="Gadiparthi Sai Sushvik">
-
-    <!--
-        Content Security Policy
-        v10.2
-    -->
-    <meta http-equiv="Content-Security-Policy"
-          content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://formspree.io; form-action https://formspree.io; frame-src 'none'; media-src 'self'; worker-src 'none'; manifest-src 'self'; object-src 'none'; base-uri 'self'; upgrade-insecure-requests;">
-
-    <!--
-        Theme initialization MUST remain render-blocking.
-        This prevents a light/dark theme flash during first paint.
-    -->
-    <script src="./theme.js"></script>
-
-    <!-- Favicons -->
-    <link rel="icon"
-          href="./favicon.ico"
-          sizes="any">
-
-    <link rel="icon"
-          href="./images/favicon.svg"
-          type="image/svg+xml">
-
-    <link rel="apple-touch-icon"
-          href="./images/apple-touch-icon.png">
-
-    <!-- PWA -->
-    <link rel="manifest"
-          href="./manifest.json">
-
-    <!-- Sitemap -->
-    <link rel="sitemap"
-          type="application/xml"
-          href="./sitemap.xml">
-
-    <!-- Main stylesheet -->
-    <link rel="stylesheet"
-          href="./style.css">
-
-    <!-- Translation dictionary -->
-    <script src="./translations.js"></script>
-
-    <!-- Main application -->
-    <script type="module"
-            src="./script.js"></script>
-
-    <!-- Structured data -->
-    <script type="application/ld+json">
-    [
-        {
-            "@context": "https://schema.org",
-            "@type": "ProfilePage",
-            "@id": "https://aaravsushvik.github.io/#profilepage",
-            "url": "https://aaravsushvik.github.io/",
-            "name": "Gadiparthi Sai Sushvik — Portfolio",
-            "inLanguage": "en-IN",
-            "isPartOf": {
-                "@id": "https://aaravsushvik.github.io/#website"
-            },
-            "mainEntity": {
-                "@id": "https://aaravsushvik.github.io/#person"
-            },
-            "primaryImageOfPage": {
-                "@id": "https://aaravsushvik.github.io/#heroimage"
-            }
-        },
-
-        {
-            "@context": "https://schema.org",
-            "@type": "Person",
-            "@id": "https://aaravsushvik.github.io/#person",
-            "name": "Gadiparthi Sai Sushvik",
-            "alternateName": "Sai Sushvik",
-            "url": "https://aaravsushvik.github.io/",
-            "image": {
-                "@id": "https://aaravsushvik.github.io/#heroimage"
-            },
-            "description": "Student interested in technology, governance, accessibility, artificial intelligence, and digital innovation.",
-            "jobTitle": "Student",
-            "knowsLanguage": [
-                {
-                    "@type": "Language",
-                    "name": "English",
-                    "alternateName": "en"
-                },
-                {
-                    "@type": "Language",
-                    "name": "Telugu",
-                    "alternateName": "te"
-                },
-                {
-                    "@type": "Language",
-                    "name": "Hindi",
-                    "alternateName": "hi"
-                }
-            ],
-            "homeLocation": {
-                "@type": "Place",
-                "name": "Hyderabad, Telangana, India",
-                "address": {
-                    "@type": "PostalAddress",
-                    "addressLocality": "Hyderabad",
-                    "addressRegion": "Telangana",
-                    "addressCountry": "IN"
-                }
-            },
-            "hasOccupation": {
-                "@type": "Occupation",
-                "name": "Student",
-                "description": "Student pursuing interests in technology, governance, public policy, accessibility, and digital innovation."
-            },
-            "knowsAbout": [
-                "Web Development",
-                "Artificial Intelligence",
-                "Digital Governance",
-                "Public Policy",
-                "Web Accessibility",
-                "Responsive Web Design",
-                "Semantic HTML",
-                "CSS",
-                "JavaScript",
-                "Civic Technology",
-                "GovTech",
-                "Systems Thinking"
-            ],
-            "sameAs": [
-                "https://github.com/aaravsushvik",
-                "https://www.instagram.com/sushvikhyd/",
-                "https://linktr.ee/gadiparthisaisushvik"
-            ]
-        },
-
-        {
-            "@context": "https://schema.org",
-            "@type": "ImageObject",
-            "@id": "https://aaravsushvik.github.io/#heroimage",
-            "url": "https://aaravsushvik.github.io/images/og-card.jpg",
-            "contentUrl": "https://aaravsushvik.github.io/images/og-card.jpg",
-            "width": 1200,
-            "height": 630,
-            "caption": "Gadiparthi Sai Sushvik"
-        },
-
-        {
-            "@context": "https://schema.org",
-            "@type": "WebSite",
-            "@id": "https://aaravsushvik.github.io/#website",
-            "name": "Sai Sushvik Portfolio",
-            "url": "https://aaravsushvik.github.io/",
-            "inLanguage": "en-IN",
-            "publisher": {
-                "@id": "https://aaravsushvik.github.io/#person"
-            }
-        }
+  <link rel="icon" href="./favicon.ico" sizes="any">
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="./images/apple-touch-icon.png">
+  <link rel="manifest" href="./manifest.json">
+  <script src="./theme.js"></script>
+  <link rel="stylesheet" href="./style.css">
+  <script src="./translations.js"></script>
+  <script type="module" src="./script.js"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Gadiparthi Sai Sushvik",
+    "alternateName": "Sai Sushvik",
+    "url": "https://aaravsushvik.github.io/",
+    "image": "https://aaravsushvik.github.io/images/IMG_2358_Original.jpeg",
+    "jobTitle": "Student",
+    "knowsAbout": [
+      "Web Development",
+      "Artificial Intelligence",
+      "Digital Governance",
+      "Public Policy",
+      "Accessibility"
+    ],
+    "sameAs": [
+      "https://github.com/aaravsushvik",
+      "https://www.instagram.com/sushvikhyd/",
+      "https://linktr.ee/gadiparthisaisushvik"
     ]
-    </script>
+  }
+  </script>
 </head>
-
-
 <body>
-
-    <!-- Accessibility: keyboard users -->
-    <a class="skip-link"
-       href="#main-content"
-       data-i18n="skip.link">
-        Skip to main content
-    </a>
-
-    <!-- Scroll progress -->
-    <div id="scroll-progress"
-         aria-hidden="true">
+<a class="skip-link" href="#main-content" data-i18n="skip.link">Skip to main content</a>
+<div id="scroll-progress" aria-hidden="true"></div>
+<header class="site-header" id="main-header">
+  <div class="container header-inner">
+    <a class="logo" href="#home" aria-label="Gadiparthi Sai Sushvik Home" data-i18n-aria="logo.aria">Sai Sushvik.</a>
+    <nav id="main-nav" aria-label="Main navigation">
+      <ul class="nav-list">
+        <li><a href="#home" class="nav-link" data-i18n="nav.home">Home</a></li>
+        <li><a href="#about" class="nav-link" data-i18n="nav.about">About</a></li>
+        <li><a href="#projects" class="nav-link" data-i18n="nav.projects">Projects</a></li>
+        <li><a href="#learning" class="nav-link" data-i18n="nav.learning">Learning</a></li>
+        <li><a href="#contact" class="nav-link contact-link" data-i18n="nav.contact">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <label class="sr-only" for="lang-select" data-i18n="lang.select.label">Choose language</label>
+      <select id="lang-select" class="lang-dropdown" aria-label="Choose language">
+        <option value="en">English</option>
+        <option value="te">తెలుగు</option>
+        <option value="hi">हिन्दी</option>
+      </select>
+      <button id="share-btn" class="icon-button" type="button" aria-label="Share this page" data-i18n-aria="share.button">
+        <span aria-hidden="true">↗</span>
+      </button>
+      <button id="theme-toggle" class="icon-button" type="button" role="switch" aria-checked="false" aria-label="Switch to dark mode" data-i18n-aria="theme.toDark">
+        <span id="theme-icon" aria-hidden="true">☾</span>
+      </button>
+      <button id="menu-toggle" class="icon-button hamburger" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Open navigation menu" data-i18n-aria="menu.open">
+        <span></span><span></span><span></span>
+      </button>
     </div>
-
-
-    <!-- =========================================================
-         HEADER
-    ========================================================== -->
-
-    <header id="main-header"
-            class="glass-header">
-
-        <div class="header-container">
-
-            <!-- Logo -->
-            <a href="#home"
-               class="logo"
-               aria-label="Gadiparthi Sai Sushvik Home"
-               data-i18n-aria="nav.home.aria">
-                Sai Sushvik.
-            </a>
-
-
-            <!-- Main navigation -->
-            <nav id="main-nav"
-                 aria-label="Main navigation"
-                 data-i18n-aria="nav.aria">
-
-                <ul class="nav-list"
-                    role="list">
-
-                    <li>
-                        <a href="#home"
-                           class="nav-link"
-                           data-i18n="nav.home">
-                            Home
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="#about"
-                           class="nav-link"
-                           data-i18n="nav.about">
-                            About
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="#projects"
-                           class="nav-link"
-                           data-i18n="nav.projects">
-                            Projects
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="#learning"
-                           class="nav-link"
-                           data-i18n="nav.learning">
-                            Learning
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="#skills"
-                           class="nav-link"
-                           data-i18n="nav.skills">
-                            Skills
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="#results"
-                           class="nav-link"
-                           data-i18n="nav.results">
-                            Results
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="#contact"
-                           class="nav-link contact-link"
-                           data-i18n="nav.contact">
-                            Contact
-                        </a>
-                    </li>
-
-                </ul>
-
-            </nav>
-
-
-            <!-- Header controls -->
-            <div class="header-actions">
-
-                <!-- Language -->
-                <div class="language-control">
-
-                    <label for="lang-select"
-                           class="visually-hidden"
-                           data-i18n="language.label">
-                        Choose language
-                    </label>
-
-                    <select id="lang-select"
-                            class="lang-dropdown"
-                            aria-label="Choose language"
-                            data-i18n-aria="language.label">
-
-                        <option value="en">
-                            English
-                        </option>
-
-                        <option value="te">
-                            తెలుగు
-                        </option>
-
-                        <option value="hi">
-                            हिन्दी
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <!-- Share -->
-                <button id="share-button"
-                        class="icon-button"
-                        type="button"
-                        aria-label="Share this portfolio"
-                        data-i18n-aria="share.aria"
-                        title="Share this portfolio"
-                        data-i18n-title="share.title">
-
-                    <svg viewBox="0 0 24 24"
-                         width="20"
-                         height="20"
-                         fill="none"
-                         stroke="currentColor"
-                         stroke-width="2"
-                         stroke-linecap="round"
-                         stroke-linejoin="round"
-                         aria-hidden="true">
-
-                        <circle cx="18"
-                                cy="5"
-                                r="3">
-                        </circle>
-
-                        <circle cx="6"
-                                cy="12"
-                                r="3">
-                        </circle>
-
-                        <circle cx="18"
-                                cy="19"
-                                r="3">
-                        </circle>
-
-                        <line x1="8.59"
-                              y1="13.51"
-                              x2="15.42"
-                              y2="17.49">
-                        </line>
-
-                        <line x1="15.41"
-                              y1="6.51"
-                              x2="8.59"
-                              y2="10.49">
-                        </line>
-
-                    </svg>
-
-                </button>
-
-
-                <!-- Read aloud -->
-                <button id="read-aloud"
-                        class="icon-button"
-                        type="button"
-                        aria-label="Read page aloud"
-                        data-i18n-aria="read.aria"
-                        title="Read page aloud"
-                        data-i18n-title="read.title">
-
-                    <svg viewBox="0 0 24 24"
-                         width="20"
-                         height="20"
-                         fill="none"
-                         stroke="currentColor"
-                         stroke-width="2"
-                         stroke-linecap="round"
-                         stroke-linejoin="round"
-                         aria-hidden="true">
-
-                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5">
-                        </polygon>
-
-                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14">
-                        </path>
-
-                        <path d="M15.54 8.46a5 5 0 0 1 0 7.07">
-                        </path>
-
-                    </svg>
-
-                </button>
-
-
-                <!-- Command palette -->
-                <button id="command-palette-button"
-                        class="icon-button"
-                        type="button"
-                        aria-label="Open command palette"
-                        data-i18n-aria="palette.open"
-                        title="Command palette"
-                        data-i18n-title="palette.open">
-
-                    <svg viewBox="0 0 24 24"
-                         width="20"
-                         height="20"
-                         fill="none"
-                         stroke="currentColor"
-                         stroke-width="2"
-                         stroke-linecap="round"
-                         stroke-linejoin="round"
-                         aria-hidden="true">
-
-                        <circle cx="11"
-                                cy="11"
-                                r="8">
-                        </circle>
-
-                        <line x1="21"
-                              y1="21"
-                              x2="16.65"
-                              y2="16.65">
-                        </line>
-
-                    </svg>
-
-                </button>
-
-
-                <!-- Theme -->
-                <button id="theme-toggle"
-                        class="icon-button"
-                        type="button"
-                        role="switch"
-                        aria-checked="false"
-                        aria-label="Switch to dark mode"
-                        data-i18n-aria="theme.toDark"
-                        title="Switch theme">
-
-                    <!-- Moon -->
-                    <svg id="moon-icon"
-                         viewBox="0 0 24 24"
-                         width="20"
-                         height="20"
-                         stroke="currentColor"
-                         stroke-width="2"
-                         fill="none"
-                         stroke-linecap="round"
-                         stroke-linejoin="round"
-                         aria-hidden="true">
-
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z">
-                        </path>
-
-                    </svg>
-
-
-                    <!-- Sun -->
-                    <svg id="sun-icon"
-                         viewBox="0 0 24 24"
-                         width="20"
-                         height="20"
-                         stroke="currentColor"
-                         stroke-width="2"
-                         fill="none"
-                         stroke-linecap="round"
-                         stroke-linejoin="round"
-                         class="hidden"
-                         aria-hidden="true">
-
-                        <circle cx="12"
-                                cy="12"
-                                r="5">
-                        </circle>
-
-                        <line x1="12"
-                              y1="1"
-                              x2="12"
-                              y2="3">
-                        </line>
-
-                        <line x1="12"
-                              y1="21"
-                              x2="12"
-                              y2="23">
-                        </line>
-
-                        <line x1="4.22"
-                              y1="4.22"
-                              x2="5.64"
-                              y2="5.64">
-                        </line>
-
-                        <line x1="18.36"
-                              y1="18.36"
-                              x2="19.78"
-                              y2="19.78">
-                        </line>
-
-                        <line x1="1"
-                              y1="12"
-                              x2="3"
-                              y2="12">
-                        </line>
-
-                        <line x1="21"
-                              y1="12"
-                              x2="23"
-                              y2="12">
-                        </line>
-
-                        <line x1="4.22"
-                              y1="19.78"
-                              x2="5.64"
-                              y2="18.36">
-                        </line>
-
-                        <line x1="18.36"
-                              y1="5.64"
-                              x2="19.78"
-                              y2="4.22">
-                        </line>
-
-                    </svg>
-
-                </button>
-
-
-                <!-- Mobile navigation -->
-                <button id="menu-toggle"
-                        class="hamburger icon-button"
-                        type="button"
-                        aria-expanded="false"
-                        aria-label="Open navigation menu"
-                        data-i18n-aria="menu.open"
-                        aria-controls="main-nav">
-
-                    <span></span>
-                    <span></span>
-                    <span></span>
-
-                </button>
-
-            </div>
-
+  </div>
+</header>
+
+<div id="command-palette" class="command-palette" hidden>
+  <div class="palette-overlay" data-close-palette></div>
+  <div class="palette-dialog" role="dialog" aria-modal="true" aria-labelledby="command-title">
+    <h2 id="command-title" class="sr-only">Command palette</h2>
+    <input id="command-input" type="search" autocomplete="off" placeholder="Type a command..." data-i18n-placeholder="command.placeholder" aria-autocomplete="list" aria-controls="command-results" aria-activedescendant="">
+    <ul id="command-results" role="listbox"></ul>
+  </div>
+</div>
+<div id="lang-announcer" class="sr-only" aria-live="polite"></div>
+
+<main id="main-content" tabindex="-1">
+  <section id="home" class="hero">
+    <canvas id="hero-canvas" aria-hidden="true"></canvas>
+    <div class="container hero-grid">
+      <div class="hero-copy reveal">
+        <p class="eyebrow" data-i18n="hero.kicker">Student & Aspiring Civil Servant</p>
+        <h1 data-i18n="hero.title">Gadiparthi Sai Sushvik</h1>
+        <p class="hero-subtitle" data-i18n="hero.subtitle">Exploring technology, governance, and systems that improve everyday life.</p>
+        <p class="hero-description" data-i18n="hero.description">Curious about how technology, governance, and public systems connect — learning through web development, AI research, and the intersection of innovation and policy.</p>
+        <div class="hero-actions">
+          <a class="btn-primary" href="#projects" data-i18n="hero.projects">See what I've built</a>
+          <a class="btn-secondary" href="#contact" data-i18n="hero.contact">Get in touch</a>
         </div>
-
-    </header>
-
-
-    <!-- =========================================================
-         COMMAND PALETTE
-    ========================================================== -->
-
-    <div id="command-palette"
-         class="command-palette"
-         hidden
-         role="dialog"
-         aria-modal="true"
-         aria-labelledby="command-palette-title">
-
-        <div class="command-palette-backdrop"
-             data-command-close>
+        <div class="social-links" aria-label="Social links">
+          <a href="https://www.instagram.com/sushvikhyd/" target="_blank" rel="me noopener noreferrer" class="social-icon" aria-label="Instagram" data-i18n-aria="social.instagram">IG</a>
+          <a href="https://github.com/aaravsushvik" target="_blank" rel="me noopener noreferrer" class="social-icon" aria-label="GitHub" data-i18n-aria="social.github">GH</a>
+          <a href="https://linktr.ee/gadiparthisaisushvik" target="_blank" rel="me noopener noreferrer" class="social-icon" aria-label="Linktree" data-i18n-aria="social.linktree">LT</a>
         </div>
-
-        <div class="command-palette-panel">
-
-            <div class="command-palette-header">
-
-                <h2 id="command-palette-title"
-                    data-i18n="palette.title">
-                    Quick Navigation
-                </h2>
-
-                <button id="command-palette-close"
-                        class="icon-button"
-                        type="button"
-                        aria-label="Close command palette"
-                        data-i18n-aria="palette.close">
-
-                    <svg viewBox="0 0 24 24"
-                         width="20"
-                         height="20"
-                         fill="none"
-                         stroke="currentColor"
-                         stroke-width="2"
-                         stroke-linecap="round"
-                         aria-hidden="true">
-
-                        <line x1="18"
-                              y1="6"
-                              x2="6"
-                              y2="18">
-                        </line>
-
-                        <line x1="6"
-                              y1="6"
-                              x2="18"
-                              y2="18">
-                        </line>
-
-                    </svg>
-
-                </button>
-
-            </div>
-
-
-            <label for="command-search"
-                   class="visually-hidden"
-                   data-i18n="palette.search.label">
-                Search portfolio
-            </label>
-
-            <input id="command-search"
-                   type="search"
-                   autocomplete="off"
-                   placeholder="Search or jump to a section..."
-                   data-i18n-placeholder="palette.search.placeholder">
-
-
-            <nav id="command-results"
-                 aria-label="Quick navigation results">
-
-                <a href="#home"
-                   class="command-item"
-                   data-i18n="nav.home">
-                    Home
-                </a>
-
-                <a href="#about"
-                   class="command-item"
-                   data-i18n="nav.about">
-                    About
-                </a>
-
-                <a href="#projects"
-                   class="command-item"
-                   data-i18n="nav.projects">
-                    Projects
-                </a>
-
-                <a href="#learning"
-                   class="command-item"
-                   data-i18n="nav.learning">
-                    Learning
-                </a>
-
-                <a href="#skills"
-                   class="command-item"
-                   data-i18n="nav.skills">
-                    Technical Skills
-                </a>
-
-                <a href="#results"
-                   class="command-item"
-                   data-i18n="nav.results">
-                    Academic Milestones
-                </a>
-
-                <a href="#favorites"
-                   class="command-item"
-                   data-i18n="nav.favorites">
-                    Favorites
-                </a>
-
-                <a href="#inspiration"
-                   class="command-item"
-                   data-i18n="nav.inspiration">
-                    Inspiration
-                </a>
-
-                <a href="#contact"
-                   class="command-item"
-                   data-i18n="nav.contact">
-                    Contact
-                </a>
-
-            </nav>
-
-
-            <p class="command-hint">
-                <span data-i18n="palette.hint">
-                    Press
-                </span>
-
-                <kbd>Esc</kbd>
-
-                <span data-i18n="palette.hint.close">
-                    to close.
-                </span>
-            </p>
-
+      </div>
+      <div class="hero-media reveal">
+        <div class="image-frame">
+          <picture>
+            <source type="image/avif" srcset="./images/IMG_2358_Original.avif">
+            <source type="image/webp" srcset="./images/IMG_2358_Original.webp">
+            <img src="./images/IMG_2358_Original.jpeg" width="840" height="630" fetchpriority="high" decoding="async" alt="Gadiparthi Sai Sushvik with family" data-i18n-alt="hero.img.alt">
+          </picture>
         </div>
-
+      </div>
     </div>
-
-
-    <!-- =========================================================
-         MAIN
-    ========================================================== -->
-
-    <main id="main-content"
-          tabindex="-1">
-
-
-        <!-- =====================================================
-             HERO
-        ====================================================== -->
-
-        <section id="home"
-                 class="hero">
-
-            <canvas id="hero-canvas"
-                    aria-hidden="true"
-                    role="presentation">
-            </canvas>
-
-
-            <div class="container hero-grid">
-
-                <div class="hero-copy reveal">
-
-                    <p class="eyebrow"
-                       data-i18n="hero.kicker">
-                        Student &amp; Aspiring Civil Servant
-                    </p>
-
-
-                    <h1 data-i18n="hero.title">
-                        Gadiparthi Sai Sushvik
-                    </h1>
-
-
-                    <p class="hero-subtitle"
-                       data-i18n="hero.subtitle">
-                        Exploring technology, governance, and systems that improve everyday life.
-                    </p>
-
-
-                    <p class="hero-description"
-                       data-i18n="hero.description">
-                        Curious about how technology, governance, and public systems connect — learning through web development, AI research, and exploring the intersection of innovation and policy.
-                    </p>
-
-
-                    <div class="hero-actions">
-
-                        <a href="#projects"
-                           class="btn-primary"
-                           data-i18n="hero.projects">
-                            See what I've built
-                        </a>
-
-                        <a href="#contact"
-                           class="btn-secondary"
-                           data-i18n="hero.contact">
-                            Get in touch
-                        </a>
-
-                    </div>
-
-
-                    <!-- Social links -->
-                    <div class="social-links"
-                         aria-label="Social profiles"
-                         data-i18n-aria="social.aria">
-
-
-                        <!-- Instagram -->
-                        <a href="https://www.instagram.com/sushvikhyd/"
-                           target="_blank"
-                           rel="me noopener noreferrer"
-                           aria-label="Instagram Profile"
-                           class="social-icon"
-                           data-i18n-aria="social.instagram">
-
-                            <svg viewBox="0 0 448 512"
-                                 width="1.25em"
-                                 height="1.25em"
-                                 fill="currentColor"
-                                 aria-hidden="true">
-
-                                <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/>
-
-                            </svg>
-
-                        </a>
-
-
-                        <!-- GitHub -->
-                        <a href="https://github.com/aaravsushvik"
-                           target="_blank"
-                           rel="me noopener noreferrer"
-                           aria-label="GitHub Profile"
-                           class="social-icon"
-                           data-i18n-aria="social.github">
-
-                            <svg viewBox="0 0 496 512"
-                                 width="1.25em"
-                                 height="1.25em"
-                                 fill="currentColor"
-                                 aria-hidden="true">
-
-                                <path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8z"/>
-
-                            </svg>
-
-                        </a>
-
-
-                        <!-- Linktree -->
-                        <a href="https://linktr.ee/gadiparthisaisushvik"
-                           target="_blank"
-                           rel="me noopener noreferrer"
-                           aria-label="Linktree Profile"
-                           class="social-icon"
-                           data-i18n-aria="social.linktree">
-
-                            <svg viewBox="0 0 24 24"
-                                 width="1.25em"
-                                 height="1.25em"
-                                 fill="currentColor"
-                                 aria-hidden="true">
-
-                                <path d="M13.511 5.853V10.467H17.674C18.088 10.467 18.29 10.972 17.988 11.253L12 16.899L6.012 11.253C5.71 10.972 5.912 10.467 6.326 10.467H10.489V5.853C10.489 5.429 10.826 5.085 11.241 5.085H12.759C13.174 5.085 13.511 5.429 13.511 5.853ZM10.246 17.915H13.754C14.168 17.915 14.506 18.259 14.506 18.683V22.463C14.506 22.887 14.168 23.231 13.754 23.231H10.246C9.832 23.231 9.494 22.887 9.494 22.463V18.683C9.494 18.259 9.832 17.915 10.246 17.915Z"/>
-
-                            </svg>
-
-                        </a>
-
-                    </div>
-
-                </div>
-
-
-                <!-- Hero image -->
-                <div class="hero-image-wrapper">
-
-                    <picture class="hero-picture">
-
-                        <source
-                            type="image/avif"
-                            srcset="./images/IMG_2358_Original.avif">
-
-                        <source
-                            type="image/webp"
-                            srcset="./images/IMG_2358_Original.webp">
-
-                        <img
-                            src="./images/IMG_2358_Original.jpeg"
-                            alt="Gadiparthi Sai Sushvik with family"
-                            class="hero-image"
-                            width="840"
-                            height="630"
-                            loading="eager"
-                            fetchpriority="high"
-                            decoding="async"
-                            draggable="false"
-                            data-i18n-alt="hero.img.alt">
-
-                    </picture>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =====================================================
-             ABOUT
-        ====================================================== -->
-
-        <section id="about"
-                 class="container reveal content-section">
-
-            <h2 class="section-title"
-                data-i18n="about.title">
-                About Me
-            </h2>
-
-
-            <div class="content-grid solid-panel">
-
-                <div class="text-block">
-
-                    <h3 data-i18n="about.who.title">
-                        Who Am I?
-                    </h3>
-
-                    <p data-i18n="about.who.p1">
-                        Hello! I am Gadiparthi Sai Sushvik — a student, technology enthusiast, and aspiring civil servant from Hyderabad, India, committed to a career path that bridges innovation with public service.
-                    </p>
-
-                    <p data-i18n="about.who.p2">
-                        My interests lie at the intersection of two critical forces: technology and governance. I am equally fascinated by the potential of artificial intelligence and the architectural framework of policies that shape millions of lives. Recognizing their deep connection, I strive to understand both domains comprehensively.
-                    </p>
-
-                    <p data-i18n="about.who.p3">
-                        Living with Cerebral Palsy has instilled in me deep patience, adaptability, and persistence. It continuously shapes my perspective on learning and problem-solving, teaching me to move forward steadily — learning, building, and growing one step at a time.
-                    </p>
-
-                </div>
-
-
-                <div class="text-block">
-
-                    <h3 data-i18n="about.vision.title">
-                        My Vision &amp; Academic Path
-                    </h3>
-
-                    <p data-i18n="about.vision.p1">
-                        I aim to serve as a civil servant equipped with a profound understanding of both technology and governance. I am particularly focused on digital governance, web accessibility, education systems, and leveraging technology to optimize public service delivery at scale.
-                    </p>
-
-                    <p data-i18n="about.vision.p2">
-                        Currently enrolled in CEC Intermediate (2026–2028), my future academic plans include pursuing a Bachelor's degree in Political Science, Economics, or History (2028–2031). Ultimately, I intend to appear for the UPSC Civil Services Examination in 2031 with the ambition of serving the nation as an IAS or IPS officer.
-                    </p>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =====================================================
-             PROJECTS
-        ====================================================== -->
-
-        <section id="projects"
-                 class="container reveal content-section">
-
-            <h2 class="section-title"
-                data-i18n="projects.title">
-                Projects &amp; Experiments
-            </h2>
-
-
-            <div class="card-grid">
-
-
-                <!-- Portfolio -->
-                <article class="solid-card">
-
-                    <div class="card-header">
-
-                        <h3 data-i18n="projects.portfolio.title">
-                            Personal Portfolio Website
-                        </h3>
-
-                        <span class="badge"
-                              data-i18n="projects.portfolio.badge">
-                            2026 · Ongoing
-                        </span>
-
-                    </div>
-
-
-                    <ul class="feature-list"
-                        role="list">
-
-                        <li data-i18n="projects.portfolio.p1">
-                            Built from scratch — no framework, no template. Semantic HTML, CSS custom properties and vanilla JavaScript.
-                        </li>
-
-                        <li data-i18n="projects.portfolio.p2">
-                            The canvas background dynamically adapts particle density according to device capability, connection conditions, viewport size and observed frame rate.
-                        </li>
-
-                        <li data-i18n="projects.portfolio.p3">
-                            The animation respects reduced-motion preferences and stops when the hero section is outside the viewport.
-                        </li>
-
-                        <li data-i18n="projects.portfolio.p4">
-                            Accessibility includes a skip link, keyboard-operable navigation, ARIA states, labelled form fields, live form status, accessible touch targets and strong text contrast.
-                        </li>
-
-                        <li data-i18n="projects.portfolio.p5">
-                            Includes responsive design, theme switching, multilingual controls, share functionality, read-aloud support and command-based navigation.
-                        </li>
-
-                        <li data-i18n="projects.portfolio.p6">
-                            Includes structured data, Open Graph metadata, canonical URL, sitemap, PWA metadata and a security-focused Content Security Policy.
-                        </li>
-
-                        <li data-i18n="projects.portfolio.p7">
-                            Includes offline support through a versioned service-worker cache and automated Lighthouse CI quality checks.
-                        </li>
-
-                    </ul>
-
-
-                    <p class="card-links">
-
-                        <a href="https://github.com/aaravsushvik/aaravsushvik.github.io"
-                           target="_blank"
-                           rel="noopener noreferrer"
-                           data-i18n="projects.source">
-                            Source on GitHub
-                        </a>
-
-                    </p>
-
-                </article>
-
-
-                <!-- UI -->
-                <article class="solid-card">
-
-                    <div class="card-header">
-
-                        <h3 data-i18n="projects.ui.title">
-                            Responsive UI Experiments
-                        </h3>
-
-                        <span class="badge"
-                              data-i18n="projects.ui.badge">
-                            2026 · Experimental
-                        </span>
-
-                    </div>
-
-
-                    <ul class="feature-list"
-                        role="list">
-
-                        <li data-i18n="projects.ui.p1">
-                            Designed layouts utilizing a mobile-first philosophy to ensure universal accessibility.
-                        </li>
-
-                        <li data-i18n="projects.ui.p2">
-                            Constructed scalable CSS architecture relying on modern custom properties and fluid typography.
-                        </li>
-
-                        <li data-i18n="projects.ui.p3">
-                            Experimented with accessible navigation systems and dynamic scroll behavior tracking.
-                        </li>
-
-                    </ul>
-
-                </article>
-
-
-                <!-- Civic tech -->
-                <article class="solid-card">
-
-                    <div class="card-header">
-
-                        <h3 data-i18n="projects.civic.title">
-                            Civic-Tech &amp; Governance Notes
-                        </h3>
-
-                        <span class="badge"
-                              data-i18n="projects.civic.badge">
-                            2026 · Research
-                        </span>
-
-                    </div>
-
-
-                    <ul class="feature-list"
-                        role="list">
-
-                        <li data-i18n="projects.civic.p1">
-                            Documenting literature on how digital tools and APIs enhance public service accessibility.
-                        </li>
-
-                        <li data-i18n="projects.civic.p2">
-                            Tracking the evolution of GovTech developments and Digital India scale initiatives.
-                        </li>
-
-                        <li data-i18n="projects.civic.p3">
-                            Analyzing the critical relationship between artificial intelligence policy and public administration.
-                        </li>
-
-                    </ul>
-
-                </article>
-
-            </div>
-
-        </section>
-
-
-        <!-- =====================================================
-             LEARNING
-        ====================================================== -->
-
-        <section id="learning"
-                 class="container reveal content-section">
-
-            <h2 class="section-title"
-                data-i18n="learning.title">
-                Currently Learning
-            </h2>
-
-
-            <div class="solid-panel">
-
-                <ul class="tag-cloud"
-                    role="list"
-                    aria-label="Topics currently being studied"
-                    data-i18n-aria="learning.aria">
-
-                    <li class="tag"
-                        data-i18n="learning.web">
-                        Responsive Web Design
-                    </li>
-
-                    <li class="tag"
-                        data-i18n="learning.wcag">
-                        Accessibility (WCAG 2.2)
-                    </li>
-
-                    <li class="tag"
-                        data-i18n="learning.html">
-                        Semantic HTML
-                    </li>
-
-                    <li class="tag"
-                        data-i18n="learning.css">
-                        CSS Architecture
-                    </li>
-
-                    <li class="tag"
-                        data-i18n="learning.js">
-                        JavaScript Fundamentals
-                    </li>
-
-                    <li class="tag"
-                        data-i18n="learning.ai">
-                        AI Tools &amp; Prompting
-                    </li>
-
-                    <li class="tag"
-                        data-i18n="learning.governance">
-                        Governance &amp; Public Policy
-                    </li>
-
-                    <li class="tag"
-                        data-i18n="learning.political">
-                        Political Science
-                    </li>
-
-                </ul>
-
-            </div>
-
-        </section>
-
-
-        <!-- =====================================================
-             SKILLS
-        ====================================================== -->
-
-        <section id="skills"
-                 class="container reveal content-section">
-
-            <h2 class="section-title"
-                data-i18n="skills.title">
-                Technical Skills
-            </h2>
-
-
-            <div class="solid-panel">
-
-                <ul class="tag-cloud"
-                    role="list"
-                    aria-label="Technical skills"
-                    data-i18n-aria="skills.aria">
-
-                    <li class="tag">
-                        HTML5
-                    </li>
-
-                    <li class="tag">
-                        CSS3
-                    </li>
-
-                    <li class="tag"
-                        data-i18n="skills.responsive">
-                        Responsive Design
-                    </li>
-
-                    <li class="tag"
-                        data-i18n="skills.accessibility">
-                        Web Accessibility
-                    </li>
-
-                    <li class="tag"
-                        data-i18n="skills.javascript">
-                        Vanilla JavaScript
-                    </li>
-
-                    <li class="tag">
-                        Canvas &amp; requestAnimationFrame
-                    </li>
-
-                    <li class="tag"
-                        data-i18n="skills.git">
-                        Git &amp; GitHub Pages
-                    </li>
-
-                    <li class="tag"
-                        data-i18n="skills.ai">
-                        AI Tools
-                    </li>
-
-                </ul>
-
-            </div>
-
-        </section>
-
-
-        <!-- =====================================================
-             ACADEMIC MILESTONES
-        ====================================================== -->
-
-        <section id="results"
-                 class="container reveal content-section">
-
-            <h2 class="section-title"
-                data-i18n="results.title">
-                Academic Milestones
-            </h2>
-
-
-            <div class="solid-panel stats-container">
-
-
-                <div class="stat-box">
-
-                    <h3 class="stat-title"
-                        data-i18n="results.ssc.title">
-                        Telangana SSC Board, 2026
-                    </h3>
-
-                    <p class="stat-value">
-
-                        379
-
-                        <span class="stat-sub"
-                              data-i18n="results.ssc.score">
-                            / 500 · 75.8%
-                        </span>
-
-                    </p>
-
-                </div>
-
-
-                <div class="stat-box">
-
-                    <h3 class="stat-title"
-                        data-i18n="results.cec.title">
-                        Intermediate, CEC stream
-                    </h3>
-
-                    <p class="stat-value">
-
-                        2026
-
-                        <span class="stat-sub">
-                            – 2028
-                        </span>
-
-                    </p>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =====================================================
-             FAVORITES
-        ====================================================== -->
-
-        <section id="favorites"
-                 class="container reveal content-section">
-
-            <h2 class="section-title"
-                data-i18n="favorites.title">
-                My Favorites
-            </h2>
-
-
-            <div class="solid-panel">
-
-                <ul class="feature-list"
-                    role="list">
-
-                    <li data-i18n="favorites.ai">
-                        Artificial Intelligence &amp; Machine Learning
-                    </li>
-
-                    <li data-i18n="favorites.robotics">
-                        Robotics &amp; Embedded Systems
-                    </li>
-
-                    <li data-i18n="favorites.web">
-                        Web Development &amp; Open Source Initiatives
-                    </li>
-
-                    <li data-i18n="favorites.political">
-                        Political Science, History, &amp; Constitutional Governance
-                    </li>
-
-                    <li data-i18n="favorites.govtech">
-                        Smart Governance, GovTech, &amp; Digital Accessibility
-                    </li>
-
-                    <li data-i18n="favorites.space">
-                        Space Exploration &amp; Aerospace Innovation
-                    </li>
-
-                    <li data-i18n="favorites.systems">
-                        Creative Problem Solving &amp; Systems Thinking
-                    </li>
-
-                </ul>
-
-            </div>
-
-        </section>
-
-
-        <!-- =====================================================
-             INSPIRATION
-        ====================================================== -->
-
-        <section id="inspiration"
-                 class="container reveal content-section">
-
-            <h2 class="section-title"
-                data-i18n="inspiration.title">
-                Sources of Inspiration
-            </h2>
-
-
-            <div class="solid-panel">
-
-                <ol class="feature-list ordered"
-                    role="list">
-
-                    <li data-i18n="inspiration.family">
-                        <strong>My Family</strong> — My foundation, my strength, and my earliest teachers.
-                    </li>
-
-                    <li data-i18n="inspiration.kalam">
-                        <strong>Dr. APJ Abdul Kalam</strong> — The Missile Man, a visionary President who dared to dream for a billion people.
-                    </li>
-
-                    <li data-i18n="inspiration.ai">
-                        <strong>Artificial Intelligence &amp; Emerging Technologies</strong> — The technological frontier that continuously evolves.
-                    </li>
-
-                    <li data-i18n="inspiration.accessibility">
-                        <strong>Accessibility Researchers</strong> — Professionals actively advancing inclusive and equitable technology.
-                    </li>
-
-                    <li data-i18n="inspiration.mkbhd">
-                        <strong>Marques Brownlee (MKBHD)</strong> — A creator making technology honest, accessible, and exciting for a global audience.
-                    </li>
-
-                    <li data-i18n="inspiration.public">
-                        <strong>Public Servants &amp; Technologists</strong> — The individuals striving to improve digital governance.
-                    </li>
-
-                    <li data-i18n="inspiration.ias">
-                        <strong>IAS &amp; IPS Officers</strong> — The often unsung architects driving systemic change and transformation in India.
-                    </li>
-
-                    <li data-i18n="inspiration.scientists">
-                        <strong>Scientists, Engineers, &amp; Inventors</strong> — The quiet builders shaping the modern world.
-                    </li>
-
-                    <li data-i18n="inspiration.future">
-                        <strong>The Future of Humanity &amp; Space Exploration</strong> — The ultimate horizon, reminding us of our boundless potential.
-                    </li>
-
-                </ol>
-
-            </div>
-
-        </section>
-
-
-        <!-- =====================================================
-             CONTACT
-        ====================================================== -->
-
-        <section id="contact"
-                 class="container reveal content-section">
-
-            <h2 class="section-title"
-                data-i18n="contact.title">
-                Get in Touch
-            </h2>
-
-
-            <div class="solid-panel contact-layout">
-
-
-                <!-- Contact information -->
-                <div class="contact-info">
-
-                    <p data-i18n="contact.description">
-                        Interested in discussing technology, governance, or public systems? Feel free to reach out.
-                    </p>
-
-
-                    <div class="email-block">
-
-                        <svg viewBox="0 0 24 24"
-                             width="24"
-                             height="24"
-                             stroke="currentColor"
-                             stroke-width="2"
-                             fill="none"
-                             aria-hidden="true">
-
-                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
-                            </path>
-
-                            <polyline points="22,6 12,13 2,6">
-                            </polyline>
-
-                        </svg>
-
-
-                        <!--
-                            Email displayed in non-clickable form.
-                            This keeps the public address less directly
-                            exposed to simple automated harvesting.
-                        -->
-                        <strong id="contact-email"
-                                data-u="saisushvik.pnt"
-                                data-d="gmail.com">
-
-                            saisushvik.pnt [at] gmail.com
-
-                        </strong>
-
-                    </div>
-
-                </div>
-
-
-                <!-- Contact form -->
-                <form id="contact-form"
-                      action="https://formspree.io/f/meenzdqr"
-                      method="POST"
-                      class="form-container"
-                      novalidate>
-
-
-                    <!-- Name -->
-                    <div class="form-group">
-
-                        <label for="name"
-                               data-i18n="form.name.label">
-                            Full Name
-                        </label>
-
-                        <input id="name"
-                               name="name"
-                               type="text"
-                               autocomplete="name"
-                               placeholder="Your full name"
-                               data-i18n-placeholder="form.name.placeholder"
-                               required
-                               aria-required="true"
-                               aria-describedby="name-err">
-
-                        <p id="name-err"
-                           class="field-error"
-                           role="alert"
-                           hidden>
-                        </p>
-
-                    </div>
-
-
-                    <!-- Email -->
-                    <div class="form-group">
-
-                        <label for="email"
-                               data-i18n="form.email.label">
-                            Email Address
-                        </label>
-
-                        <input id="email"
-                               name="email"
-                               type="email"
-                               autocomplete="email"
-                               inputmode="email"
-                               placeholder="your@email.com"
-                               data-i18n-placeholder="form.email.placeholder"
-                               required
-                               aria-required="true"
-                               aria-describedby="email-err">
-
-                        <p id="email-err"
-                           class="field-error"
-                           role="alert"
-                           hidden>
-                        </p>
-
-                    </div>
-
-
-                    <!-- Message -->
-                    <div class="form-group">
-
-                        <label for="form-message"
-                               data-i18n="form.message.label">
-                            Message
-                        </label>
-
-                        <textarea id="form-message"
-                                  name="message"
-                                  rows="5"
-                                  placeholder="Write your message here..."
-                                  data-i18n-placeholder="form.message.placeholder"
-                                  required
-                                  aria-required="true"
-                                  aria-describedby="form-message-err"></textarea>
-
-                        <p id="form-message-err"
-                           class="field-error"
-                           role="alert"
-                           hidden>
-                        </p>
-
-                    </div>
-
-
-                    <!-- Honeypot -->
-                    <input type="text"
-                           name="_gotcha"
-                           class="gotcha"
-                           tabindex="-1"
-                           autocomplete="off"
-                           aria-hidden="true"
-                           hidden>
-
-
-                    <!-- Submit -->
-                    <button type="submit"
-                            class="btn-primary"
-                            id="submit-btn"
-                            data-i18n="form.submit">
-                        Send Message
-                    </button>
-
-
-                    <!-- Accessible form status -->
-                    <div id="form-status"
-                         class="form-status"
-                         role="status"
-                         aria-live="polite"
-                         aria-atomic="true">
-                    </div>
-
-
-                    <!-- Privacy / processing notice -->
-                    <p class="form-note"
-                       data-i18n="form.note">
-                        Messages are delivered via Formspree, which receives your name, email address, message and technical data such as your IP address. I use this only to reply to you.
-                    </p>
-
-                </form>
-
-            </div>
-
-        </section>
-
-    </main>
-
-
-    <!-- =========================================================
-         FOOTER
-    ========================================================== -->
-
-    <footer class="footer">
-
-        <div class="container footer-content">
-
-            <p>
-
-                <span data-i18n="footer.built">
-                    Built with semantic HTML, modern CSS, and a commitment to accessibility.
-                </span>
-
-                &nbsp;•&nbsp;
-
-                © 2026 Gadiparthi Sai Sushvik
-
-                &nbsp;•&nbsp;
-
-                <span data-i18n="footer.updated">
-                    Last updated
-                </span>
-
-                <time datetime="2026-09-04">
-                    4 September 2026
-                </time>
-
-            </p>
-
-
-            <div class="footer-links"
-                 aria-label="Footer links"
-                 data-i18n-aria="footer.aria">
-
-                <a href="#home"
-                   data-i18n="footer.top">
-                    Back to top
-                </a>
-
-                <span aria-hidden="true">
-                    ·
-                </span>
-
-                <a href="#contact"
-                   data-i18n="nav.contact">
-                    Contact
-                </a>
-
-            </div>
-
-        </div>
-
-    </footer>
-
-
-    <!-- =========================================================
-         SCROLL TO TOP
-    ========================================================== -->
-
-    <button id="topBtn"
-            type="button"
-            aria-label="Scroll to top of page"
-            data-i18n-aria="top.aria"
-            class="icon-button top-btn hidden">
-
-        <svg viewBox="0 0 24 24"
-             width="24"
-             height="24"
-             stroke="currentColor"
-             stroke-width="2"
-             fill="none"
-             stroke-linecap="round"
-             stroke-linejoin="round"
-             aria-hidden="true">
-
-            <line x1="12"
-                  y1="19"
-                  x2="12"
-                  y2="5">
-            </line>
-
-            <polyline points="5 12 12 5 19 12">
-            </polyline>
-
-        </svg>
-
-    </button>
-
-
-    <!-- =========================================================
-         GLOBAL ACCESSIBILITY STATUS
-    ========================================================== -->
-
-    <div id="site-status"
-         class="visually-hidden"
-         aria-live="polite"
-         aria-atomic="true">
+  </section>
+
+  <section id="about" class="container section reveal">
+    <h2 data-i18n="about.title">About Me</h2>
+    <div class="panel two-column">
+      <div>
+        <h3 data-i18n="about.who.title">Who Am I?</h3>
+        <p data-i18n="about.who.p1">Hello! I am Gadiparthi Sai Sushvik — a student, technology enthusiast, and aspiring civil servant from Hyderabad, India, committed to a career path that bridges innovation with public service.</p>
+        <p data-i18n="about.who.p2">My interests lie at the intersection of technology and governance. I am fascinated by artificial intelligence and by the policies that shape how public systems work.</p>
+        <p data-i18n="about.who.p3">I value patience, adaptability, persistence, and steady problem-solving as I learn, build, and grow.</p>
+      </div>
+      <div>
+        <h3 data-i18n="about.vision.title">My Vision & Academic Path</h3>
+        <p data-i18n="about.vision.p1">I aim to build a career in public service with a strong understanding of technology and governance, especially digital governance, accessibility, education systems, and public-service delivery.</p>
+        <p data-i18n="about.vision.p2">I’m currently building a foundation in CEC and exploring Political Science, Economics, and History as possible future areas of study.</p>
+      </div>
     </div>
+  </section>
 
+  <section id="projects" class="container section reveal">
+    <h2 data-i18n="projects.title">Projects & Experiments</h2>
+    <div class="card-grid">
+      <article class="card">
+        <div class="card-heading">
+          <h3 data-i18n="projects.portfolio.title">Personal Portfolio Website</h3>
+          <span class="badge" data-i18n="projects.portfolio.badge">2026 · Ongoing</span>
+        </div>
+        <ul>
+          <li data-i18n="projects.portfolio.li1">Built from scratch with semantic HTML, modern CSS, and vanilla JavaScript.</li>
+          <li data-i18n="projects.portfolio.li2">Responsive, mobile-first layout with keyboard-accessible navigation.</li>
+          <li data-i18n="projects.portfolio.li3">Light and dark themes with saved preference and system preference support.</li>
+          <li data-i18n="projects.portfolio.li4">Accessibility features including skip navigation, focus states, labels, live regions, and reduced-motion support.</li>
+          <li data-i18n="projects.portfolio.li5">SEO metadata, structured data, sitemap, PWA manifest, and offline support.</li>
+        </ul>
+      </article>
+      <article class="card">
+        <div class="card-heading">
+          <h3 data-i18n="projects.ui.title">Responsive UI Experiments</h3>
+          <span class="badge" data-i18n="projects.ui.badge">2026 · Experimental</span>
+        </div>
+        <ul>
+          <li data-i18n="projects.ui.li1">Mobile-first layouts for different screen sizes.</li>
+          <li data-i18n="projects.ui.li2">Scalable CSS architecture using custom properties and fluid sizing.</li>
+          <li data-i18n="projects.ui.li3">Accessible navigation and scroll-behavior experiments.</li>
+        </ul>
+      </article>
+      <article class="card">
+        <div class="card-heading">
+          <h3 data-i18n="projects.civic.title">Civic-Tech & Governance Notes</h3>
+          <span class="badge" data-i18n="projects.civic.badge">2026 · Research</span>
+        </div>
+        <ul>
+          <li data-i18n="projects.civic.li1">Documenting how digital tools can improve public-service accessibility.</li>
+          <li data-i18n="projects.civic.li2">Tracking GovTech and Digital India developments.</li>
+          <li data-i18n="projects.civic.li3">Exploring AI policy and public administration.</li>
+        </ul>
+      </article>
+    </div>
+  </section>
 
+  <section id="learning" class="container section reveal">
+    <h2 data-i18n="learning.title">Currently Learning</h2>
+    <div class="panel tag-cloud">
+      <span class="tag" data-i18n="learning.tag1">Responsive Web Design</span>
+      <span class="tag" data-i18n="learning.tag2">Accessibility (WCAG 2.2)</span>
+      <span class="tag" data-i18n="learning.tag3">Semantic HTML</span>
+      <span class="tag" data-i18n="learning.tag4">CSS Architecture</span>
+      <span class="tag" data-i18n="learning.tag5">JavaScript Fundamentals</span>
+      <span class="tag" data-i18n="learning.tag6">AI Tools & Prompting</span>
+      <span class="tag" data-i18n="learning.tag7">Governance & Public Policy</span>
+      <span class="tag" data-i18n="learning.tag8">Political Science</span>
+    </div>
+  </section>
+
+  <section id="skills" class="container section reveal">
+    <h2 data-i18n="skills.title">Technical Skills</h2>
+    <div class="panel tag-cloud">
+      <span class="tag" data-i18n="skills.tag1">HTML5</span>
+      <span class="tag" data-i18n="skills.tag2">CSS3</span>
+      <span class="tag" data-i18n="skills.tag3">Responsive Design</span>
+      <span class="tag" data-i18n="skills.tag4">Web Accessibility</span>
+      <span class="tag" data-i18n="skills.tag5">Dark Mode Systems</span>
+      <span class="tag" data-i18n="skills.tag6">Frontend Optimization</span>
+      <span class="tag" data-i18n="skills.tag7">SEO Fundamentals</span>
+      <span class="tag" data-i18n="skills.tag8">Vanilla JavaScript</span>
+    </div>
+  </section>
+
+  <section id="results" class="container section reveal">
+    <h2 data-i18n="results.title">Academic Milestones</h2>
+    <div class="panel stats">
+      <div>
+        <h3 data-i18n="results.ssc.title">Telangana SSC Board 2026</h3>
+        <strong>379 <small>/ 500</small></strong>
+      </div>
+      <div>
+        <h3 data-i18n="results.percentage.title">Percentage Achieved</h3>
+        <strong>75.8%</strong>
+      </div>
+      <div>
+        <h3 data-i18n="results.inter.title">Intermediate, CEC</h3>
+        <strong>2026–2028</strong>
+      </div>
+    </div>
+  </section>
+
+  <section id="favorites" class="container section reveal">
+    <h2 data-i18n="favorites.title">My Favorites</h2>
+    <div class="panel">
+      <ul>
+        <li data-i18n="favorites.li1">Artificial Intelligence & Machine Learning</li>
+        <li data-i18n="favorites.li2">Robotics & Embedded Systems</li>
+        <li data-i18n="favorites.li3">Web Development & Open Source Initiatives</li>
+        <li data-i18n="favorites.li4">Political Science, History, & Constitutional Governance</li>
+        <li data-i18n="favorites.li5">Smart Governance, GovTech, & Digital Accessibility</li>
+        <li data-i18n="favorites.li6">Space Exploration & Aerospace Innovation</li>
+        <li data-i18n="favorites.li7">Creative Problem Solving & Systems Thinking</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="contact" class="container section reveal">
+    <h2 data-i18n="contact.title">Get in Touch</h2>
+    <div class="panel contact-grid">
+      <div>
+        <p data-i18n="contact.info">Interested in discussing technology, governance, or public systems? Feel free to reach out.</p>
+        <button id="listen-btn" class="btn-primary" type="button" data-i18n="listen.button">Listen to this page</button>
+        <div class="email-block">
+          <span aria-hidden="true">✉</span>
+          <strong id="contact-email" data-u="saisushvik.pnt" data-d="gmail.com">saisushvik.pnt [at] gmail.com</strong>
+        </div>
+      </div>
+      <form id="contact-form" action="https://formspree.io/f/meenzdqr" method="POST" novalidate>
+        <div class="form-group">
+          <label for="name" data-i18n="form.name.label">Full Name</label>
+          <input id="name" name="name" autocomplete="name" required placeholder="Your full name" data-i18n-placeholder="form.name.placeholder">
+          <p id="name-err" class="field-error" role="alert" hidden></p>
+        </div>
+        <div class="form-group">
+          <label for="email" data-i18n="form.email.label">Email Address</label>
+          <input id="email" name="email" type="email" autocomplete="email" required placeholder="your@email.com" data-i18n-placeholder="form.email.placeholder">
+          <p id="email-err" class="field-error" role="alert" hidden></p>
+        </div>
+        <div class="form-group">
+          <label for="form-message" data-i18n="form.message.label">Message</label>
+          <textarea id="form-message" name="message" rows="6" required placeholder="Write your message here..." data-i18n-placeholder="form.message.placeholder"></textarea>
+          <p id="form-message-err" class="field-error" role="alert" hidden></p>
+        </div>
+        <input name="_gotcha" class="gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button id="submit-btn" class="btn-primary" type="submit" data-i18n="form.submit">Send Message</button>
+        <div id="form-status" class="form-status" role="status" aria-live="polite"></div>
+        <p class="form-note" data-i18n="form.note">Messages are delivered through Formspree, which receives the information you submit and technical data needed to process the request.</p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <p data-i18n="footer.text">Built with semantic HTML, modern CSS, and a commitment to accessibility. • © 2026 Gadiparthi Sai Sushvik</p>
+  </div>
+</footer>
+
+<button id="topBtn" class="top-btn icon-button" type="button" hidden aria-label="Scroll to top" data-i18n-aria="top.button.label">↑</button>
+
+<noscript>
+  <div class="noscript-notice">JavaScript is disabled. Core content remains available, but interactive features such as language switching and theme controls are unavailable.</div>
+</noscript>
 </body>
-
 </html>
