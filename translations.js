@@ -1,338 +1,783 @@
-const translations = {
+window.TRANSLATIONS = {
   en: {
-    "page.title": "Gadiparthi Sai Sushvik | Student & Aspiring Civil Servant",
-    "page.description": "Personal portfolio of Gadiparthi Sai Sushvik, a student exploring technology, governance, accessibility, and digital innovation from Hyderabad, India.",
-    "skip.link": "Skip to main content",
-    "logo.aria": "Gadiparthi Sai Sushvik Home",
-    "nav.home": "Home",
-    "nav.about": "About",
-    "nav.projects": "Projects",
-    "nav.learning": "Learning",
-    "nav.contact": "Contact",
-    "lang.select.label": "Choose language",
-    "theme.toLight": "Switch to light mode",
-    "theme.toDark": "Switch to dark mode",
-    "menu.toggle.label": "Navigation menu",
-    "hero.kicker": "Student & Aspiring Civil Servant",
-    "hero.title": "Gadiparthi Sai Sushvik",
-    "hero.subtitle": "Exploring technology, governance, and systems that improve everyday life.",
-    "hero.description": "Curious about how technology, governance, and public systems connect — learning through web development, AI research, and exploring the intersection of innovation and policy.",
-    "hero.cta.projects": "See what I've built",
-    "hero.cta.contact": "Get in touch",
-    "social.instagram": "Instagram Profile",
-    "social.github": "GitHub Profile",
-    "social.linktree": "Linktree Profile",
-    "hero.img.alt": "Gadiparthi Sai Sushvik with Family",
-    "about.title": "About Me",
-    "about.who.title": "Who Am I?",
-    "about.who.p1": "Hello! I am <strong>Gadiparthi Sai Sushvik</strong> — a student, technology enthusiast, and aspiring civil servant from Hyderabad, India, committed to a career path that bridges innovation with public service.",
-    "about.who.p2": "My interests lie at the intersection of two critical forces: <em>technology</em> and <em>governance</em>. I am equally fascinated by the potential of artificial intelligence and the architectural framework of policies that shape millions of lives. Recognizing their deep connection, I strive to understand both domains comprehensively.",
-    "about.who.p3": "Living with Cerebral Palsy has instilled in me deep patience, adaptability, and persistence. It continuously shapes my perspective on learning and problem-solving, teaching me to move forward steadily — learning, building, and growing one step at a time.",
-    "about.vision.title": "My Vision & Academic Path",
-    "about.vision.p1": "I aim to serve as a civil servant equipped with a profound understanding of both technology and governance. I am particularly focused on digital governance, web accessibility, education systems, and leveraging technology to optimize public service delivery at scale.",
-    "about.vision.p2": "Currently enrolled in CEC Intermediate (2026–2028), my future academic plans include pursuing a Bachelor's degree in Political Science, Economics, or History (2028–2031). Ultimately, I intend to appear for the UPSC Civil Services Examination in 2031 with the ambition of serving the nation as an IAS or IPS officer.",
-    "projects.title": "Projects & Experiments",
-    "projects.portfolio.title": "Personal Portfolio Website",
-    "projects.portfolio.badge": "2026 · Ongoing",
-    "projects.portfolio.li1": "Engineered a fully responsive, mobile-first design optimized for all devices.",
-    "projects.portfolio.li2": "Implemented semantic HTML5 architecture for superior accessibility and structure.",
-    "projects.portfolio.li3": "Developed a native dark mode system utilizing CSS variables and system preferences.",
-    "projects.portfolio.li4": "Integrated comprehensive accessibility enhancements aligned with WCAG 2.2 AA standards.",
-    "projects.portfolio.li5": "Executed advanced SEO strategies leveraging Schema.org JSON-LD and strict CSP.",
-    "projects.ui.title": "Responsive UI Experiments",
-    "projects.ui.badge": "2026 · Experimental",
-    "projects.ui.li1": "Designed layouts utilizing a mobile-first philosophy.",
-    "projects.ui.li2": "Constructed scalable CSS architecture relying on modern custom properties.",
-    "projects.ui.li3": "Experimented with accessible navigation systems and dynamic scroll behavior tracking.",
-    "projects.civic.title": "Civic-Tech & Governance Notes",
-    "projects.civic.badge": "2026 · Research",
-    "projects.civic.li1": "Documenting literature on how digital tools enhance public service accessibility.",
-    "projects.civic.li2": "Tracking the evolution of GovTech developments and Digital India initiatives.",
-    "projects.civic.li3": "Analyzing the critical relationship between artificial intelligence policy and public administration.",
-    "learning.title": "Currently Learning",
-    "learning.tag1": "Responsive Web Design",
-    "learning.tag2": "Accessibility (WCAG 2.2)",
-    "learning.tag3": "Semantic HTML",
-    "learning.tag4": "CSS Architecture",
-    "learning.tag5": "JavaScript Fundamentals",
-    "learning.tag6": "AI Tools & Prompting",
-    "learning.tag7": "Governance & Public Policy",
-    "learning.tag8": "Political Science",
-    "skills.title": "Technical Skills",
-    "skills.tag1": "HTML5",
-    "skills.tag2": "CSS3",
-    "skills.tag3": "Responsive Design",
-    "skills.tag4": "Web Accessibility",
-    "skills.tag5": "Dark Mode Systems",
-    "skills.tag6": "Frontend Optimization",
-    "skills.tag7": "SEO Fundamentals",
-    "skills.tag8": "AI Research & Tools",
-    "results.title": "Academic Milestones",
-    "results.ssc.title": "Telangana SSC Board 2026",
-    "results.percentage.title": "Percentage Achieved",
-    "favorites.title": "My Favorites",
-    "favorites.li1": "Artificial Intelligence & Machine Learning",
-    "favorites.li2": "Robotics & Embedded Systems",
-    "favorites.li3": "Web Development & Open Source Initiatives",
-    "favorites.li4": "Political Science, History, & Constitutional Governance",
-    "favorites.li5": "Smart Governance, GovTech, & Digital Accessibility",
-    "favorites.li6": "Space Exploration & Aerospace Innovation",
-    "favorites.li7": "Creative Problem Solving & Systems Thinking",
-    "inspiration.title": "Sources of Inspiration",
-    "inspiration.li1": "<strong>My Family</strong> — My foundation, my strength, and my earliest teachers.",
-    "inspiration.li2": "<strong>Dr. APJ Abdul Kalam</strong> — The Missile Man, a visionary President who dared to dream for a billion people.",
-    "inspiration.li3": "<strong>Artificial Intelligence & Emerging Technologies</strong> — The technological frontier that continuously evolves.",
-    "inspiration.li4": "<strong>Accessibility Researchers</strong> — Professionals actively advancing inclusive and equitable technology.",
-    "inspiration.li5": "<strong>Marques Brownlee (MKBHD)</strong> — A creator making technology honest, accessible, and exciting for a global audience.",
-    "inspiration.li6": "<strong>Public Servants & Technologists</strong> — The individuals striving to improve digital governance.",
-    "inspiration.li7": "<strong>IAS & IPS Officers</strong> — The often unsung architects driving systemic change and transformation in India.",
-    "inspiration.li8": "<strong>Scientists, Engineers, & Inventors</strong> — The quiet builders shaping the modern world.",
-    "inspiration.li9": "<strong>The Future of Humanity & Space Exploration</strong> — The ultimate horizon, reminding us of our boundless potential.",
-    "contact.title": "Get in Touch",
-    "contact.info": "Interested in discussing technology, governance, or public systems? Feel free to reach out.",
-    "form.name.label": "Full Name",
-    "form.name.placeholder": "Your full name",
-    "form.email.label": "Email Address",
-    "form.email.placeholder": "your@email.com",
-    "form.message.label": "Message",
-    "form.message.placeholder": "Write your message here...",
-    "form.submit": "Send Message",
-    "form.sending": "Sending...",
-    "form.sent": "Message Sent",
-    "form.success": "Message sent successfully.",
-    "form.error": "Something went wrong. Please try again, or email me directly.",
-    "form.invalid.generic": "Please check the highlighted fields.",
-    "form.note": "Messages are delivered via Formspree, which receives your name, email address, message and technical data such as your IP address. I use this only to reply to you.",
-    "footer.text": "SYSTEM.UI // MODERN CSS // ACCESSIBILITY-FIRST &nbsp;•&nbsp; © 2026 Gadiparthi Sai Sushvik",
-    "top.button.label": "Scroll to top of page",
-    "share.button": "Share this page",
-    "share.text": "Check out this portfolio!",
-    "listen.button": "Listen to this page",
-    "listen.stop": "Stop listening",
-    "lang.announce": "Language changed to English"
+    page: {
+      title: "Gadiparthi Sai Sushvik | Student & Aspiring Civil Servant"
+    },
+
+    skip: {
+      link: "Skip to main content"
+    },
+
+    logo: {
+      aria: "Gadiparthi Sai Sushvik Home"
+    },
+
+    nav: {
+      home: "Home",
+      about: "About",
+      projects: "Projects",
+      learning: "Learning",
+      contact: "Contact"
+    },
+
+    lang: {
+      select: {
+        label: "Choose language"
+      }
+    },
+
+    share: {
+      button: "Share this page"
+    },
+
+    theme: {
+      toDark: "Switch to dark mode",
+      toLight: "Switch to light mode"
+    },
+
+    menu: {
+      open: "Open navigation menu",
+      close: "Close navigation menu"
+    },
+
+    command: {
+      placeholder: "Type a command..."
+    },
+
+    hero: {
+      kicker: "Student & Aspiring Civil Servant",
+      title: "Gadiparthi Sai Sushvik",
+      subtitle:
+        "Exploring technology, governance, and systems that improve everyday life.",
+      description:
+        "Curious about how technology, governance, and public systems connect — learning through web development, AI research, and the intersection of innovation and policy.",
+      projects: "See what I've built",
+      contact: "Get in touch",
+      img: {
+        alt: "Gadiparthi Sai Sushvik with family"
+      }
+    },
+
+    about: {
+      title: "About Me",
+
+      who: {
+        title: "Who Am I?",
+        p1:
+          "Hello! I am Gadiparthi Sai Sushvik — a student, technology enthusiast, and aspiring civil servant from Hyderabad, India, committed to a career path that bridges innovation with public service.",
+        p2:
+          "My interests lie at the intersection of technology and governance. I am fascinated by artificial intelligence and by the policies that shape how public systems work.",
+        p3:
+          "I value patience, adaptability, persistence, and steady problem-solving as I learn, build, and grow."
+      },
+
+      vision: {
+        title: "My Vision & Academic Path",
+        p1:
+          "I aim to build a career in public service with a strong understanding of technology and governance, especially digital governance, accessibility, education systems, and public-service delivery.",
+        p2:
+          "I’m currently building a foundation in CEC and exploring Political Science, Economics, and History as possible future areas of study."
+      }
+    },
+
+    projects: {
+      title: "Projects & Experiments",
+
+      portfolio: {
+        title: "Personal Portfolio Website",
+        badge: "2026 · Ongoing",
+        li1:
+          "Built from scratch with semantic HTML, modern CSS, and vanilla JavaScript.",
+        li2:
+          "Responsive, mobile-first layout with keyboard-accessible navigation.",
+        li3:
+          "Light and dark themes with saved preference and system preference support.",
+        li4:
+          "Accessibility features including skip navigation, focus states, labels, live regions, and reduced-motion support.",
+        li5:
+          "SEO metadata, structured data, sitemap, PWA manifest, and offline support."
+      },
+
+      ui: {
+        title: "Responsive UI Experiments",
+        badge: "2026 · Experimental",
+        li1:
+          "Mobile-first layouts for different screen sizes.",
+        li2:
+          "Scalable CSS architecture using custom properties and fluid sizing.",
+        li3:
+          "Accessible navigation and scroll-behavior experiments."
+      },
+
+      civic: {
+        title: "Civic-Tech & Governance Notes",
+        badge: "2026 · Research",
+        li1:
+          "Documenting how digital tools can improve public-service accessibility.",
+        li2:
+          "Tracking GovTech and Digital India developments.",
+        li3:
+          "Exploring AI policy and public administration."
+      }
+    },
+
+    learning: {
+      title: "Currently Learning",
+      tag1: "Responsive Web Design",
+      tag2: "Accessibility (WCAG 2.2)",
+      tag3: "Semantic HTML",
+      tag4: "CSS Architecture",
+      tag5: "JavaScript Fundamentals",
+      tag6: "AI Tools & Prompting",
+      tag7: "Governance & Public Policy",
+      tag8: "Political Science"
+    },
+
+    skills: {
+      title: "Technical Skills",
+      tag1: "HTML5",
+      tag2: "CSS3",
+      tag3: "Responsive Design",
+      tag4: "Web Accessibility",
+      tag5: "Dark Mode Systems",
+      tag6: "Frontend Optimization",
+      tag7: "SEO Fundamentals",
+      tag8: "Vanilla JavaScript"
+    },
+
+    results: {
+      title: "Academic Milestones",
+      ssc: {
+        title: "Telangana SSC Board 2026"
+      },
+      percentage: {
+        title: "Percentage Achieved"
+      },
+      inter: {
+        title: "Intermediate, CEC"
+      }
+    },
+
+    favorites: {
+      title: "My Favorites",
+      li1:
+        "Artificial Intelligence & Machine Learning",
+      li2:
+        "Robotics & Embedded Systems",
+      li3:
+        "Web Development & Open Source Initiatives",
+      li4:
+        "Political Science, History, & Constitutional Governance",
+      li5:
+        "Smart Governance, GovTech, & Digital Accessibility",
+      li6:
+        "Space Exploration & Aerospace Innovation",
+      li7:
+        "Creative Problem Solving & Systems Thinking"
+    },
+
+    contact: {
+      title: "Get in Touch",
+      info:
+        "Interested in discussing technology, governance, or public systems? Feel free to reach out."
+    },
+
+    listen: {
+      button: "Listen to this page"
+    },
+
+    form: {
+      name: {
+        label: "Full Name",
+        placeholder: "Your full name",
+        error: "Please enter your name."
+      },
+
+      email: {
+        label: "Email Address",
+        placeholder: "your@email.com",
+        error:
+          "Please enter a valid email address."
+      },
+
+      message: {
+        label: "Message",
+        placeholder:
+          "Write your message here...",
+        error:
+          "Please enter a message."
+      },
+
+      submit: "Send Message",
+
+      sending: "Sending…",
+
+      success:
+        "Thanks — your message was sent.",
+
+      failure:
+        "Sorry, the message could not be sent. Please try again.",
+
+      note:
+        "Messages are delivered through Formspree, which receives the information you submit and technical data needed to process the request."
+    },
+
+    top: {
+      button: {
+        label: "Scroll to top"
+      }
+    },
+
+    footer: {
+      text:
+        "Built with semantic HTML, modern CSS, and a commitment to accessibility. • © 2026 Gadiparthi Sai Sushvik"
+    }
   },
+
   te: {
-    "page.title": "గాడిపర్తి సాయి సుశ్విక్ | విద్యార్థి & కాబోయే సివిల్ సర్వెంట్",
-    "page.description": "హైదరాబాద్‌కు చెందిన విద్యార్థి గాడిపర్తి సాయి సుశ్విక్ వ్యక్తిగత పోర్ట్‌ఫోలియో — సాంకేతికత, పాలన, వెబ్ ప్రాప్యత మరియు డిజిటల్ ఆవిష్కరణల అన్వేషణ.",
-    "skip.link": "ప్రధాన విషయానికి వెళ్లండి",
-    "logo.aria": "గాడిపర్తి సాయి సుశ్విక్ హోమ్",
-    "nav.home": "హోమ్",
-    "nav.about": "నా గురించి",
-    "nav.projects": "ప్రాజెక్ట్‌లు",
-    "nav.learning": "నేర్చుకుంటున్నవి",
-    "nav.contact": "సంప్రదించండి",
-    "lang.select.label": "భాషను ఎంచుకోండి",
-    "theme.toLight": "లైట్ మోడ్‌కు మారండి",
-    "theme.toDark": "డార్క్ మోడ్‌కు మారండి",
-    "menu.toggle.label": "నావిగేషన్ మెనూ",
-    "hero.kicker": "విద్యార్థి & కాబోయే సివిల్ సర్వెంట్",
-    "hero.title": "గాడిపర్తి సాయి సుశ్విక్",
-    "hero.subtitle": "రోజువారీ జీవితాన్ని మెరుగుపరిచే సాంకేతికత, పాలన మరియు వ్యవస్థల అన్వేషణ.",
-    "hero.description": "సాంకేతికత, పాలన మరియు ప్రజా వ్యవస్థలు ఎలా అనుసంధానమవుతాయో తెలుసుకోవాలనే ఆసక్తి — వెబ్ డెవలప్‌మెంట్, ఏఐ పరిశోధన మరియు పాలసీ ఆవిష్కరణల ద్వారా నేర్చుకోవడం.",
-    "hero.cta.projects": "నేను నిర్మించినవి చూడండి",
-    "hero.cta.contact": "సంప్రదించండి",
-    "social.instagram": "ఇన్‌స్టాగ్రామ్ ప్రొఫైల్",
-    "social.github": "గిట్‌హబ్ ప్రొఫైల్",
-    "social.linktree": "లింక్‌ట్రీ ప్రొఫైల్",
-    "hero.img.alt": "గాడిపర్తి సాయి సుశ్విక్ కుటుంబంతో",
-    "about.title": "నా గురించి",
-    "about.who.title": "నేను ఎవరు?",
-    "about.who.p1": "నమస్కారం! నేను <strong>గాడిపర్తి సాయి సుశ్విక్</strong> — హైదరాబాద్‌కు చెందిన విద్యార్థిని, సాంకేతిక ఔత్సాహికుడిని మరియు కాబోయే సివిల్ సర్వెంట్‌ని. ప్రజా సేవతో ఆవిష్కరణలను అనుసంధానించే మార్గంలో పయనిస్తున్నాను.",
-    "about.who.p2": "నా ఆసక్తులు రెండు ప్రధాన శక్తుల కలయికలో ఉన్నాయి: <em>సాంకేతికత</em> మరియు <em>పరిపాలన</em>. ఆర్టిఫిషియల్ ఇంటెలిజెన్స్ సామర్థ్యం మరియు కోట్ల మంది జీవితాలను తీర్చిదిద్దే పాలసీల విధానం రెండూ నన్ను సమానంగా ఆకర్షిస్తాయి.",
-    "about.who.p3": "సెరిబ్రల్ పాల్సీతో జీవించడం నాకు అపారమైన ఓర్పు, అనుకూలత మరియు పట్టుదలను నేర్పింది. ఇది నిరంతరం నా అభ్యాస దృక్పథాన్ని తీర్చిదిద్దుతూ, క్రమంగా ముందుకు సాగడానికి ప్రేరణనిస్తుంది.",
-    "about.vision.title": "నా లక్ష్యం & విద్యా ప్రయాణం",
-    "about.vision.p1": "సాంకేతికత మరియు పాలన రెండింటిపై సమగ్ర అవగాహన ఉన్న సివిల్ సర్వెంట్‌గా సేవ చేయడమే నా లక్ష్యం. ముఖ్యంగా డిజిటల్ గవర్నెన్స్, వెబ్ ప్రాప్యత మరియు ప్రజా సేవల వ్యవస్థల మెరుగుదలపై దృష్టి సారిస్తున్నాను.",
-    "about.vision.p2": "ప్రస్తుతం సీఈసీ ఇంటర్మీడియట్ (2026–2028) చదువుతున్నాను. భవిష్యత్తులో పొలిటికల్ సైన్స్ లేదా ఎకనామిక్స్‌లో డిగ్రీ పూర్తి చేసి, 2031లో యూపీఎస్సీ సివిల్ సర్వీసెస్ పరీక్ష రాసి ఐఏఎస్ లేదా ఐపీఎస్ అధికారిగా దేశానికి సేవ చేయాలనేదే నా సంకల్పం.",
-    "projects.title": "ప్రాజెక్ట్‌లు & ప్రయోగాలు",
-    "projects.portfolio.title": "వ్యక్తిగత పోర్ట్‌ఫోలియో వెబ్‌సైట్",
-    "projects.portfolio.badge": "2026 · కొనసాగుతోంది",
-    "projects.portfolio.li1": "అన్ని పరికరాలకు సరిపోయే పూర్తి రెస్పాన్సివ్, మొబైల్-ఫస్ట్ డిజైన్ రూపొందించబడింది.",
-    "projects.portfolio.li2": "సెమాంటిక్ HTML5 నిర్మాణం అమలు చేసి ఉన్నత ప్రాప్యత మరియు నిర్మాణం సాధించబడింది.",
-    "projects.portfolio.li3": "CSS వేరియబుల్స్ మరియు సిస్టమ్ ప్రాధాన్యతలను ఉపయోగించి స్థానిక డార్క్ మోడ్ వ్యవస్థ అభివృద్ధి చేయబడింది.",
-    "projects.portfolio.li4": "WCAG 2.2 AA ప్రమాణాలకు అనుగుణంగా సమగ్ర ప్రాప్యత మెరుగుదలలు సమీకృతం చేయబడ్డాయి.",
-    "projects.portfolio.li5": "Schema.org JSON-LD మరియు కఠినమైన CSP వినియోగించి అధునాతన SEO వ్యూహాలు అమలు చేయబడ్డాయి.",
-    "projects.ui.title": "రెస్పాన్సివ్ యూఐ ప్రయోగాలు",
-    "projects.ui.badge": "2026 · ప్రయోగాత్మక",
-    "projects.ui.li1": "మొబైల్-ఫస్ట్ విధానంతో లేఅవుట్‌లు రూపొందించబడ్డాయి.",
-    "projects.ui.li2": "ఆధునిక కస్టమ్ ప్రాపర్టీలపై ఆధారపడిన స్కేలబుల్ CSS నిర్మాణం నిర్మించబడింది.",
-    "projects.ui.li3": "సులభమైన నావిగేషన్ మరియు డైనమిక్ స్క్రోల్ ట్రాకింగ్ పరీక్షించబడ్డాయి.",
-    "projects.civic.title": "సివిక్-టెక్ & గవర్నెన్స్ నోట్స్",
-    "projects.civic.badge": "2026 · రీసెర్చ్",
-    "projects.civic.li1": "డిజిటల్ సాధనాలు ప్రజా సేవల ప్రాప్యతను ఎలా పెంచుతాయో సాహిత్యం నమోదు చేయబడుతోంది.",
-    "projects.civic.li2": "గవర్నెన్స్ టెక్ పరిణామాలు మరియు డిజిటల్ ఇండియా కార్యక్రమాల పురోగతి గమనించబడుతోంది.",
-    "projects.civic.li3": "కృత్రిమ మేధస్సు విధానం మరియు ప్రజా పరిపాలన మధ్య సంబంధం విశ్లేషించబడుతోంది.",
-    "learning.title": "ప్రస్తుతం నేర్చుకుంటున్నవి",
-    "learning.tag1": "రెస్పాన్సివ్ వెబ్ డిజైన్",
-    "learning.tag2": "వెబ్ ప్రాప్యత (WCAG 2.2)",
-    "learning.tag3": "సెమాంటిక్ హెచ్‌టీఎంఎల్",
-    "learning.tag4": "సీఎస్ఎస్ ఆర్కిటెక్చర్",
-    "learning.tag5": "జావాస్క్రిప్ట్ ప్రాథమికాంశాలు",
-    "learning.tag6": "ఏఐ సాధనాలు & ప్రాంప్టింగ్",
-    "learning.tag7": "పాలన & ప్రజా విధానం",
-    "learning.tag8": "పొలిటికల్ సైన్స్",
-    "skills.title": "సాంకేతిక నైపుణ్యాలు",
-    "skills.tag1": "HTML5",
-    "skills.tag2": "CSS3",
-    "skills.tag3": "రెస్పాన్సివ్ డిజైన్",
-    "skills.tag4": "వెబ్ ప్రాప్యత",
-    "skills.tag5": "డార్క్ మోడ్ వ్యవస్థలు",
-    "skills.tag6": "ఫ్రంటెండ్ ఆప్టిమైజేషన్",
-    "skills.tag7": "SEO ప్రాథమికాంశాలు",
-    "skills.tag8": "ఏఐ పరిశోధన & సాధనాలు",
-    "results.title": "విద్యా మైలురాళ్ళు",
-    "results.ssc.title": "తెలంగాణ ఎస్ఎస్‌సీ బోర్డు 2026",
-    "results.percentage.title": "సాధించిన శాతం",
-    "favorites.title": "నా అభిమాన రంగాలు",
-    "favorites.li1": "ఆర్టిఫిషియల్ ఇంటెలిజెన్స్ & మెషిన్ లెర్నింగ్",
-    "favorites.li2": "రోబోటిక్స్ & ఎంబెడెడ్ సిస్టమ్స్",
-    "favorites.li3": "వెబ్ డెవలప్‌మెంట్ & ఓపెన్ సోర్స్ ప్రాజెక్ట్‌లు",
-    "favorites.li4": "పొలిటికల్ సైన్స్, చరిత్ర & రాజ్యాంగ పాలన",
-    "favorites.li5": "స్మార్ట్ గవర్నెన్స్ & డిజిటల్ ప్రాప్యత",
-    "favorites.li6": "అంతరిక్ష పరిశోధన & ఏరోస్పేస్",
-    "favorites.li7": "సమస్య పరిష్కారం & సిస్టమ్స్ ఆలోచన",
-    "inspiration.title": "నా ప్రేరణలు",
-    "inspiration.li1": "<strong>నా కుటుంబం</strong> — నా పునాది, బలం మరియు మొదటి గురువులు.",
-    "inspiration.li2": "<strong>డాక్టర్ ఏపీజే అబ్దుల్ కలాం</strong> — మిస్సైల్ మ్యాన్, కోట్లాది మంది కలలు కనేలా చేసిన దార్శనిక నాయకుడు.",
-    "inspiration.li3": "<strong>ఏఐ & ఆధునిక సాంకేతికతలు</strong> — నిరంతరం అభివృద్ధి చెందుతున్న సరిహద్దులు.",
-    "inspiration.li4": "<strong>ప్రాప్యత పరిశోధకులు</strong> — సమ్మిళిత సాంకేతికతను ప్రోత్సహించే నిపుణులు.",
-    "inspiration.li5": "<strong>మార్కస్ బ్రౌన్లీ (MKBHD)</strong> — సాంకేతికతను సులభంగా అర్థమయ్యేలా చేసే క్రియేటర్.",
-    "inspiration.li6": "<strong>ప్రజా సేవకులు & టెక్నాలజిస్టులు</strong> — డిజిటల్ పాలనను ముందుకు నడిపించే వ్యక్తులు.",
-    "inspiration.li7": "<strong>ఐఏఎస్ & ఐపీఎస్ అధికారులు</strong> — వ్యవస్థాగత మార్పు తెచ్చే రక్షకులు.",
-    "inspiration.li8": "<strong>శాస్త్రవేత్తలు & ఇంజనీర్లు</strong> — ఆధునిక ప్రపంచాన్ని నిర్మించే నిర్మాతలు.",
-    "inspiration.li9": "<strong>మానవాళి భవిష్యత్తు & అంతరిక్ష అన్వేషణ</strong> — అనంతమైన అవకాశాల మార్గం.",
-    "contact.title": "సంప్రదించండి",
-    "contact.info": "సాంకేతికత, పాలన లేదా ప్రజా వ్యవస్థలపై చర్చించడానికి ఆసక్తి ఉందా? సంకోచించకుండా సంప్రదించండి.",
-    "form.name.label": "పూర్తి పేరు",
-    "form.name.placeholder": "మీ పూర్తి పేరు",
-    "form.email.label": "ఈమెయిల్ చిరునామా",
-    "form.email.placeholder": "your@email.com",
-    "form.message.label": "సందేశం",
-    "form.message.placeholder": "మీ సందేశాన్ని ఇక్కడ రాయండి...",
-    "form.submit": "సందేశం పంపండి",
-    "form.sending": "పంపుతోంది...",
-    "form.sent": "సందేశం పంపబడింది",
-    "form.success": "సందేశం విజయవంతంగా పంపబడింది.",
-    "form.error": "ఏదో తప్పు జరిగింది. దయచేసి మళ్లీ ప్రయత్నించండి లేదా నేరుగా ఈమెయిల్ చేయండి.",
-    "form.invalid.generic": "దయచేసి హైలైట్ చేసిన ఫీల్డ్‌లను సరిచూడండి.",
-    "form.note": "సందేశాలు Formspree ద్వారా పంపబడతాయి. మీ సందేశానికి ప్రత్యుత్తరం ఇవ్వడానికి మాత్రమే ఇది ఉపయోగించబడుతుంది.",
-    "footer.text": "SYSTEM.UI // MODERN CSS // ACCESSIBILITY-FIRST &nbsp;•&nbsp; © 2026 గాడిపర్తి సాయి సుశ్విక్",
-    "top.button.label": "పేజీ పైకి వెళ్లండి",
-    "share.button": "ఈ పేజీని భాగస్వామ్యం చేయండి",
-    "share.text": "ఈ పోర్ట్‌ఫోలియోను చూడండి!",
-    "listen.button": "ఈ పేజీని వినండి",
-    "listen.stop": "వినడం ఆపండి",
-    "lang.announce": "భాష తెలుగులోకి మార్చబడింది"
+    page: {
+      title:
+        "గదిపర్తి సాయి సుష్విక్ | విద్యార్థి & భవిష్యత్ సివిల్ సర్వెంట్"
+    },
+
+    skip: {
+      link: "ప్రధాన కంటెంట్‌కు వెళ్లండి"
+    },
+
+    logo: {
+      aria: "గదిపర్తి సాయి సుష్విక్ హోమ్"
+    },
+
+    nav: {
+      home: "హోమ్",
+      about: "నా గురించి",
+      projects: "ప్రాజెక్టులు",
+      learning: "నేర్చుకుంటున్నవి",
+      contact: "సంప్రదించండి"
+    },
+
+    lang: {
+      select: {
+        label: "భాషను ఎంచుకోండి"
+      }
+    },
+
+    share: {
+      button: "ఈ పేజీని షేర్ చేయండి"
+    },
+
+    theme: {
+      toDark: "డార్క్ మోడ్‌కు మార్చండి",
+      toLight: "లైట్ మోడ్‌కు మార్చండి"
+    },
+
+    menu: {
+      open: "నావిగేషన్ మెనూను తెరవండి",
+      close: "నావిగేషన్ మెనూను మూసివేయండి"
+    },
+
+    command: {
+      placeholder: "కమాండ్ టైప్ చేయండి..."
+    },
+
+    hero: {
+      kicker:
+        "విద్యార్థి & భవిష్యత్ సివిల్ సర్వెంట్",
+      title: "గదిపర్తి సాయి సుష్విక్",
+      subtitle:
+        "రోజువారీ జీవితాన్ని మెరుగుపరిచే సాంకేతికత, పాలన మరియు వ్యవస్థలను అన్వేషిస్తున్నాను.",
+      description:
+        "వెబ్ డెవలప్‌మెంట్, AI పరిశోధన, ఆవిష్కరణ మరియు విధానాల సంగమం ద్వారా సాంకేతికత, పాలన మరియు ప్రజా వ్యవస్థల అనుసంధానాన్ని నేర్చుకుంటున్నాను.",
+      projects:
+        "నేను నిర్మించినవి చూడండి",
+      contact: "సంప్రదించండి",
+      img: {
+        alt:
+          "కుటుంబంతో గదిపర్తి సాయి సుష్విక్"
+      }
+    },
+
+    about: {
+      title: "నా గురించి",
+
+      who: {
+        title: "నేను ఎవరు?",
+        p1:
+          "నేను గదిపర్తి సాయి సుష్విక్ — హైదరాబాద్‌కు చెందిన విద్యార్థి, సాంకేతికతపై ఆసక్తి ఉన్న వ్యక్తి మరియు భవిష్యత్ సివిల్ సర్వెంట్. ఆవిష్కరణను ప్రజాసేవతో అనుసంధానించే మార్గాన్ని నిర్మిస్తున్నాను.",
+        p2:
+          "సాంకేతికత మరియు పాలన మధ్య ఉన్న సంబంధం నా ప్రధాన ఆసక్తి. కృత్రిమ మేధస్సుతో పాటు ప్రజా వ్యవస్థలను ప్రభావితం చేసే విధానాలను అర్థం చేసుకోవడం నాకు ఆసక్తికరం.",
+        p3:
+          "నేర్చుకుంటూ, నిర్మిస్తూ, ఎదుగుతూ సహనం, అనుకూలత, పట్టుదల మరియు స్థిరమైన సమస్య పరిష్కారాన్ని విలువైనవిగా భావిస్తున్నాను."
+      },
+
+      vision: {
+        title:
+          "నా దృష్టి & విద్యా మార్గం",
+        p1:
+          "డిజిటల్ గవర్నెన్స్, యాక్సెసిబిలిటీ, విద్యా వ్యవస్థలు మరియు ప్రజాసేవా పంపిణీలో సాంకేతికత మరియు పాలనపై బలమైన అవగాహనతో ప్రజాసేవలో కెరీర్ నిర్మించడం నా లక్ష్యం.",
+        p2:
+          "ప్రస్తుతం CEC ఇంటర్మీడియట్ (2026–2028) చదువుతున్నాను. భవిష్యత్తులో పొలిటికల్ సైన్స్, ఎకనామిక్స్ లేదా హిస్టరీలో బ్యాచిలర్ డిగ్రీ చేసి UPSC సివిల్ సర్వీసెస్ పరీక్షకు సిద్ధం కావాలని లక్ష్యంగా పెట్టుకున్నాను."
+      }
+    },
+
+    projects: {
+      title: "ప్రాజెక్టులు & ప్రయోగాలు",
+
+      portfolio: {
+        title:
+          "వ్యక్తిగత పోర్ట్‌ఫోలియో వెబ్‌సైట్",
+        badge: "2026 · కొనసాగుతోంది",
+        li1:
+          "సెమాంటిక్ HTML, ఆధునిక CSS మరియు వనిల్లా JavaScript‌తో మొదటి నుంచి నిర్మించబడింది.",
+        li2:
+          "కీబోర్డ్‌కు అనుకూలమైన నావిగేషన్‌తో responsive, mobile-first లేఅవుట్.",
+        li3:
+          "సేవ్ చేసిన ఎంపిక మరియు సిస్టమ్ ప్రాధాన్యతకు మద్దతుతో లైట్/డార్క్ థీమ్‌లు.",
+        li4:
+          "skip navigation, focus states, labels, live regions మరియు reduced-motion వంటి యాక్సెసిబిలిటీ ఫీచర్లు.",
+        li5:
+          "SEO metadata, structured data, sitemap, PWA manifest మరియు offline support."
+      },
+
+      ui: {
+        title:
+          "Responsive UI ప్రయోగాలు",
+        badge: "2026 · ప్రయోగాత్మకం",
+        li1:
+          "వివిధ స్క్రీన్ పరిమాణాల కోసం mobile-first లేఅవుట్లు.",
+        li2:
+          "custom properties మరియు fluid sizing ఆధారిత scalable CSS.",
+        li3:
+          "యాక్సెసిబుల్ నావిగేషన్ మరియు స్క్రోల్ ప్రవర్తన ప్రయోగాలు."
+      },
+
+      civic: {
+        title:
+          "Civic-Tech & Governance Notes",
+        badge: "2026 · పరిశోధన",
+        li1:
+          "డిజిటల్ సాధనాలు ప్రజాసేవ యాక్సెసిబిలిటీని ఎలా మెరుగుపరచగలవో నమోదు చేస్తున్నాను.",
+        li2:
+          "GovTech మరియు Digital India అభివృద్ధులను ట్రాక్ చేస్తున్నాను.",
+        li3:
+          "AI విధానం మరియు ప్రజా పరిపాలనను అన్వేషిస్తున్నాను."
+      }
+    },
+
+    learning: {
+      title:
+        "ప్రస్తుతం నేర్చుకుంటున్నవి",
+      tag1: "Responsive Web Design",
+      tag2:
+        "Accessibility (WCAG 2.2)",
+      tag3: "Semantic HTML",
+      tag4: "CSS Architecture",
+      tag5:
+        "JavaScript Fundamentals",
+      tag6:
+        "AI Tools & Prompting",
+      tag7:
+        "Governance & Public Policy",
+      tag8: "Political Science"
+    },
+
+    skills: {
+      title: "సాంకేతిక నైపుణ్యాలు",
+      tag1: "HTML5",
+      tag2: "CSS3",
+      tag3: "Responsive Design",
+      tag4: "Web Accessibility",
+      tag5:
+        "Dark Mode Systems",
+      tag6:
+        "Frontend Optimization",
+      tag7:
+        "SEO Fundamentals",
+      tag8:
+        "Vanilla JavaScript"
+    },
+
+    results: {
+      title:
+        "విద్యా మైలురాళ్లు",
+      ssc: {
+        title:
+          "తెలంగాణ SSC బోర్డు 2026"
+      },
+      percentage: {
+        title:
+          "సాధించిన శాతం"
+      },
+      inter: {
+        title:
+          "ఇంటర్మీడియట్, CEC"
+      }
+    },
+
+    favorites: {
+      title: "నాకు ఇష్టమైనవి",
+      li1:
+        "Artificial Intelligence & Machine Learning",
+      li2:
+        "Robotics & Embedded Systems",
+      li3:
+        "Web Development & Open Source Initiatives",
+      li4:
+        "Political Science, History, & Constitutional Governance",
+      li5:
+        "Smart Governance, GovTech, & Digital Accessibility",
+      li6:
+        "Space Exploration & Aerospace Innovation",
+      li7:
+        "Creative Problem Solving & Systems Thinking"
+    },
+
+    contact: {
+      title: "సంప్రదించండి",
+      info:
+        "సాంకేతికత, పాలన లేదా ప్రజా వ్యవస్థల గురించి చర్చించాలనుకుంటున్నారా? సంప్రదించండి."
+    },
+
+    listen: {
+      button: "ఈ పేజీని వినండి"
+    },
+
+    form: {
+      name: {
+        label: "పూర్తి పేరు",
+        placeholder:
+          "మీ పూర్తి పేరు",
+        error:
+          "మీ పేరును నమోదు చేయండి."
+      },
+
+      email: {
+        label:
+          "ఈమెయిల్ చిరునామా",
+        placeholder:
+          "your@email.com",
+        error:
+          "చెల్లుబాటు అయ్యే ఈమెయిల్ నమోదు చేయండి."
+      },
+
+      message: {
+        label: "సందేశం",
+        placeholder:
+          "మీ సందేశాన్ని ఇక్కడ రాయండి...",
+        error:
+          "మీ సందేశాన్ని నమోదు చేయండి."
+      },
+
+      submit: "సందేశం పంపండి",
+
+      sending: "పంపుతోంది…",
+
+      success:
+        "ధన్యవాదాలు — మీ సందేశం పంపబడింది.",
+
+      failure:
+        "క్షమించండి — సందేశం పంపలేకపోయాం. మళ్లీ ప్రయత్నించండి.",
+
+      note:
+        "సందేశాలు Formspree ద్వారా పంపబడతాయి. మీరు సమర్పించిన సమాచారం మరియు అభ్యర్థనను ప్రాసెస్ చేయడానికి అవసరమైన సాంకేతిక డేటాను అది స్వీకరిస్తుంది."
+    },
+
+    top: {
+      button: {
+        label:
+          "పైకి స్క్రోల్ చేయండి"
+      }
+    },
+
+    footer: {
+      text:
+        "Semantic HTML, ఆధునిక CSS మరియు యాక్సెసిబిలిటీతో నిర్మించబడింది. • © 2026 Gadiparthi Sai Sushvik"
+    }
   },
+
   hi: {
-    "page.title": "गाडिपर्थी साई सुश्विक | छात्र और भावी सिविल सेवक",
-    "page.description": "हैदराबाद के छात्र गाडिपर्थी साई सुश्विक का व्यक्तिगत पोर्टफोलियो — प्रौद्योगिकी, शासन, सुगमता और डिजिटल नवाचार की खोज।",
-    "skip.link": "मुख्य सामग्री पर जाएं",
-    "logo.aria": "गाडिपर्थी साई सुश्विक होम",
-    "nav.home": "होम",
-    "nav.about": "मेरे बारे में",
-    "nav.projects": "प्रोजेक्ट्स",
-    "nav.learning": "सीख रहा हूँ",
-    "nav.contact": "संपर्क करें",
-    "lang.select.label": "भाषा चुनें",
-    "theme.toLight": "लाइट मोड में बदलें",
-    "theme.toDark": "डार्क मोड में बदलें",
-    "menu.toggle.label": "नेविगेशन मेनू",
-    "hero.kicker": "छात्र और भावी सिविल सेवक",
-    "hero.title": "गाडिपर्थी साई सुश्विक",
-    "hero.subtitle": "दैनिक जीवन को बेहतर बनाने वाली प्रौद्योगिकी, शासन और प्रणालियों की खोज।",
-    "hero.description": "प्रौद्योगिकी, शासन और सार्वजनिक प्रणालियों के अंतर्संबंधों को जानने का उत्सुक — वेब विकास, एआई अनुसंधान और नीति नवाचार के माध्यम से सीख रहा हूँ।",
-    "hero.cta.projects": "मेरे काम देखें",
-    "hero.cta.contact": "संपर्क करें",
-    "social.instagram": "इंस्टाग्राम प्रोफ़ाइल",
-    "social.github": "गिटहब प्रोफ़ाइल",
-    "social.linktree": "लिंकट्री प्रोफ़ाइल",
-    "hero.img.alt": "गाडिपर्थी साई सुश्विक परिवार के साथ",
-    "about.title": "मेरे बारे में",
-    "about.who.title": "मैं कौन हूँ?",
-    "about.who.p1": "नमस्ते! मैं <strong>गाडिपर्थी साई सुश्विक</strong> हूँ — हैदराबाद का एक छात्र, तकनीक उत्साही और भावी सिविल सेवक, जो सार्वजनिक सेवा के साथ नवाचार को जोड़ने के लिए प्रतिबद्ध है।",
-    "about.who.p2": "मेरी रुचियां दो महत्वपूर्ण क्षेत्रों के संगम पर हैं: <em>प्रौद्योगिकी</em> और <em>शासन</em>। मैं आर्टिफिशियल इंटेलिजेंस की क्षमता और लाखों लोगों के जीवन को आकार देने वाली नीतियों के ढांचे दोनों से समान रूप से प्रेरित हूँ।",
-    "about.who.p3": "सेरेब्रल पाल्सी के साथ जीने के अनुभव ने मुझमें धैर्य, अनुकूलन क्षमता और दृढ़ता का निर्माण किया है। यह सीखने और समस्याओं को हल करने के प्रति मेरे दृष्टिकोण को निरंतर दिशा देता है।",
-    "about.vision.title": "मेरा दृष्टिकोण और शैक्षणिक पथ",
-    "about.vision.p1": "मेरा लक्ष्य तकनीक और शासन दोनों की गहरी समझ के साथ एक सिविल सेवक के रूप में सेवा करना है। मैं डिजिटल गवर्नेंस, वेब सुगमता और सार्वजनिक वितरण प्रणालियों को बेहतर बनाने पर केंद्रित हूँ।",
-    "about.vision.p2": "वर्तमान में सीईसी इंटरमीडिएट (2026–2028) में नामांकित हूँ। भविष्य में राजनीति विज्ञान या अर्थशास्त्र में स्नातक करने के बाद, 2031 में यूपीएससी सिविल सेवा परीक्षा में शामिल होकर आईएएस या आईपीएस अधिकारी बनने का लक्ष्य है।",
-    "projects.title": "प्रोजेक्ट्स और प्रयोग",
-    "projects.portfolio.title": "व्यक्तिगत पोर्टफोलियो वेबसाइट",
-    "projects.portfolio.badge": "2026 · जारी",
-    "projects.portfolio.li1": "सभी उपकरणों के लिए पूरी तरह से रिस्पॉन्सिव, मोबाइल-फर्स्ट डिज़ाइन तैयार किया गया।",
-    "projects.portfolio.li2": "बेहतर सुगमता और संरचना के लिए सिमेंटिक HTML5 आर्किटेक्चर लागू किया गया।",
-    "projects.portfolio.li3": "CSS वेरिएबल्स और सिस्टम प्राथमिकताओं का उपयोग करके एक मूल डार्क मोड सिस्टम विकसित किया गया।",
-    "projects.portfolio.li4": "WCAG 2.2 AA मानकों के अनुरूप व्यापक सुगमता सुधार एकीकृत किए गए।",
-    "projects.portfolio.li5": "Schema.org JSON-LD और सख्त CSP का लाभ उठाते हुए उन्नत SEO रणनीतियाँ निष्पादित की गईं।",
-    "projects.ui.title": "रिस्पॉन्सिव यूआई प्रयोग",
-    "projects.ui.badge": "2026 · प्रयोगात्मक",
-    "projects.ui.li1": "मोबाइल-फर्स्ट दर्शन का उपयोग करके लेआउट डिज़ाइन किए गए।",
-    "projects.ui.li2": "आधुनिक कस्टम प्रॉपर्टीज पर निर्भर स्केलेबल CSS आर्किटेक्चर का निर्माण किया गया।",
-    "projects.ui.li3": "सुलभ नेविगेशन सिस्टम और डायनामिक स्क्रॉल ट्रैकिंग के साथ प्रयोग किया गया।",
-    "projects.civic.title": "सिविक-टेक और गवर्नेंस नोट्स",
-    "projects.civic.badge": "2026 · अनुसंधान",
-    "projects.civic.li1": "डिजिटल उपकरण सार्वजनिक सेवाओं की पहुंच को कैसे बढ़ाते हैं, इस पर साहित्य दस्तावेज किया जा रहा है।",
-    "projects.civic.li2": "गवर्नेंस टेक विकास और डिजिटल इंडिया पहलों की प्रगति की निगरानी की जा रही है।",
-    "projects.civic.li3": "आर्टिफिशियल इंटेलिजेंस नीति और लोक प्रशासन के बीच संबंधों का विश्लेषण किया जा रहा है।",
-    "learning.title": "वर्तमान अध्ययन",
-    "learning.tag1": "रिस्पॉन्सिव वेब डिज़ाइन",
-    "learning.tag2": "वेब सुगमता (WCAG 2.2)",
-    "learning.tag3": "सिमेंटिक HTML",
-    "learning.tag4": "CSS आर्किटेक्चर",
-    "learning.tag5": "जावास्क्रिप्ट सिद्धांत",
-    "learning.tag6": "AI टूल्स और प्रॉम्प्टिंग",
-    "learning.tag7": "शासन और लोक नीति",
-    "learning.tag8": "राजनीति विज्ञान",
-    "skills.title": "तकनीकी कौशल",
-    "skills.tag1": "HTML5",
-    "skills.tag2": "CSS3",
-    "skills.tag3": "रिस्पॉन्सिव डिज़ाइन",
-    "skills.tag4": "वेब सुगमता",
-    "skills.tag5": "डार्क मोड सिस्टम",
-    "skills.tag6": "फ्रंटएंड ऑप्टिमाइज़ेशन",
-    "skills.tag7": "SEO सिद्धांत",
-    "skills.tag8": "AI अनुसंधान और टूल्स",
-    "results.title": "शैक्षणिक उपलब्धियां",
-    "results.ssc.title": "तेलंगाना एसएससी बोर्ड 2026",
-    "results.percentage.title": "प्राप्त प्रतिशत",
-    "favorites.title": "मेरी रुचियां",
-    "favorites.li1": "आर्टिफिशियल इंटेलिजेंस और मशीन लर्निंग",
-    "favorites.li2": "रोबोटिक्स और एम्बेडेड सिस्टम",
-    "favorites.li3": "वेब डेवलपमेंट और ओपन सोर्स प्रोजेक्ट",
-    "favorites.li4": "राजनीति विज्ञान, इतिहास और संवैधानिक शासन",
-    "favorites.li5": "स्मार्ट गवर्नेंस और डिजिटल सुगमता",
-    "favorites.li6": "अंतरिक्ष अन्वेषण और एयरोस्पेस",
-    "favorites.li7": "समस्या समाधान और सिस्टम्स थिंकिंग",
-    "inspiration.title": "प्रेरणा के स्रोत",
-    "inspiration.li1": "<strong>मेरा परिवार</strong> — मेरी नींव, शक्ति और प्रथम शिक्षक।",
-    "inspiration.li2": "<strong>डॉ. एपीजे अब्दुल कलाम</strong> — मिसाइल मैन, एक दूरदर्शी राष्ट्रपति जिन्होंने करोड़ों को सपने देखने का हौसला दिया।",
-    "inspiration.li3": "<strong>एआई और उभरती प्रौद्योगिकियां</strong> — निरंतर विकसित होती तकनीकी सीमाएं।",
-    "inspiration.li4": "<strong>सुगमता शोधकर्ता</strong> — समावेशी तकनीक को आगे बढ़ाने वाले विशेषज्ञ।",
-    "inspiration.li5": "<strong>मार्केस ब्राउनली (MKBHD)</strong> — तकनीक को सरल और सुलभ बनाने वाले निर्माता।",
-    "inspiration.li6": "<strong>लोक सेवक और प्रौद्योगिकीविद</strong> — डिजिटल शासन को बेहतर बनाने वाले लोग।",
-    "inspiration.li7": "<strong>आईएएस और आईपीएस अधिकारी</strong> — व्यवस्थागत परिवर्तन के सूत्रधार।",
-    "inspiration.li8": "<strong>वैज्ञानिक और इंजीनियर</strong> — आधुनिक दुनिया के शांत निर्माता।",
-    "inspiration.li9": "<strong>मानवता का भविष्य और अंतरिक्ष अन्वेषण</strong> — असीम संभावनाओं का मार्ग।",
-    "contact.title": "संपर्क करें",
-    "contact.info": "प्रौद्योगिकी, शासन या सार्वजनिक प्रणालियों पर चर्चा के लिए निसंकोच संपर्क करें।",
-    "form.name.label": "पूरा नाम",
-    "form.name.placeholder": "आपका पूरा नाम",
-    "form.email.label": "ईमेल पता",
-    "form.email.placeholder": "your@email.com",
-    "form.message.label": "संदेश",
-    "form.message.placeholder": "अपना संदेश यहाँ लिखें...",
-    "form.submit": "संदेश भेजें",
-    "form.sending": "भेज रहा है...",
-    "form.sent": "संदेश भेजा गया",
-    "form.success": "संदेश सफलतापूर्वक भेजा गया।",
-    "form.error": "कुछ गलत हुआ। कृपया पुन: प्रयास करें या सीधे ईमेल करें।",
-    "form.invalid.generic": "कृपया हाइलाइट किए गए फ़ील्ड की जाँच करें।",
-    "form.note": "संदेश Formspree के माध्यम से भेजे जाते हैं। इसका उपयोग केवल आपको उत्तर देने के लिए किया जाता है।",
-    "footer.text": "SYSTEM.UI // MODERN CSS // ACCESSIBILITY-FIRST &nbsp;•&nbsp; © 2026 गाडिपर्थी साई सुश्विक",
-    "top.button.label": "पृष्ठ के शीर्ष पर जाएं",
-    "share.button": "इस पेज को साझा करें",
-    "share.text": "इस पोर्टफोलियो को देखें!",
-    "listen.button": "इस पेज को सुनें",
-    "listen.stop": "सुनना बंद करें",
-    "lang.announce": "भाषा हिंदी में बदल गई"
+    page: {
+      title:
+        "गदिपर्थी साई सुष्विक | विद्यार्थी और भावी सिविल सर्वेंट"
+    },
+
+    skip: {
+      link: "मुख्य सामग्री पर जाएँ"
+    },
+
+    logo: {
+      aria:
+        "गदिपर्थी साई सुष्विक होम"
+    },
+
+    nav: {
+      home: "होम",
+      about: "मेरे बारे में",
+      projects: "प्रोजेक्ट्स",
+      learning: "सीख रहा हूँ",
+      contact: "संपर्क"
+    },
+
+    lang: {
+      select: {
+        label: "भाषा चुनें"
+      }
+    },
+
+    share: {
+      button: "यह पेज साझा करें"
+    },
+
+    theme: {
+      toDark:
+        "डार्क मोड पर जाएँ",
+      toLight:
+        "लाइट मोड पर जाएँ"
+    },
+
+    menu: {
+      open:
+        "नेविगेशन मेनू खोलें",
+      close:
+        "नेविगेशन मेनू बंद करें"
+    },
+
+    command: {
+      placeholder:
+        "कमांड लिखें..."
+    },
+
+    hero: {
+      kicker:
+        "विद्यार्थी और भावी सिविल सर्वेंट",
+      title:
+        "गदिपर्थी साई सुष्विक",
+      subtitle:
+        "तकनीक, शासन और रोज़मर्रा की ज़िंदगी को बेहतर बनाने वाली प्रणालियों को समझने की कोशिश।",
+      description:
+        "वेब डेवलपमेंट, AI रिसर्च और इनोवेशन तथा नीति के संगम के माध्यम से तकनीक, शासन और सार्वजनिक प्रणालियों के संबंध को सीख रहा हूँ।",
+      projects:
+        "मेरे बनाए प्रोजेक्ट देखें",
+      contact: "संपर्क करें",
+      img: {
+        alt:
+          "परिवार के साथ गदिपर्थी साई सुष्विक"
+      }
+    },
+
+    about: {
+      title: "मेरे बारे में",
+
+      who: {
+        title:
+          "मैं कौन हूँ?",
+        p1:
+          "मैं गदिपर्थी साई सुष्विक हूँ — हैदराबाद, भारत का एक विद्यार्थी, तकनीक में रुचि रखने वाला और भावी सिविल सर्वेंट। मेरा लक्ष्य नवाचार को सार्वजनिक सेवा से जोड़ना है।",
+        p2:
+          "मेरी मुख्य रुचि तकनीक और शासन के बीच के संबंध में है। मुझे कृत्रिम बुद्धिमत्ता और सार्वजनिक प्रणालियों को आकार देने वाली नीतियों को समझना पसंद है।",
+        p3:
+          "सीखते, बनाते और आगे बढ़ते हुए मैं धैर्य, अनुकूलन, दृढ़ता और लगातार समस्या-समाधान को महत्व देता हूँ।"
+      },
+
+      vision: {
+        title:
+          "मेरी दृष्टि और शैक्षणिक मार्ग",
+        p1:
+          "मेरा लक्ष्य तकनीक और शासन की मजबूत समझ के साथ सार्वजनिक सेवा में करियर बनाना है, विशेष रूप से डिजिटल गवर्नेंस, एक्सेसिबिलिटी, शिक्षा प्रणालियों और सार्वजनिक सेवा वितरण में।",
+        p2:
+          "मैं वर्तमान में CEC इंटरमीडिएट (2026–2028) में हूँ। आगे Political Science, Economics या History में स्नातक की पढ़ाई और UPSC Civil Services Examination की तैयारी करना चाहता हूँ।"
+      }
+    },
+
+    projects: {
+      title:
+        "प्रोजेक्ट्स और प्रयोग",
+
+      portfolio: {
+        title:
+          "पर्सनल पोर्टफोलियो वेबसाइट",
+        badge:
+          "2026 · जारी",
+        li1:
+          "Semantic HTML, आधुनिक CSS और Vanilla JavaScript से शुरू से बनाई गई।",
+        li2:
+          "Keyboard-accessible navigation के साथ responsive, mobile-first layout.",
+        li3:
+          "Saved preference और system preference के साथ light/dark themes.",
+        li4:
+          "Skip navigation, focus states, labels, live regions और reduced-motion जैसे accessibility features.",
+        li5:
+          "SEO metadata, structured data, sitemap, PWA manifest और offline support."
+      },
+
+      ui: {
+        title:
+          "Responsive UI प्रयोग",
+        badge:
+          "2026 · प्रयोगात्मक",
+        li1:
+          "अलग-अलग स्क्रीन के लिए mobile-first layouts.",
+        li2:
+          "Custom properties और fluid sizing पर आधारित scalable CSS.",
+        li3:
+          "Accessible navigation और scrolling behavior के प्रयोग."
+      },
+
+      civic: {
+        title:
+          "Civic-Tech और Governance Notes",
+        badge:
+          "2026 · शोध",
+        li1:
+          "डिजिटल टूल्स से सार्वजनिक सेवाओं की accessibility कैसे बेहतर हो सकती है, इसका दस्तावेज़ीकरण।",
+        li2:
+          "GovTech और Digital India के विकास को ट्रैक करना।",
+        li3:
+          "AI policy और public administration को समझना।"
+      }
+    },
+
+    learning: {
+      title:
+        "अभी सीख रहा हूँ",
+      tag1:
+        "Responsive Web Design",
+      tag2:
+        "Accessibility (WCAG 2.2)",
+      tag3:
+        "Semantic HTML",
+      tag4:
+        "CSS Architecture",
+      tag5:
+        "JavaScript Fundamentals",
+      tag6:
+        "AI Tools & Prompting",
+      tag7:
+        "Governance & Public Policy",
+      tag8:
+        "Political Science"
+    },
+
+    skills: {
+      title:
+        "तकनीकी कौशल",
+      tag1: "HTML5",
+      tag2: "CSS3",
+      tag3:
+        "Responsive Design",
+      tag4:
+        "Web Accessibility",
+      tag5:
+        "Dark Mode Systems",
+      tag6:
+        "Frontend Optimization",
+      tag7:
+        "SEO Fundamentals",
+      tag8:
+        "Vanilla JavaScript"
+    },
+
+    results: {
+      title:
+        "शैक्षणिक उपलब्धियाँ",
+      ssc: {
+        title:
+          "तेलंगाना SSC बोर्ड 2026"
+      },
+      percentage: {
+        title:
+          "प्राप्त प्रतिशत"
+      },
+      inter: {
+        title:
+          "इंटरमीडिएट, CEC"
+      }
+    },
+
+    favorites: {
+      title: "मेरी पसंद",
+      li1:
+        "Artificial Intelligence & Machine Learning",
+      li2:
+        "Robotics & Embedded Systems",
+      li3:
+        "Web Development & Open Source Initiatives",
+      li4:
+        "Political Science, History, & Constitutional Governance",
+      li5:
+        "Smart Governance, GovTech, & Digital Accessibility",
+      li6:
+        "Space Exploration & Aerospace Innovation",
+      li7:
+        "Creative Problem Solving & Systems Thinking"
+    },
+
+    contact: {
+      title:
+        "संपर्क करें",
+      info:
+        "तकनीक, शासन या सार्वजनिक प्रणालियों पर चर्चा करना चाहते हैं? संपर्क करें।"
+    },
+
+    listen: {
+      button:
+        "यह पेज सुनें"
+    },
+
+    form: {
+      name: {
+        label:
+          "पूरा नाम",
+        placeholder:
+          "अपना पूरा नाम",
+        error:
+          "कृपया अपना नाम दर्ज करें।"
+      },
+
+      email: {
+        label:
+          "ईमेल पता",
+        placeholder:
+          "your@email.com",
+        error:
+          "कृपया सही ईमेल पता दर्ज करें।"
+      },
+
+      message: {
+        label:
+          "संदेश",
+        placeholder:
+          "अपना संदेश यहाँ लिखें...",
+        error:
+          "कृपया अपना संदेश दर्ज करें।"
+      },
+
+      submit:
+        "संदेश भेजें",
+
+      sending:
+        "भेजा जा रहा है…",
+
+      success:
+        "धन्यवाद — आपका संदेश भेज दिया गया है।",
+
+      failure:
+        "क्षमा करें — संदेश नहीं भेजा जा सका। फिर से प्रयास करें।",
+
+      note:
+        "संदेश Formspree के माध्यम से भेजे जाते हैं। इसे आपके द्वारा दी गई जानकारी और अनुरोध को संसाधित करने के लिए आवश्यक तकनीकी डेटा प्राप्त होता है।"
+    },
+
+    top: {
+      button: {
+        label:
+          "ऊपर जाएँ"
+      }
+    },
+
+    footer: {
+      text:
+        "Semantic HTML, आधुनिक CSS और accessibility के साथ बनाया गया। • © 2026 Gadiparthi Sai Sushvik"
+    }
   }
 };
