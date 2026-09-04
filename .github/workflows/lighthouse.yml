@@ -2,19 +2,47 @@ name: Lighthouse CI
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
+
   pull_request:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
   lighthouse:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Verify required files
+        run: |
+          test -f theme.js
+          test -f manifest.json
+          test -f favicon.svg
+          test -f index.html
+          test -f style.css
+          test -f script.js
+          test -f translations.js
+          test -f sw.js
+          test -f offline.html
+          test -f 404.html
+          test -f sitemap.xml
+          test -f robots.txt
+          test -f images/apple-touch-icon.png
+          test -f images/icon-192.png
+          test -f images/icon-512.png
+          test -f images/IMG_2358_Original.jpeg
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
-          node-version: 24
-      - name: Install Lighthouse CI
-        run: npm install -g @lhci/cli
+          node-version: 22
+
+      - name: Install Lighthouse CI (pinned)
+        run: npm install -g @lhci/cli@0.14.0
+
       - name: Run Lighthouse CI
         run: lhci autorun --config=.lighthouserc.json
