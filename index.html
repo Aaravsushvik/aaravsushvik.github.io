@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="color-scheme" content="light dark">
-    <meta id="meta-theme-color-light" name="theme-color" content="#fbfbfd" media="(prefers-color-scheme: light)">
-    <meta id="meta-theme-color-dark" name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+    <meta id="meta-theme-color-light" name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
+    <meta id="meta-theme-color-dark" name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)">
     <meta name="application-name" content="Sai Sushvik Portfolio">
     <meta name="referrer" content="strict-origin-when-cross-origin">
 
@@ -50,7 +50,7 @@
     <meta http-equiv="Content-Security-Policy"
           content="default-src 'self';
                    script-src 'self' https://plausible.io;
-                   style-src 'self';
+                   style-src 'self' 'unsafe-inline';
                    img-src 'self' data:;
                    font-src 'self';
                    connect-src 'self' https://formspree.io https://plausible.io;
@@ -64,7 +64,7 @@
                    base-uri 'self';
                    upgrade-insecure-requests;">
 
-    <!-- Theme loader (external) -->
+    <!-- Theme loader (render-blocking) -->
     <script src="./theme.js"></script>
 
     <!-- No-JS fallback -->
@@ -94,7 +94,6 @@
     <link rel="sitemap" type="application/xml" href="/sitemap.xml">
 
     <!-- Preload critical resources -->
-    <link rel="preload" href="./style.css" as="style">
     <link rel="preload" href="./images/IMG_2358_Original.jpeg" as="image" type="image/jpeg" imagesizes="(max-width: 768px) 90vw, 420px">
     <link rel="stylesheet" href="./style.css">
 
@@ -102,7 +101,7 @@
     <script src="./translations.js"></script>
     <script type="module" src="./script.js"></script>
 
-    <!-- Optional Privacy-friendly Analytics (Plausible) – Replace data-domain with your own -->
+    <!-- Optional Privacy-friendly Analytics (Plausible) -->
     <script defer data-domain="aaravsushvik.github.io" src="https://plausible.io/js/script.js"></script>
 
     <!-- Structured Data -->
@@ -176,6 +175,10 @@
                 </select>
             </div>
 
+            <button id="install-btn" class="icon-button hidden" aria-label="Install app">
+                <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            </button>
+
             <button id="share-btn" class="icon-button" aria-label="Share this page" data-i18n-aria="share.button">
                 <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
             </button>
@@ -191,16 +194,14 @@
     </div>
 </header>
 
-<!-- Command Palette Modal -->
 <div id="command-palette" class="command-palette" role="dialog" aria-modal="true" aria-label="Command palette" hidden>
     <div class="command-palette-overlay" data-close-palette></div>
     <div class="command-palette-content">
         <input type="text" id="command-input" placeholder="Type a command..." autocomplete="off">
-        <ul id="command-results" class="command-results" role="listbox"></ul>
+        <ul id="command-results" class="command-results" role="listbox" aria-busy="true"></ul>
     </div>
 </div>
 
-<!-- Hidden live region for language change announcements -->
 <div id="lang-announcer" class="sr-only" aria-live="polite"></div>
 
 <main id="main-content" tabindex="-1">
@@ -372,23 +373,6 @@
         </div>
     </section>
 
-    <section id="inspiration" class="container reveal content-section">
-        <h2 class="section-title" data-i18n="inspiration.title">Sources of Inspiration</h2>
-        <div class="solid-panel">
-            <ol class="feature-list ordered" role="list">
-                <li data-i18n="inspiration.li1"><strong>My Family</strong> — My foundation, my strength, and my earliest teachers.</li>
-                <li data-i18n="inspiration.li2"><strong>Dr. APJ Abdul Kalam</strong> — The Missile Man, a visionary President who dared to dream for a billion people.</li>
-                <li data-i18n="inspiration.li3"><strong>Artificial Intelligence &amp; Emerging Technologies</strong> — The technological frontier that continuously evolves.</li>
-                <li data-i18n="inspiration.li4"><strong>Accessibility Researchers</strong> — Professionals actively advancing inclusive and equitable technology.</li>
-                <li data-i18n="inspiration.li5"><strong>Marques Brownlee (MKBHD)</strong> — A creator making technology honest, accessible, and exciting for a global audience.</li>
-                <li data-i18n="inspiration.li6"><strong>Public Servants &amp; Technologists</strong> — The individuals striving to improve digital governance.</li>
-                <li data-i18n="inspiration.li7"><strong>IAS &amp; IPS Officers</strong> — The often unsung architects driving systemic change and transformation in India.</li>
-                <li data-i18n="inspiration.li8"><strong>Scientists, Engineers, &amp; Inventors</strong> — The quiet builders shaping the modern world.</li>
-                <li data-i18n="inspiration.li9"><strong>The Future of Humanity &amp; Space Exploration</strong> — The ultimate horizon, reminding us of our boundless potential.</li>
-            </ol>
-        </div>
-    </section>
-
     <section id="contact" class="container reveal content-section">
         <h2 class="section-title" data-i18n="contact.title">Get in Touch</h2>
         <div class="solid-panel contact-layout">
@@ -398,7 +382,8 @@
                     <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                     <strong id="contact-email" data-u="saisushvik.pnt" data-d="gmail.com">saisushvik.pnt [at] gmail.com</strong>
                 </div>
-                <button id="listen-btn" class="btn-secondary" data-i18n="listen.button">Listen to this page</button>
+                <br>
+                <button id="listen-btn" class="btn-primary" data-i18n="listen.button">Listen to this page</button>
             </div>
             <form id="contact-form" action="https://formspree.io/f/meenzdqr" method="POST" class="form-container">
                 <div class="form-group">
@@ -432,7 +417,7 @@
 
 <footer class="footer">
     <div class="container footer-content">
-        <p data-i18n="footer.text">Built with semantic HTML, modern CSS, and a commitment to accessibility. &nbsp;•&nbsp; © 2026 Gadiparthi Sai Sushvik</p>
+        <p data-i18n="footer.text">SYSTEM.UI // MODERN CSS // ACCESSIBILITY-FIRST &nbsp;•&nbsp; © 2026 Gadiparthi Sai Sushvik</p>
     </div>
 </footer>
 
