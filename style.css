@@ -143,7 +143,7 @@ body {
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0; }
 :focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; border-radius: 6px; }
 
-/* Skip link (added) */
+/* Skip link */
 .skip-link {
   position: fixed;
   top: 0;
@@ -294,10 +294,24 @@ html.dark .badge { background: rgba(255,255,255,0.04); }
 .tag:hover { border-color: var(--color-accent); color: var(--color-accent); background: color-mix(in srgb, var(--color-accent) 8%, transparent); }
 .tag:active { transform: scale(0.97); }
 
+/* Lists */
 .feature-list { list-style: none; color: var(--color-text-secondary); font-size: 0.95rem; }
 .feature-list li { position: relative; padding-left: 1.35rem; margin-bottom: 0.55rem; letter-spacing: -0.01em; }
 .feature-list li::before { content: "→"; position: absolute; left: 0; color: var(--color-accent); font-weight: 500; }
 
+/* Ordered list variation */
+.feature-list.ordered {
+  counter-reset: item;
+}
+.feature-list.ordered li::before {
+  content: counter(item) ".";
+  counter-increment: item;
+  font-weight: 600;
+  left: 0;
+  color: var(--color-accent);
+}
+
+/* Forms */
 .form-group label { font-size: 0.85rem; font-weight: 600; color: var(--color-text-primary); letter-spacing: -0.01em; display: block; margin-bottom: 0.35rem; }
 input, textarea {
   width: 100%; padding: 0.9rem 1rem; border-radius: var(--radius-sm);
@@ -310,6 +324,8 @@ input:focus-visible, textarea:focus-visible {
   box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-accent) 25%, transparent);
 }
 
+.gotcha { display: none !important; }
+
 .btn-primary {
   display: inline-flex; align-items: center; justify-content: center;
   color: var(--color-on-accent); background: var(--color-accent); border: none;
@@ -321,6 +337,7 @@ input:focus-visible, textarea:focus-visible {
 .btn-primary:hover { background: var(--color-accent-hover); box-shadow: 0 4px 12px rgba(0, 113, 227, 0.3); }
 .btn-primary:active { background: var(--color-accent-active); transform: scale(0.97); }
 
+/* Command Palette */
 .command-palette { position: fixed; inset: 0; z-index: var(--z-command); display: flex; align-items: flex-start; justify-content: center; padding: 12vh 1rem 2rem; }
 .command-palette[hidden] { display: none; }
 .command-palette-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.35); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
@@ -341,6 +358,7 @@ input:focus-visible, textarea:focus-visible {
   color: var(--color-text-primary); border-left-color: var(--color-accent);
 }
 
+/* Footer & Top Btn */
 .footer { padding: var(--space-md) 0; text-align: center; border-top: 1px solid var(--color-border); color: var(--color-text-tertiary); font-size: 0.8rem; letter-spacing: -0.01em; }
 .top-btn {
   position: fixed; bottom: var(--space-sm); right: var(--space-sm);
@@ -357,6 +375,14 @@ input:focus-visible, textarea:focus-visible {
   transition: width 0.1s linear; pointer-events: none;
 }
 
+/* Stats */
+.stats-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-md); }
+.stat-box { display: flex; flex-direction: column; gap: 4px; }
+.stat-value { font-size: clamp(2.2rem, 4vw, 3rem); font-weight: 700; letter-spacing: -0.04em; line-height: 1; order: 1; color: var(--color-accent); }
+.stat-sub { font-size: 1rem; font-weight: 600; color: var(--color-text-secondary); }
+.stat-title { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: var(--color-text-secondary); order: 2; }
+
+/* Scroll-driven animations */
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
     .reveal { animation: fade-in-up linear both; animation-timeline: view(); animation-range: entry 0% entry 25%; }
@@ -369,9 +395,6 @@ input:focus-visible, textarea:focus-visible {
 .social-icon:hover { color: var(--color-accent); }
 .social-icon:active { transform: scale(0.9); }
 
-/* ==========================================================================
-   Optional Polish Blocks (Recommended)
-   ========================================================================== */
 /* Mobile nav */
 @media (max-width: 767px) {
   #main-nav {
@@ -430,8 +453,8 @@ input:focus-visible, textarea:focus-visible {
   font-size: 0.9rem;
   font-weight: 500;
 }
-.form-status.success { color: var(--color-success); }
-.form-status.error   { color: var(--color-error); }
+.form-status.is-success { color: var(--color-success); }
+.form-status.is-error   { color: var(--color-error); }
 
 /* Active nav link */
 .nav-link.active {
@@ -439,7 +462,7 @@ input:focus-visible, textarea:focus-visible {
   font-weight: 600;
 }
 
-/* Reduced Motion (added) */
+/* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
