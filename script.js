@@ -184,7 +184,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Canvas Particle Engine (same as previous) ---
+    // --- Canvas Particle Engine ---
     const canvas = q('hero-canvas'), heroSection = q('home');
     const QUALITY = Object.freeze({ LOW: 0, MEDIUM: 1, HIGH: 2 });
     const CONFIG = Object.freeze({
@@ -429,7 +429,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- Navigation & Mobile Drawer (unchanged) ---
+    // --- Navigation & Mobile Drawer ---
     const closeMenu = () => {
         if (!nav || !menuToggle || !nav.classList.contains('open')) return;
         nav.classList.remove('open');
@@ -576,7 +576,7 @@ document.addEventListener('DOMContentLoaded', () => {
         topBtn.addEventListener('click', () => w.scrollTo({ top: 0, behavior: prefersReducedMotion.matches ? 'auto' : 'smooth' }));
     }
 
-    // --- Contact Form (unchanged) ---
+    // --- Contact Form ---
     if (contactForm && submitBtn && formStatus) {
         const setStatus = (msg, state) => {
             formStatus.textContent = msg;
@@ -762,6 +762,7 @@ document.addEventListener('DOMContentLoaded', () => {
             commandPalette.hidden = false;
             commandInput.value = '';
             currentFilter = '';
+            commandResults.setAttribute('aria-busy', 'true');
             renderResults(commands);
             commandInput.focus();
             selectedIndex = -1;
@@ -784,6 +785,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
                 commandResults.appendChild(li);
             });
+            commandResults.setAttribute('aria-busy', 'false');
             if (results.length > 0) {
                 selectedIndex = 0;
                 highlightSelected();
