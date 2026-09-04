@@ -1,1 +1,923 @@
-document.addEventListener('DOMContentLoaded',()=>{const d=document,w=window,html=d.documentElement;const q=id=>d.getElementById(id);const header=q('main-header'),themeToggle=q('theme-toggle'),sunIcon=q('sun-icon'),moonIcon=q('moon-icon'),menuToggle=q('menu-toggle'),nav=q('main-nav'),mainContent=q('main-content'),footerElement=d.querySelector('footer'),navLinks=d.querySelectorAll('.nav-link'),sections=d.querySelectorAll('section[id]'),topBtn=q('topBtn'),progressBar=q('scroll-progress'),contactForm=q('contact-form'),submitBtn=q('submit-btn'),formStatus=q('form-status'),metaThemeColorLight=q('meta-theme-color-light'),metaThemeColorDark=q('meta-theme-color-dark'),langAnnouncer=q('lang-announcer'),commandPalette=q('command-palette'),commandInput=q('command-input'),commandResults=q('command-results'),shareBtn=q('share-btn'),listenBtn=q('listen-btn');const prefersReducedMotion=w.matchMedia('(prefers-reduced-motion: reduce)'),supportsInert='inert' in HTMLElement.prototype,systemTheme=w.matchMedia('(prefers-color-scheme: dark)'),supportsViewTransitions='startViewTransition' in d,supportsScrollDrivenAnimations=CSS.supports('animation-timeline: view()');let currentLang='en';const getTranslation=key=>{if(typeof translations==='undefined')return '';const dict=translations[currentLang]||translations.en;return dict[key]!==undefined?dict[key]:(translations.en[key]||'')};const isDark=()=>html.classList.contains('dark')||(!html.classList.contains('light')&&systemTheme.matches);const updateMetaColors=darkMode=>{metaThemeColorLight&&metaThemeColorLight.setAttribute('content',darkMode?'#0a0a0a':'#fafafa');metaThemeColorDark&&metaThemeColorDark.setAttribute('content',darkMode?'#0a0a0a':'#000000')};const updateThemeIcon=()=>{if(!moonIcon||!sunIcon||!themeToggle)return;const darkMode=isDark();themeToggle.setAttribute('aria-checked',String(darkMode));const label=getTranslation(darkMode?'theme.toLight':'theme.toDark')||(darkMode?'Switch to light mode':'Switch to dark mode');themeToggle.setAttribute('aria-label',label);if(darkMode){moonIcon.classList.add('hidden');sunIcon.classList.remove('hidden')}else{moonIcon.classList.remove('hidden');sunIcon.classList.add('hidden')}};const applyThemeFromState=darkMode=>{html.classList.remove('light','dark');html.classList.add(darkMode?'dark':'light');try{localStorage.setItem('theme',darkMode?'dark':'light')}catch(e){}updateMetaColors(darkMode);updateThemeIcon();requestAnimationFrame(dispatchThemeUpdate)};const getInitialTheme=()=>{const urlParams=new URLSearchParams(w.location.search);const themeParam=urlParams.get('theme');if(themeParam==='dark')return true;if(themeParam==='light')return false;try{const saved=localStorage.getItem('theme');if(saved==='dark')return true;if(saved==='light')return false}catch(e){}return systemTheme.matches};applyThemeFromState(getInitialTheme());const dispatchThemeUpdate=()=>{const styles=w.getComputedStyle(d.body);d.dispatchEvent(new CustomEvent('themechange',{detail:{background:styles.getPropertyValue('--color-bg').trim(),particle:styles.getPropertyValue('--canvas-particle').trim(),line:styles.getPropertyValue('--canvas-line').trim()}}))};systemTheme.addEventListener('change',e=>{try{if(!localStorage.getItem('theme')&&!new URLSearchParams(w.location.search).has('theme'))applyThemeFromState(e.matches)}catch(err){}});if(themeToggle){themeToggle.addEventListener('click',()=>{const currentlyDark=isDark();const newDark=!currentlyDark;const doApply=()=>applyThemeFromState(newDark);if(supportsViewTransitions)d.startViewTransition(doApply);else doApply()})}const applyLanguageChunked=lang=>{if(typeof translations==='undefined')return;const targetLang=translations[lang]?lang:'en';currentLang=targetLang;const dict=translations[targetLang];html.lang=targetLang==='en'?'en-IN':targetLang==='te'?'te-IN':targetLang==='hi'?'hi-IN':targetLang;try{localStorage.setItem('lang',targetLang)}catch(e){}const yieldToMain=w.scheduler&&w.scheduler.yield?()=>w.scheduler.yield():()=>new Promise(resolve=>setTimeout(resolve,0));const elements=[...d.querySelectorAll('[data-i18n]')],placeholders=[...d.querySelectorAll('[data-i18n-placeholder]')],ariaLabels=[...d.querySelectorAll('[data-i18n-aria]')],altTexts=[...d.querySelectorAll('[data-i18n-alt]')];const processChunk=async(items,callback)=>{for(let i=0;i<items.length;i++){callback(items[i]);if(i%10===9)await yieldToMain()}};(async()=>{await processChunk(elements,el=>{const key=el.getAttribute('data-i18n');if(dict[key]!==undefined)el.innerHTML=dict[key]});await processChunk(placeholders,el=>{const key=el.getAttribute('data-i18n-placeholder');if(dict[key]!==undefined)el.setAttribute('placeholder',dict[key])});await processChunk(ariaLabels,el=>{const key=el.getAttribute('data-i18n-aria');if(dict[key]!==undefined)el.setAttribute('aria-label',dict[key])});await processChunk(altTexts,el=>{const key=el.getAttribute('data-i18n-alt');if(dict[key]!==undefined)el.setAttribute('alt',dict[key])});if(dict['page.title'])d.title=dict['page.title'];const metaDesc=d.querySelector('meta[name="description"]');if(metaDesc&&dict['page.description'])metaDesc.setAttribute('content',dict['page.description']);updateThemeIcon();if(langAnnouncer)langAnnouncer.textContent=getTranslation('lang.announce')||`Language changed to ${targetLang}`})()};const getInitialLanguage=()=>{const urlParams=new URLSearchParams(w.location.search);const langParam=urlParams.get('lang');if(langParam&&['en','te','hi'].includes(langParam))return langParam;try{return localStorage.getItem('lang')||'en'}catch(e){return 'en'}};const langSelect=q('lang-select');if(langSelect&&typeof translations!=='undefined'){const initialLang=getInitialLanguage();langSelect.value=initialLang;applyLanguageChunked(initialLang);langSelect.addEventListener('change',e=>{const newLang=e.target.value;const doApply=()=>applyLanguageChunked(newLang);if(supportsViewTransitions)d.startViewTransition(doApply);else doApply()})}const canvas=q('hero-canvas'),heroSection=q('home');const QUALITY=Object.freeze({LOW:0,MEDIUM:1,HIGH:2});const CONFIG=Object.freeze({mouseRadius:150,mouseRadiusSq:22500,physicsStep:1000/60,alphaBuckets:5,levels:{0:{count:25,connDistSq:6400},1:{count:50,connDistSq:10000},2:{count:80,connDistSq:14400}}});const connection=navigator.connection||navigator.mozConnection||navigator.webkitConnection;const saveData=connection&&connection.saveData;let initCanvas=()=>{};if(canvas&&heroSection&&!prefersReducedMotion.matches&&!saveData){canvas.setAttribute('aria-hidden','true');const ctx=canvas.getContext('2d',{alpha:false});let engineRunning=false,heroVisible=true,animationFrameId=null,width=0,height=0,lastDpr=0;let lastTime=0,accumulator=0,emaFps=60,lastQualityCheck=0,lowFrames=0,highFrames=0;let maxHardwareQuality=QUALITY.MEDIUM,currentQuality=QUALITY.LOW;const particles=[],mouse=Object.seal({x:null,y:null});let rawPointer={x:null,y:null},backgroundColor,particleColor,lineColor;const maxLines=(CONFIG.levels[2].count*(CONFIG.levels[2].count-1))/2;const lineBuckets=Array.from({length:5},()=>new Float32Array(maxLines*4)),bucketCounts=new Int32Array(5);const assessHardware=()=>{const cores=navigator.hardwareConcurrency||4,networkType=connection?connection.effectiveType:'4g';const isSlow=networkType==='2g'||networkType==='slow-2g'||networkType==='3g';if(cores>4&&!isSlow&&w.innerWidth>768)maxHardwareQuality=QUALITY.HIGH;else if(isSlow)maxHardwareQuality=QUALITY.LOW;else maxHardwareQuality=QUALITY.MEDIUM;currentQuality=maxHardwareQuality};const themeHandler=e=>{if(!e||!e.detail)return;backgroundColor=e.detail.background||backgroundColor;particleColor=e.detail.particle||particleColor;lineColor=e.detail.line||lineColor};const initTheme=()=>{const styles=w.getComputedStyle(d.body);backgroundColor=styles.getPropertyValue('--color-bg').trim();particleColor=styles.getPropertyValue('--canvas-particle').trim();lineColor=styles.getPropertyValue('--canvas-line').trim()};const pointerMoveHandler=e=>{rawPointer.x=e.offsetX;rawPointer.y=e.offsetY};const pointerLeaveHandler=()=>{rawPointer.x=null;rawPointer.y=null};class Particle{constructor(){this.reset()}reset(){this.x=Math.random()*width;this.y=Math.random()*height;this.vx=(Math.random()-0.5)*0.5;this.vy=(Math.random()-0.5)*0.5;this.radius=Math.random()*1.5+0.5}update(dt){const timeScale=dt/CONFIG.physicsStep;this.x+=this.vx*timeScale;this.y+=this.vy*timeScale;if(this.x<0||this.x>width){this.vx=-this.vx;this.x=Math.max(0,Math.min(width,this.x))}if(this.y<0||this.y>height){this.vy=-this.vy;this.y=Math.max(0,Math.min(height,this.y))}if(mouse.x!==null){const dx=mouse.x-this.x,dy=mouse.y-this.y,distSq=dx*dx+dy*dy;if(distSq>0&&distSq<CONFIG.mouseRadiusSq){const distance=Math.sqrt(distSq),force=Math.max(0,(CONFIG.mouseRadius-distance)/CONFIG.mouseRadius);this.x-=dx/distance*force*1.5*timeScale;this.y-=dy/distance*force*1.5*timeScale}}}draw(){ctx.beginPath();ctx.arc(this.x,this.y,this.radius,0,Math.PI*2);ctx.fill()}}initCanvas=()=>{const nw=canvas.parentElement.clientWidth,nh=canvas.parentElement.clientHeight;const dpr=Math.min(w.devicePixelRatio||1,2);if(nw===0||nh===0||(nw===width&&nh===height&&dpr===lastDpr))return;width=nw;height=nh;lastDpr=dpr;canvas.width=width*dpr;canvas.height=height*dpr;canvas.style.width=`${width}px`;canvas.style.height=`${height}px`;ctx.setTransform(dpr,0,0,dpr,0,0);const maxNeeded=CONFIG.levels[QUALITY.HIGH].count;while(particles.length<maxNeeded)particles.push(new Particle());for(let i=0;i<maxNeeded;i++)particles[i].reset()};const startEngine=()=>{if(engineRunning)return;engineRunning=true;lastTime=performance.now();accumulator=0;animationFrameId=requestAnimationFrame(animateCanvas)};const stopEngine=()=>{engineRunning=false;if(animationFrameId!==null){cancelAnimationFrame(animationFrameId);animationFrameId=null}};const animateCanvas=time=>{if(!engineRunning)return;animationFrameId=requestAnimationFrame(animateCanvas);let dt=time-lastTime;if(dt>100)dt=100;lastTime=time;if(rawPointer.x!==null){mouse.x=rawPointer.x;mouse.y=rawPointer.y}else{mouse.x=null;mouse.y=null}emaFps=emaFps*0.9+(1000/(dt||1))*0.1;if(time-lastQualityCheck>500){lastQualityCheck=time;if(emaFps<45){lowFrames++;highFrames=0}else if(emaFps>55){highFrames++;lowFrames=0}else{lowFrames=0;highFrames=0}if(lowFrames>=3&&currentQuality>QUALITY.LOW){currentQuality--;lowFrames=0}else if(highFrames>=3&&currentQuality<maxHardwareQuality){const oldTarget=CONFIG.levels[currentQuality].count;currentQuality++;const newTarget=CONFIG.levels[currentQuality].count;for(let i=oldTarget;i<newTarget;i++)particles[i].reset();highFrames=0}}accumulator+=dt;const activeCount=CONFIG.levels[currentQuality].count,currentConnDistSq=CONFIG.levels[currentQuality].connDistSq;let steps=0;while(accumulator>=CONFIG.physicsStep&&steps<5){for(let i=0;i<activeCount;i++)particles[i].update(CONFIG.physicsStep);accumulator-=CONFIG.physicsStep;steps++}ctx.fillStyle=backgroundColor;ctx.fillRect(0,0,width,height);ctx.fillStyle=particleColor;for(let i=0;i<activeCount;i++)particles[i].draw();bucketCounts.fill(0);for(let i=0;i<activeCount;i++){for(let j=i+1;j<activeCount;j++){const dx=particles[i].x-particles[j].x,dy=particles[i].y-particles[j].y,distSq=dx*dx+dy*dy;if(distSq<currentConnDistSq){const alpha=1-(distSq/currentConnDistSq);let bucketIdx=Math.floor(alpha*5);if(bucketIdx>=5)bucketIdx=4;const ptr=bucketCounts[bucketIdx]*4,arr=lineBuckets[bucketIdx];arr[ptr]=particles[i].x;arr[ptr+1]=particles[i].y;arr[ptr+2]=particles[j].x;arr[ptr+3]=particles[j].y;bucketCounts[bucketIdx]++}}}ctx.strokeStyle=lineColor;for(let b=0;b<5;b++){if(bucketCounts[b]===0)continue;ctx.beginPath();ctx.globalAlpha=(b+1)/5;const count=bucketCounts[b],arr=lineBuckets[b];for(let i=0;i<count;i++){const ptr=i*4;ctx.moveTo(arr[ptr],arr[ptr+1]);ctx.lineTo(arr[ptr+2],arr[ptr+3])}ctx.stroke()}ctx.globalAlpha=1};canvas.addEventListener('pointermove',pointerMoveHandler,{passive:true});canvas.addEventListener('pointerleave',pointerLeaveHandler,{passive:true});canvas.addEventListener('pointercancel',pointerLeaveHandler,{passive:true});d.addEventListener('themechange',themeHandler);let resizePending=false;const resizeObserver=new ResizeObserver(()=>{if(resizePending)return;resizePending=true;requestAnimationFrame(()=>{initCanvas();resizePending=false})});resizeObserver.observe(canvas.parentElement);const visibilityHandler=()=>{if(d.hidden)stopEngine();else if(heroVisible)startEngine()};const pageShowHandler=event=>{if(heroVisible&&!d.hidden&&(event.persisted||!event.persisted))startEngine()};new IntersectionObserver(([entry])=>{heroVisible=entry.isIntersecting;if(heroVisible&&!d.hidden&&!prefersReducedMotion.matches)startEngine();else stopEngine()},{threshold:0}).observe(heroSection);d.addEventListener('visibilitychange',visibilityHandler);w.addEventListener('pagehide',stopEngine);w.addEventListener('pageshow',pageShowHandler);const updateHardwareAndCanvas=()=>{assessHardware();if(currentQuality>maxHardwareQuality)currentQuality=maxHardwareQuality;initCanvas()};w.addEventListener('resize',updateHardwareAndCanvas);if(connection)connection.addEventListener('change',updateHardwareAndCanvas);let lastDprValue=w.devicePixelRatio||1;const dprMql=w.matchMedia(`(resolution: ${lastDprValue}dppx)`);const onDprChange=()=>{const newDpr=w.devicePixelRatio||1;if(newDpr!==lastDprValue){lastDprValue=newDpr;initCanvas()}dprMql.addEventListener('change',onDprChange,{once:true})};dprMql.addEventListener('change',onDprChange,{once:true});const motionHandler=e=>{if(e.matches)stopEngine();else if(heroVisible&&!d.hidden)startEngine()};prefersReducedMotion.addEventListener('change',motionHandler);const initCanvasEngine=()=>{initTheme();assessHardware();initCanvas();startEngine()};if(w.requestIdleCallback)w.requestIdleCallback(initCanvasEngine,{timeout:1000});else setTimeout(initCanvasEngine,0)}const closeMenu=()=>{if(!nav||!menuToggle||!nav.classList.contains('open'))return;nav.classList.remove('open');menuToggle.setAttribute('aria-expanded','false');html.style.overflow='';if(topBtn)topBtn.inert=false;if(supportsInert){mainContent&&(mainContent.inert=false);footerElement&&(footerElement.inert=false)}else{mainContent&&mainContent.removeAttribute('aria-hidden');footerElement&&footerElement.removeAttribute('aria-hidden')}};const desktopMQ=w.matchMedia('(min-width: 768px)');if(menuToggle&&nav){menuToggle.addEventListener('click',()=>{const isOpen=nav.classList.toggle('open');menuToggle.setAttribute('aria-expanded',String(isOpen));if(isOpen){html.style.overflow='hidden';topBtn&&(topBtn.inert=true);if(supportsInert){mainContent&&(mainContent.inert=true);footerElement&&(footerElement.inert=true)}else{mainContent&&mainContent.setAttribute('aria-hidden','true');footerElement&&footerElement.setAttribute('aria-hidden','true')}const firstLink=nav.querySelector('a');if(firstLink)requestAnimationFrame(()=>requestAnimationFrame(()=>firstLink.focus()))}else closeMenu()});desktopMQ.addEventListener('change',e=>{if(e.matches)closeMenu()});nav.addEventListener('click',e=>{if(e.target.closest('a[href]'))closeMenu()});d.addEventListener('keydown',e=>{if(e.key==='Escape'&&nav.classList.contains('open')){closeMenu();menuToggle.focus()}if(!supportsInert&&e.key==='Tab'&&nav.classList.contains('open')&&w.innerWidth<=768){const focusable=nav.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])');if(focusable.length===0)return;const first=focusable[0],last=focusable[focusable.length-1];if(e.shiftKey&&d.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&d.activeElement===last){e.preventDefault();first.focus()}}})}d.body.addEventListener('click',e=>{const link=e.target.closest('a[href^="#"]');if(!link||link.classList.contains('skip-link'))return;const href=link.getAttribute('href');if(!href||href==='#')return;const target=d.getElementById(href.slice(1));if(!target)return;e.preventDefault();nav&&nav.classList.contains('open')&&closeMenu();const pad=parseFloat(getComputedStyle(html).scrollPaddingTop)||60;w.scrollTo({top:target.getBoundingClientRect().top+w.scrollY-pad,behavior:prefersReducedMotion.matches?'auto':'smooth'});if(!target.hasAttribute('tabindex'))target.setAttribute('tabindex','-1');target.focus({preventScroll:true});history.pushState(null,'',href)});const initDeferredObservers=()=>{if(navLinks.length>0&&sections.length>0){const navObserver=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){const id=entry.target.getAttribute('id');navLinks.forEach(link=>{const on=link.getAttribute('href')===`#${id}`;link.classList.toggle('active',on);if(on)link.setAttribute('aria-current','true');else link.removeAttribute('aria-current')});if(history.replaceState)history.replaceState(null,'',`#${id}`)}})},{rootMargin:'-20% 0px -70% 0px',threshold:0});[...navLinks].map(l=>d.getElementById(l.getAttribute('href').slice(1))).filter(Boolean).forEach(sec=>navObserver.observe(sec))}if(!supportsScrollDrivenAnimations&&!prefersReducedMotion.matches){const reveals=d.querySelectorAll('.reveal');if(reveals.length>0){const revealObserver=new IntersectionObserver((entries,observer)=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target)}})},{rootMargin:'0px 0px -50px 0px',threshold:0.1});reveals.forEach(el=>revealObserver.observe(el))}}else{d.querySelectorAll('.reveal').forEach(el=>el.classList.add('visible'))}};if(canvas&&(prefersReducedMotion.matches||saveData)){prefersReducedMotion.addEventListener('change',()=>{if(!prefersReducedMotion.matches)location.reload()})}const scheduleIdle=w.requestIdleCallback??((cb)=>setTimeout(cb,1));scheduleIdle(initDeferredObservers);let ticking=false;w.addEventListener('scroll',()=>{if(!ticking){w.requestAnimationFrame(()=>{const scrollTop=w.scrollY;if(header){scrollTop>10?header.classList.add('scrolled'):header.classList.remove('scrolled')}if(progressBar&&!prefersReducedMotion.matches){const docHeight=d.documentElement.scrollHeight-w.innerHeight;progressBar.style.transform=`scaleX(${docHeight>0?scrollTop/docHeight:0})`}if(topBtn){scrollTop>400?topBtn.classList.remove('hidden'):topBtn.classList.add('hidden')}ticking=false});ticking=true}},{passive:true});if(topBtn)topBtn.addEventListener('click',()=>w.scrollTo({top:0,behavior:prefersReducedMotion.matches?'auto':'smooth'}));if(contactForm&&submitBtn&&formStatus){const setStatus=(msg,state)=>{formStatus.textContent=msg;formStatus.className=`form-status is-${state}`};const errFor=f=>q(f.id+'-err');const showError=(f,msg)=>{const p=errFor(f);f.setAttribute('aria-invalid','true');if(p){p.textContent=msg;p.hidden=false;p.setAttribute('role','alert')}};const clearError=f=>{const p=errFor(f);f.removeAttribute('aria-invalid');if(p){p.hidden=true;p.textContent='';p.removeAttribute('role')}};contactForm.setAttribute('novalidate','');['name','email','form-message'].forEach(id=>{const f=q(id);if(f)f.addEventListener('input',()=>{if(f.checkValidity())clearError(f)})});contactForm.addEventListener('submit',async e=>{e.preventDefault();const fields=[...contactForm.elements].filter(f=>f.willValidate&&f.id);fields.forEach(clearError);const bad=fields.filter(f=>!f.checkValidity());if(bad.length){bad.forEach(f=>showError(f,f.validationMessage));const msg=getTranslation('form.invalid.generic')||`${bad.length} field(s) need attention.`;setStatus(msg,'error');bad[0].focus();return}const defaultSubmitText=getTranslation('form.submit')||'Send Message';submitBtn.disabled=true;submitBtn.textContent=getTranslation('form.sending')||'Sending...';setStatus(getTranslation('form.sending')||'Sending your message...','pending');try{const response=await fetch(contactForm.action,{method:'POST',body:new FormData(contactForm),headers:{'Accept':'application/json'}});if(!response.ok)throw new Error('Network response was not ok.');contactForm.reset();submitBtn.textContent=getTranslation('form.sent')||'Message Sent';submitBtn.classList.add('success');setStatus(getTranslation('form.success')||'Message sent successfully.','success');setTimeout(()=>{submitBtn.textContent=defaultSubmitText;submitBtn.classList.remove('success');submitBtn.disabled=false;formStatus.textContent=''},4000)}catch(error){submitBtn.disabled=false;submitBtn.textContent=defaultSubmitText;setStatus(getTranslation('form.error')||'Something went wrong. Please try again, or email me directly.','error')}})}if('serviceWorker' in navigator){w.addEventListener('load',()=>{navigator.serviceWorker.register('/sw.js').then(registration=>{registration.addEventListener('updatefound',()=>{const newWorker=registration.installing;newWorker.addEventListener('statechange',()=>{if(newWorker.state==='installed'&&navigator.serviceWorker.controller){if(confirm('A new version of this site is available. Reload now?'))w.location.reload()}})})}).catch(err=>console.warn('Service worker registration failed:',err))});let refreshing=false;navigator.serviceWorker.addEventListener('controllerchange',()=>{if(!refreshing){refreshing=true;w.location.reload()}})}const emailHost=q('contact-email');if(emailHost&&emailHost.dataset.u&&emailHost.dataset.d){const addr=`${emailHost.dataset.u}@${emailHost.dataset.d}`;const a=d.createElement('a');a.href=`mailto:${addr}`;a.textContent=addr;a.rel='nofollow';emailHost.replaceChildren(a)}if(shareBtn&&navigator.share){shareBtn.addEventListener('click',async()=>{try{await navigator.share({title:d.title,text:getTranslation('share.text')||'Check out this portfolio!',url:w.location.href})}catch(err){console.warn('Share cancelled or failed:',err)}})}else if(shareBtn)shareBtn.style.display='none';if(listenBtn&&'speechSynthesis' in w){let speaking=false;const speakPage=()=>{if(speaking){w.speechSynthesis.cancel();speaking=false;listenBtn.textContent=getTranslation('listen.button')||'Listen to this page';return}const textToRead=d.body.innerText;const utterance=new SpeechSynthesisUtterance(textToRead);utterance.lang=html.lang;utterance.onend=()=>{speaking=false;listenBtn.textContent=getTranslation('listen.button')||'Listen to this page'};utterance.onerror=()=>{speaking=false;listenBtn.textContent=getTranslation('listen.button')||'Listen to this page'};w.speechSynthesis.speak(utterance);speaking=true;listenBtn.textContent=getTranslation('listen.stop')||'Stop listening'};listenBtn.addEventListener('click',speakPage)}else if(listenBtn)listenBtn.style.display='none';if(commandPalette&&commandInput&&commandResults){const commands=[{label:'Home',action:()=>w.location.hash='#home',keywords:['home']},{label:'About',action:()=>w.location.hash='#about',keywords:['about']},{label:'Projects',action:()=>w.location.hash='#projects',keywords:['projects']},{label:'Learning',action:()=>w.location.hash='#learning',keywords:['learning']},{label:'Contact',action:()=>w.location.hash='#contact',keywords:['contact']},{label:'Toggle dark mode',action:()=>themeToggle.click(),keywords:['dark','theme']},{label:'Switch to English',action:()=>{langSelect.value='en';langSelect.dispatchEvent(new Event('change'))},keywords:['english','language']},{label:'Switch to Telugu',action:()=>{langSelect.value='te';langSelect.dispatchEvent(new Event('change'))},keywords:['telugu','language']},{label:'Switch to Hindi',action:()=>{langSelect.value='hi';langSelect.dispatchEvent(new Event('change'))},keywords:['hindi','language']}];let selectedIndex=-1,currentFilter='';const openPalette=()=>{commandPalette.hidden=false;commandInput.value='';currentFilter='';renderResults(commands);commandInput.focus();selectedIndex=-1};const closePalette=()=>{commandPalette.hidden=true};const renderResults=results=>{commandResults.innerHTML='';results.forEach((cmd,idx)=>{const li=d.createElement('li');li.textContent=cmd.label;li.setAttribute('role','option');li.dataset.index=idx;li.addEventListener('click',()=>{cmd.action();closePalette()});commandResults.appendChild(li)});if(results.length>0){selectedIndex=0;highlightSelected()}else selectedIndex=-1};const highlightSelected=()=>{const items=commandResults.querySelectorAll('li');items.forEach((li,idx)=>{li.setAttribute('aria-selected',idx===selectedIndex?'true':'false');if(idx===selectedIndex)li.scrollIntoView({block:'nearest'})})};const filterCommands=query=>{const lower=query.toLowerCase();return commands.filter(cmd=>cmd.label.toLowerCase().includes(lower)||cmd.keywords.some(k=>k.includes(lower)))};commandInput.addEventListener('input',()=>{currentFilter=commandInput.value;const filtered=filterCommands(currentFilter);renderResults(filtered)});commandInput.addEventListener('keydown',e=>{const items=commandResults.querySelectorAll('li');if(e.key==='ArrowDown'){e.preventDefault();if(items.length>0){selectedIndex=(selectedIndex+1)%items.length;highlightSelected()}}else if(e.key==='ArrowUp'){e.preventDefault();if(items.length>0){selectedIndex=(selectedIndex-1+items.length)%items.length;highlightSelected()}}else if(e.key==='Enter'){e.preventDefault();if(selectedIndex>=0&&items.length>0){const cmd=commands.find(c=>c.label===items[selectedIndex].textContent);if(cmd){cmd.action();closePalette()}}}else if(e.key==='Escape')closePalette()});d.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();openPalette()}});d.querySelector('[data-close-palette]').addEventListener('click',closePalette)}if(w.location.hash){const target=d.getElementById(w.location.hash.slice(1));if(target){setTimeout(()=>{const pad=parseFloat(getComputedStyle(html).scrollPaddingTop)||60;w.scrollTo({top:target.getBoundingClientRect().top+w.scrollY-pad,behavior:prefersReducedMotion.matches?'auto':'smooth'})},100)}}let deferredInstallPrompt=null;const installButton=d.getElementById('install-btn');w.addEventListener('beforeinstallprompt',event=>{event.preventDefault();deferredInstallPrompt=event;if(installButton)installButton.classList.remove('hidden')});w.addEventListener('appinstalled',()=>{deferredInstallPrompt=null;if(installButton)installButton.classList.add('hidden')});if(installButton){installButton.addEventListener('click',async()=>{if(!deferredInstallPrompt)return;deferredInstallPrompt.prompt();const{outcome}=await deferredInstallPrompt.userChoice;if(outcome==='accepted'){deferredInstallPrompt=null;installButton.classList.add('hidden')}})}if('PerformanceObserver' in window){try{new PerformanceObserver(list=>{const entries=list.getEntries();const lastEntry=entries[entries.length-1];console.log('[Web Vitals] LCP:',lastEntry.startTime)}).observe({type:'largest-contentful-paint',buffered:true});let clsValue=0;new PerformanceObserver(list=>{for(const entry of list.getEntries()){if(!entry.hadRecentInput)clsValue+=entry.value}console.log('[Web Vitals] CLS:',clsValue)}).observe({type:'layout-shift',buffered:true});let inpValue=0;new PerformanceObserver(list=>{for(const entry of list.getEntries()){inpValue=entry.duration}console.log('[Web Vitals] INP:',inpValue)}).observe({type:'event',buffered:true,durationThreshold:16})}catch(e){console.warn('Web Vitals RUM not supported:',e)}}});
+document.addEventListener('DOMContentLoaded', () => {
+    const d = document, w = window, html = d.documentElement;
+    const q = id => d.getElementById(id);
+    const header = q('main-header'), themeToggle = q('theme-toggle');
+    const sunIcon = q('sun-icon'), moonIcon = q('moon-icon');
+    const menuToggle = q('menu-toggle'), nav = q('main-nav'), mainContent = q('main-content');
+    const footerElement = d.querySelector('footer'), navLinks = d.querySelectorAll('.nav-link'), sections = d.querySelectorAll('section[id]');
+    const topBtn = q('topBtn'), progressBar = q('scroll-progress');
+    const contactForm = q('contact-form'), submitBtn = q('submit-btn'), formStatus = q('form-status');
+    const metaThemeColorLight = q('meta-theme-color-light'), metaThemeColorDark = q('meta-theme-color-dark');
+    const langAnnouncer = q('lang-announcer');
+    const commandPalette = q('command-palette'), commandInput = q('command-input'), commandResults = q('command-results');
+    const shareBtn = q('share-btn');
+    const listenBtn = q('listen-btn');
+
+    const prefersReducedMotion = w.matchMedia('(prefers-reduced-motion: reduce)');
+    const supportsInert = 'inert' in HTMLElement.prototype;
+    const systemTheme = w.matchMedia('(prefers-color-scheme: dark)');
+    const supportsViewTransitions = 'startViewTransition' in d;
+    const supportsScrollDrivenAnimations = CSS.supports('animation-timeline: view()');
+
+    let currentLang = 'en';
+
+    const getTranslation = (key) => {
+        if (typeof translations === 'undefined') return '';
+        const dict = translations[currentLang] || translations.en;
+        return dict[key] !== undefined ? dict[key] : (translations.en[key] || '');
+    };
+
+    const isDark = () => html.classList.contains('dark') || (!html.classList.contains('light') && systemTheme.matches);
+
+    const updateMetaColors = (darkMode) => {
+        if (metaThemeColorLight) metaThemeColorLight.setAttribute('content', darkMode ? '#000000' : '#f5f5f7');
+        if (metaThemeColorDark) metaThemeColorDark.setAttribute('content', darkMode ? '#000000' : '#f5f5f7');
+    };
+
+    const updateThemeIcon = () => {
+        if (!moonIcon || !sunIcon || !themeToggle) return;
+        const darkMode = isDark();
+        themeToggle.setAttribute('aria-checked', String(darkMode));
+        const label = getTranslation(darkMode ? 'theme.toLight' : 'theme.toDark') || (darkMode ? 'Switch to light mode' : 'Switch to dark mode');
+        themeToggle.setAttribute('aria-label', label);
+
+        if (darkMode) {
+            moonIcon.classList.add('hidden');
+            sunIcon.classList.remove('hidden');
+        } else {
+            moonIcon.classList.remove('hidden');
+            sunIcon.classList.add('hidden');
+        }
+    };
+
+    const applyThemeFromState = (darkMode) => {
+        html.classList.remove('light', 'dark');
+        html.classList.add(darkMode ? 'dark' : 'light');
+        try { localStorage.setItem('theme', darkMode ? 'dark' : 'light'); } catch (e) {}
+        updateMetaColors(darkMode);
+        updateThemeIcon();
+        requestAnimationFrame(dispatchThemeUpdate);
+    };
+
+    const getInitialTheme = () => {
+        const urlParams = new URLSearchParams(w.location.search);
+        const themeParam = urlParams.get('theme');
+        if (themeParam === 'dark') return true;
+        if (themeParam === 'light') return false;
+
+        try {
+            const saved = localStorage.getItem('theme');
+            if (saved === 'dark') return true;
+            if (saved === 'light') return false;
+        } catch (e) {}
+        return systemTheme.matches;
+    };
+
+    applyThemeFromState(getInitialTheme());
+
+    const dispatchThemeUpdate = () => {
+        const styles = w.getComputedStyle(d.body);
+        d.dispatchEvent(new CustomEvent('themechange', {
+            detail: {
+                background: styles.getPropertyValue('--color-bg').trim(),
+                particle: styles.getPropertyValue('--canvas-particle').trim(),
+                line: styles.getPropertyValue('--canvas-line').trim()
+            }
+        }));
+    };
+
+    systemTheme.addEventListener('change', (e) => {
+        try {
+            if (!localStorage.getItem('theme') && !new URLSearchParams(w.location.search).has('theme')) {
+                applyThemeFromState(e.matches);
+            }
+        } catch (err) {}
+    });
+
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            const currentlyDark = isDark();
+            const newDark = !currentlyDark;
+            const doApply = () => applyThemeFromState(newDark);
+            if (supportsViewTransitions) {
+                d.startViewTransition(doApply);
+            } else {
+                doApply();
+            }
+        });
+    }
+
+    // --- Multi-Language System (chunked apply) ---
+    const applyLanguageChunked = (lang) => {
+        if (typeof translations === 'undefined') return;
+        const targetLang = translations[lang] ? lang : 'en';
+        currentLang = targetLang;
+        const dict = translations[targetLang];
+
+        html.lang = targetLang === 'en' ? 'en-IN' : targetLang === 'te' ? 'te-IN' : targetLang === 'hi' ? 'hi-IN' : targetLang;
+        try { localStorage.setItem('lang', targetLang); } catch (e) {}
+
+        const yieldToMain = w.scheduler && w.scheduler.yield ? () => w.scheduler.yield() : () => new Promise(resolve => setTimeout(resolve, 0));
+
+        const elements = [...d.querySelectorAll('[data-i18n]')];
+        const placeholders = [...d.querySelectorAll('[data-i18n-placeholder]')];
+        const ariaLabels = [...d.querySelectorAll('[data-i18n-aria]')];
+        const altTexts = [...d.querySelectorAll('[data-i18n-alt]')];
+
+        const processChunk = async (items, callback) => {
+            for (let i = 0; i < items.length; i++) {
+                callback(items[i]);
+                if (i % 10 === 9) await yieldToMain();
+            }
+        };
+
+        (async () => {
+            await processChunk(elements, el => {
+                const key = el.getAttribute('data-i18n');
+                if (dict[key] !== undefined) el.innerHTML = dict[key];
+            });
+            await processChunk(placeholders, el => {
+                const key = el.getAttribute('data-i18n-placeholder');
+                if (dict[key] !== undefined) el.setAttribute('placeholder', dict[key]);
+            });
+            await processChunk(ariaLabels, el => {
+                const key = el.getAttribute('data-i18n-aria');
+                if (dict[key] !== undefined) el.setAttribute('aria-label', dict[key]);
+            });
+            await processChunk(altTexts, el => {
+                const key = el.getAttribute('data-i18n-alt');
+                if (dict[key] !== undefined) el.setAttribute('alt', dict[key]);
+            });
+
+            if (dict['page.title']) d.title = dict['page.title'];
+            const metaDesc = d.querySelector('meta[name="description"]');
+            if (metaDesc && dict['page.description']) metaDesc.setAttribute('content', dict['page.description']);
+
+            updateThemeIcon();
+
+            if (langAnnouncer) {
+                langAnnouncer.textContent = getTranslation('lang.announce') || `Language changed to ${targetLang}`;
+            }
+        })();
+    };
+
+    const getInitialLanguage = () => {
+        const urlParams = new URLSearchParams(w.location.search);
+        const langParam = urlParams.get('lang');
+        if (langParam && ['en', 'te', 'hi'].includes(langParam)) return langParam;
+        try { return localStorage.getItem('lang') || 'en'; } catch (e) { return 'en'; }
+    };
+
+    const langSelect = q('lang-select');
+    if (langSelect && typeof translations !== 'undefined') {
+        const initialLang = getInitialLanguage();
+        langSelect.value = initialLang;
+        applyLanguageChunked(initialLang);
+        langSelect.addEventListener('change', (e) => {
+            const newLang = e.target.value;
+            const doApply = () => applyLanguageChunked(newLang);
+            if (supportsViewTransitions) {
+                d.startViewTransition(doApply);
+            } else {
+                doApply();
+            }
+        });
+    }
+
+    // --- Canvas Particle Engine (same as previous) ---
+    const canvas = q('hero-canvas'), heroSection = q('home');
+    const QUALITY = Object.freeze({ LOW: 0, MEDIUM: 1, HIGH: 2 });
+    const CONFIG = Object.freeze({
+        mouseRadius: 150, mouseRadiusSq: 22500, physicsStep: 1000/60, alphaBuckets: 5,
+        levels: {
+            0: { count: 25, connDistSq: 6400 },
+            1: { count: 50, connDistSq: 10000 },
+            2: { count: 80, connDistSq: 14400 }
+        }
+    });
+    const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    const saveData = connection && connection.saveData;
+
+    let initCanvas = () => {};
+
+    if (canvas && heroSection && !prefersReducedMotion.matches && !saveData) {
+        canvas.setAttribute('aria-hidden', 'true');
+        const ctx = canvas.getContext('2d', { alpha: false });
+        let engineRunning = false, heroVisible = true, animationFrameId = null, width = 0, height = 0, lastDpr = 0;
+        let lastTime = 0, accumulator = 0, emaFps = 60, lastQualityCheck = 0, lowFrames = 0, highFrames = 0;
+        let maxHardwareQuality = QUALITY.MEDIUM, currentQuality = QUALITY.LOW;
+        const particles = [], mouse = Object.seal({ x: null, y: null });
+        let rawPointer = { x: null, y: null }, backgroundColor, particleColor, lineColor;
+        const maxLines = (CONFIG.levels[2].count * (CONFIG.levels[2].count - 1)) / 2;
+        const lineBuckets = Array.from({ length: 5 }, () => new Float32Array(maxLines * 4)), bucketCounts = new Int32Array(5);
+
+        const assessHardware = () => {
+            const cores = navigator.hardwareConcurrency || 4, networkType = connection ? connection.effectiveType : '4g';
+            const isSlow = networkType === '2g' || networkType === 'slow-2g' || networkType === '3g';
+            if (cores > 4 && !isSlow && w.innerWidth > 768) maxHardwareQuality = QUALITY.HIGH;
+            else if (isSlow) maxHardwareQuality = QUALITY.LOW;
+            else maxHardwareQuality = QUALITY.MEDIUM;
+            currentQuality = maxHardwareQuality;
+        };
+
+        const themeHandler = (e) => {
+            if (!e || !e.detail) return;
+            backgroundColor = e.detail.background || backgroundColor;
+            particleColor = e.detail.particle || particleColor;
+            lineColor = e.detail.line || lineColor;
+        };
+
+        const initTheme = () => {
+            const styles = w.getComputedStyle(d.body);
+            backgroundColor = styles.getPropertyValue('--color-bg').trim();
+            particleColor = styles.getPropertyValue('--canvas-particle').trim();
+            lineColor = styles.getPropertyValue('--canvas-line').trim();
+        };
+
+        const pointerMoveHandler = (e) => { rawPointer.x = e.offsetX; rawPointer.y = e.offsetY; };
+        const pointerLeaveHandler = () => { rawPointer.x = null; rawPointer.y = null; };
+
+        class Particle {
+            constructor() { this.reset(); }
+            reset() {
+                this.x = Math.random() * width; this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 0.5; this.vy = (Math.random() - 0.5) * 0.5;
+                this.radius = Math.random() * 1.5 + 0.5;
+            }
+            update(dt) {
+                const timeScale = dt / CONFIG.physicsStep;
+                this.x += this.vx * timeScale; this.y += this.vy * timeScale;
+                if (this.x < 0 || this.x > width) { this.vx = -this.vx; this.x = Math.max(0, Math.min(width, this.x)); }
+                if (this.y < 0 || this.y > height) { this.vy = -this.vy; this.y = Math.max(0, Math.min(height, this.y)); }
+                if (mouse.x !== null) {
+                    const dx = mouse.x - this.x, dy = mouse.y - this.y, distSq = dx*dx + dy*dy;
+                    if (distSq > 0 && distSq < CONFIG.mouseRadiusSq) {
+                        const distance = Math.sqrt(distSq), force = Math.max(0, (CONFIG.mouseRadius - distance) / CONFIG.mouseRadius);
+                        this.x -= (dx / distance) * force * 1.5 * timeScale;
+                        this.y -= (dy / distance) * force * 1.5 * timeScale;
+                    }
+                }
+            }
+            draw() { ctx.beginPath(); ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2); ctx.fill(); }
+        }
+
+        initCanvas = () => {
+            const nw = canvas.parentElement.clientWidth, nh = canvas.parentElement.clientHeight;
+            const dpr = Math.min(w.devicePixelRatio || 1, 2);
+            if (nw === 0 || nh === 0 || (nw === width && nh === height && dpr === lastDpr)) return;
+            width = nw; height = nh; lastDpr = dpr;
+            canvas.width = width * dpr; canvas.height = height * dpr;
+            canvas.style.width = `${width}px`; canvas.style.height = `${height}px`;
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            const maxNeeded = CONFIG.levels[QUALITY.HIGH].count;
+            while (particles.length < maxNeeded) particles.push(new Particle());
+            for (let i = 0; i < maxNeeded; i++) particles[i].reset();
+        };
+
+        const startEngine = () => {
+            if (engineRunning) return;
+            engineRunning = true; lastTime = performance.now(); accumulator = 0;
+            animationFrameId = requestAnimationFrame(animateCanvas);
+        };
+
+        const stopEngine = () => {
+            engineRunning = false;
+            if (animationFrameId !== null) {
+                cancelAnimationFrame(animationFrameId);
+                animationFrameId = null;
+            }
+        };
+
+        const animateCanvas = (time) => {
+            if (!engineRunning) return;
+            animationFrameId = requestAnimationFrame(animateCanvas);
+            let dt = time - lastTime;
+            if (dt > 100) dt = 100;
+            lastTime = time;
+
+            if (rawPointer.x !== null) { mouse.x = rawPointer.x; mouse.y = rawPointer.y; }
+            else { mouse.x = null; mouse.y = null; }
+
+            emaFps = emaFps * 0.9 + (1000 / (dt || 1)) * 0.1;
+            if (time - lastQualityCheck > 500) {
+                lastQualityCheck = time;
+                if (emaFps < 45) { lowFrames++; highFrames = 0; }
+                else if (emaFps > 55) { highFrames++; lowFrames = 0; }
+                else { lowFrames = 0; highFrames = 0; }
+
+                if (lowFrames >= 3 && currentQuality > QUALITY.LOW) {
+                    currentQuality--; lowFrames = 0;
+                } else if (highFrames >= 3 && currentQuality < maxHardwareQuality) {
+                    const oldTarget = CONFIG.levels[currentQuality].count;
+                    currentQuality++;
+                    const newTarget = CONFIG.levels[currentQuality].count;
+                    for (let i = oldTarget; i < newTarget; i++) particles[i].reset();
+                    highFrames = 0;
+                }
+            }
+
+            accumulator += dt;
+            const activeCount = CONFIG.levels[currentQuality].count;
+            const currentConnDistSq = CONFIG.levels[currentQuality].connDistSq;
+            let steps = 0;
+            while (accumulator >= CONFIG.physicsStep && steps < 5) {
+                for (let i = 0; i < activeCount; i++) particles[i].update(CONFIG.physicsStep);
+                accumulator -= CONFIG.physicsStep;
+                steps++;
+            }
+
+            ctx.fillStyle = backgroundColor;
+            ctx.fillRect(0, 0, width, height);
+            ctx.fillStyle = particleColor;
+            for (let i = 0; i < activeCount; i++) particles[i].draw();
+
+            bucketCounts.fill(0);
+            for (let i = 0; i < activeCount; i++) {
+                for (let j = i + 1; j < activeCount; j++) {
+                    const dx = particles[i].x - particles[j].x, dy = particles[i].y - particles[j].y, distSq = dx*dx + dy*dy;
+                    if (distSq < currentConnDistSq) {
+                        const alpha = 1 - (distSq / currentConnDistSq);
+                        let bucketIdx = Math.floor(alpha * 5);
+                        if (bucketIdx >= 5) bucketIdx = 4;
+                        const ptr = bucketCounts[bucketIdx] * 4, arr = lineBuckets[bucketIdx];
+                        arr[ptr] = particles[i].x; arr[ptr+1] = particles[i].y;
+                        arr[ptr+2] = particles[j].x; arr[ptr+3] = particles[j].y;
+                        bucketCounts[bucketIdx]++;
+                    }
+                }
+            }
+
+            ctx.strokeStyle = lineColor;
+            for (let b = 0; b < 5; b++) {
+                if (bucketCounts[b] === 0) continue;
+                ctx.beginPath();
+                ctx.globalAlpha = (b + 1) / 5;
+                const count = bucketCounts[b], arr = lineBuckets[b];
+                for (let i = 0; i < count; i++) {
+                    const ptr = i * 4;
+                    ctx.moveTo(arr[ptr], arr[ptr+1]);
+                    ctx.lineTo(arr[ptr+2], arr[ptr+3]);
+                }
+                ctx.stroke();
+            }
+            ctx.globalAlpha = 1.0;
+        };
+
+        canvas.addEventListener('pointermove', pointerMoveHandler, { passive: true });
+        canvas.addEventListener('pointerleave', pointerLeaveHandler, { passive: true });
+        canvas.addEventListener('pointercancel', pointerLeaveHandler, { passive: true });
+        d.addEventListener('themechange', themeHandler);
+
+        let resizePending = false;
+        const resizeObserver = new ResizeObserver(() => {
+            if (resizePending) return;
+            resizePending = true;
+            requestAnimationFrame(() => { initCanvas(); resizePending = false; });
+        });
+        resizeObserver.observe(canvas.parentElement);
+
+        const visibilityHandler = () => { if (d.hidden) stopEngine(); else if (heroVisible) startEngine(); };
+        const pageShowHandler = (event) => {
+            if (heroVisible && !d.hidden && (event.persisted || !event.persisted)) startEngine();
+        };
+
+        new IntersectionObserver(([entry]) => {
+            heroVisible = entry.isIntersecting;
+            if (heroVisible && !d.hidden && !prefersReducedMotion.matches) startEngine();
+            else stopEngine();
+        }, { threshold: 0 }).observe(heroSection);
+
+        d.addEventListener('visibilitychange', visibilityHandler);
+        w.addEventListener('pagehide', stopEngine);
+        w.addEventListener('pageshow', pageShowHandler);
+
+        const updateHardwareAndCanvas = () => {
+            assessHardware();
+            if (currentQuality > maxHardwareQuality) currentQuality = maxHardwareQuality;
+            initCanvas();
+        };
+        w.addEventListener('resize', updateHardwareAndCanvas);
+        if (connection) connection.addEventListener('change', updateHardwareAndCanvas);
+
+        // DPR change detection
+        let lastDprValue = w.devicePixelRatio || 1;
+        const dprMql = w.matchMedia(`(resolution: ${lastDprValue}dppx)`);
+        const onDprChange = () => {
+            const newDpr = w.devicePixelRatio || 1;
+            if (newDpr !== lastDprValue) {
+                lastDprValue = newDpr;
+                initCanvas();
+            }
+            dprMql.addEventListener('change', onDprChange, { once: true });
+        };
+        dprMql.addEventListener('change', onDprChange, { once: true });
+
+        const motionHandler = (e) => { if (e.matches) stopEngine(); else if (heroVisible && !d.hidden) startEngine(); };
+        prefersReducedMotion.addEventListener('change', motionHandler);
+
+        const initCanvasEngine = () => {
+            initTheme();
+            assessHardware();
+            initCanvas();
+            startEngine();
+        };
+
+        if (w.requestIdleCallback) {
+            w.requestIdleCallback(initCanvasEngine, { timeout: 1000 });
+        } else {
+            setTimeout(initCanvasEngine, 0);
+        }
+    }
+
+    // --- Navigation & Mobile Drawer (unchanged) ---
+    const closeMenu = () => {
+        if (!nav || !menuToggle || !nav.classList.contains('open')) return;
+        nav.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        html.style.overflow = '';
+        if (topBtn) topBtn.inert = false;
+        if (supportsInert) {
+            if (mainContent) mainContent.inert = false;
+            if (footerElement) footerElement.inert = false;
+        } else {
+            if (mainContent) mainContent.removeAttribute('aria-hidden');
+            if (footerElement) footerElement.removeAttribute('aria-hidden');
+        }
+    };
+    const desktopMQ = w.matchMedia('(min-width: 768px)');
+
+    if (menuToggle && nav) {
+        menuToggle.addEventListener('click', () => {
+            const isOpen = nav.classList.toggle('open');
+            menuToggle.setAttribute('aria-expanded', String(isOpen));
+            if (isOpen) {
+                html.style.overflow = 'hidden';
+                if (topBtn) topBtn.inert = true;
+                if (supportsInert) {
+                    if (mainContent) mainContent.inert = true;
+                    if (footerElement) footerElement.inert = true;
+                } else {
+                    if (mainContent) mainContent.setAttribute('aria-hidden', 'true');
+                    if (footerElement) footerElement.setAttribute('aria-hidden', 'true');
+                }
+                const firstLink = nav.querySelector('a');
+                if (firstLink) requestAnimationFrame(() => requestAnimationFrame(() => firstLink.focus()));
+            } else {
+                closeMenu();
+            }
+        });
+        desktopMQ.addEventListener('change', (e) => { if (e.matches) closeMenu(); });
+        nav.addEventListener('click', (e) => { if (e.target.closest('a[href]')) closeMenu(); });
+        d.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && nav.classList.contains('open')) { closeMenu(); menuToggle.focus(); }
+            if (!supportsInert && e.key === 'Tab' && nav.classList.contains('open') && w.innerWidth <= 768) {
+                const focusable = nav.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])');
+                if (focusable.length === 0) return;
+                const first = focusable[0], last = focusable[focusable.length - 1];
+                if (e.shiftKey && d.activeElement === first) { e.preventDefault(); last.focus(); }
+                else if (!e.shiftKey && d.activeElement === last) { e.preventDefault(); first.focus(); }
+            }
+        });
+    }
+
+    // --- Smooth Scroll & Section Spy (Event Delegation) ---
+    d.body.addEventListener('click', (e) => {
+        const link = e.target.closest('a[href^="#"]');
+        if (!link || link.classList.contains('skip-link')) return;
+        const href = link.getAttribute('href');
+        if (!href || href === '#') return;
+        const target = d.getElementById(href.slice(1));
+        if (!target) return;
+        e.preventDefault();
+        if (nav && nav.classList.contains('open')) closeMenu();
+        const pad = parseFloat(getComputedStyle(html).scrollPaddingTop) || 60;
+        w.scrollTo({
+            top: target.getBoundingClientRect().top + w.scrollY - pad,
+            behavior: prefersReducedMotion.matches ? 'auto' : 'smooth'
+        });
+        if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1');
+        target.focus({ preventScroll: true });
+        history.pushState(null, '', href);
+    });
+
+    const initDeferredObservers = () => {
+        if (navLinks.length > 0 && sections.length > 0) {
+            const navObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        navLinks.forEach(link => {
+                            const on = link.getAttribute('href') === `#${id}`;
+                            link.classList.toggle('active', on);
+                            if (on) link.setAttribute('aria-current', 'true');
+                            else link.removeAttribute('aria-current');
+                        });
+                        if (history.replaceState) history.replaceState(null, '', `#${id}`);
+                    }
+                });
+            }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+
+            [...navLinks]
+                .map(l => d.getElementById(l.getAttribute('href').slice(1)))
+                .filter(Boolean)
+                .forEach(sec => navObserver.observe(sec));
+        }
+
+        if (!supportsScrollDrivenAnimations && !prefersReducedMotion.matches) {
+            const reveals = d.querySelectorAll('.reveal');
+            if (reveals.length > 0) {
+                const revealObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { rootMargin: '0px 0px -50px 0px', threshold: 0.1 });
+                reveals.forEach(el => revealObserver.observe(el));
+            }
+        } else {
+            d.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+        }
+    };
+
+    if (canvas && (prefersReducedMotion.matches || saveData)) {
+        prefersReducedMotion.addEventListener('change', () => { if (!prefersReducedMotion.matches) location.reload(); });
+    }
+
+    const scheduleIdle = w.requestIdleCallback ?? ((cb) => setTimeout(cb, 1));
+    scheduleIdle(initDeferredObservers);
+
+    // --- Scroll Progress & Top Button ---
+    let ticking = false;
+    w.addEventListener('scroll', () => {
+        if (!ticking) {
+            w.requestAnimationFrame(() => {
+                const scrollTop = w.scrollY;
+                if (header) {
+                    if (scrollTop > 10) header.classList.add('scrolled');
+                    else header.classList.remove('scrolled');
+                }
+                if (progressBar && !prefersReducedMotion.matches) {
+                    const docHeight = d.documentElement.scrollHeight - w.innerHeight;
+                    progressBar.style.width = `${docHeight > 0 ? (scrollTop / docHeight) * 100 : 0}%`;
+                }
+                if (topBtn) {
+                    if (scrollTop > 400) topBtn.classList.remove('hidden');
+                    else topBtn.classList.add('hidden');
+                }
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }, { passive: true });
+
+    if (topBtn) {
+        topBtn.addEventListener('click', () => w.scrollTo({ top: 0, behavior: prefersReducedMotion.matches ? 'auto' : 'smooth' }));
+    }
+
+    // --- Contact Form (unchanged) ---
+    if (contactForm && submitBtn && formStatus) {
+        const setStatus = (msg, state) => {
+            formStatus.textContent = msg;
+            formStatus.className = `form-status is-${state}`;
+        };
+        const errFor = f => q(f.id + '-err');
+
+        const showError = (f, msg) => {
+            const p = errFor(f);
+            f.setAttribute('aria-invalid', 'true');
+            if (p) {
+                p.textContent = msg;
+                p.hidden = false;
+                p.setAttribute('role', 'alert');
+            }
+        };
+
+        const clearError = f => {
+            const p = errFor(f);
+            f.removeAttribute('aria-invalid');
+            if (p) {
+                p.hidden = true;
+                p.textContent = '';
+                p.removeAttribute('role');
+            }
+        };
+
+        contactForm.setAttribute('novalidate', '');
+        ['name', 'email', 'form-message'].forEach(id => {
+            const f = q(id);
+            if (f) f.addEventListener('input', () => { if (f.checkValidity()) clearError(f); });
+        });
+
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const fields = [...contactForm.elements].filter(f => f.willValidate && f.id);
+            fields.forEach(clearError);
+            const bad = fields.filter(f => !f.checkValidity());
+
+            if (bad.length) {
+                bad.forEach(f => showError(f, f.validationMessage));
+                const msg = getTranslation('form.invalid.generic') || `${bad.length} field(s) need attention.`;
+                setStatus(msg, 'error');
+                bad[0].focus();
+                return;
+            }
+
+            const defaultSubmitText = getTranslation('form.submit') || 'Send Message';
+            submitBtn.disabled = true;
+            submitBtn.textContent = getTranslation('form.sending') || 'Sending...';
+            setStatus(getTranslation('form.sending') || 'Sending your message...', 'pending');
+
+            try {
+                const response = await fetch(contactForm.action, {
+                    method: 'POST',
+                    body: new FormData(contactForm),
+                    headers: { 'Accept': 'application/json' }
+                });
+                if (!response.ok) throw new Error('Network response was not ok.');
+                contactForm.reset();
+                submitBtn.textContent = getTranslation('form.sent') || 'Message Sent';
+                submitBtn.classList.add('success');
+                setStatus(getTranslation('form.success') || 'Message sent successfully.', 'success');
+
+                setTimeout(() => {
+                    submitBtn.textContent = defaultSubmitText;
+                    submitBtn.classList.remove('success');
+                    submitBtn.disabled = false;
+                    formStatus.textContent = '';
+                }, 4000);
+            } catch (error) {
+                submitBtn.disabled = false;
+                submitBtn.textContent = defaultSubmitText;
+                setStatus(getTranslation('form.error') || 'Something went wrong. Please try again, or email me directly.', 'error');
+            }
+        });
+    }
+
+    // --- Service Worker Registration & Update Flow ---
+    if ('serviceWorker' in navigator) {
+        w.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js').then(registration => {
+                registration.addEventListener('updatefound', () => {
+                    const newWorker = registration.installing;
+                    newWorker.addEventListener('statechange', () => {
+                        if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                            if (confirm('A new version of this site is available. Reload now?')) {
+                                w.location.reload();
+                            }
+                        }
+                    });
+                });
+            }).catch(err => {
+                console.warn('Service worker registration failed:', err);
+            });
+        });
+
+        let refreshing = false;
+        navigator.serviceWorker.addEventListener('controllerchange', () => {
+            if (!refreshing) {
+                refreshing = true;
+                w.location.reload();
+            }
+        });
+    }
+
+    // --- Email Obfuscation ---
+    const emailHost = q('contact-email');
+    if (emailHost && emailHost.dataset.u && emailHost.dataset.d) {
+        const addr = `${emailHost.dataset.u}@${emailHost.dataset.d}`;
+        const a = d.createElement('a');
+        a.href = `mailto:${addr}`;
+        a.textContent = addr;
+        a.rel = 'nofollow';
+        emailHost.replaceChildren(a);
+    }
+
+    // --- Native Share API ---
+    if (shareBtn && navigator.share) {
+        shareBtn.addEventListener('click', async () => {
+            try {
+                await navigator.share({
+                    title: d.title,
+                    text: getTranslation('share.text') || 'Check out this portfolio!',
+                    url: w.location.href
+                });
+            } catch (err) {
+                console.warn('Share cancelled or failed:', err);
+            }
+        });
+    } else if (shareBtn) {
+        shareBtn.style.display = 'none';
+    }
+
+    // --- Speech Synthesis (Listen button) ---
+    if (listenBtn && 'speechSynthesis' in w) {
+        let speaking = false;
+        const speakPage = () => {
+            if (speaking) {
+                w.speechSynthesis.cancel();
+                speaking = false;
+                listenBtn.textContent = getTranslation('listen.button') || 'Listen to this page';
+                return;
+            }
+            const textToRead = d.body.innerText;
+            const utterance = new SpeechSynthesisUtterance(textToRead);
+            utterance.lang = html.lang;
+            utterance.onend = () => {
+                speaking = false;
+                listenBtn.textContent = getTranslation('listen.button') || 'Listen to this page';
+            };
+            utterance.onerror = () => {
+                speaking = false;
+                listenBtn.textContent = getTranslation('listen.button') || 'Listen to this page';
+            };
+            w.speechSynthesis.speak(utterance);
+            speaking = true;
+            listenBtn.textContent = getTranslation('listen.stop') || 'Stop listening';
+        };
+        listenBtn.addEventListener('click', speakPage);
+    } else if (listenBtn) {
+        listenBtn.style.display = 'none';
+    }
+
+    // --- Command Palette (Ctrl+K / Cmd+K) ---
+    if (commandPalette && commandInput && commandResults) {
+        const commands = [
+            { label: 'Home', action: () => w.location.hash = '#home', keywords: ['home'] },
+            { label: 'About', action: () => w.location.hash = '#about', keywords: ['about'] },
+            { label: 'Projects', action: () => w.location.hash = '#projects', keywords: ['projects'] },
+            { label: 'Learning', action: () => w.location.hash = '#learning', keywords: ['learning'] },
+            { label: 'Contact', action: () => w.location.hash = '#contact', keywords: ['contact'] },
+            { label: 'Toggle dark mode', action: () => themeToggle.click(), keywords: ['dark', 'theme'] },
+            { label: 'Switch to English', action: () => { langSelect.value = 'en'; langSelect.dispatchEvent(new Event('change')); }, keywords: ['english', 'language'] },
+            { label: 'Switch to Telugu', action: () => { langSelect.value = 'te'; langSelect.dispatchEvent(new Event('change')); }, keywords: ['telugu', 'language'] },
+            { label: 'Switch to Hindi', action: () => { langSelect.value = 'hi'; langSelect.dispatchEvent(new Event('change')); }, keywords: ['hindi', 'language'] },
+        ];
+
+        let selectedIndex = -1;
+        let currentFilter = '';
+
+        const openPalette = () => {
+            commandPalette.hidden = false;
+            commandInput.value = '';
+            currentFilter = '';
+            renderResults(commands);
+            commandInput.focus();
+            selectedIndex = -1;
+        };
+
+        const closePalette = () => {
+            commandPalette.hidden = true;
+        };
+
+        const renderResults = (results) => {
+            commandResults.innerHTML = '';
+            results.forEach((cmd, idx) => {
+                const li = d.createElement('li');
+                li.textContent = cmd.label;
+                li.setAttribute('role', 'option');
+                li.dataset.index = idx;
+                li.addEventListener('click', () => {
+                    cmd.action();
+                    closePalette();
+                });
+                commandResults.appendChild(li);
+            });
+            if (results.length > 0) {
+                selectedIndex = 0;
+                highlightSelected();
+            } else {
+                selectedIndex = -1;
+            }
+        };
+
+        const highlightSelected = () => {
+            const items = commandResults.querySelectorAll('li');
+            items.forEach((li, idx) => {
+                li.setAttribute('aria-selected', idx === selectedIndex ? 'true' : 'false');
+                if (idx === selectedIndex) li.scrollIntoView({ block: 'nearest' });
+            });
+        };
+
+        const filterCommands = (query) => {
+            const lower = query.toLowerCase();
+            return commands.filter(cmd => {
+                return cmd.label.toLowerCase().includes(lower) || cmd.keywords.some(k => k.includes(lower));
+            });
+        };
+
+        commandInput.addEventListener('input', () => {
+            currentFilter = commandInput.value;
+            const filtered = filterCommands(currentFilter);
+            renderResults(filtered);
+        });
+
+        commandInput.addEventListener('keydown', (e) => {
+            const items = commandResults.querySelectorAll('li');
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                if (items.length > 0) {
+                    selectedIndex = (selectedIndex + 1) % items.length;
+                    highlightSelected();
+                }
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                if (items.length > 0) {
+                    selectedIndex = (selectedIndex - 1 + items.length) % items.length;
+                    highlightSelected();
+                }
+            } else if (e.key === 'Enter') {
+                e.preventDefault();
+                if (selectedIndex >= 0 && items.length > 0) {
+                    const cmd = commands.find(c => c.label === items[selectedIndex].textContent);
+                    if (cmd) {
+                        cmd.action();
+                        closePalette();
+                    }
+                }
+            } else if (e.key === 'Escape') {
+                closePalette();
+            }
+        });
+
+        d.addEventListener('keydown', (e) => {
+            if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+                e.preventDefault();
+                openPalette();
+            }
+        });
+
+        d.querySelector('[data-close-palette]').addEventListener('click', closePalette);
+    }
+
+    // --- Scroll to hash on load if present ---
+    if (w.location.hash) {
+        const target = d.getElementById(w.location.hash.slice(1));
+        if (target) {
+            setTimeout(() => {
+                const pad = parseFloat(getComputedStyle(html).scrollPaddingTop) || 60;
+                w.scrollTo({
+                    top: target.getBoundingClientRect().top + w.scrollY - pad,
+                    behavior: prefersReducedMotion.matches ? 'auto' : 'smooth'
+                });
+            }, 100);
+        }
+    }
+
+    // --- Custom PWA Install Prompt ---
+    let deferredInstallPrompt = null;
+    const installButton = d.getElementById('install-btn');
+
+    w.addEventListener('beforeinstallprompt', (event) => {
+        event.preventDefault();
+        deferredInstallPrompt = event;
+        if (installButton) installButton.classList.remove('hidden');
+    });
+
+    w.addEventListener('appinstalled', () => {
+        deferredInstallPrompt = null;
+        if (installButton) installButton.classList.add('hidden');
+    });
+
+    if (installButton) {
+        installButton.addEventListener('click', async () => {
+            if (!deferredInstallPrompt) return;
+            deferredInstallPrompt.prompt();
+            const { outcome } = await deferredInstallPrompt.userChoice;
+            if (outcome === 'accepted') {
+                deferredInstallPrompt = null;
+                installButton.classList.add('hidden');
+            }
+        });
+    }
+
+    // --- Web Vitals RUM (Item W) ---
+    if ('PerformanceObserver' in window) {
+        try {
+            new PerformanceObserver((list) => {
+                const entries = list.getEntries();
+                const lastEntry = entries[entries.length - 1];
+                console.log('[Web Vitals] LCP:', lastEntry.startTime);
+            }).observe({ type: 'largest-contentful-paint', buffered: true });
+
+            let clsValue = 0;
+            new PerformanceObserver((list) => {
+                for (const entry of list.getEntries()) {
+                    if (!entry.hadRecentInput) clsValue += entry.value;
+                }
+                console.log('[Web Vitals] CLS:', clsValue);
+            }).observe({ type: 'layout-shift', buffered: true });
+
+            let inpValue = 0;
+            new PerformanceObserver((list) => {
+                for (const entry of list.getEntries()) {
+                    inpValue = entry.duration;
+                }
+                console.log('[Web Vitals] INP:', inpValue);
+            }).observe({ type: 'event', buffered: true, durationThreshold: 16 });
+        } catch (e) {
+            console.warn('Web Vitals RUM not supported:', e);
+        }
+    }
+});
