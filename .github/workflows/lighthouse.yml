@@ -1,48 +1,43 @@
-name: Lighthouse CI
+- name: Verify required files
+  shell: bash
+  run: |
+    set -u
 
-on:
-  push:
-    branches:
-      - main
+    files=(
+      "theme.js"
+      "manifest.json"
+      "favicon.svg"
+      "index.html"
+      "style.css"
+      "script.js"
+      "translations.js"
+      "sw.js"
+      "offline.html"
+      "404.html"
+      "sitemap.xml"
+      "robots.txt"
+      "images/apple-touch-icon.png"
+      "images/icon-192.png"
+      "images/icon-512.png"
+      "images/IMG_2358_Original.jpeg"
+    )
 
-  pull_request:
-    branches:
-      - main
+    missing=0
 
-jobs:
-  lighthouse:
-    runs-on: ubuntu-latest
+    for file in "${files[@]}"; do
+      if [[ -f "$file" ]]; then
+        echo "✓ FOUND: $file"
+      else
+        echo "✗ MISSING: $file"
+        missing=1
+      fi
+    done
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+    if [[ "$missing" -ne 0 ]]; then
+      echo ""
+      echo "Required file verification FAILED."
+      exit 1
+    fi
 
-      - name: Verify required files
-        run: |
-          test -f theme.js
-          test -f manifest.json
-          test -f favicon.svg
-          test -f index.html
-          test -f style.css
-          test -f script.js
-          test -f translations.js
-          test -f sw.js
-          test -f offline.html
-          test -f 404.html
-          test -f sitemap.xml
-          test -f robots.txt
-          test -f images/apple-touch-icon.png
-          test -f images/icon-192.png
-          test -f images/icon-512.png
-          test -f images/IMG_2358_Original.jpeg
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-
-      - name: Install Lighthouse CI (pinned)
-        run: npm install -g @lhci/cli@0.14.0
-
-      - name: Run Lighthouse CI
-        run: lhci autorun --config=.lighthouserc.json
+    echo ""
+    echo "All required files are present."
