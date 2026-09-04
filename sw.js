@@ -1,4 +1,4 @@
-const CACHE_NAME = 'portfolio-v5';
+const CACHE_NAME = 'portfolio-v7';
 const urlsToCache = [
   '/',
   '/index.html',
@@ -13,6 +13,8 @@ const urlsToCache = [
   '/images/icon-192.png',
   '/images/icon-512.png',
   '/images/IMG_2358_Original.jpeg',
+  '/images/IMG_2358_Original.avif',
+  '/images/IMG_2358_Original.webp',
   '/offline.html'
 ];
 
