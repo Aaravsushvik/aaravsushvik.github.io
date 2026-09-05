@@ -63,6 +63,7 @@ function initTheme() {
   });
 }
 function initLanguage() {
+  if (!window.TRANSLATIONS) return; // defensive check
   let saved = null;
   try { saved = localStorage.getItem("lang"); } catch {}
   const params = new URLSearchParams(window.location.search);
@@ -226,9 +227,16 @@ function showError(id, key) {
   if (!el) return;
   el.textContent = t(key);
   el.hidden = false;
+  const input = el.closest('.form-group')?.querySelector('input, textarea');
+  if (input) input.setAttribute('aria-invalid', 'true');
 }
 function clearErrors() {
-  $$(".field-error").forEach((el) => { el.hidden = true; el.textContent = ""; });
+  $$(".field-error").forEach((el) => {
+    el.hidden = true;
+    el.textContent = "";
+    const input = el.closest('.form-group')?.querySelector('input, textarea');
+    if (input) input.removeAttribute('aria-invalid');
+  });
 }
 async function initForm() {
   const form = $("#contact-form");
@@ -363,8 +371,20 @@ function initPalette() {
       e.preventDefault();
       closePalette();
     } else if (e.key === "Tab") {
-      e.preventDefault();
-      input.focus();
+      // Focus trap for the dialog
+      const dialog = $(".palette-dialog");
+      const focusable = dialog.querySelectorAll('input, [tabindex]:not([tabindex="-1"])');
+      if (focusable.length > 0) {
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
     }
   });
 
@@ -391,8 +411,8 @@ function registerServiceWorker() {
   });
 }
 function init() {
+  initTheme(); // before initLanguage for theme to work even if translations fail
   initLanguage();
-  initTheme();
   initMenu();
   initScroll();
   initReveal();
