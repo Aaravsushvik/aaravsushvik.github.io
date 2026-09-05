@@ -1,4 +1,4 @@
-const CACHE_NAME = "portfolio-v10-2";
+const CACHE_NAME = "portfolio-v10-3";
 const PRECACHE = [
   "/",
   "/index.html",
@@ -12,6 +12,8 @@ const PRECACHE = [
   "/images/icon-192.png",
   "/images/icon-512.png",
   "/images/IMG_2358_Original.jpeg",
+  "/images/IMG_2358_Original.avif",   // Remove if file doesn't exist
+  "/images/IMG_2358_Original.webp",   // Remove if file doesn't exist
   "/offline.html"
 ];
 
