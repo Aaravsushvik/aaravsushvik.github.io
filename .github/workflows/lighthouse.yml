@@ -6,14 +6,12 @@ on:
   pull_request:
     branches:
       - main
-
 jobs:
   lighthouse:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
       - name: Verify required files exist
         run: |
           test -f index.html
@@ -33,19 +31,24 @@ jobs:
           test -f images/icon-512.png
           test -f images/IMG_2358_Original.jpeg
           echo "All required files are present."
-
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
-
+      - name: Prepare minified build
+        run: |
+          mkdir -p dist
+          cp index.html style.css manifest.json favicon.svg offline.html 404.html robots.txt sitemap.xml dist/
+          cp -r images dist/
+          npx terser script.js -o dist/script.js
+          npx terser theme.js -o dist/theme.js
+          npx terser translations.js -o dist/translations.js
+          npx terser sw.js -o dist/sw.js
       - name: Install Lighthouse CI (pinned)
         run: npm install -g @lhci/cli@0.14.0
-
       - name: Serve site with compression and caching
         run: |
-          npx serve@14.2.0 -l 8080 --compress &
+          npx serve@14.2.0 dist -l 8080 --compress &
           sleep 5
-
       - name: Run Lighthouse CI
         run: lhci autorun --config=.lighthouserc.json
