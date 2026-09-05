@@ -63,7 +63,7 @@ function initTheme() {
   });
 }
 function initLanguage() {
-  if (!window.TRANSLATIONS) return; // defensive check
+  if (!window.TRANSLATIONS) return;
   let saved = null;
   try { saved = localStorage.getItem("lang"); } catch {}
   const params = new URLSearchParams(window.location.search);
@@ -371,7 +371,6 @@ function initPalette() {
       e.preventDefault();
       closePalette();
     } else if (e.key === "Tab") {
-      // Focus trap for the dialog
       const dialog = $(".palette-dialog");
       const focusable = dialog.querySelectorAll('input, [tabindex]:not([tabindex="-1"])');
       if (focusable.length > 0) {
@@ -411,7 +410,7 @@ function registerServiceWorker() {
   });
 }
 function init() {
-  initTheme(); // before initLanguage for theme to work even if translations fail
+  initTheme();
   initLanguage();
   initMenu();
   initScroll();
