@@ -1,4 +1,5 @@
 name: Lighthouse CI
+
 on:
   push:
     branches:
@@ -6,9 +7,11 @@ on:
   pull_request:
     branches:
       - main
+
 jobs:
   lighthouse:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -41,8 +44,10 @@ jobs:
       - name: Prepare minified build
         run: |
           mkdir -p dist
+
           cp index.html style.css manifest.json favicon.svg offline.html 404.html robots.txt sitemap.xml dist/
           cp -r images dist/
+
           npx terser script.js -o dist/script.js
           npx terser theme.js -o dist/theme.js
           npx terser translations.js -o dist/translations.js
@@ -53,24 +58,34 @@ jobs:
 
       - name: Run Lighthouse CI
         run: |
-          npx --yes serve@14.2.0 dist -l 8080 --compress > /tmp/serve.log 2>&1 &
+          npx --yes serve@14.2.0 dist -l 8080 > /tmp/serve.log 2>&1 &
           SERVER_PID=$!
+
           echo "Server PID: $SERVER_PID"
+
           trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
 
           READY=0
+
           for i in {1..15}; do
             if curl -fsS http://127.0.0.1:8080/ >/dev/null; then
               echo "Server is ready"
               READY=1
               break
             fi
+
+            if ! kill -0 "$SERVER_PID" 2>/dev/null; then
+              echo "Server process exited unexpectedly."
+              cat /tmp/serve.log
+              exit 1
+            fi
+
             echo "Waiting for server... ($i)"
             sleep 2
           done
 
           if [ "$READY" -ne 1 ]; then
-            echo "Server failed to start."
+            echo "Server failed to become ready."
             cat /tmp/serve.log
             exit 1
           fi
