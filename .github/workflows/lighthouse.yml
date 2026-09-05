@@ -17,26 +17,35 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Verify required files exist
+        shell: bash
         run: |
-          set -e
+          set -euo pipefail
 
-          test -f index.html
-          test -f style.css
-          test -f script.js
-          test -f theme.js
-          test -f translations.js
-          test -f sw.js
-          test -f manifest.json
-          test -f favicon.svg
-          test -f offline.html
-          test -f 404.html
-          test -f sitemap.xml
-          test -f robots.txt
+          required_files=(
+            "index.html"
+            "style.css"
+            "script.js"
+            "theme.js"
+            "translations.js"
+            "sw.js"
+            "manifest.json"
+            "favicon.svg"
+            "offline.html"
+            "404.html"
+            "sitemap.xml"
+            "robots.txt"
+            "images/apple-touch-icon.png"
+            "images/icon-192.png"
+            "images/icon-512.png"
+            "images/IMG_2358_Original.jpeg"
+          )
 
-          test -f images/apple-touch-icon.png
-          test -f images/icon-192.png
-          test -f images/icon-512.png
-          test -f images/IMG_2358_Original.jpeg
+          for file in "${required_files[@]}"; do
+            if [ ! -f "$file" ]; then
+              echo "::error::Missing required file: $file"
+              exit 1
+            fi
+          done
 
           echo "All required files are present."
 
@@ -46,8 +55,9 @@ jobs:
           node-version: 22
 
       - name: Prepare production build
+        shell: bash
         run: |
-          set -e
+          set -euo pipefail
 
           rm -rf dist
           mkdir -p dist
@@ -68,21 +78,23 @@ jobs:
           npx --yes terser@5 translations.js -c -m -o dist/translations.js
           npx --yes terser@5 sw.js -c -m -o dist/sw.js
 
-          echo "Production build created."
+          echo "Production build created successfully."
 
       - name: Verify Lighthouse configuration
+        shell: bash
         run: |
-          set -e
+          set -euo pipefail
 
-          test -f .lighthouserc.json
-
-          echo "Lighthouse configuration:"
-          cat .lighthouserc.json
+          if [ ! -f ".lighthouserc.json" ]; then
+            echo "::error::Missing .lighthouserc.json"
+            exit 1
+          fi
 
           if grep -Eq \
-            'lcp-lazy-loaded|non-composited-animations|prioritize-lcp-image' \
+            '"preset"[[:space:]]*:[[:space:]]*"lighthouse:recommended"' \
             .lighthouserc.json; then
-            echo "ERROR: Invalid Lighthouse assertions detected."
+            echo "::error::The lighthouse:recommended preset must not be used."
+            echo "It can introduce unsupported NaN assertions."
             exit 1
           fi
 
@@ -90,11 +102,12 @@ jobs:
 
       - name: Install Lighthouse CI
         run: |
-          npm install -g @lhci/cli@0.14.0
+          npm install --global @lhci/cli@0.14.0
 
       - name: Start local production server
+        shell: bash
         run: |
-          set -e
+          set -euo pipefail
 
           npx --yes serve@14.2.0 dist -l 8080 > /tmp/serve.log 2>&1 &
           SERVER_PID=$!
@@ -129,7 +142,8 @@ jobs:
           fi
 
       - name: Run Lighthouse CI
+        shell: bash
         run: |
-          set -e
+          set -euo pipefail
 
           lhci autorun --config=.lighthouserc.json
