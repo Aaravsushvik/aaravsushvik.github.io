@@ -13,8 +13,6 @@ const PRECACHE = [
   "/images/icon-192.png",
   "/images/icon-512.png",
   "/images/IMG_2358_Original.jpeg",
-  "/images/IMG_2358_Original.avif",
-  "/images/IMG_2358_Original.webp",
   "/offline.html"
 ];
 
@@ -51,11 +49,15 @@ self.addEventListener("activate", (event) => {
 });
 
 self.addEventListener("fetch", (event) => {
-  if (event.request.method !== "GET") return;
+  if (event.request.method !== "GET") {
+    return;
+  }
 
   const url = new URL(event.request.url);
 
-  if (url.origin !== self.location.origin) return;
+  if (url.origin !== self.location.origin) {
+    return;
+  }
 
   if (event.request.mode === "navigate") {
     event.respondWith(
