@@ -1,40 +1,93 @@
 name: Lighthouse CI
+
 on:
   push:
     branches:
       - main
+
   pull_request:
     branches:
       - main
+
 jobs:
+
   lighthouse:
+
     runs-on: ubuntu-latest
+
     steps:
+
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Verify required files
+        shell: bash
         run: |
-          test -f theme.js
-          test -f manifest.json
-          test -f favicon.svg
-          test -f index.html
-          test -f style.css
-          test -f script.js
-          test -f translations.js
-          test -f sw.js
-          test -f offline.html
-          test -f 404.html
-          test -f sitemap.xml
-          test -f robots.txt
-          test -f images/apple-touch-icon.png
-          test -f images/icon-192.png
-          test -f images/icon-512.png
-          test -f images/IMG_2358_Original.jpeg
+          set -uo pipefail
+
+          required_files=(
+            "theme.js"
+            "manifest.json"
+            "favicon.svg"
+            "index.html"
+            "style.css"
+            "script.js"
+            "translations.js"
+            "sw.js"
+            "offline.html"
+            "404.html"
+            "sitemap.xml"
+            "robots.txt"
+            "images/apple-touch-icon.png"
+            "images/icon-192.png"
+            "images/icon-512.png"
+            "images/IMG_2358_Original.jpeg"
+          )
+
+          missing=0
+
+          echo "Checking required files..."
+          echo
+
+          for file in "${required_files[@]}"; do
+            if [[ -f "$file" ]]; then
+              echo "✓ $file"
+            else
+              echo "✗ MISSING: $file"
+              missing=1
+            fi
+          done
+
+          echo
+
+          if [[ "$missing" -ne 0 ]]; then
+            echo "::error::One or more required files are missing."
+            exit 1
+          fi
+
+          echo "All required files are present."
+
+      - name: Verify optional responsive image assets
+        shell: bash
+        run: |
+          for file in \
+            "images/IMG_2358_Original.avif" \
+            "images/IMG_2358_Original.webp"
+          do
+            if [[ -f "$file" ]]; then
+              echo "✓ Optional asset found: $file"
+            else
+              echo "⚠ Optional asset not found: $file"
+            fi
+          done
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Install Lighthouse CI (pinned)
+
+      - name: Install Lighthouse CI
         run: npm install -g @lhci/cli@0.14.0
+
       - name: Run Lighthouse CI
         run: lhci autorun --config=.lighthouserc.json
