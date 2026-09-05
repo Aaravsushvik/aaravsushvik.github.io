@@ -18,6 +18,8 @@ jobs:
 
       - name: Verify required files exist
         run: |
+          set -e
+
           test -f index.html
           test -f style.css
           test -f script.js
@@ -30,10 +32,12 @@ jobs:
           test -f 404.html
           test -f sitemap.xml
           test -f robots.txt
+
           test -f images/apple-touch-icon.png
           test -f images/icon-192.png
           test -f images/icon-512.png
           test -f images/IMG_2358_Original.jpeg
+
           echo "All required files are present."
 
       - name: Setup Node.js
@@ -41,23 +45,57 @@ jobs:
         with:
           node-version: 22
 
-      - name: Prepare minified build
+      - name: Prepare production build
         run: |
+          set -e
+
+          rm -rf dist
           mkdir -p dist
 
-          cp index.html style.css manifest.json favicon.svg offline.html 404.html robots.txt sitemap.xml dist/
+          cp index.html dist/
+          cp style.css dist/
+          cp manifest.json dist/
+          cp favicon.svg dist/
+          cp offline.html dist/
+          cp 404.html dist/
+          cp robots.txt dist/
+          cp sitemap.xml dist/
+
           cp -r images dist/
 
-          npx terser script.js -o dist/script.js
-          npx terser theme.js -o dist/theme.js
-          npx terser translations.js -o dist/translations.js
-          npx terser sw.js -o dist/sw.js
+          npx --yes terser@5 script.js -c -m -o dist/script.js
+          npx --yes terser@5 theme.js -c -m -o dist/theme.js
+          npx --yes terser@5 translations.js -c -m -o dist/translations.js
+          npx --yes terser@5 sw.js -c -m -o dist/sw.js
 
-      - name: Install Lighthouse CI (pinned)
-        run: npm install -g @lhci/cli@0.14.0
+          echo "Production build created."
 
-      - name: Run Lighthouse CI
+      - name: Verify Lighthouse configuration
         run: |
+          set -e
+
+          test -f .lighthouserc.json
+
+          echo "Lighthouse configuration:"
+          cat .lighthouserc.json
+
+          if grep -Eq \
+            'lcp-lazy-loaded|non-composited-animations|prioritize-lcp-image' \
+            .lighthouserc.json; then
+            echo "ERROR: Invalid Lighthouse assertions detected."
+            exit 1
+          fi
+
+          echo "Lighthouse configuration verified."
+
+      - name: Install Lighthouse CI
+        run: |
+          npm install -g @lhci/cli@0.14.0
+
+      - name: Start local production server
+        run: |
+          set -e
+
           npx --yes serve@14.2.0 dist -l 8080 > /tmp/serve.log 2>&1 &
           SERVER_PID=$!
 
@@ -69,7 +107,7 @@ jobs:
 
           for i in {1..15}; do
             if curl -fsS http://127.0.0.1:8080/ >/dev/null; then
-              echo "Server is ready"
+              echo "Server is ready."
               READY=1
               break
             fi
@@ -89,5 +127,9 @@ jobs:
             cat /tmp/serve.log
             exit 1
           fi
+
+      - name: Run Lighthouse CI
+        run: |
+          set -e
 
           lhci autorun --config=.lighthouserc.json
