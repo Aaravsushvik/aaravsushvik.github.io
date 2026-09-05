@@ -24,6 +24,7 @@
   <meta name="twitter:image" content="https://aaravsushvik.github.io/images/IMG_2358_Original.jpeg">
   <title data-i18n="page.title">Gadiparthi Sai Sushvik | Student & Aspiring Civil Servant</title>
 
+  <!-- CSP must come before any script/style -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://formspree.io; form-action https://formspree.io; frame-src 'none'; object-src 'none'; base-uri 'self'; upgrade-insecure-requests;">
 
   <link rel="icon" href="./favicon.ico" sizes="any">
@@ -267,17 +268,17 @@
       <form id="contact-form" action="https://formspree.io/f/meenzdqr" method="POST" novalidate>
         <div class="form-group">
           <label for="name" data-i18n="form.name.label">Full Name</label>
-          <input id="name" name="name" autocomplete="name" required placeholder="Your full name" data-i18n-placeholder="form.name.placeholder">
+          <input id="name" name="name" autocomplete="name" required placeholder="Your full name" data-i18n-placeholder="form.name.placeholder" aria-describedby="name-err">
           <p id="name-err" class="field-error" role="alert" hidden></p>
         </div>
         <div class="form-group">
           <label for="email" data-i18n="form.email.label">Email Address</label>
-          <input id="email" name="email" type="email" autocomplete="email" required placeholder="your@email.com" data-i18n-placeholder="form.email.placeholder">
+          <input id="email" name="email" type="email" autocomplete="email" required placeholder="your@email.com" data-i18n-placeholder="form.email.placeholder" aria-describedby="email-err">
           <p id="email-err" class="field-error" role="alert" hidden></p>
         </div>
         <div class="form-group">
           <label for="form-message" data-i18n="form.message.label">Message</label>
-          <textarea id="form-message" name="message" rows="6" required placeholder="Write your message here..." data-i18n-placeholder="form.message.placeholder"></textarea>
+          <textarea id="form-message" name="message" rows="6" required placeholder="Write your message here..." data-i18n-placeholder="form.message.placeholder" aria-describedby="form-message-err"></textarea>
           <p id="form-message-err" class="field-error" role="alert" hidden></p>
         </div>
         <input name="_gotcha" class="gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
