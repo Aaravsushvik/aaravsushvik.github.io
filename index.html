@@ -5,20 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
   <meta name="theme-color" content="#f5f5f7">
-
   <meta
     name="description"
     content="Personal portfolio of Gadiparthi Sai Sushvik — exploring artificial intelligence, technology, web development, governance, public systems, accessibility, and the relationship between technology and society."
   >
   <meta name="author" content="Gadiparthi Sai Sushvik">
   <meta name="robots" content="index, follow">
-
   <link rel="canonical" href="https://aaravsushvik.github.io/">
   <link rel="alternate" hreflang="en" href="https://aaravsushvik.github.io/?lang=en">
   <link rel="alternate" hreflang="te" href="https://aaravsushvik.github.io/?lang=te">
   <link rel="alternate" hreflang="hi" href="https://aaravsushvik.github.io/?lang=hi">
   <link rel="alternate" hreflang="x-default" href="https://aaravsushvik.github.io/">
-
   <meta
     property="og:title"
     content="Gadiparthi Sai Sushvik — Technology, AI & Governance"
@@ -33,7 +30,6 @@
     property="og:image"
     content="https://aaravsushvik.github.io/images/IMG_2358_Original.jpeg"
   >
-
   <meta name="twitter:card" content="summary_large_image">
   <meta
     name="twitter:title"
@@ -47,27 +43,29 @@
     name="twitter:image"
     content="https://aaravsushvik.github.io/images/IMG_2358_Original.jpeg"
   >
-
   <title data-i18n="page.title">
     Gadiparthi Sai Sushvik | Technology, AI & Governance
   </title>
-
   <!-- CSP must come before any script/style -->
   <meta
     http-equiv="Content-Security-Policy"
     content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://formspree.io; form-action https://formspree.io; frame-src 'none'; object-src 'none'; base-uri 'self'; upgrade-insecure-requests;"
   >
-
+  <!-- Preload LCP image for performance -->
+  <link
+    rel="preload"
+    as="image"
+    href="images/IMG_2358_Original.jpeg"
+    fetchpriority="high"
+  >
   <link rel="icon" href="./favicon.ico" sizes="any">
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="./images/apple-touch-icon.png">
   <link rel="manifest" href="./manifest.json">
-
   <script src="./theme.js"></script>
   <link rel="stylesheet" href="./style.css">
   <script src="./translations.js"></script>
   <script type="module" src="./script.js"></script>
-
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -99,7 +97,6 @@
   }
   </script>
 </head>
-
 <body>
 <a
   class="skip-link"
@@ -108,12 +105,9 @@
 >
   Skip to main content
 </a>
-
 <div id="scroll-progress" aria-hidden="true"></div>
-
 <header class="site-header" id="main-header">
   <div class="container header-inner">
-
     <a
       class="logo"
       href="#home"
@@ -122,7 +116,6 @@
     >
       Sai Sushvik.
     </a>
-
     <nav id="main-nav" aria-label="Main navigation">
       <ul class="nav-list">
         <li>
@@ -152,9 +145,7 @@
         </li>
       </ul>
     </nav>
-
     <div class="header-actions">
-
       <label
         class="sr-only"
         for="lang-select"
@@ -162,7 +153,6 @@
       >
         Choose language
       </label>
-
       <select
         id="lang-select"
         class="lang-dropdown"
@@ -172,7 +162,6 @@
         <option value="te">తెలుగు</option>
         <option value="hi">हिन्दी</option>
       </select>
-
       <button
         id="share-btn"
         class="icon-button"
@@ -182,7 +171,6 @@
       >
         <span aria-hidden="true">↗</span>
       </button>
-
       <button
         id="theme-toggle"
         class="icon-button"
@@ -194,7 +182,6 @@
       >
         <span id="theme-icon" aria-hidden="true">☾</span>
       </button>
-
       <button
         id="menu-toggle"
         class="icon-button hamburger"
@@ -208,14 +195,11 @@
         <span></span>
         <span></span>
       </button>
-
     </div>
   </div>
 </header>
-
 <div id="command-palette" class="command-palette" hidden>
   <div class="palette-overlay" data-close-palette></div>
-
   <div
     class="palette-dialog"
     role="dialog"
@@ -225,7 +209,6 @@
     <h2 id="command-title" class="sr-only">
       Command palette
     </h2>
-
     <input
       id="command-input"
       type="search"
@@ -236,53 +219,40 @@
       aria-controls="command-results"
       aria-activedescendant=""
     >
-
     <ul id="command-results" role="listbox"></ul>
   </div>
 </div>
-
 <div
   id="lang-announcer"
   class="sr-only"
   aria-live="polite"
 ></div>
-
 <main id="main-content" tabindex="-1">
-
   <!-- HERO -->
   <section id="home" class="hero">
-
     <canvas
       id="hero-canvas"
       aria-hidden="true"
     ></canvas>
-
     <div class="container hero-grid">
-
       <div class="hero-copy reveal">
-
         <p class="eyebrow" data-i18n="hero.kicker">
           Technology · AI · Governance
         </p>
-
         <h1 data-i18n="hero.title">
           Curious about technology. Fascinated by systems. Building toward impact.
         </h1>
-
         <p class="hero-subtitle" data-i18n="hero.subtitle">
           I explore the intersection of artificial intelligence, technology,
           governance, and society — learning by building, experimenting,
           researching, and asking better questions.
         </p>
-
         <p class="hero-description" data-i18n="hero.description">
           I’m a student and independent learner interested in how technology
           works, how systems shape people’s lives, and how thoughtful design,
           policy, and public systems can work together.
         </p>
-
         <div class="hero-actions">
-
           <a
             class="btn-primary"
             href="#projects"
@@ -290,7 +260,6 @@
           >
             Explore my work
           </a>
-
           <a
             class="btn-secondary"
             href="#contact"
@@ -298,9 +267,7 @@
           >
             Start a conversation
           </a>
-
         </div>
-
         <div
           class="social-links"
           aria-label="Social links"
@@ -315,7 +282,6 @@
           >
             IG
           </a>
-
           <a
             href="https://github.com/aaravsushvik"
             target="_blank"
@@ -326,7 +292,6 @@
           >
             GH
           </a>
-
           <a
             href="https://linktr.ee/gadiparthisaisushvik"
             target="_blank"
@@ -338,9 +303,7 @@
             LT
           </a>
         </div>
-
       </div>
-
       <div class="hero-media reveal">
         <div class="image-frame">
           <picture>
@@ -348,12 +311,10 @@
               type="image/avif"
               srcset="./images/IMG_2358_Original.avif"
             >
-
             <source
               type="image/webp"
               srcset="./images/IMG_2358_Original.webp"
             >
-
             <img
               src="./images/IMG_2358_Original.jpeg"
               width="840"
@@ -366,10 +327,8 @@
           </picture>
         </div>
       </div>
-
     </div>
   </section>
-
   <!-- ABOUT -->
   <section
     id="about"
@@ -378,64 +337,49 @@
     <h2 data-i18n="about.title">
       About
     </h2>
-
     <div class="panel two-column">
-
       <div>
-
         <h3 data-i18n="about.who.title">
           I like understanding what happens beneath the surface.
         </h3>
-
         <p data-i18n="about.who.p1">
           I’m Gadiparthi Sai Sushvik — a student and independent learner
           exploring the intersection of technology and society.
         </p>
-
         <p data-i18n="about.who.p2">
           My curiosity moves across artificial intelligence, web development,
           robotics, economics, political science, history, governance, and
           public policy. I enjoy exploring these different fields because many
           meaningful problems exist between disciplines rather than inside just one of them.
         </p>
-
         <p data-i18n="about.who.p3">
           I build digital projects to understand technology by making things.
           I research governance and public systems to understand the
           environments in which technology operates.
         </p>
-
       </div>
-
       <div>
-
         <h3 data-i18n="about.vision.title">
           Building the foundations for what comes next.
         </h3>
-
         <p data-i18n="about.vision.p1">
           I’m particularly interested in AI and public policy, digital
           governance, accessible technology, public-service delivery, and the
           responsible development of emerging technologies.
         </p>
-
         <p data-i18n="about.vision.p2">
           My academic journey is helping me develop the foundations I want to
           carry into higher education and, eventually, work involving
           technology, governance, and public systems.
         </p>
-
         <p data-i18n="about.vision.p3">
           I’m interested in understanding how institutions work, how technology
           changes them, and how thoughtful design and policy can make systems
           more accessible, effective, and useful to people.
         </p>
-
       </div>
-
     </div>
   </section>
-
   <!-- PROJECTS -->
   <section
     id="projects"
@@ -444,21 +388,16 @@
     <h2 data-i18n="projects.title">
       From curiosity to something tangible.
     </h2>
-
     <p data-i18n="projects.intro">
       I learn by making. Each project is an opportunity to test an idea,
       understand a technology, solve a problem, or discover a better question.
     </p>
-
     <div class="card-grid">
-
       <article class="card">
-
         <div class="card-heading">
           <h3 data-i18n="projects.portfolio.title">
             Personal Portfolio Website
           </h3>
-
           <span
             class="badge"
             data-i18n="projects.portfolio.badge"
@@ -466,44 +405,34 @@
             Web · Ongoing
           </span>
         </div>
-
         <p data-i18n="projects.portfolio.description">
           An evolving digital space for documenting my projects, experiments,
           interests, and learning journey.
         </p>
-
         <ul>
           <li data-i18n="projects.portfolio.li1">
             Semantic HTML, modern CSS, and vanilla JavaScript.
           </li>
-
           <li data-i18n="projects.portfolio.li2">
             Responsive design and accessibility-conscious interaction patterns.
           </li>
-
           <li data-i18n="projects.portfolio.li3">
             Light and dark themes with saved and system preferences.
           </li>
-
           <li data-i18n="projects.portfolio.li4">
             Multilingual content, structured metadata, and progressive web
             capabilities.
           </li>
-
           <li data-i18n="projects.portfolio.li5">
             Offline support, SEO foundations, and performance-conscious design.
           </li>
         </ul>
-
       </article>
-
       <article class="card">
-
         <div class="card-heading">
           <h3 data-i18n="projects.ui.title">
             Responsive UI Experiments
           </h3>
-
           <span
             class="badge"
             data-i18n="projects.ui.badge"
@@ -511,40 +440,31 @@
             Frontend · Experimental
           </span>
         </div>
-
         <p data-i18n="projects.ui.description">
           Small experiments exploring responsive layouts, interaction design,
           accessibility, motion, and the relationship between visual simplicity
           and functional complexity.
         </p>
-
         <ul>
           <li data-i18n="projects.ui.li1">
             Responsive layouts across different screen sizes.
           </li>
-
           <li data-i18n="projects.ui.li2">
             Modern CSS architecture, custom properties, and fluid sizing.
           </li>
-
           <li data-i18n="projects.ui.li3">
             Navigation and interaction experiments.
           </li>
-
           <li data-i18n="projects.ui.li4">
             Accessibility-conscious interface patterns.
           </li>
         </ul>
-
       </article>
-
       <article class="card">
-
         <div class="card-heading">
           <h3 data-i18n="projects.civic.title">
             Civic-Tech & Governance Notes
           </h3>
-
           <span
             class="badge"
             data-i18n="projects.civic.badge"
@@ -552,35 +472,27 @@
             Research · Ongoing
           </span>
         </div>
-
         <p data-i18n="projects.civic.description">
           An evolving exploration of how technology interacts with government,
           institutions, policy, and everyday public life.
         </p>
-
         <ul>
           <li data-i18n="projects.civic.li1">
             Digital governance and public-service delivery.
           </li>
-
           <li data-i18n="projects.civic.li2">
             AI and public policy.
           </li>
-
           <li data-i18n="projects.civic.li3">
             Accessibility and inclusive public systems.
           </li>
-
           <li data-i18n="projects.civic.li4">
             Technology, institutions, and public systems.
           </li>
         </ul>
-
       </article>
-
     </div>
   </section>
-
   <!-- LEARNING -->
   <section
     id="learning"
@@ -589,86 +501,65 @@
     <h2 data-i18n="learning.title">
       Still learning. Always.
     </h2>
-
     <p data-i18n="learning.intro">
       I don’t see learning as a checklist of technologies to collect. I see it
       as the process of developing stronger fundamentals, better mental models,
       and the ability to approach unfamiliar problems.
     </p>
-
     <div class="panel tag-cloud">
-
       <span class="tag" data-i18n="learning.tag1">
         Web Development
       </span>
-
       <span class="tag" data-i18n="learning.tag2">
         JavaScript
       </span>
-
       <span class="tag" data-i18n="learning.tag3">
         Responsive Design
       </span>
-
       <span class="tag" data-i18n="learning.tag4">
         Web Accessibility
       </span>
-
       <span class="tag" data-i18n="learning.tag5">
         Artificial Intelligence
       </span>
-
       <span class="tag" data-i18n="learning.tag6">
         AI Tools & Prompting
       </span>
-
       <span class="tag" data-i18n="learning.tag7">
         Robotics
       </span>
-
       <span class="tag" data-i18n="learning.tag8">
         Emerging Technology
       </span>
-
       <span class="tag" data-i18n="learning.tag9">
         Political Science
       </span>
-
       <span class="tag" data-i18n="learning.tag10">
         Economics
       </span>
-
       <span class="tag" data-i18n="learning.tag11">
         History
       </span>
-
       <span class="tag" data-i18n="learning.tag12">
         Governance
       </span>
-
       <span class="tag" data-i18n="learning.tag13">
         Public Policy
       </span>
-
       <span class="tag" data-i18n="learning.tag14">
         Digital Governance
       </span>
-
       <span class="tag" data-i18n="learning.tag15">
         Systems Thinking
       </span>
-
       <span class="tag" data-i18n="learning.tag16">
         Research
       </span>
-
       <span class="tag" data-i18n="learning.tag17">
         Critical Thinking
       </span>
-
     </div>
   </section>
-
   <!-- SKILLS -->
   <section
     id="skills"
@@ -677,81 +568,61 @@
     <h2 data-i18n="skills.title">
       What I build with.
     </h2>
-
     <p data-i18n="skills.intro">
       I focus on developing depth in fundamentals rather than simply
       collecting technologies.
     </p>
-
     <div class="panel tag-cloud">
-
       <span class="tag" data-i18n="skills.tag1">
         HTML5
       </span>
-
       <span class="tag" data-i18n="skills.tag2">
         CSS3
       </span>
-
       <span class="tag" data-i18n="skills.tag3">
         JavaScript
       </span>
-
       <span class="tag" data-i18n="skills.tag4">
         Responsive Web Design
       </span>
-
       <span class="tag" data-i18n="skills.tag5">
         Semantic HTML
       </span>
-
       <span class="tag" data-i18n="skills.tag6">
         Accessibility
       </span>
-
       <span class="tag" data-i18n="skills.tag7">
         Interaction Design
       </span>
-
       <span class="tag" data-i18n="skills.tag8">
         Responsive UI
       </span>
-
       <span class="tag" data-i18n="skills.tag9">
         Progressive Web App Concepts
       </span>
-
       <span class="tag" data-i18n="skills.tag10">
         Offline Experiences
       </span>
-
       <span class="tag" data-i18n="skills.tag11">
         SEO Fundamentals
       </span>
-
       <span class="tag" data-i18n="skills.tag12">
         Web Performance
       </span>
-
       <span class="tag" data-i18n="skills.tag13">
         AI Tools
       </span>
-
       <span class="tag" data-i18n="skills.tag14">
         Prompting
       </span>
-
       <span class="tag" data-i18n="skills.tag15">
         Automation
       </span>
-
       <span class="tag" data-i18n="skills.tag16">
         Emerging Technologies
       </span>
-
     </div>
   </section>
-
   <!-- ACADEMIC JOURNEY -->
   <section
     id="results"
@@ -760,52 +631,41 @@
     <h2 data-i18n="results.title">
       Building the foundations.
     </h2>
-
     <p data-i18n="results.intro">
       My academic journey is developing the foundations I want to carry into
       higher education and beyond.
     </p>
-
     <div class="panel stats">
-
       <div>
         <h3 data-i18n="results.ssc.title">
           Telangana SSC · 2026
         </h3>
-
         <strong>
           379 <small>/ 500</small>
         </strong>
       </div>
-
       <div>
         <h3 data-i18n="results.percentage.title">
           Overall Result
         </h3>
-
         <strong>
           75.8%
         </strong>
       </div>
-
       <div>
         <h3 data-i18n="results.inter.title">
           Intermediate · CEC
         </h3>
-
         <strong>
           2026–2028
         </strong>
       </div>
-
     </div>
-
     <p data-i18n="results.inter.description">
       Currently pursuing Intermediate education in the CEC stream, building a
       foundation in civics, economics, and commerce.
     </p>
   </section>
-
   <!-- AREAS OF CURIOSITY -->
   <section
     id="favorites"
@@ -814,56 +674,43 @@
     <h2 data-i18n="favorites.title">
       Questions I keep coming back to.
     </h2>
-
     <div class="panel">
-
       <ul>
-
         <li data-i18n="favorites.li1">
           How will increasingly capable AI systems change the way people learn,
           work, create, govern, and make decisions?
         </li>
-
         <li data-i18n="favorites.li2">
           How can technology make public systems simpler, more accessible,
           transparent, and effective?
         </li>
-
         <li data-i18n="favorites.li3">
           What happens when intelligence moves from software into the physical
           world?
         </li>
-
         <li data-i18n="favorites.li4">
           How should society respond when technology evolves faster than
           institutions?
         </li>
-
         <li data-i18n="favorites.li5">
           What does it take to design technology that works for more people,
           rather than only for an assumed average user?
         </li>
-
         <li data-i18n="favorites.li6">
           How do ideas, institutions, and decisions from the past shape the
           systems we live with today?
         </li>
-
         <li data-i18n="favorites.li7">
           What can science and engineering teach us about the boundaries of
           human capability?
         </li>
-
         <li data-i18n="favorites.li8">
           How do technologies, institutions, incentives, and people influence
           one another?
         </li>
-
       </ul>
-
     </div>
   </section>
-
   <!-- CONTACT -->
   <section
     id="contact"
@@ -872,22 +719,17 @@
     <h2 data-i18n="contact.title">
       Let’s explore an idea.
     </h2>
-
     <div class="panel contact-grid">
-
       <div>
-
         <p data-i18n="contact.info">
           Have a project, question, observation, or idea worth discussing?
           I’m interested in conversations around technology, artificial
           intelligence, web development, governance, public systems,
           accessibility, and the future of technology.
         </p>
-
         <p data-i18n="contact.closing">
           Good ideas often begin with a simple conversation.
         </p>
-
         <button
           id="listen-btn"
           class="btn-primary"
@@ -896,10 +738,8 @@
         >
           Listen to this page
         </button>
-
         <div class="email-block">
           <span aria-hidden="true">✉</span>
-
           <strong
             id="contact-email"
             data-u="saisushvik.pnt"
@@ -908,25 +748,20 @@
             saisushvik.pnt [at] gmail.com
           </strong>
         </div>
-
       </div>
-
       <form
         id="contact-form"
         action="https://formspree.io/f/meenzdqr"
         method="POST"
         novalidate
       >
-
         <div class="form-group">
-
           <label
             for="name"
             data-i18n="form.name.label"
           >
             Full Name
           </label>
-
           <input
             id="name"
             name="name"
@@ -936,25 +771,20 @@
             data-i18n-placeholder="form.name.placeholder"
             aria-describedby="name-err"
           >
-
           <p
             id="name-err"
             class="field-error"
             role="alert"
             hidden
           ></p>
-
         </div>
-
         <div class="form-group">
-
           <label
             for="email"
             data-i18n="form.email.label"
           >
             Email Address
           </label>
-
           <input
             id="email"
             name="email"
@@ -965,25 +795,20 @@
             data-i18n-placeholder="form.email.placeholder"
             aria-describedby="email-err"
           >
-
           <p
             id="email-err"
             class="field-error"
             role="alert"
             hidden
           ></p>
-
         </div>
-
         <div class="form-group">
-
           <label
             for="form-message"
             data-i18n="form.message.label"
           >
             Message
           </label>
-
           <textarea
             id="form-message"
             name="message"
@@ -993,16 +818,13 @@
             data-i18n-placeholder="form.message.placeholder"
             aria-describedby="form-message-err"
           ></textarea>
-
           <p
             id="form-message-err"
             class="field-error"
             role="alert"
             hidden
           ></p>
-
         </div>
-
         <input
           name="_gotcha"
           class="gotcha"
@@ -1010,7 +832,6 @@
           autocomplete="off"
           aria-hidden="true"
         >
-
         <button
           id="submit-btn"
           class="btn-primary"
@@ -1019,14 +840,12 @@
         >
           Send Message
         </button>
-
         <div
           id="form-status"
           class="form-status"
           role="status"
           aria-live="polite"
         ></div>
-
         <p
           class="form-note"
           data-i18n="form.note"
@@ -1036,26 +855,19 @@
           received by the service. I use submitted information to respond to
           your message.
         </p>
-
       </form>
-
     </div>
   </section>
-
 </main>
-
 <footer class="footer">
   <div class="container">
-
     <p data-i18n="footer.text">
       Learn deeply. Build thoughtfully. Question assumptions.
       • Built with semantic HTML, modern CSS, and vanilla JavaScript.
       • © 2026 Gadiparthi Sai Sushvik
     </p>
-
   </div>
 </footer>
-
 <button
   id="topBtn"
   class="top-btn icon-button"
@@ -1066,13 +878,11 @@
 >
   ↑
 </button>
-
 <noscript>
   <div class="noscript-notice">
     JavaScript is disabled. Core content remains available, but interactive
     features such as language switching and theme controls are unavailable.
   </div>
 </noscript>
-
 </body>
 </html>
