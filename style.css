@@ -5,7 +5,7 @@
   --surface: rgba(255, 255, 255, 0.72);
   --surface-strong: #ffffff;
   --text: #1d1d1f;
-  --text-2: #515154; /* CHANGED from #6e6e73 for better contrast */
+  --text-2: #3a3a3c; /* CHANGED from #515154 to darker */
   --border: rgba(0, 0, 0, 0.08);
   --accent: #0071e3;
   --accent-hover: #0077ed;
@@ -212,6 +212,7 @@ html.dark .badge { border-color: rgba(41, 151, 255, 0.35); }
   display: inline-flex; padding: 9px 13px; border-radius: 999px;
   border: 1px solid var(--border); background: var(--surface-strong);
   font-size: 0.92rem;
+  color: var(--text); /* Explicitly set color */
 }
 .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 .stats > div { padding: 12px; }
@@ -343,8 +344,8 @@ html.dark .field-error { color: #ff8f87; }
   transform: scale(1.15);
 }
 
-/* NEW: Fix contrast for input placeholders */
+/* Placeholder color (fixed contrast) */
 input::placeholder, textarea::placeholder {
-  color: #515154;
+  color: #3a3a3c;
   opacity: 1;
 }
