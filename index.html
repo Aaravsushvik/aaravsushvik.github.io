@@ -62,6 +62,9 @@
   }
   </script>
 
+  <!-- PERFORMANCE FIX: Preload the hero image for immediate LCP -->
+  <link rel="preload" as="image" href="/images/IMG_2358_Original.jpeg" fetchpriority="high">
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#f5f5f7">
@@ -141,14 +144,11 @@
           </div>
         </div>
         <div class="hero-media image-frame">
-          <!-- FIXED: Removed lazy loading, added fetchpriority="high" for LCP -->
-          <img src="/images/IMG_2358_Original.jpeg" alt="Gadiparthi Sai Sushvik with Family" width="800" height="600" fetchpriority="high">
+          <!-- PERFORMANCE FIX: Removed loading="lazy" and fetchpriority from img (Preload handles it now) -->
+          <img src="/images/IMG_2358_Original.jpeg" alt="Gadiparthi Sai Sushvik with Family" width="800" height="600">
         </div>
       </div>
     </section>
-
-    <!-- [All other sections (About, Projects, Learning, Skills, Results, Favorites, Contact) remain exactly the same as the previous version] -->
-    <!-- I will paste them completely below to ensure no missing code -->
 
     <section id="about" class="section">
       <div class="container">
