@@ -5,9 +5,9 @@
   --surface: rgba(255, 255, 255, 0.72);
   --surface-strong: #ffffff;
   --text: #1d1d1f;
-  --text-2: #3a3a3c; /* CHANGED */
+  --text-2: #3a3a3c;   /* CHANGED: darker for contrast */
   --border: rgba(0, 0, 0, 0.08);
-  --accent: #005fcc; /* CHANGED */
+  --accent: #005fcc;   /* CHANGED: darker for contrast */
   --accent-hover: #0077ed;
   --on-accent: #ffffff;
   --shadow: 0 8px 30px rgba(0, 0, 0, 0.06), 0 20px 60px rgba(0, 0, 0, 0.04);
@@ -212,7 +212,7 @@ html.dark .badge { border-color: rgba(41, 151, 255, 0.35); }
   display: inline-flex; padding: 9px 13px; border-radius: 999px;
   border: 1px solid var(--border); background: var(--surface-strong);
   font-size: 0.92rem;
-  color: var(--text); /* CHANGED */
+  color: var(--text);   /* CHANGED: explicit dark color for contrast */
 }
 .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 .stats > div { padding: 12px; }
