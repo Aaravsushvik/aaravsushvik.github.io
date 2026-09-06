@@ -190,12 +190,15 @@ function initCanvas() {
   resize();
   draw();
   window.addEventListener("resize", resize, { passive: true });
-  const observer = new IntersectionObserver(([entry]) => {
-    running = entry.isIntersecting;
-    if (running && !raf) draw();
-    if (!running) { window.cancelAnimationFrame(raf); raf = 0; }
-  });
-  observer.observe($("#home"));
+  const home = document.getElementById("home");
+  if (home) {
+    const observer = new IntersectionObserver(([entry]) => {
+      running = entry.isIntersecting;
+      if (running && !raf) draw();
+      if (!running) { window.cancelAnimationFrame(raf); raf = 0; }
+    });
+    observer.observe(home);
+  }
 }
 function initShare() {
   const btn = $("#share-btn");
@@ -215,7 +218,7 @@ function initSpeech() {
     if (!("speechSynthesis" in window)) return;
     window.speechSynthesis.cancel();
     const main = $("#main-content");
-    const text = [...main.querySelectorAll("h1,h2,h3,p,li")].map((el) => el.textContent.trim()).filter(Boolean).join(". ");
+    const text = [...main.querySelectorAll("h1,h2,h3,p,li,strong,small")].map((el) => el.textContent.trim()).filter(Boolean).join(". ");
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = document.documentElement.lang;
     utterance.rate = 0.95;
@@ -285,6 +288,8 @@ const commands = [
   ["Projects", "#projects"],
   ["Learning", "#learning"],
   ["Skills", "#skills"],
+  ["Results", "#results"],
+  ["Favorites", "#favorites"],
   ["Contact", "#contact"]
 ];
 function initPalette() {
