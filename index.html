@@ -7,7 +7,7 @@
   <!-- SEO: Canonical URL -->
   <link rel="canonical" href="https://aaravsushvik.github.io/">
 
-  <!-- SEO: Meta Description (CRITICAL - Lighthouse requires this) -->
+  <!-- SEO: Meta Description -->
   <meta name="description" content="Portfolio of Gadiparthi Sai Sushvik, a student from Hyderabad exploring the intersection of technology, digital governance, AI, and public policy.">
 
   <!-- Social: Open Graph / Facebook / LinkedIn / WhatsApp -->
@@ -69,7 +69,9 @@
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
   <link rel="stylesheet" href="/style.css">
-  <script src="/theme.js"></script>
+  
+  <!-- Performance: Deferred theme script to avoid render-blocking -->
+  <script src="/theme.js" defer></script>
 </head>
 <body>
   <a href="#main-content" class="skip-link">Skip to main content</a>
