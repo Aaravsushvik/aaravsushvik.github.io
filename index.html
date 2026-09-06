@@ -141,10 +141,14 @@
           </div>
         </div>
         <div class="hero-media image-frame">
-          <img src="/images/IMG_2358_Original.jpeg" alt="Gadiparthi Sai Sushvik with Family" width="800" height="600" loading="lazy">
+          <!-- FIXED: Removed lazy loading, added fetchpriority="high" for LCP -->
+          <img src="/images/IMG_2358_Original.jpeg" alt="Gadiparthi Sai Sushvik with Family" width="800" height="600" fetchpriority="high">
         </div>
       </div>
     </section>
+
+    <!-- [All other sections (About, Projects, Learning, Skills, Results, Favorites, Contact) remain exactly the same as the previous version] -->
+    <!-- I will paste them completely below to ensure no missing code -->
 
     <section id="about" class="section">
       <div class="container">
@@ -315,7 +319,6 @@
             <a href="mailto:saisushvik.pnt@gmail.com" style="font-weight: 700; text-decoration: none; color: var(--accent);">✉ saisushvik.pnt [at] gmail.com</a>
           </p>
         </div>
-        
         <form id="contact-form" action="https://formspree.io/f/meenzdqr" method="POST" class="panel">
           <div class="form-group">
             <label for="name">Full Name</label>
