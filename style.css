@@ -74,8 +74,8 @@ a:hover { text-decoration: underline; }
 button, input, textarea, select { font: inherit; }
 button, .btn-primary, .btn-secondary, .social-icon, .nav-link { touch-action: manipulation; }
 button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
-  outline: 3px solid var(--focus);
-  outline-offset: 3px;
+  outline: 2px solid var(--focus);
+  outline-offset: 4px;
 }
 .container { width: min(1120px, calc(100% - 40px)); margin-inline: auto; }
 .sr-only {
@@ -326,3 +326,11 @@ html.dark .field-error { color: #ff8f87; }
 }
 .btn-primary:hover { transform: translateY(-1px); }
 .btn-primary:active { transform: translateY(0); }
+
+/* New: Social icon hover effect */
+.social-icon svg {
+  transition: transform 0.2s var(--ease, ease);
+}
+.social-icon:hover svg {
+  transform: scale(1.15);
+}
