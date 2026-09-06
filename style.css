@@ -5,7 +5,7 @@
   --surface: rgba(255, 255, 255, 0.72);
   --surface-strong: #ffffff;
   --text: #1d1d1f;
-  --text-2: #6e6e73;
+  --text-2: #515154; /* CHANGED from #6e6e73 for better contrast */
   --border: rgba(0, 0, 0, 0.08);
   --accent: #0071e3;
   --accent-hover: #0077ed;
@@ -36,9 +36,7 @@
     --focus: #64b5ff;
   }
 }
-html.light {
-  color-scheme: light;
-}
+html.light { color-scheme: light; }
 html.dark {
   color-scheme: dark;
   --bg: #000000;
@@ -73,10 +71,16 @@ a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
 button, input, textarea, select { font: inherit; }
 button, .btn-primary, .btn-secondary, .social-icon, .nav-link { touch-action: manipulation; }
-button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
-  outline: 2px solid var(--focus);
+
+/* Accessibility: High-visibility focus ring for keyboard navigation */
+:focus-visible {
+  outline: 2px solid #ffffff;
   outline-offset: 4px;
 }
+html:not(.dark) :focus-visible {
+  outline-color: var(--focus);
+}
+
 .container { width: min(1120px, calc(100% - 40px)); margin-inline: auto; }
 .sr-only {
   position: absolute !important;
@@ -299,6 +303,8 @@ html.dark .field-error { color: #ff8f87; }
   .section { padding: 72px 0; }
   .panel, .card { padding: 22px; }
 }
+
+/* Accessibility: Pause/Hide animation for users with vestibular disorders */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after {
@@ -307,7 +313,9 @@ html.dark .field-error { color: #ff8f87; }
     transition-duration: 0.01ms !important;
   }
   .js .reveal { opacity: 1; transform: none; }
-  #hero-canvas { display: none; }
+  canvas { 
+    display: none; 
+  }
 }
 
 ::selection {
@@ -327,10 +335,16 @@ html.dark .field-error { color: #ff8f87; }
 .btn-primary:hover { transform: translateY(-1px); }
 .btn-primary:active { transform: translateY(0); }
 
-/* New: Social icon hover effect */
+/* Social icon hover effect */
 .social-icon svg {
   transition: transform 0.2s var(--ease, ease);
 }
 .social-icon:hover svg {
   transform: scale(1.15);
+}
+
+/* NEW: Fix contrast for input placeholders */
+input::placeholder, textarea::placeholder {
+  color: #515154;
+  opacity: 1;
 }
