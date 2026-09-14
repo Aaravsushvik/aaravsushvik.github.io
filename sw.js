@@ -1,4 +1,4 @@
-const CACHE_NAME = "portfolio-v11";
+const CACHE_NAME = "portfolio-v12";
 const PRECACHE = [
  "/",
  "/index.html",
@@ -43,14 +43,6 @@ self.addEventListener("fetch", (event) => {
  if (url.origin !== self.location.origin) return;
 
  if (event.request.mode === "navigate") {
-   // FIX: only the actual "/" or "/index.html" request may overwrite the
-   // cached "/index.html" entry. Previously ANY navigation (including a
-   // mistyped or removed path, which GitHub Pages answers with 404.html
-   // content) was cached under the "/index.html" key, silently replacing
-   // the real homepage in the offline cache with a 404 page. We now cache
-   // each navigation under its own request, and only update the "/index.html"
-   // alias when the URL genuinely is the homepage. We also skip caching
-   // non-OK responses (e.g. 404s) entirely.
    const isHome = url.pathname === "/" || url.pathname === "/index.html";
    event.respondWith(
      fetch(event.request)
