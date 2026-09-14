@@ -1,4 +1,4 @@
-const CACHE_NAME = "portfolio-v12";
+const CACHE_NAME = "portfolio-v13";
 const PRECACHE = [
  "/",
  "/index.html",
@@ -11,7 +11,6 @@ const PRECACHE = [
  "/images/apple-touch-icon.png",
  "/images/icon-192.png",
  "/images/icon-512.png",
- "/images/IMG_2358_Original.jpeg",
  "/offline.html"
 ];
 
