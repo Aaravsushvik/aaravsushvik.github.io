@@ -181,6 +181,7 @@ html.dark .badge { border-color: rgba(41, 151, 255, 0.35); }
 .stats > div { padding: 12px; }
 .stats strong { font-size: clamp(2.2rem, 5vw, 4rem); letter-spacing: -0.05em; }
 .stats small { font-size: 0.9rem; color: var(--text-2); }
+.stat-note { font-size: 0.78rem; color: var(--text-2); margin: 4px 0 0; }
 .contact-grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 48px; }
 .form-group { margin-bottom: 18px; }
 label { display: block; font-weight: 700; margin-bottom: 7px; }
@@ -196,6 +197,7 @@ html.dark .field-error { color: #ff8f87; }
 .form-note { font-size: 0.82rem; color: var(--text-2); }
 .gotcha { position: absolute !important; left: -10000px !important; width: 1px !important; height: 1px !important; }
 .footer { padding: 40px 0 60px; border-top: 1px solid var(--border); color: var(--text-2); font-size: 0.9rem; }
+.footer-copyright { margin-top: 8px; }
 .top-btn { position: fixed; right: 20px; bottom: 20px; z-index: 50; }
 .reveal { opacity: 1; transform: none; }
 .js .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s ease; }
@@ -258,3 +260,19 @@ html.dark .field-error { color: #ff8f87; }
 .social-icon svg { transition: transform 0.2s var(--ease, ease); }
 .social-icon:hover svg { transform: scale(1.15); }
 input::placeholder, textarea::placeholder { color: var(--text-2); opacity: 1; }
+
+/* ------------------------------------------------------------------
+   Layout spacing (moved out of inline style="" attributes so the
+   strict CSP `style-src 'self'` in index.html can stay enabled).
+   ------------------------------------------------------------------ */
+#projects .card-grid,
+#certifications .card-grid { margin-top: 36px; }
+
+#learning .tag-cloud,
+#skills .tag-cloud { margin-top: 28px; }
+
+#results .two-column { margin-top: 36px; }
+
+#favorites .panel { margin-top: 28px; }
+
+.contact-action { margin-top: 22px; }
