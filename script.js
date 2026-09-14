@@ -214,6 +214,10 @@ function initShare() {
 function initSpeech() {
  const btn = $("#listen-btn");
  if (!btn) return;
+ if (!("speechSynthesis" in window)) {
+   btn.hidden = true;
+   return;
+ }
  btn.addEventListener("click", () => {
    if (!("speechSynthesis" in window)) return;
    window.speechSynthesis.cancel();
@@ -224,6 +228,20 @@ function initSpeech() {
    utterance.rate = 0.95;
    window.speechSynthesis.speak(utterance);
  });
+}
+function initEmailLink() {
+ const link = $("#email-link");
+ if (!link) return;
+ const user = "saisushvik.pnt";
+ const domain = "gmail.com";
+ link.addEventListener("click", (e) => {
+   e.preventDefault();
+   window.location.href = `mailto:${user}@${domain}`;
+ });
+}
+function initCopyrightYear() {
+ const el = $("#copyright-year");
+ if (el) el.textContent = String(new Date().getFullYear());
 }
 function showError(id, key) {
  const el = $("#" + id);
@@ -288,6 +306,7 @@ const commands = [
  ["Projects", "#projects"],
  ["Learning", "#learning"],
  ["Skills", "#skills"],
+ ["Certifications", "#certifications"],
  ["Results", "#results"],
  ["Favorites", "#favorites"],
  ["Contact", "#contact"]
@@ -425,6 +444,8 @@ function init() {
  initSpeech();
  initForm();
  initPalette();
+ initEmailLink();
+ initCopyrightYear();
  registerServiceWorker();
 }
 document.addEventListener("DOMContentLoaded", init);
