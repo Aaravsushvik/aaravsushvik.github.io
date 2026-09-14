@@ -111,7 +111,8 @@ function initScroll() {
  const top = $("#topBtn");
  const sections = $$(".nav-link").map((link) => document.getElementById(link.getAttribute("href")?.slice(1))).filter(Boolean);
  const update = () => {
-   const max = document.documentElement.scrollHeight - window.innerHeight;
+   const max = document.documentElement.sc;
+rollHeight - window.innerHeight let;
    if (progress) progress.style.width = `${max > 0 ? Math.min(100, (window.scrollY / max) * 100) : 0}%`;
    if (top) top.hidden = window.scrollY < 500;
    let active = null;
@@ -153,8 +154,7 @@ function initCanvas() {
  if (navigator.connection?.saveData) return;
  const ctx = canvas.getContext("2d");
  if (!ctx) return;
- let raf = 0;
- let running = true;
+ let raf = 0 running = true;
  let points = [];
  function resize() {
    const rect = canvas.getBoundingClientRect();
@@ -198,6 +198,14 @@ function initCanvas() {
      if (!running) { window.cancelAnimationFrame(raf); raf = 0; }
    });
    observer.observe(home);
+ }
+}
+function initCanvasDeferred() {
+ const start = () => initCanvas();
+ if ("requestIdleCallback" in window) {
+   window.requestIdleCallback(start, { timeout: 2500 });
+ } else {
+   window.setTimeout(start, 1800);
  }
 }
 function initShare() {
@@ -439,7 +447,7 @@ function init() {
  initMenu();
  initScroll();
  initReveal();
- initCanvas();
+ initCanvasDeferred();
  initShare();
  initSpeech();
  initForm();
