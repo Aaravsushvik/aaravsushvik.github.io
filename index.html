@@ -168,13 +168,23 @@
         </div>
       </div>
 
-      <div class="hero-media image-frame reveal">
-        <img src="/images/IMG_2358_Original.jpeg"
-             width="1200" height="900"
-             fetchpriority="high"
-             decoding="async"
-             alt="Gadiparthi Sai Sushvik with family"
-             data-i18n-alt="hero.img.alt">
+      <div class="hero-media image-frame reveal" aria-hidden="true">
+        <svg viewBox="0 0 400 300" width="400" height="300" preserveAspectRatio="xMidYMid meet" focusable="false">
+          <defs>
+            <linearGradient id="heroGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#2997ff"/>
+              <stop offset="1" stop-color="#005fcc"/>
+            </linearGradient>
+          </defs>
+          <rect width="400" height="300" rx="24" fill="url(#heroGrad)"/>
+          <circle cx="140" cy="120" r="60" fill="rgba(255,255,255,0.15)"/>
+          <circle cx="260" cy="180" r="80" fill="rgba(255,255,255,0.10)"/>
+          <circle cx="200" cy="150" r="4"  fill="#ffffff"/>
+          <circle cx="290" cy="90"  r="3"  fill="#ffffff"/>
+          <circle cx="110" cy="210" r="3"  fill="#ffffff"/>
+          <line x1="200" y1="150" x2="290" y2="90"  stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
+          <line x1="200" y1="150" x2="110" y2="210" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
+        </svg>
       </div>
 
     </div>
