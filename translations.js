@@ -53,6 +53,7 @@ window.TRANSLATIONS = {
    certifications: {
      title: "Credentials I’ve earned.",
      intro: "Short courses that back up the skills above.",
+     verify: "Verify credential",
      c1: { title: "AI Fluency for students", badge: "Anthropic Academy", date: "Issued September 13, 2026" },
      c2: { title: "Claude 101", badge: "Anthropic Academy", date: "Issued September 13, 2026" },
      c3: { title: "AI Foundations", badge: "OpenAI Academy", date: "Issued September 13, 2026" },
@@ -145,6 +146,7 @@ window.TRANSLATIONS = {
    certifications: {
      title: "నేను సాధించిన సర్టిఫికేషన్లు.",
      intro: "పైన ఉన్న స్కిల్స్‌కు ఆధారంగా ఉన్న చిన్న కోర్సులు.",
+     verify: "ధృవీకరించండి",
      c1: { title: "AI Fluency for students", badge: "Anthropic Academy", date: "సెప్టెంబర్ 13, 2026న జారీ చేయబడింది" },
      c2: { title: "Claude 101", badge: "Anthropic Academy", date: "సెప్టెంబర్ 13, 2026న జారీ చేయబడింది" },
      c3: { title: "AI Foundations", badge: "OpenAI Academy", date: "సెప్టెంబర్ 13, 2026న జారీ చేయబడింది" },
@@ -236,6 +238,7 @@ window.TRANSLATIONS = {
    certifications: {
      title: "मेरे द्वारा प्राप्त प्रमाणपत्र।",
      intro: "ऊपर बताई गई skills का समर्थन करने वाले छोटे कोर्स।",
+     verify: "सत्यापित करें",
      c1: { title: "AI Fluency for students", badge: "Anthropic Academy", date: "13 सितंबर, 2026 को जारी किया गया" },
      c2: { title: "Claude 101", badge: "Anthropic Academy", date: "13 सितंबर, 2026 को जारी किया गया" },
      c3: { title: "AI Foundations", badge: "OpenAI Academy", date: "13 सितंबर, 2026 को जारी किया गया" },
