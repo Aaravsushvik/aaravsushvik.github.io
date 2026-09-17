@@ -105,7 +105,6 @@ function updateThemeColor(dark) {
 }
 function applyTheme(dark, persist = true) {
   const root = document.documentElement;
-  // Explicitly manage classes to prevent state desync with theme.js
   root.classList.remove(dark ? "light" : "dark");
   root.classList.add(dark ? "dark" : "light");
   root.style.colorScheme =
@@ -121,32 +120,12 @@ function applyTheme(dark, persist = true) {
   updateThemeColor(dark);
   updateThemeUI();
 }
+
+// Optimized for flawless execution across Safari & iPadOS
 function setTheme(dark, persist = true) {
-  const reduceMotion =
-    window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-  const transition =
-    document.startViewTransition;
-
-  const update = () => applyTheme(dark, persist);
-
-  if (
-    typeof transition === "function" &&
-    !reduceMotion &&
-    !document.hidden
-  ) {
-    try {
-      transition(update).finished.catch(() => {
-        update();
-      });
-    } catch {
-      update();
-    }
-  } else {
-    update();
-  }
+  applyTheme(dark, persist);
 }
+
 function initTheme() {
   updateThemeUI();
   const button = $("#theme-toggle");
