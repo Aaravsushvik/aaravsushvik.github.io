@@ -1,99 +1,100 @@
 name: Lighthouse CI
-
 on:
- push:
-   branches: [main]
- pull_request:
-   branches: [main]
-
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
- lighthouse:
-   runs-on: ubuntu-latest
-   steps:
-     - name: Checkout repository
-       uses: actions/checkout@v4
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-     - name: Verify required files exist
-       shell: bash
-       run: |
-         set -euo pipefail
-         required_files=(
-           "index.html" "style.css" "script.js" "theme.js" "translations.js"
-           "sw.js" "manifest.json" "favicon.svg" "offline.html" "404.html"
-           "sitemap.xml" "robots.txt"
-           "images/apple-touch-icon.png" "images/icon-192.png"
-           "images/icon-512.png" "images/IMG_2358_Original.jpeg"
-         )
-         for file in "${required_files[@]}"; do
-           if [ ! -f "$file" ]; then
-             echo "::error::Missing required file: $file"
-             exit 1
-           fi
-         done
-         echo "All required files are present."
+      - name: Verify required files exist
+        shell: bash
+        run: |
+          set -euo pipefail
+          required_files=(
+            "index.html" "style.css" "script.js" "theme.js" "translations.js"
+            "sw.js" "manifest.json" "favicon.svg" "offline.html" "404.html"
+            "sitemap.xml" "robots.txt"
+            "images/apple-touch-icon.png" "images/icon-192.png"
+            "images/icon-512.png" "images/hero-1024.jpeg"
+          )
+          for file in "${required_files[@]}"; do
+            if [ ! -f "$file" ]; then
+              echo "::error::Missing required file: $file"
+              exit 1
+            fi
+          done
+          echo "All required files are present."
 
-     - name: Setup Node.js
-       uses: actions/setup-node@v4
-       with:
-         node-version: 22
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
 
-     - name: Prepare production build
-       shell: bash
-       run: |
-         set -euo pipefail
-         rm -rf dist
-         mkdir -p dist
-         cp index.html style.css manifest.json favicon.svg offline.html 404.html robots.txt sitemap.xml dist/
-         cp -r images dist/
-         npx --yes terser@5 script.js -c -m -o dist/script.js
-         npx --yes terser@5 theme.js -c -m -o dist/theme.js
-         npx --yes terser@5 translations.js -c -m -o dist/translations.js
-         npx --yes terser@5 sw.js -c -m -o dist/sw.js
-         echo "Production build created successfully."
+      - name: Prepare production build
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf dist
+          mkdir -p dist
+          cp index.html style.css manifest.json favicon.svg offline.html 404.html robots.txt sitemap.xml dist/
+          cp -r images dist/
+          npx --yes terser@5 script.js -c -m -o dist/script.js
+          npx --yes terser@5 theme.js -c -m -o dist/theme.js
+          npx --yes terser@5 translations.js -c -m -o dist/translations.js
+          npx --yes terser@5 sw.js -c -m -o dist/sw.js
+          echo "Production build created successfully."
 
-     - name: Verify Lighthouse configuration
-       shell: bash
-       run: |
-         set -euo pipefail
-         if [ ! -f ".lighthouserc.json" ]; then
-           echo "::error::Missing .lighthouserc.json"
-           exit 1
-         fi
-         if grep -Eq '"preset"[[:space:]]*:[[:space:]]*"lighthouse:recommended"' .lighthouserc.json; then
-           echo "::error::The lighthouse:recommended preset must not be used."
-           exit 1
-         fi
-         echo "Lighthouse configuration verified."
+      - name: Verify Lighthouse configuration
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -f ".lighthouserc.json" ]; then
+            echo "::error::Missing .lighthouserc.json"
+            exit 1
+          fi
+          if grep -Eq '"preset"[[:space:]]*:[[:space:]]*"lighthouse:recommended"' .lighthouserc.json; then
+            echo "::error::The lighthouse:recommended preset must not be used."
+            exit 1
+          fi
+          echo "Lighthouse configuration verified."
 
-     - name: Install Lighthouse CI
-       run: npm install --global @lhci/cli@0.14.0
+      - name: Install Lighthouse CI
+        run: npm install --global @lhci/cli@0.14.0
 
-     - name: Start local production server
-       shell: bash
-       run: |
-         set -euo pipefail
-         npx --yes serve@14.2.0 dist -l 8080 > /tmp/serve.log 2>&1 &
-         SERVER_PID=$!
-         trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
-         READY=0
-         for i in {1..15}; do
-           if curl -fsS http://127.0.0.1:8080/ >/dev/null; then
-             READY=1
-             break
-           fi
-           if ! kill -0 "$SERVER_PID" 2>/dev/null; then
-             cat /tmp/serve.log
-             exit 1
-           fi
-           sleep 2
-         done
-         if [ "$READY" -ne 1 ]; then
-           cat /tmp/serve.log
-           exit 1
-         fi
+      - name: Start local production server
+        shell: bash
+        run: |
+          set -euo pipefail
+          npx --yes serve@14.2.0 dist -l 8080 -a 0.0.0.0 > /tmp/serve.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          READY=0
+          for i in {1..15}; do
+            if curl -fsS http://127.0.0.1:8080/ >/dev/null; then
+              READY=1
+              break
+            fi
+            if ! kill -0 "$SERVER_PID" 2>/dev/null; then
+              cat /tmp/serve.log
+              exit 1
+            fi
+            sleep 2
+          done
+          if [ "$READY" -ne 1 ]; then
+            cat /tmp/serve.log
+            exit 1
+          fi
 
-     - name: Run Lighthouse CI
-       shell: bash
-       run: |
-         set -euo pipefail
-         lhci autorun --config=.lighthouserc.json
+      - name: Run Lighthouse CI
+        shell: bash
+        run: |
+          set -euo pipefail
+          lhci autorun --config=.lighthouserc.json
