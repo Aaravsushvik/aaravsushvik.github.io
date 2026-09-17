@@ -73,7 +73,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          npx --yes serve@14.2.0 dist -l 8080 -a 0.0.0.0 > /tmp/serve.log 2>&1 &
+          npx --yes serve@14.2.0 dist -l 8080 > /tmp/serve.log 2>&1 &
           SERVER_PID=$!
           trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
           READY=0
