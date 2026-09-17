@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en-IN" class="light">
+<html lang="en-IN" class="light" dir="ltr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="view-transition" content="same-origin">
 <meta name="theme-color" content="#f5f5f7">
 
 <meta http-equiv="Content-Security-Policy" content="
@@ -45,6 +46,8 @@
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
 <link rel="manifest" href="/manifest.json">
+<link rel="preconnect" href="https://formspree.io">
+<link rel="dns-prefetch" href="//formspree.io">
 
 <script src="/theme.js"></script>
 <link rel="stylesheet" href="/style.css">
@@ -615,18 +618,37 @@
 <button id="topBtn" class="icon-button top-btn" type="button" hidden
         aria-label="Scroll to top" data-i18n-aria="top.button.label">↑</button>
 
-<div id="command-palette" class="command-palette" hidden role="dialog" aria-modal="true"
-     aria-label="Command palette">
-  <div class="palette-overlay" data-close-palette></div>
+<dialog id="command-palette"
+        class="command-palette"
+        aria-labelledby="command-palette-title">
   <div class="palette-dialog">
-    <label class="sr-only" for="command-input">Command</label>
-    <input id="command-input" type="text" autocomplete="off" spellcheck="false"
-           placeholder="Type a command..." data-i18n-placeholder="command.placeholder"
-           role="combobox" aria-expanded="true" aria-controls="command-results"
-           aria-autocomplete="list">
-    <ul id="command-results" role="listbox" aria-label="Commands"></ul>
+    <div class="palette-header">
+      <h2 id="command-palette-title" class="sr-only">
+        Command palette
+      </h2>
+      <label class="sr-only" for="command-input">
+        Command
+      </label>
+      <input
+        id="command-input"
+        type="search"
+        autocomplete="off"
+        spellcheck="false"
+        placeholder="Type a command..."
+        data-i18n-placeholder="command.placeholder"
+        role="combobox"
+        aria-expanded="true"
+        aria-controls="command-results"
+        aria-autocomplete="list"
+        aria-activedescendant="">
+    </div>
+    <ul
+      id="command-results"
+      role="listbox"
+      aria-label="Commands">
+    </ul>
   </div>
-</div>
+</dialog>
 
 <noscript>
   <p class="noscript-notice">
