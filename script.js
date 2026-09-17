@@ -105,8 +105,9 @@ function updateThemeColor(dark) {
 }
 function applyTheme(dark, persist = true) {
   const root = document.documentElement;
-  root.classList.toggle("dark", dark);
-  root.classList.toggle("light", !dark);
+  // Explicitly manage classes to prevent state desync with theme.js
+  root.classList.remove(dark ? "light" : "dark");
+  root.classList.add(dark ? "dark" : "light");
   root.style.colorScheme =
     dark ? "dark" : "light";
   if (persist) {
@@ -127,16 +128,23 @@ function setTheme(dark, persist = true) {
     ).matches;
   const transition =
     document.startViewTransition;
+
+  const update = () => applyTheme(dark, persist);
+
   if (
     typeof transition === "function" &&
     !reduceMotion &&
     !document.hidden
   ) {
-    transition(() => {
-      applyTheme(dark, persist);
-    }).finished.catch(() => {});
+    try {
+      transition(update).finished.catch(() => {
+        update();
+      });
+    } catch {
+      update();
+    }
   } else {
-    applyTheme(dark, persist);
+    update();
   }
 }
 function initTheme() {
