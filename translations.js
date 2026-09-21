@@ -12,48 +12,48 @@ window.TRANSLATIONS = {
    social: { instagram: "Instagram", github: "GitHub", linktree: "Linktree" },
    hero: {
      kicker: "Technology · AI · Governance",
-     title: "Curious about technology. Fascinated by systems. Building toward impact.",
-     subtitle: "I explore the intersection of artificial intelligence, technology, governance, and society — learning by building, experimenting, researching, and asking better questions.",
-     description: "I’m a student and independent learner interested in how technology works, how systems shape people’s lives, and how thoughtful design, policy, and public systems can work together.",
+     title: "Curious about technology. Obsessed with systems. Building for impact.",
+     subtitle: "I sit at the intersection of AI, technology, and governance — learning by building, testing, and asking better questions.",
+     description: "Most of what's on this page started as a question I couldn't stop poking at.",
      projects: "Explore my work", contact: "Start a conversation", img: { alt: "Gadiparthi Sai Sushvik with family" }
    },
    about: {
      title: "About",
      who: {
        title: "I like understanding what happens beneath the surface.",
-       p1: "I’m Gadiparthi Sai Sushvik — a student and independent learner exploring the intersection of technology and society.",
-       p2: "My curiosity moves across artificial intelligence, web development, robotics, economics, political science, history, governance, and public policy.",
-       p3: "I build digital projects to understand technology by making things. I research governance and public systems to understand the environments in which technology operates."
+       p1: "I’m Gadiparthi Sai Sushvik. Most of my time goes into understanding how technology and society shape each other.",
+       p2: "My curiosity spans AI, web development, robotics, economics, political science, history, governance, and public policy — because the most interesting problems usually sit between disciplines, not inside one.",
+       p3: "I build things to understand technology, and I study governance to understand the systems technology has to work inside."
      },
      vision: {
        title: "Building the foundations for what comes next.",
-       p1: "I’m particularly interested in AI and public policy, digital governance, accessible technology, public-service delivery, and the responsible development of emerging technologies.",
-       p2: "My academic journey is helping me develop the foundations I want to carry into higher education and, eventually, work involving technology, governance, and public systems.",
-       p3: "I’m interested in understanding how institutions work, how technology changes them, and how thoughtful design and policy can make systems more accessible, effective, and useful to people.",
+       p1: "I care most about AI and public policy, digital governance, accessible technology, and building emerging tech responsibly.",
+       p2: "School is where I’m building the foundation I want to carry into higher education, and eventually, into work at the intersection of technology and governance.",
+       p3: "I want to understand how institutions actually work, how technology reshapes them, and how good design and policy can make systems that serve people better.",
        p4: "Longer term, I want to work in the civil services — bringing this understanding of technology and governance directly to public problems."
      }
    },
    projects: {
      title: "From curiosity to something tangible.",
-     intro: "I learn by making. Each project is an opportunity to test an idea, understand a technology, solve a problem, or discover a better question.",
-     portfolio: { title: "Personal Portfolio Website", badge: "Web · Ongoing", description: "An evolving digital space for documenting my projects, experiments, interests, and learning journey.", li1: "Semantic HTML, modern CSS, and vanilla JavaScript.", li2: "Responsive design and accessibility-conscious interaction patterns.", li3: "Light and dark themes with saved and system preferences.", li4: "Multilingual content, structured metadata, and progressive web capabilities.", li5: "Offline support, SEO foundations, and performance-conscious design." },
-     ui: { title: "Responsive UI Experiments", badge: "Frontend · Experimental", description: "Small experiments exploring responsive layouts, interaction design, accessibility, motion, and the relationship between visual simplicity and functional complexity.", li1: "Responsive layouts across different screen sizes.", li2: "Modern CSS architecture, custom properties, and fluid sizing.", li3: "Navigation and interaction experiments.", li4: "Accessibility-conscious interface patterns." },
-     civic: { title: "Civic-Tech & Governance Notes", badge: "Research · Ongoing", description: "An evolving exploration of how technology interacts with government, institutions, policy, and everyday public life.", li1: "Digital governance and public-service delivery.", li2: "AI and public policy.", li3: "Accessibility and inclusive public systems.", li4: "Technology, institutions, and public systems." }
+     intro: "I learn by making. Every project here is a chance to test an idea, learn a technology, or find a sharper question.",
+     portfolio: { title: "Personal Portfolio Website", badge: "Web · Ongoing", description: "This site, basically — a running log of what I’m building, breaking, and learning.", li1: "Semantic HTML, modern CSS, and vanilla JavaScript.", li2: "Responsive design and accessibility-conscious interaction patterns.", li3: "Light and dark themes with saved and system preferences.", li4: "Multilingual content, structured metadata, and progressive web capabilities.", li5: "Offline support, SEO foundations, and performance-conscious design.", updated: "Last updated: September 2026" },
+     ui: { title: "Responsive UI Experiments", badge: "Frontend · Experimental", description: "Small experiments in layout, motion, and interaction — mostly me asking “what if this worked differently?”", li1: "Responsive layouts across different screen sizes.", li2: "Modern CSS architecture, custom properties, and fluid sizing.", li3: "Navigation and interaction experiments.", li4: "Accessibility-conscious interface patterns.", updated: "Last updated: September 2026" },
+     civic: { title: "Civic-Tech & Governance Notes", badge: "Research · Ongoing", description: "Notes on where technology and government actually meet — institutions, policy, and everyday public life.", li1: "Digital governance and public-service delivery.", li2: "AI and public policy.", li3: "Accessibility and inclusive public systems.", li4: "Technology, institutions, and public systems.", updated: "Last updated: September 2026" }
    },
    learning: {
      title: "Still learning. Always.",
-     intro: "I don’t see learning as a checklist of technologies to collect. I see it as the process of developing stronger fundamentals, better mental models, and the ability to approach unfamiliar problems.",
+     intro: "Learning isn’t a checklist of tools to collect for me — it’s building stronger fundamentals, sharper mental models, and the nerve to walk into an unfamiliar problem.",
      tag1: "Web Development", tag2: "JavaScript", tag3: "Responsive Design", tag4: "Web Accessibility", tag5: "Artificial Intelligence", tag6: "AI Tools & Prompting", tag7: "Robotics", tag8: "Emerging Technologies", tag9: "Political Science", tag10: "Economics", tag11: "History", tag12: "Governance", tag13: "Public Policy", tag14: "Digital Governance", tag15: "Systems Thinking", tag16: "Research", tag17: "Critical Thinking"
    },
    skills: {
      title: "What I build with.",
-     intro: "I focus on developing depth in fundamentals rather than simply collecting technologies.",
+     intro: "Depth over breadth — I’d rather go deep on fundamentals than collect logos.",
      tag1: "HTML5", tag2: "CSS3", tag3: "JavaScript", tag4: "Responsive Web Design", tag5: "Semantic HTML", tag6: "Accessibility", tag7: "Interaction Design", tag8: "Responsive UI", tag9: "Progressive Web App Concepts", tag10: "Offline Experiences", tag11: "SEO Fundamentals", tag12: "Web Performance", tag13: "AI Tools", tag14: "Prompting", tag15: "Automation", tag16: "Emerging Technologies"
    },
    certifications: {
      title: "Credentials I’ve earned.",
-     intro: "Short courses that back up the skills above.",
-     verify: "Verify credential",
+     intro: "Proof, not just claims — short courses that back the skills above.",
+     verifyLabel: "Verify credential ↗",
      c1: { title: "AI Fluency for students", badge: "Anthropic Academy", date: "Issued September 13, 2026" },
      c2: { title: "Claude 101", badge: "Anthropic Academy", date: "Issued September 13, 2026" },
      c3: { title: "AI Foundations", badge: "OpenAI Academy", date: "Issued September 13, 2026" },
@@ -63,7 +63,7 @@ window.TRANSLATIONS = {
    },
    results: {
      title: "Building the foundations.",
-     intro: "My academic journey is developing the foundations I want to carry into higher education and beyond.",
+     intro: "The foundation I’m building now is the one I’ll carry into higher education and beyond.",
      ssc: { title: "Telangana SSC · 2026", note: "Language-II not appeared" },
      percentage: { title: "Overall Result" },
      inter: { title: "Intermediate · CEC", description: "Currently pursuing Intermediate education in the CEC stream, building a foundation in civics, economics, and commerce." }
@@ -78,7 +78,7 @@ window.TRANSLATIONS = {
    },
    contact: {
      title: "Let’s explore an idea.",
-     info: "Have a project, question, observation, or idea worth discussing? I’m interested in conversations around technology, artificial intelligence, web development, governance, public systems, accessibility, and the future of technology.",
+     info: "Got a project, question, or idea worth arguing about? I’m always up for a conversation about technology, AI, governance, or where they’re headed next.",
      closing: "Good ideas often begin with a simple conversation."
    },
    listen: { button: "Listen to this page" },
@@ -105,48 +105,48 @@ window.TRANSLATIONS = {
    social: { instagram: "ఇన్‌స్టాగ్రామ్", github: "గిట్‌హబ్", linktree: "లింక్‌ట్రీ" },
    hero: {
      kicker: "టెక్నాలజీ · AI · గవర్నెన్స్",
-     title: "టెక్నాలజీపై ఆసక్తి. వ్యవస్థలను అర్థం చేసుకోవాలనే కుతూహలం. ప్రభావం వైపు ప్రయాణం.",
-     subtitle: "కృత్రిమ మేధస్సు, టెక్నాలజీ, గవర్నెన్స్ మరియు సమాజం కలిసే ప్రాంతాన్ని అన్వేషిస్తున్నాను — నిర్మించడం, ప్రయోగించడం, పరిశోధించడం మరియు మెరుగైన ప్రశ్నలు అడగడం ద్వారా నేర్చుకుంటున్నాను.",
-     description: "టెక్నాలజీ ఎలా పనిచేస్తుంది, వ్యవస్థలు ప్రజల జీవితాలను ఎలా రూపొందిస్తాయి, అలాగే ఆలోచనాత్మక డిజైన్, విధానం మరియు ప్రజా వ్యవస్థలు కలిసి ఎలా పనిచేయగలవో అనే వాటిపై ఆసక్తి ఉన్న విద్యార్థి మరియు స్వతంత్ర అభ్యాసకుడిని.",
+     title: "టెక్నాలజీపై ఆసక్తి. వ్యవస్థల పట్ల నిమగ్నత. ప్రభావం కోసం నిర్మాణం.",
+     subtitle: "AI, టెక్నాలజీ మరియు గవర్నెన్స్ కలిసే చోట నేను ఉంటాను — నిర్మించడం, పరీక్షించడం మరియు మెరుగైన ప్రశ్నలు అడగడం ద్వారా నేర్చుకుంటున్నాను.",
+     description: "ఈ పేజీలో ఉన్నవన్నీ దాదాపుగా నేను వదలలేని ఒక ప్రశ్నతోనే మొదలయ్యాయి.",
      projects: "నా పనిని చూడండి", contact: "సంభాషణను ప్రారంభించండి", img: { alt: "కుటుంబంతో గదిపర్తి సాయి సుష్విక్" }
    },
    about: {
      title: "నా గురించి",
      who: {
        title: "ఏదైనా విషయం వెనుక నిజంగా ఏమి జరుగుతుందో అర్థం చేసుకోవడం నాకు ఇష్టం.",
-       p1: "నేను గదిపర్తి సాయి సుష్విక్ — టెక్నాలజీ మరియు సమాజం మధ్య సంబంధాన్ని అన్వేషిస్తున్న విద్యార్థి మరియు స్వతంత్ర అభ్యాసకుడిని.",
-       p2: "కృత్రిమ మేధస్సు, వెబ్ డెవలప్‌మెంట్, రోబోటిక్స్, ఎకనామిక్స్, పొలిటికల్ సైన్స్, హిస్టరీ, గవర్నెన్స్ మరియు పబ్లిక్ పాలసీ వంటి రంగాలలో నా ఆసక్తి కదులుతుంది.",
-       p3: "నిర్మించడం ద్వారా టెక్నాలజీని అర్థం చేసుకోవడానికి డిజిటల్ ప్రాజెక్టులను రూపొందిస్తాను. టెక్నాలజీ పనిచేసే వాతావరణాలను అర్థం చేసుకోవడానికి గవర్నెన్స్ మరియు ప్రజా వ్యవస్థలను పరిశోధిస్తాను."
+       p1: "నేను గదిపర్తి సాయి సుష్విక్. టెక్నాలజీ మరియు సమాజం ఒకదానినొకటి ఎలా ప్రభావితం చేసుకుంటాయో అర్థం చేసుకోవడంలో నా సమయం ఎక్కువ భాగం గడుపుతాను.",
+       p2: "నా ఆసక్తి AI, వెబ్ డెవలప్‌మెంట్, రోబోటిక్స్, ఎకనామిక్స్, పొలిటికల్ సైన్స్, హిస్టరీ, గవర్నెన్స్ మరియు పబ్లిక్ పాలసీ వరకు విస్తరించి ఉంటుంది — ఎందుకంటే అత్యంత ఆసక్తికరమైన సమస్యలు సాధారణంగా ఒక్క రంగంలో కాకుండా రంగాల మధ్యనే ఉంటాయి.",
+       p3: "టెక్నాలజీని అర్థం చేసుకోవడానికి నేను వాటిని నిర్మిస్తాను, మరియు టెక్నాలజీ పనిచేయాల్సిన వ్యవస్థలను అర్థం చేసుకోవడానికి గవర్నెన్స్‌ను అధ్యయనం చేస్తాను."
      },
      vision: {
        title: "తర్వాతి దశకు అవసరమైన పునాదులను నిర్మించడం.",
-       p1: "AI మరియు పబ్లిక్ పాలసీ, డిజిటల్ గవర్నెన్స్, అందుబాటులో ఉండే టెక్నాలజీ, ప్రజాసేవల పంపిణీ మరియు అభివృద్ధి చెందుతున్న టెక్నాలజీల బాధ్యతాయుత అభివృద్ధిపై నాకు ప్రత్యేక ఆసక్తి ఉంది.",
-       p2: "నా విద్యా ప్రయాణం ఉన్నత విద్యకు మరియు చివరికి టెక్నాలజీ, గవర్నెన్స్ మరియు ప్రజా వ్యవస్థలకు సంబంధించిన పనిలో నేను తీసుకెళ్లాలనుకునే పునాదులను అభివృద్ధి చేయడంలో నాకు సహాయపడుతోంది.",
-       p3: "సంస్థలు ఎలా పనిచేస్తాయి, టెక్నాలజీ వాటిని ఎలా మారుస్తుంది, అలాగే ఆలోచనాత్మక డిజైన్ మరియు విధానం వ్యవస్థలను ప్రజలకు మరింత అందుబాటులో, సమర్థవంతంగా మరియు ఉపయోగకరంగా ఎలా మార్చగలవో అర్థం చేసుకోవడంలో నాకు ఆసక్తి ఉంది.",
+       p1: "AI మరియు పబ్లిక్ పాలసీ, డిజిటల్ గవర్నెన్స్, అందుబాటులో ఉండే టెక్నాలజీ మరియు అభివృద్ధి చెందుతున్న టెక్నాలజీలను బాధ్యతాయుతంగా నిర్మించడంపై నాకు ఎక్కువ ఆసక్తి.",
+       p2: "పాఠశాల విద్య నేను ఉన్నత విద్యకు, ఆ తర్వాత టెక్నాలజీ మరియు గవర్నెన్స్ కలిసే పనికి తీసుకెళ్లాలనుకునే పునాదిని నిర్మించే స్థలం.",
+       p3: "సంస్థలు నిజంగా ఎలా పనిచేస్తాయో, టెక్నాలజీ వాటిని ఎలా మారుస్తుందో, మరియు మంచి డిజైన్ మరియు విధానం వ్యవస్థలను ప్రజలకు మెరుగ్గా ఎలా ఉపయోగపడేలా చేయగలవో అర్థం చేసుకోవాలని అనుకుంటున్నాను.",
        p4: "భవిష్యత్తులో నేను సివిల్ సర్వీసెస్‌లో పనిచేయాలని అనుకుంటున్నాను — టెక్నాలజీ మరియు గవర్నెన్స్‌పై ఈ అవగాహనను ప్రజా సమస్యలకు నేరుగా ఉపయోగించడం ద్వారా."
      }
    },
    projects: {
      title: "ఆసక్తి నుంచి స్పష్టమైన రూపానికి.",
-     intro: "నేను నిర్మించడం ద్వారా నేర్చుకుంటాను. ప్రతి ప్రాజెక్ట్ ఒక ఆలోచనను పరీక్షించడానికి, ఒక టెక్నాలజీని అర్థం చేసుకోవడానికి, ఒక సమస్యను పరిష్కరించడానికి లేదా మెరుగైన ప్రశ్నను కనుగొనడానికి ఒక అవకాశం.",
-     portfolio: { title: "వ్యక్తిగత పోర్ట్‌ఫోలియో వెబ్‌సైట్", badge: "వెబ్ · కొనసాగుతోంది", description: "నా ప్రాజెక్టులు, ప్రయోగాలు, ఆసక్తులు మరియు అభ్యాస ప్రయాణాన్ని నమోదు చేసే అభివృద్ధి చెందుతున్న డిజిటల్ స్థలం.", li1: "Semantic HTML, ఆధునిక CSS మరియు vanilla JavaScript.", li2: "Responsive design మరియు accessibility-conscious interaction patterns.", li3: "సేవ్ చేసిన మరియు సిస్టమ్ ప్రాధాన్యతలకు అనుగుణంగా light/dark themes.", li4: "బహుభాషా కంటెంట్, structured metadata మరియు progressive web capabilities.", li5: "Offline support, SEO foundations మరియు performance-conscious design." },
-     ui: { title: "Responsive UI ప్రయోగాలు", badge: "ఫ్రంట్‌ఎండ్ · ప్రయోగాత్మకం", description: "Responsive layouts, interaction design, accessibility, motion మరియు దృశ్య సరళత మరియు కార్యాత్మక సంక్లిష్టత మధ్య సంబంధాన్ని అన్వేషించే చిన్న ప్రయోగాలు.", li1: "వివిధ స్క్రీన్ పరిమాణాలకు responsive layouts.", li2: "ఆధునిక CSS architecture, custom properties మరియు fluid sizing.", li3: "Navigation మరియు interaction ప్రయోగాలు.", li4: "Accessibility-conscious interface patterns." },
-     civic: { title: "Civic-Tech & Governance Notes", badge: "పరిశోధన · కొనసాగుతోంది", description: "టెక్నాలజీ ప్రభుత్వం, సంస్థలు, విధానాలు మరియు రోజువారీ ప్రజా జీవితంతో ఎలా సంకర్షణ చెందుతుందో అన్వేషించే అభివృద్ధి చెందుతున్న అధ్యయనం.", li1: "డిజిటల్ గవర్నెన్స్ మరియు ప్రజాసేవల పంపిణీ.", li2: "AI మరియు పబ్లిక్ పాలసీ.", li3: "Accessibility మరియు inclusive public systems.", li4: "టెక్నాలజీ, సంస్థలు మరియు ప్రజా వ్యవస్థలు." }
+     intro: "నేను నిర్మించడం ద్వారా నేర్చుకుంటాను. ఇక్కడ ఉన్న ప్రతి ప్రాజెక్ట్ ఒక ఆలోచనను పరీక్షించడానికి, ఒక టెక్నాలజీని నేర్చుకోవడానికి లేదా మరింత మెరుగైన ప్రశ్నను కనుగొనడానికి ఒక అవకాశం.",
+     portfolio: { title: "వ్యక్తిగత పోర్ట్‌ఫోలియో వెబ్‌సైట్", badge: "వెబ్ · కొనసాగుతోంది", description: "ఇదే ఈ సైట్ — నేను ఏమి నిర్మిస్తున్నానో, ఏమి పాడైపోతోందో, ఏమి నేర్చుకుంటున్నానో నమోదు చేసే స్థలం.", li1: "Semantic HTML, ఆధునిక CSS మరియు vanilla JavaScript.", li2: "Responsive design మరియు accessibility-conscious interaction patterns.", li3: "సేవ్ చేసిన మరియు సిస్టమ్ ప్రాధాన్యతలకు అనుగుణంగా light/dark themes.", li4: "బహుభాషా కంటెంట్, structured metadata మరియు progressive web capabilities.", li5: "Offline support, SEO foundations మరియు performance-conscious design.", updated: "చివరిగా అప్‌డేట్ చేయబడింది: సెప్టెంబర్ 2026" },
+     ui: { title: "Responsive UI ప్రయోగాలు", badge: "ఫ్రంట్‌ఎండ్ · ప్రయోగాత్మకం", description: "లేఅవుట్, మోషన్ మరియు ఇంటరాక్షన్‌లో చిన్న ప్రయోగాలు — ఎక్కువగా 'ఇది వేరేలా పనిచేస్తే ఎలా ఉంటుంది?' అని నేను నన్ను అడుగుతూ.", li1: "వివిధ స్క్రీన్ పరిమాణాలకు responsive layouts.", li2: "ఆధునిక CSS architecture, custom properties మరియు fluid sizing.", li3: "Navigation మరియు interaction ప్రయోగాలు.", li4: "Accessibility-conscious interface patterns.", updated: "చివరిగా అప్‌డేట్ చేయబడింది: సెప్టెంబర్ 2026" },
+     civic: { title: "Civic-Tech & Governance Notes", badge: "పరిశోధన · కొనసాగుతోంది", description: "టెక్నాలజీ మరియు ప్రభుత్వం నిజంగా ఎక్కడ కలుస్తాయో దానిపై గమనికలు — సంస్థలు, విధానాలు మరియు రోజువారీ ప్రజా జీవితం.", li1: "డిజిటల్ గవర్నెన్స్ మరియు ప్రజాసేవల పంపిణీ.", li2: "AI మరియు పబ్లిక్ పాలసీ.", li3: "Accessibility మరియు inclusive public systems.", li4: "టెక్నాలజీ, సంస్థలు మరియు ప్రజా వ్యవస్థలు.", updated: "చివరిగా అప్‌డేట్ చేయబడింది: సెప్టెంబర్ 2026" }
    },
    learning: {
      title: "నేర్చుకోవడం కొనసాగుతూనే ఉంటుంది.",
-     intro: "నేర్చుకోవడాన్ని కేవలం టెక్నాలజీల జాబితాను సేకరించడం అని నేను చూడను. బలమైన ప్రాథమికాలు, మెరుగైన మానసిక నమూనాలు మరియు తెలియని సమస్యలను సమీపించే సామర్థ్యాన్ని అభివృద్ధి చేసే ప్రక్రియగా చూస్తాను.",
+     intro: "నాకు నేర్చుకోవడం అంటే టెక్నాలజీల జాబితా సేకరించడం కాదు — బలమైన ప్రాథమికాలు, మెరుగైన మానసిక నమూనాలు, మరియు తెలియని సమస్యను ధైర్యంగా ఎదుర్కొనే శక్తిని నిర్మించడం.",
      tag1: "Web Development", tag2: "JavaScript", tag3: "Responsive Design", tag4: "Web Accessibility", tag5: "Artificial Intelligence", tag6: "AI Tools & Prompting", tag7: "Robotics", tag8: "Emerging Technologies", tag9: "Political Science", tag10: "Economics", tag11: "History", tag12: "Governance", tag13: "Public Policy", tag14: "Digital Governance", tag15: "Systems Thinking", tag16: "Research", tag17: "Critical Thinking"
    },
    skills: {
      title: "నేను నిర్మించడానికి ఉపయోగించే సామర్థ్యాలు.",
-     intro: "టెక్నాలజీలను సేకరించడం కంటే ప్రాథమిక అంశాలలో లోతైన అవగాహనను అభివృద్ధి చేయడంపై దృష్టి పెడతాను.",
+     intro: "వెడల్పు కంటే లోతు — లోగోలు సేకరించడం కంటే ప్రాథమికాలలో లోతుగా వెళ్లడమే నాకు నచ్చుతుంది.",
      tag1: "HTML5", tag2: "CSS3", tag3: "JavaScript", tag4: "Responsive Web Design", tag5: "Semantic HTML", tag6: "Accessibility", tag7: "Interaction Design", tag8: "Responsive UI", tag9: "Progressive Web App Concepts", tag10: "Offline Experiences", tag11: "SEO Fundamentals", tag12: "Web Performance", tag13: "AI Tools", tag14: "Prompting", tag15: "Automation", tag16: "Emerging Technologies"
    },
    certifications: {
      title: "నేను సాధించిన సర్టిఫికేషన్లు.",
-     intro: "పైన ఉన్న స్కిల్స్‌కు ఆధారంగా ఉన్న చిన్న కోర్సులు.",
-     verify: "ధృవీకరించండి",
+     intro: "ప్రూఫ్, కేవలం మాటలు కాదు — పైన ఉన్న స్కిల్స్‌కు ఆధారంగా ఉన్న చిన్న కోర్సులు.",
+     verifyLabel: "క్రెడెన్షియల్‌ను వెరిఫై చేయండి ↗",
      c1: { title: "AI Fluency for students", badge: "Anthropic Academy", date: "సెప్టెంబర్ 13, 2026న జారీ చేయబడింది" },
      c2: { title: "Claude 101", badge: "Anthropic Academy", date: "సెప్టెంబర్ 13, 2026న జారీ చేయబడింది" },
      c3: { title: "AI Foundations", badge: "OpenAI Academy", date: "సెప్టెంబర్ 13, 2026న జారీ చేయబడింది" },
@@ -156,7 +156,7 @@ window.TRANSLATIONS = {
    },
    results: {
      title: "పునాదులను నిర్మిస్తున్నాను.",
-     intro: "నా విద్యా ప్రయాణం భవిష్యత్తులో ఉన్నత విద్యకు మరియు తదుపరి దశలకు ఉపయోగపడే పునాదులను అభివృద్ధి చేస్తోంది.",
+     intro: "ఇప్పుడు నేను నిర్మిస్తున్న పునాదే ఉన్నత విద్యకు మరియు ఆ తర్వాతకు నేను తీసుకువెళ్లేది.",
      ssc: { title: "తెలంగాణ SSC · 2026", note: "Language-II పరీక్షకు హాజరు కాలేదు" }, percentage: { title: "మొత్తం ఫలితం" },
      inter: { title: "ఇంటర్మీడియట్ · CEC", description: "ప్రస్తుతం CEC స్ట్రీమ్లో ఇంటర్మీడియట్ విద్యను అభ్యసిస్తూ, సివిక్స్, ఎకనామిక్స్ మరియు కామర్స్లో పునాదిని నిర్మిస్తున్నాను." }
    },
@@ -170,7 +170,7 @@ window.TRANSLATIONS = {
    },
    contact: {
      title: "ఒక ఆలోచనను కలిసి అన్వేషిద్దాం.",
-     info: "చర్చించదగిన ప్రాజెక్ట్, ప్రశ్న, పరిశీలన లేదా ఆలోచన ఉందా? టెక్నాలజీ, కృత్రిమ మేధస్సు, వెబ్ డెవలప్‌మెంట్, గవర్నెన్స్, ప్రజా వ్యవస్థలు, యాక్సెసిబిలిటీ మరియు టెక్నాలజీ భవిష్యత్తు గురించిన సంభాషణలపై నాకు ఆసక్తి ఉంది.",
+     info: "వాదించదగ్గ ప్రాజెక్ట్, ప్రశ్న లేదా ఆలోచన ఉందా? టెక్నాలజీ, AI, గవర్నెన్స్ లేదా అవి ఎటు వెళ్తున్నాయో అనే దాని గురించి మాట్లాడటానికి నేను ఎప్పుడూ రెడీ.",
      closing: "మంచి ఆలోచనలు తరచుగా ఒక సాధారణ సంభాషణతో ప్రారంభమవుతాయి."
    },
    listen: { button: "ఈ పేజీని వినండి" },
@@ -197,48 +197,48 @@ window.TRANSLATIONS = {
    social: { instagram: "इंस्टाग्राम", github: "गिटहब", linktree: "लिंकट्री" },
    hero: {
      kicker: "Technology · AI · Governance",
-     title: "तकनीक के प्रति जिज्ञासा। प्रणालियों को समझने का जुनून। प्रभाव की दिशा में निर्माण।",
-     subtitle: "मैं आर्टिफिशियल इंटेलिजेंस, तकनीक, शासन और समाज के बीच के संबंध को समझने की कोशिश करता हूँ — बनाकर, प्रयोग करके, शोध करके और बेहतर सवाल पूछकर सीखता हूँ।",
-     description: "मैं एक विद्यार्थी और स्वतंत्र शिक्षार्थी हूँ, जो इस बात में रुचि रखता है कि तकनीक कैसे काम करती है, प्रणालियाँ लोगों के जीवन को कैसे आकार देती हैं, और विचारशील डिज़ाइन, नीति और सार्वजनिक प्रणालियाँ एक साथ कैसे काम कर सकती हैं।",
+     title: "तकनीक के प्रति जिज्ञासा। प्रणालियों के प्रति जुनून। प्रभाव के लिए निर्माण।",
+     subtitle: "मैं AI, तकनीक और शासन के मिलन बिंदु पर हूँ — बनाकर, परखकर और बेहतर सवाल पूछकर सीखता हूँ।",
+     description: "इस पेज पर जो कुछ भी है, वह किसी न किसी सवाल से शुरू हुआ जिसे मैं छोड़ नहीं पाया।",
      projects: "मेरा काम देखें", contact: "बातचीत शुरू करें", img: { alt: "परिवार के साथ गदिपर्थी साई सुष्विक" }
    },
    about: {
      title: "मेरे बारे में",
      who: {
        title: "मुझे यह समझना पसंद है कि किसी चीज़ के पीछे वास्तव में क्या हो रहा है।",
-       p1: "मैं गदिपर्थी साई सुष्विक हूँ — तकनीक और समाज के बीच के संबंध को समझने वाला विद्यार्थी और स्वतंत्र शिक्षार्थी।",
-       p2: "मेरी जिज्ञासा आर्टिफिशियल इंटेलिजेंस, वेब डेवलपमेंट, रोबोटिक्स, अर्थशास्त्र, राजनीतिक विज्ञान, इतिहास, शासन और सार्वजनिक नीति तक फैली हुई है।",
-       p3: "मैं तकनीक को समझने के लिए डिजिटल प्रोजेक्ट बनाता हूँ। तकनीक जिन वातावरणों में काम करती है उन्हें समझने के लिए मैं शासन और सार्वजनिक प्रणालियों पर शोध करता हूँ।"
+       p1: "मैं गदिपर्थी साई सुष्विक हूँ। मेरा ज़्यादातर समय यह समझने में जाता है कि तकनीक और समाज एक-दूसरे को कैसे आकार देते हैं।",
+       p2: "मेरी जिज्ञासा AI, वेब डेवलपमेंट, रोबोटिक्स, अर्थशास्त्र, राजनीतिक विज्ञान, इतिहास, शासन और सार्वजनिक नीति तक फैली है — क्योंकि सबसे दिलचस्प समस्याएँ अक्सर किसी एक विषय के भीतर नहीं, बल्कि विषयों के बीच होती हैं।",
+       p3: "मैं तकनीक को समझने के लिए चीज़ें बनाता हूँ, और तकनीक को जिन प्रणालियों के भीतर काम करना होता है उन्हें समझने के लिए शासन का अध्ययन करता हूँ।"
      },
      vision: {
        title: "आने वाले समय के लिए नींव तैयार करना।",
-       p1: "मेरी विशेष रुचि AI और सार्वजनिक नीति, डिजिटल गवर्नेंस, सुलभ तकनीक, सार्वजनिक सेवा वितरण और उभरती तकनीकों के जिम्मेदार विकास में है।",
-       p2: "मेरी शैक्षणिक यात्रा मुझे उन नींवों को विकसित करने में मदद कर रही है जिन्हें मैं उच्च शिक्षा और अंततः तकनीक, शासन तथा सार्वजनिक प्रणालियों से जुड़े काम में ले जाना चाहता हूँ।",
-       p3: "मुझे यह समझने में रुचि है कि संस्थाएँ कैसे काम करती हैं, तकनीक उन्हें कैसे बदलती है, और विचारशील डिज़ाइन तथा नीति प्रणालियों को लोगों के लिए अधिक सुलभ, प्रभावी और उपयोगी कैसे बना सकती हैं।",
+       p1: "मुझे सबसे ज़्यादा दिलचस्पी AI और सार्वजनिक नीति, डिजिटल गवर्नेंस, सुलभ तकनीक, और उभरती तकनीकों को ज़िम्मेदारी से बनाने में है।",
+       p2: "स्कूल वह जगह है जहाँ मैं वह नींव बना रहा हूँ जिसे मैं उच्च शिक्षा में, और आखिर में तकनीक व शासन के मिलन बिंदु पर काम में ले जाना चाहता हूँ।",
+       p3: "मैं यह समझना चाहता हूँ कि संस्थाएँ असल में कैसे काम करती हैं, तकनीक उन्हें कैसे बदलती है, और अच्छा डिज़ाइन व नीति प्रणालियों को लोगों के लिए बेहतर कैसे बना सकते हैं।",
        p4: "आगे चलकर मैं सिविल सेवाओं में काम करना चाहता हूँ — तकनीक और गवर्नेंस की इस समझ को सीधे सार्वजनिक समस्याओं पर लागू करके।"
      }
    },
    projects: {
      title: "जिज्ञासा से कुछ ठोस बनाने तक।",
-     intro: "मैं बनाकर सीखता हूँ। हर प्रोजेक्ट किसी विचार को परखने, किसी तकनीक को समझने, किसी समस्या को हल करने या एक बेहतर सवाल खोजने का अवसर है।",
-     portfolio: { title: "पर्सनल पोर्टफोलियो वेबसाइट", badge: "वेब · जारी", description: "मेरे प्रोजेक्ट्स, प्रयोगों, रुचियों और सीखने की यात्रा को दर्ज करने के लिए एक विकसित होता डिजिटल स्थान।", li1: "Semantic HTML, आधुनिक CSS और Vanilla JavaScript.", li2: "Responsive design और accessibility-conscious interaction patterns.", li3: "Saved और system preferences के साथ light/dark themes.", li4: "Multilingual content, structured metadata और progressive web capabilities.", li5: "Offline support, SEO foundations और performance-conscious design." },
-     ui: { title: "Responsive UI प्रयोग", badge: "फ्रंटएंड · प्रयोगात्मक", description: "Responsive layouts, interaction design, accessibility, motion और दृश्य सरलता तथा कार्यात्मक जटिलता के बीच संबंध का पता लगाने वाले छोटे प्रयोग।", li1: "विभिन्न स्क्रीन आकारों के लिए responsive layouts.", li2: "आधुनिक CSS architecture, custom properties और fluid sizing.", li3: "Navigation और interaction experiments.", li4: "Accessibility-conscious interface patterns." },
-     civic: { title: "Civic-Tech और Governance Notes", badge: "शोध · जारी", description: "तकनीक सरकार, संस्थाओं, नीति और रोज़मर्रा के सार्वजनिक जीवन के साथ कैसे संपर्क करती है, इसकी एक विकसित खोज।", li1: "Digital governance और public-service delivery.", li2: "AI और public policy.", li3: "Accessibility और inclusive public systems.", li4: "Technology, institutions और public systems." }
+     intro: "मैं बनाकर सीखता हूँ। यहाँ हर प्रोजेक्ट किसी विचार को परखने, कोई तकनीक सीखने, या एक बेहतर सवाल खोजने का मौका है।",
+     portfolio: { title: "पर्सनल पोर्टफोलियो वेबसाइट", badge: "वेब · जारी", description: "यही यह साइट है — मैं क्या बना रहा हूँ, क्या टूट रहा है, और क्या सीख रहा हूँ, इसका चलता-फिरता रिकॉर्ड।", li1: "Semantic HTML, आधुनिक CSS और Vanilla JavaScript.", li2: "Responsive design और accessibility-conscious interaction patterns.", li3: "Saved और system preferences के साथ light/dark themes.", li4: "Multilingual content, structured metadata और progressive web capabilities.", li5: "Offline support, SEO foundations और performance-conscious design.", updated: "आख़िरी बार अपडेट: सितंबर 2026" },
+     ui: { title: "Responsive UI प्रयोग", badge: "फ्रंटएंड · प्रयोगात्मक", description: "लेआउट, मोशन और इंटरैक्शन में छोटे प्रयोग — ज़्यादातर मैं खुद से पूछता हूँ, 'अगर यह अलग तरह से काम करे तो कैसा रहेगा?'", li1: "विभिन्न स्क्रीन आकारों के लिए responsive layouts.", li2: "आधुनिक CSS architecture, custom properties और fluid sizing.", li3: "Navigation और interaction experiments.", li4: "Accessibility-conscious interface patterns.", updated: "आख़िरी बार अपडेट: सितंबर 2026" },
+     civic: { title: "Civic-Tech और Governance Notes", badge: "शोध · जारी", description: "तकनीक और सरकार असल में जहाँ मिलते हैं, उस पर नोट्स — संस्थाएँ, नीति और रोज़मर्रा की सार्वजनिक ज़िंदगी।", li1: "Digital governance और public-service delivery.", li2: "AI और public policy.", li3: "Accessibility और inclusive public systems.", li4: "Technology, institutions और public systems.", updated: "आख़िरी बार अपडेट: सितंबर 2026" }
    },
    learning: {
      title: "सीखना जारी है। हमेशा।",
-     intro: "मैं सीखने को केवल तकनीकों की सूची इकट्ठी करने के रूप में नहीं देखता। मैं इसे मजबूत fundamentals, बेहतर mental models और अपरिचित समस्याओं से निपटने की क्षमता विकसित करने की प्रक्रिया के रूप में देखता हूँ।",
+     intro: "मेरे लिए सीखना तकनीकों की सूची जोड़ने का काम नहीं है — यह मज़बूत fundamentals, बेहतर mental models, और किसी भी अपरिचित समस्या का सामना बिना डरे करने की काबिलियत बनाने का काम है।",
      tag1: "Web Development", tag2: "JavaScript", tag3: "Responsive Design", tag4: "Web Accessibility", tag5: "Artificial Intelligence", tag6: "AI Tools & Prompting", tag7: "Robotics", tag8: "Emerging Technologies", tag9: "Political Science", tag10: "Economics", tag11: "History", tag12: "Governance", tag13: "Public Policy", tag14: "Digital Governance", tag15: "Systems Thinking", tag16: "Research", tag17: "Critical Thinking"
    },
    skills: {
      title: "मैं किन क्षमताओं से बनाता हूँ।",
-     intro: "मैं केवल तकनीकों को इकट्ठा करने के बजाय fundamentals में गहराई विकसित करने पर ध्यान केंद्रित करता हूँ।",
+     intro: "चौड़ाई से ज़्यादा गहराई — मुझे logos इकट्ठा करने से ज़्यादा fundamentals में गहराई तक जाना पसंद है।",
      tag1: "HTML5", tag2: "CSS3", tag3: "JavaScript", tag4: "Responsive Web Design", tag5: "Semantic HTML", tag6: "Accessibility", tag7: "Interaction Design", tag8: "Responsive UI", tag9: "Progressive Web App Concepts", tag10: "Offline Experiences", tag11: "SEO Fundamentals", tag12: "Web Performance", tag13: "AI Tools", tag14: "Prompting", tag15: "Automation", tag16: "Emerging Technologies"
    },
    certifications: {
      title: "मेरे द्वारा प्राप्त प्रमाणपत्र।",
-     intro: "ऊपर बताई गई skills का समर्थन करने वाले छोटे कोर्स।",
-     verify: "सत्यापित करें",
+     intro: "सिर्फ़ दावे नहीं, सबूत — ऊपर बताई गई skills का समर्थन करने वाले छोटे कोर्स।",
+     verifyLabel: "क्रेडेंशियल सत्यापित करें ↗",
      c1: { title: "AI Fluency for students", badge: "Anthropic Academy", date: "13 सितंबर, 2026 को जारी किया गया" },
      c2: { title: "Claude 101", badge: "Anthropic Academy", date: "13 सितंबर, 2026 को जारी किया गया" },
      c3: { title: "AI Foundations", badge: "OpenAI Academy", date: "13 सितंबर, 2026 को जारी किया गया" },
@@ -248,7 +248,7 @@ window.TRANSLATIONS = {
    },
    results: {
      title: "नींव तैयार करना।",
-     intro: "मेरी शैक्षणिक यात्रा उन नींवों को विकसित कर रही है जिन्हें मैं उच्च शिक्षा और आगे के जीवन में ले जाना चाहता हूँ।",
+     intro: "अभी जो नींव मैं बना रहा हूँ, वही वह नींव है जिसे मैं उच्च शिक्षा और उससे आगे तक ले जाऊँगा।",
      ssc: { title: "तेलंगाना SSC · 2026", note: "Language-II परीक्षा में उपस्थित नहीं हुए" }, percentage: { title: "कुल परिणाम" },
      inter: { title: "इंटरमीडिएट · CEC", description: "वर्तमान में CEC स्ट्रीम में इंटरमीडिएट की पढ़ाई कर रहा हूँ और नागरिक शास्त्र, अर्थशास्त्र तथा वाणिज्य की नींव विकसित कर रहा हूँ।" }
    },
@@ -262,7 +262,7 @@ window.TRANSLATIONS = {
    },
    contact: {
      title: "एक विचार को साथ मिलकर समझते हैं।",
-     info: "क्या आपके पास कोई प्रोजेक्ट, सवाल, अवलोकन या विचार है जिस पर चर्चा की जा सकती है? मैं तकनीक, आर्टिफिशियल इंटेलिजेंस, वेब डेवलपमेंट, शासन, सार्वजनिक प्रणालियों, सुलभता और तकनीक के भविष्य के बारे में बातचीत में रुचि रखता हूँ।",
+     info: "कोई ऐसा प्रोजेक्ट, सवाल या विचार है जिस पर बहस हो सके? मैं तकनीक, AI, शासन, या ये सब आगे कहाँ जा रहे हैं — इस पर बातचीत के लिए हमेशा तैयार हूँ।",
      closing: "अच्छे विचार अक्सर एक साधारण बातचीत से शुरू होते हैं।"
    },
    listen: { button: "यह पेज सुनें" },
